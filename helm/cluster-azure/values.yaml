@@ -1,0 +1,46 @@
+clusterName: ""  # Cluster name. Defaults to chart release name
+clusterDescription: "test"  # Cluster description used in metadata.
+organization: ""  # Organization in which to create the cluster.
+kubernetesVersion: 1.22.7
+releaseVersion: 20.0.0-alpha1
+
+azure:
+  region: ""
+  azureClusterRole: "default"
+
+network:
+  availabilityZoneUsageLimit: 3  # amount of AZ that should be used for the machines
+  vpcCIDR: 10.0.0.0/16  # cidr range for the VPC
+  serviceCIDR: 172.31.0.0/16
+
+bastion:
+  instanceType: t3.small
+  replicas: 1
+
+controlPlane:
+  instanceType: m5.xlarge
+  replicas: 1  # Number of replicas in control plane. Should be an odd number.
+  rootVolumeSizeGB: 120
+  etcdVolumeSizeGB: 100
+  containerdVolumeSizeGB: 100
+  kubeletVolumeSizeGB: 100
+
+machinePools:
+- name: def00  # Name of node pool.
+  availabilityZones:
+  instanceType: m5.xlarge
+  minSize: 3  # Number of replicas in node pool.
+  maxSize: 3
+  rootVolumeSizeGB: 300
+  customNodeLabels:
+  - label=default
+
+sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
+flatcarAWSAccount: "258751437250"
+
+# Used by `cluster-shared` library chart
+includeClusterResourceSet: true
+kubectlImage:
+  registry: quay.io
+  name: giantswarm/kubectl
+  tag: 1.23.5

@@ -1,0 +1,19 @@
+version: 2.1
+orbs:
+  architect: giantswarm/architect@4.14.2
+
+workflows:
+  package-and-push-chart-on-tag:
+    jobs:
+      - architect/push-to-app-catalog:
+          context: "architect"
+          executor: "app-build-suite"
+          name: "package and push cluster-azure chart"
+          app_catalog: "cluster-catalog"
+          app_catalog_test: "cluster-test-catalog"
+          chart: "cluster-azure"
+          persist_chart_archive: true
+          # Trigger job on git tag.
+          filters:
+            tags:
+              only: /^v.*/

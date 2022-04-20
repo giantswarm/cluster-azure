@@ -1,0 +1,14 @@
+apiVersion: v2
+name: cluster-azure
+description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPA).
+type: application
+version: [[ .Version ]]
+annotations:
+  application.giantswarm.io/team: "phoenix"
+restrictions:
+  compatibleProviders:
+    - azure
+dependencies:
+- name: cluster-shared
+  version: "0.3.0"
+  repository: "https://giantswarm.github.io/cluster-catalog"
