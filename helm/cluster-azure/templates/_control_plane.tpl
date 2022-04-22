@@ -116,9 +116,9 @@ spec:
           cloud-provider: azure
           healthz-bind-address: 0.0.0.0
           image-pull-progress-deadline: 1m
-          node-ip: '{{ ds.meta_data.local_ipv4 }}'
+          node-ip: '{{ `{{ ds.meta_data.local_ipv4 }}` }}'
           v: "2"
-        name: '{{ ds.meta_data["local_hostname"] }}'
+        name: '{{ `{{ ds.meta_data["local_hostname"] }}` }}'
     joinConfiguration:
       discovery: {}
       nodeRegistration:
@@ -126,7 +126,7 @@ spec:
           azure-container-registry-config: /etc/kubernetes/azure.json
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: azure
-        name: '{{ ds.meta_data["local_hostname"] }}'
+        name: '{{ `{{ ds.meta_data["local_hostname"] }}` }}'
     mounts:
     - - LABEL=etcd_disk
       - /var/lib/etcddisk
