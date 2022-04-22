@@ -5,7 +5,7 @@
 ---
 {{- include "cluster" . }}
 ---
-{{- include "aws-cluster" . }}
+{{- include "azure-cluster" . }}
 ---
 {{- include "bastion" . }}
 ---
