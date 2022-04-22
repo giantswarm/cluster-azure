@@ -5,25 +5,23 @@ kubernetesVersion: 1.22.7
 releaseVersion: 20.0.0-alpha1
 
 azure:
-  region: ""
-  azureClusterRole: "default"
+  location: "westeurope"
 
 network:
-  availabilityZoneUsageLimit: 3  # amount of AZ that should be used for the machines
-  vpcCIDR: 10.0.0.0/16  # cidr range for the VPC
+  bastionSubnet: "10.2.0.0/16"
+  controlPlaneSubnet: "10.0.0.0/16"
+  vnetCIDR: 10.0.0.0/8  # cidr range for the VPC
   serviceCIDR: 172.31.0.0/16
 
 bastion:
-  instanceType: t3.small
+  vmSize: Standard_D2_v3
   replicas: 1
 
 controlPlane:
-  instanceType: m5.xlarge
+  vmSize: Standard_D4s_v3
   replicas: 1  # Number of replicas in control plane. Should be an odd number.
   rootVolumeSizeGB: 120
   etcdVolumeSizeGB: 100
-  containerdVolumeSizeGB: 100
-  kubeletVolumeSizeGB: 100
 
 machinePools:
 - name: def00  # Name of node pool.
@@ -36,7 +34,6 @@ machinePools:
   - label=default
 
 sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
-flatcarAWSAccount: "258751437250"
 
 # Used by `cluster-shared` library chart
 includeClusterResourceSet: true

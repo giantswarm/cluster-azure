@@ -1,0 +1,12 @@
+---
+{{- include "coredns" . }}
+---
+{{- include "psps" . }}
+---
+{{- include "cluster" . }}
+---
+{{- include "aws-cluster" . }}
+---
+{{- include "bastion" . }}
+---
+{{- include "control-plane" . }}
