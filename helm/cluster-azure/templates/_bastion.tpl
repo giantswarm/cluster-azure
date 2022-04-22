@@ -39,7 +39,7 @@ spec:
       version: {{ .Values.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-kind: AWSMachineTemplate
+kind: AzureMachineTemplate
 metadata:
   labels:
     cluster.x-k8s.io/role: bastion
