@@ -74,9 +74,9 @@ spec:
           bind-address: 0.0.0.0
       etcd:
         local:
-            dataDir: /var/lib/etcddisk/etcd
-          extraArgs:
-            quota-backend-bytes: "8589934592"
+          dataDir: /var/lib/etcddisk/etcd
+        extraArgs:
+          quota-backend-bytes: "8589934592"
       networking: {}
     diskSetup:
       filesystems:
