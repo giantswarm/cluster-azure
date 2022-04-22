@@ -7,6 +7,6 @@
 ---
 {{- include "azure-cluster" . }}
 ---
-{{- include "bastion" . }}
+#{{- include "bastion" . }}
 ---
-{{- include "control-plane" . }}
+#{{- include "control-plane" . }}
