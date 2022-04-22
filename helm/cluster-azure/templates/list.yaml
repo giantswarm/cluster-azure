@@ -7,3 +7,5 @@
 ---
 {{- include "azure-cluster" . }}
 ---
+{{- include "bastion" . }}
+
