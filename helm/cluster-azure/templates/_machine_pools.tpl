@@ -23,12 +23,12 @@ spec:
       clusterName: {{ include "resource.default.name" $ }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-        kind: AWSMachinePool
+        kind: AzureMachinePool
         name: {{ include "resource.default.name" $ }}-{{ .name }}
       version: {{ $.Values.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-kind: AWSMachinePool
+kind: AzureMachinePool
 metadata:
   labels:
     giantswarm.io/machine-pool: {{ include "resource.default.name" $ }}-{{ .name }}
@@ -36,25 +36,28 @@ metadata:
   name: {{ include "resource.default.name" $ }}-{{ .name }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  availabilityZones: {{ .availabilityZones | default (include "aws-availability-zones" .) }}
-  awsLaunchTemplate:
-    ami: {}
-    iamInstanceProfile: {{ include "resource.default.name" $ }}-nodes-{{ .name }}
-    instanceType: {{ .instanceType }}
-    rootVolume:
-      size: {{ .rootVolumeSizeGB }}
-      type: gp3
-    imageLookupBaseOS: flatcar-stable
-    imageLookupOrg: "{{ $.Values.flatcarAWSAccount }}"
-    sshKeyName: ""
-  minSize: {{ .minSize }}
-  maxSize: {{ .maxSize }}
-  mixedInstancesPolicy:
-    instancesDistribution:
-      onDemandAllocationStrategy: prioritized
-      onDemandBaseCapacity: 0
-      onDemandPercentageAboveBaseCapacity: 100
-      spotAllocationStrategy: lowest-price
+  additionalTags:
+    "cluster-autoscaler-enabled": "true"
+    "cluster-autoscaler-name": "{{ include "resource.default.name" $ }}"
+    "min": "{{ .minSize }}"
+    "max": "{{ .maxSize }}"
+  identity: SystemAssigned
+  location: ""
+  strategy:
+    rollingUpdate:
+      deletePolicy: Oldest
+      maxSurge: 25%
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    osDisk:
+      diskSizeGB: 30
+      managedDisk:
+        storageAccountType: Premium_LRS
+      osType: Linux
+    sshPublicKey: ""
+    terminateNotificationTimeout: 15
+    vmSize: Standard_D4s_v3 
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfig
@@ -69,44 +72,24 @@ spec:
     discovery: {}
     nodeRegistration:
       kubeletExtraArgs:
-        cloud-provider: aws
+        azure-container-registry-config: /etc/kubernetes/azure.json
+        cloud-config: /etc/kubernetes/azure.json
+        cloud-provider: azure
         healthz-bind-address: 0.0.0.0
         image-pull-progress-deadline: 1m
         node-labels: role=worker,giantswarm.io/machine-pool={{ include "resource.default.name" $ }}-{{ .name }},{{- join "," .customNodeLabels }}
         v: "2"
-      name: ${COREOS_EC2_HOSTNAME}
-  format: ignition
-  ignition:
-    containerLinuxConfig:
-      additionalConfig: |
-        storage:
-          links:
-          # For some reason enabling services via systemd.units doesn't work on Flatcar CAPI AMIs.
-          - path: /etc/systemd/system/multi-user.target.wants/coreos-metadata.service
-            target: /usr/lib/systemd/system/coreos-metadata.service
-          - path: /etc/systemd/system/multi-user.target.wants/kubeadm.service
-            target: /etc/systemd/system/kubeadm.service
-        systemd:
-          units:
-          - name: kubeadm.service
-            dropins:
-            - name: 10-flatcar.conf
-              contents: |
-                [Unit]
-                # kubeadm must run after coreos-metadata populated /run/metadata directory.
-                Requires=coreos-metadata.service
-                After=coreos-metadata.service
-                [Service]
-                # Ensure kubeadm service has access to kubeadm binary in /opt/bin on Flatcar.
-                Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/bin
-                # To make metadata environment variables available for pre-kubeadm commands.
-                EnvironmentFile=/run/metadata/*
+      name: '{{ `{{ ds.meta_data["local_hostname"] }}` }}'
   preKubeadmCommands:
-  - envsubst < /etc/kubeadm.yml > /etc/kubeadm.yml.tmp
-  - mv /etc/kubeadm.yml.tmp /etc/kubeadm.yml
-  - 'files="/etc/ssh/trusted-user-ca-keys.pem /etc/ssh/sshd_config"; for f in $files; do tmpFile=$(mktemp); cat "${f}" | base64 -d > ${tmpFile}; if [ "$?" -eq 0 ]; then mv ${tmpFile} ${f};fi;  done;'
   - systemctl restart sshd
   files:
+  - contentFrom:
+      secret:
+        key: worker-node-azure.json
+        name: {{ include "resource.default.name" $ }}-azure-json
+    owner: root:root
+    path: /etc/kubernetes/azure.json
+    permissions: "0644"
   {{- include "sshFiles" $ | nindent 4 }}
   users:
   {{- include "sshUsers" . | nindent 2 }}
