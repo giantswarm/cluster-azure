@@ -90,7 +90,7 @@ spec:
     owner: root:root
     path: /etc/kubernetes/azure.json
     permissions: "0644"
-  {{- include "sshFiles" $ | nindent 4 }}
+  {{- include "sshFiles" $ | nindent 2 }}
   users:
   {{- include "sshUsers" . | nindent 2 }}
 ---
