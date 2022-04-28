@@ -34,7 +34,7 @@ spec:
       clusterName: {{ include "resource.default.name" $ }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-        kind: AWSMachineTemplate
+        kind: AzureMachineTemplate
         name: {{ include "resource.default.name" $ }}-bastion
       version: {{ .Values.kubernetesVersion }}
 ---
