@@ -1,0 +1,14 @@
+---
+{{- include "coredns" . }}
+---
+{{- include "psps" . }}
+---
+{{- include "cluster" . }}
+---
+{{- include "azure-cluster" . }}
+---
+{{- include "bastion" . }}
+---
+{{- include "control-plane" . }}
+---
+{{- include "machine-pools" . }}
