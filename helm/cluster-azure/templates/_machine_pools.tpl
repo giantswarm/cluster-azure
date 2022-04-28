@@ -86,7 +86,7 @@ spec:
   - contentFrom:
       secret:
         key: worker-node-azure.json
-        name: {{ include "resource.default.name" $ }}-azure-json
+        name: {{ include "resource.default.name" $ }}-{{ .name }}-azure-json
     owner: root:root
     path: /etc/kubernetes/azure.json
     permissions: "0644"
