@@ -1,1 +1,7 @@
 {{- include "cluster" . }}
+---
+{{- include "azure-cluster" . }}
+---
+{{- include "control-plane" . }}
+---
+{{- include "machine-deployment" . }}
