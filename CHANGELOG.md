@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added github automation
+
 ## [0.0.1] - 2022-11-22
 
 [Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.1...HEAD
 [0.0.1]: https://github.com/giantswarm/cluster-azure/releases/tag/v0.0.1
+
