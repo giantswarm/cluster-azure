@@ -11,6 +11,11 @@ spec:
     matchLabels: null
   template:
     spec:
+      bootstrap:
+        configRef:
+          apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+          kind: KubeadmConfigTemplate
+          name: {{ include "resource.default.name" $ }}
       clusterName: {{ include "resource.default.name" $ }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
@@ -31,4 +36,17 @@ spec:
         osType: Linux
       sshPublicKey: ""
       vmSize: Standard_D2s_v3
+---
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+kind: KubeadmConfigTemplate
+metadata:
+  name: {{ include "resource.default.name" $ }}
+  namespace: giantswarm
+spec:
+  template:
+    spec:
+      joinConfiguration:
+        nodeRegistration:
+          kubeletExtraArgs:
+            cloud-provider: external
 {{ end }}
