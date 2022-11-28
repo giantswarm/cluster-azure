@@ -98,7 +98,7 @@ spec:
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           feature-gates: CSIMigrationAzureDisk=true
-        name: '{{ ds.meta_data["local_hostname"] }}'
+        name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
@@ -106,7 +106,7 @@ spec:
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           feature-gates: CSIMigrationAzureDisk=true
-        name: '{{ ds.meta_data["local_hostname"] }}'
+        name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
     mounts:
       - - LABEL=etcd_disk
         - /var/lib/etcddisk
