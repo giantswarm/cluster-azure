@@ -2,11 +2,13 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
+  labels:
+    {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}-md
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
-  replicas: 0
+  replicas: 3
   selector:
     matchLabels: null
   template:
@@ -26,6 +28,8 @@ spec:
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:
+  labels:
+    {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}-md
   namespace: {{ $.Release.Namespace }}
 spec:
@@ -40,6 +44,8 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
+  labels:
+    {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}-md
   namespace: {{ $.Release.Namespace }}
 spec:
@@ -49,7 +55,7 @@ spec:
         - contentFrom:
             secret:
               key: worker-node-azure.json
-              name: {{ include "resource.default.name" $ }}-md-0-azure-json
+              name: {{ include "resource.default.name" $ }}-control-plane-azure-json
           owner: root:root
           path: /etc/kubernetes/azure.json
           permissions: "0644"
