@@ -39,7 +39,7 @@ spec:
           bind-address: "0.0.0.0"
           logtostderr: "true"
           profiling: "false"
-          allocate-node-cidrs: "false"
+          allocate-node-cidrs: "true"
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           cluster-name: {{ include "resource.default.name" $ }}
