@@ -18,6 +18,9 @@ spec:
   kubeadmConfigSpec:
     clusterConfiguration:
       apiServer:
+        certSANs:
+          - 127.0.0.1
+          - localhost
         extraArgs:
           cloud-provider: external
           cloud-config: /etc/kubernetes/azure.json
