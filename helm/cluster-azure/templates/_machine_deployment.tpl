@@ -23,7 +23,7 @@ spec:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachineTemplate
         name: {{ include "resource.default.name" $ }}-md
-      version: v1.22.0
+      version: {{ .Values.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
