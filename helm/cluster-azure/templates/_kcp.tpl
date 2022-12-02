@@ -129,6 +129,15 @@ metadata:
 spec:
   template:
     spec:
+      {{- if .Values.vmIdentity.type }}
+      identity: {{ .Values.vmIdentity.type }}
+      {{- if gt (len .Values.vmIdentity.userAssignedIdentitiesIds) 0 }}
+      userAssignedIdentities:
+      {{- range $id := .Values.vmIdentity.userAssignedIdentitiesIds }}
+        - providerID: {{ $id }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
       dataDisks:
         - diskSizeGB: 256
           lun: 0
