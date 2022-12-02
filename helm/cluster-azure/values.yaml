@@ -42,7 +42,7 @@ machinePools:
     customNodeLabels:
       - label=default
 
-# TODO Is this the right place in the schema ? 
+# TODO Is this the right place in the schema ?
 vmIdentity:
   type: null
   userAssignedIdentitiesIds: []
