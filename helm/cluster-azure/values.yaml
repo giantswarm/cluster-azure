@@ -42,6 +42,11 @@ machinePools:
     customNodeLabels:
       - label=default
 
+# TODO Is this the right place in the schema ? 
+vmIdentity:
+  type: null
+  userAssignedIdentitiesIds: []
+
 sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
 
 # Used by `cluster-shared` library chart
