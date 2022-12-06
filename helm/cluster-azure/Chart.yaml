@@ -1,6 +1,6 @@
 apiVersion: v2
 name: cluster-azure
-description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPA).
+description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPZ).
 type: application
 version: [[ .Version ]]
 annotations:

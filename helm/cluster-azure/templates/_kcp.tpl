@@ -128,6 +128,9 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
+    metadata:
+      labels:
+        {{- include "labels.common" $ | nindent 8 }}
     spec:
       {{- if .Values.vmIdentity.type }}
       identity: {{ .Values.vmIdentity.type }}
