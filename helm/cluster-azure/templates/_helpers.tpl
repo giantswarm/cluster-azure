@@ -22,7 +22,6 @@ app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
-cluster.x-k8s.io/watch-filter: capi
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
 giantswarm.io/organization: {{ .Values.organization | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
