@@ -39,6 +39,9 @@
                 "rootVolumeSizeGB": {
                     "type": "integer"
                 },
+                "serviceAccountIssuer": {
+                   "type": ["null", "string"]
+                },
                 "vmSize": {
                     "type": "string"
                 }
