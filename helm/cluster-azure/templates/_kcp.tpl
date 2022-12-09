@@ -22,6 +22,9 @@ spec:
           - 127.0.0.1
           - localhost
         extraArgs:
+          {{- if .Values.controlPlane.serviceAccountIssuer }}
+          service-account-issuer: {{ .Values.controlPlane.serviceAccountIssuer }}
+          {{- end }}
           cloud-provider: external
           cloud-config: /etc/kubernetes/azure.json
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
