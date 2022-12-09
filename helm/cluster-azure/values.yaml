@@ -30,7 +30,7 @@ controlPlane:
   rootVolumeSizeGB: 120
   etcdVolumeSizeGB: 100
   # Temporary for testing, we should not really need to specify this on a per-cluster basis since it should be a predictable url
-  serviceAccountIssuer: 
+  serviceAccountIssuer:
 
 machinePools:
   # Name of node pool.
