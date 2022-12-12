@@ -4,4 +4,4 @@
 ---
 {{- include "control-plane" . }}
 ---
-{{- include "machine-deployment" . }}
+{{- include "machine-pools" . }}

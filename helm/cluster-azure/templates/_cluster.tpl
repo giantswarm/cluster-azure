@@ -5,7 +5,6 @@ metadata:
   annotations:
     cluster.giantswarm.io/description: "{{ .Values.clusterDescription }}"
   labels:
-    cni: calico
     cluster-apps-operator.giantswarm.io/watching: ""
     {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}

@@ -24,7 +24,7 @@ bastion:
   replicas: 1
 
 controlPlane:
-  vmSize: Standard_D4s_v3
+  instanceType: Standard_D4s_v3
   # Number of replicas in control plane. Should be an odd number.
   replicas: 1
   rootVolumeSizeGB: 120
@@ -33,23 +33,32 @@ controlPlane:
   serviceAccountIssuer:
 
 machinePools:
-  # Name of node pool.
   - name: def00
-    availabilityZones:
-    instanceType: m5.xlarge
-    # Number of replicas in node pool.
+    availabilityZones: "westeurope"
+    instanceType: Standard_D2s_v3
     minSize: 3
     maxSize: 3
     rootVolumeSizeGB: 300
     customNodeLabels:
       - label=default
+    customNodeTaints: []
+    # - key: ""
+    #   value: ""
+    #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
+
+sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
+
+oidc:
+  issuerUrl: ""
+  caPem: ""
+  clientId: ""
+  usernameClaim: ""
+  groupsClaim: ""
 
 # TODO Is this the right place in the schema ?
 vmIdentity:
   type: null
   userAssignedIdentitiesIds: []
-
-sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
 
 # Used by `cluster-shared` library chart
 includeClusterResourceSet: true

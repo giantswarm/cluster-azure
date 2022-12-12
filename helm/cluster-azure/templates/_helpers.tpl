@@ -62,21 +62,32 @@ room for such suffix.
   content: {{ $.Files.Get "files/etc/ssh/sshd_config_bastion" | b64enc }}
 {{- end -}}
 
-{{- define "kubernetesFiles" -}}
-- path: /etc/kubernetes/policies/audit-policy.yaml
-  permissions: "0600"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/kubernetes/policies/audit-policy.yaml" | b64enc }}
-- path: /etc/kubernetes/encryption/config.yaml
-  permissions: "0600"
-  contentFrom:
-    secret:
-      name: {{ include "resource.default.name" $ }}-encryption-provider-config
-      key: encryption
-{{- end -}}
-
 {{- define "sshUsers" -}}
 - name: giantswarm
   groups: sudo
   sudo: ALL=(ALL) NOPASSWD:ALL
+{{- end -}}
+
+
+
+{{- define "oidcFiles" -}}
+{{- if ne .Values.oidc.caPem "" }}
+- path: /etc/ssl/certs/oidc.pem
+  permissions: "0600"
+  encoding: base64
+  content: {{ tpl ($.Files.Get "files/etc/ssl/certs/oidc.pem") . | b64enc }}
+{{- end }}
+{{- end -}}
+
+{{/*
+Hash function based on data provided
+Expects two arguments (as a `dict`) E.g.
+  {{ include "hash" (dict "data" . "global" $global) }}
+Where `data` is the data to has on and `global` is the top level scope.
+*/}}
+{{- define "hash" -}}
+{{- $data := mustToJson .data | toString  }}
+{{- $salt := "" }}
+{{- if .global.Values.hashSalt }}{{ $salt = .global.Values.hashSalt}}{{end}}
+{{- (printf "%s%s" $data $salt) | quote | sha1sum | trunc 8 }}
 {{- end -}}

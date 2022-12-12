@@ -2,13 +2,13 @@ apiVersion: v2
 name: cluster-azure
 description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPZ).
 type: application
-version: [[ .Version ]]
+version: [[.Version]]
 annotations:
-  application.giantswarm.io/team: "phoenix"
+  application.giantswarm.io/team: "glippy"
 restrictions:
   compatibleProviders:
     - azure
 dependencies:
-- name: cluster-shared
-  version: "0.3.0"
-  repository: "https://giantswarm.github.io/cluster-catalog"
+  - name: cluster-shared
+    version: "0.3.0"
+    repository: "https://giantswarm.github.io/cluster-catalog"

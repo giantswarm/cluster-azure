@@ -40,7 +40,7 @@
                     "type": "integer"
                 },
                 "serviceAccountIssuer": {
-                   "type": ["null", "string"]
+                    "type": "null"
                 },
                 "vmSize": {
                     "type": "string"
@@ -73,13 +73,16 @@
                 "type": "object",
                 "properties": {
                     "availabilityZones": {
-                        "type": "null"
+                        "type": "string"
                     },
                     "customNodeLabels": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
+                    },
+                    "customNodeTaints": {
+                        "type": "array"
                     },
                     "instanceType": {
                         "type": "string"
@@ -122,6 +125,26 @@
                 }
             }
         },
+        "oidc": {
+            "type": "object",
+            "properties": {
+                "caPem": {
+                    "type": "string"
+                },
+                "clientId": {
+                    "type": "string"
+                },
+                "groupsClaim": {
+                    "type": "string"
+                },
+                "issuerUrl": {
+                    "type": "string"
+                },
+                "usernameClaim": {
+                    "type": "string"
+                }
+            }
+        },
         "organization": {
             "type": "string"
         },
@@ -135,8 +158,7 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": ["null", "string"],
-                    "enum": [null, "UserAssigned", "SystemAssigned"]
+                    "type": "null"
                 },
                 "userAssignedIdentitiesIds": {
                     "type": "array"
