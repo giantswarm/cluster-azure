@@ -137,7 +137,7 @@ spec:
     - contentFrom:
         secret:
           key: control-plane-azure.json
-          name: {{ include "resource.default.name" $ }}-control-plane-azure-json
+          name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) "global" .) }}-azure-json
       owner: root:root
       path: /etc/kubernetes/azure.json
       permissions: "0644"
