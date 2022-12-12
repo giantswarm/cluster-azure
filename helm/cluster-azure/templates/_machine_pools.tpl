@@ -45,7 +45,7 @@ spec:
     type: RollingUpdate
   template:
     osDisk:
-      diskSizeGB: 30
+      diskSizeGB: {{ .rootVolumeSizeGB }}
       managedDisk:
         storageAccountType: Premium_LRS
       osType: Linux

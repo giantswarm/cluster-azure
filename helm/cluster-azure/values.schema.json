@@ -10,17 +10,6 @@
                 }
             }
         },
-        "bastion": {
-            "type": "object",
-            "properties": {
-                "replicas": {
-                    "type": "integer"
-                },
-                "vmSize": {
-                    "type": "string"
-                }
-            }
-        },
         "clusterDescription": {
             "type": "string"
         },
@@ -33,34 +22,14 @@
                 "etcdVolumeSizeGB": {
                     "type": "integer"
                 },
+                "instanceType": {
+                    "type": "string"
+                },
                 "replicas": {
                     "type": "integer"
                 },
                 "rootVolumeSizeGB": {
                     "type": "integer"
-                },
-                "serviceAccountIssuer": {
-                    "type": "null"
-                },
-                "vmSize": {
-                    "type": "string"
-                }
-            }
-        },
-        "includeClusterResourceSet": {
-            "type": "boolean"
-        },
-        "kubectlImage": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "registry": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
                 }
             }
         },
@@ -105,22 +74,10 @@
         "network": {
             "type": "object",
             "properties": {
-                "bastionSubnet": {
-                    "type": "string"
-                },
-                "controlPlaneSubnet": {
-                    "type": "string"
-                },
                 "podCIDR": {
                     "type": "string"
                 },
-                "podNodeCidr": {
-                    "type": "integer"
-                },
                 "serviceCIDR": {
-                    "type": "string"
-                },
-                "vnetCIDR": {
                     "type": "string"
                 }
             }
@@ -148,22 +105,8 @@
         "organization": {
             "type": "string"
         },
-        "releaseVersion": {
-            "type": "string"
-        },
         "sshSSOPublicKey": {
             "type": "string"
-        },
-        "vmIdentity": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "null"
-                },
-                "userAssignedIdentitiesIds": {
-                    "type": "array"
-                }
-            }
         }
     }
 }

@@ -4,33 +4,21 @@ clusterName: ""
 clusterDescription: "test"
 # Organization in which to create the cluster.
 organization: ""
-kubernetesVersion: 1.22.7
-releaseVersion: 20.0.0-alpha1
+kubernetesVersion: 1.24.8
 
 azure:
   location: "westeurope"
 
 network:
-  bastionSubnet: "10.2.0.0/16"
-  controlPlaneSubnet: "10.0.0.0/16"
-  # cidr range for the VPC
-  vnetCIDR: 10.0.0.0/8
   serviceCIDR: 172.31.0.0/16
   podCIDR: "192.168.0.0/16"
-  podNodeCidr: 24
-
-bastion:
-  vmSize: Standard_D2_v3
-  replicas: 1
 
 controlPlane:
   instanceType: Standard_D4s_v3
   # Number of replicas in control plane. Should be an odd number.
   replicas: 1
-  rootVolumeSizeGB: 120
-  etcdVolumeSizeGB: 100
-  # Temporary for testing, we should not really need to specify this on a per-cluster basis since it should be a predictable url
-  serviceAccountIssuer:
+  rootVolumeSizeGB: 50
+  etcdVolumeSizeGB: 10
 
 machinePools:
   - name: def00
@@ -38,7 +26,7 @@ machinePools:
     instanceType: Standard_D2s_v3
     minSize: 3
     maxSize: 3
-    rootVolumeSizeGB: 300
+    rootVolumeSizeGB: 50
     customNodeLabels:
       - label=default
     customNodeTaints: []
@@ -54,15 +42,3 @@ oidc:
   clientId: ""
   usernameClaim: ""
   groupsClaim: ""
-
-# TODO Is this the right place in the schema ?
-vmIdentity:
-  type: null
-  userAssignedIdentitiesIds: []
-
-# Used by `cluster-shared` library chart
-includeClusterResourceSet: true
-kubectlImage:
-  registry: quay.io
-  name: giantswarm/kubectl
-  tag: 1.23.5

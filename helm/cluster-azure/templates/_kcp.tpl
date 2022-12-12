@@ -5,11 +5,11 @@ template:
       {{- include "labels.common" $ | nindent 8 }}
   spec:
     dataDisks:
-      - diskSizeGB: 256
+      - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
         lun: 0
         nameSuffix: etcddisk
     osDisk:
-      diskSizeGB: 128
+      diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
       osType: Linux
     sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc}}
     vmSize: {{ $.Values.controlPlane.instanceType }}
