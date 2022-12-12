@@ -41,9 +41,6 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "availabilityZones": {
-                        "type": "string"
-                    },
                     "customNodeLabels": {
                         "type": "array",
                         "items": {
@@ -54,6 +51,9 @@
                         "type": "array"
                     },
                     "instanceType": {
+                        "type": "string"
+                    },
+                    "location": {
                         "type": "string"
                     },
                     "maxSize": {

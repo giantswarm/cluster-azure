@@ -4,11 +4,7 @@ description: A helm chart for creating Cluster API clusters with the Azure infra
 type: application
 version: [[.Version]]
 annotations:
-  application.giantswarm.io/team: "glippy"
+  application.giantswarm.io/team: "clippy"
 restrictions:
   compatibleProviders:
     - azure
-dependencies:
-  - name: cluster-shared
-    version: "0.3.0"
-    repository: "https://giantswarm.github.io/cluster-catalog"

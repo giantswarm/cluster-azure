@@ -22,7 +22,7 @@ controlPlane:
 
 machinePools:
   - name: def00
-    availabilityZones: "westeurope"
+    location: "westeurope"
     instanceType: Standard_D2s_v3
     minSize: 3
     maxSize: 3

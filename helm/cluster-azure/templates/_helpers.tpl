@@ -67,8 +67,6 @@ room for such suffix.
   sudo: ALL=(ALL) NOPASSWD:ALL
 {{- end -}}
 
-
-
 {{- define "oidcFiles" -}}
 {{- if ne .Values.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
@@ -86,7 +84,5 @@ Where `data` is the data to has on and `global` is the top level scope.
 */}}
 {{- define "hash" -}}
 {{- $data := mustToJson .data | toString  }}
-{{- $salt := "" }}
-{{- if .global.Values.hashSalt }}{{ $salt = .global.Values.hashSalt}}{{end}}
-{{- (printf "%s%s" $data $salt) | quote | sha1sum | trunc 8 }}
+{{- (printf "%s%s" $data) | quote | sha1sum | trunc 8 }}
 {{- end -}}

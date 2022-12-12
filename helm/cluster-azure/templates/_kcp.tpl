@@ -11,7 +11,7 @@ template:
     osDisk:
       diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
       osType: Linux
-    sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc}}
+    sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc }}
     vmSize: {{ $.Values.controlPlane.instanceType }}
 {{- end }}
 
@@ -31,7 +31,7 @@ spec:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
       kind: AzureMachineTemplate
-      name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) "global" .) }}
+      name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}
   kubeadmConfigSpec:
     clusterConfiguration:
       apiServer:
@@ -142,7 +142,7 @@ spec:
     - contentFrom:
         secret:
           key: control-plane-azure.json
-          name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) "global" .) }}-azure-json
+          name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}-azure-json
       owner: root:root
       path: /etc/kubernetes/azure.json
       permissions: "0644"
@@ -186,7 +186,7 @@ metadata:
   labels:
     cluster.x-k8s.io/role: control-plane
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) "global" .) }}
+  name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}
   namespace: {{ $.Release.Namespace }}
 spec: {{ include "controlplane-azuremachinetemplate-spec" $ | nindent 2 }}
 {{- end -}}
