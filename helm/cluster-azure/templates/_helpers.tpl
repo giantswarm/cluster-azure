@@ -42,7 +42,7 @@ room for such suffix.
 
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
 {{- define "vmUaIdentityPrefix" -}}
-/subscriptions/{{ .Values.azureCloud.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+/subscriptions/{{ .Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
 {{- define "sshFiles" -}}

@@ -7,12 +7,7 @@
             "properties": {
                 "location": {
                     "type": "string"
-                }
-            }
-        },
-        "azureCloud": {
-            "type": "object",
-            "properties": {
+                },
                 "subscriptionId": {
                     "type": "string"
                 }
