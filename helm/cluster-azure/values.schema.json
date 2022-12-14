@@ -10,17 +10,6 @@
                 }
             }
         },
-        "bastion": {
-            "type": "object",
-            "properties": {
-                "replicas": {
-                    "type": "integer"
-                },
-                "vmSize": {
-                    "type": "string"
-                }
-            }
-        },
         "clusterDescription": {
             "type": "string"
         },
@@ -33,31 +22,14 @@
                 "etcdVolumeSizeGB": {
                     "type": "integer"
                 },
+                "instanceType": {
+                    "type": "string"
+                },
                 "replicas": {
                     "type": "integer"
                 },
                 "rootVolumeSizeGB": {
                     "type": "integer"
-                },
-                "vmSize": {
-                    "type": "string"
-                }
-            }
-        },
-        "includeClusterResourceSet": {
-            "type": "boolean"
-        },
-        "kubectlImage": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "registry": {
-                    "type": "string"
-                },
-                "tag": {
-                    "type": "string"
                 }
             }
         },
@@ -69,16 +41,19 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "availabilityZones": {
-                        "type": "null"
-                    },
                     "customNodeLabels": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         }
                     },
+                    "customNodeTaints": {
+                        "type": "array"
+                    },
                     "instanceType": {
+                        "type": "string"
+                    },
+                    "location": {
                         "type": "string"
                     },
                     "maxSize": {
@@ -99,30 +74,35 @@
         "network": {
             "type": "object",
             "properties": {
-                "bastionSubnet": {
-                    "type": "string"
-                },
-                "controlPlaneSubnet": {
-                    "type": "string"
-                },
                 "podCIDR": {
                     "type": "string"
                 },
-                "podNodeCidr": {
-                    "type": "integer"
-                },
                 "serviceCIDR": {
                     "type": "string"
+                }
+            }
+        },
+        "oidc": {
+            "type": "object",
+            "properties": {
+                "caPem": {
+                    "type": "string"
                 },
-                "vnetCIDR": {
+                "clientId": {
+                    "type": "string"
+                },
+                "groupsClaim": {
+                    "type": "string"
+                },
+                "issuerUrl": {
+                    "type": "string"
+                },
+                "usernameClaim": {
                     "type": "string"
                 }
             }
         },
         "organization": {
-            "type": "string"
-        },
-        "releaseVersion": {
             "type": "string"
         },
         "sshSSOPublicKey": {

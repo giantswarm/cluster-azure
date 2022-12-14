@@ -22,11 +22,9 @@ app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
-cluster.x-k8s.io/watch-filter: capi
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
 giantswarm.io/organization: {{ .Values.organization | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
-release.giantswarm.io/version: {{ .Values.releaseVersion | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
 {{- end -}}
 
@@ -63,21 +61,28 @@ room for such suffix.
   content: {{ $.Files.Get "files/etc/ssh/sshd_config_bastion" | b64enc }}
 {{- end -}}
 
-{{- define "kubernetesFiles" -}}
-- path: /etc/kubernetes/policies/audit-policy.yaml
-  permissions: "0600"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/kubernetes/policies/audit-policy.yaml" | b64enc }}
-- path: /etc/kubernetes/encryption/config.yaml
-  permissions: "0600"
-  contentFrom:
-    secret:
-      name: {{ include "resource.default.name" $ }}-encryption-provider-config
-      key: encryption
-{{- end -}}
-
 {{- define "sshUsers" -}}
 - name: giantswarm
   groups: sudo
   sudo: ALL=(ALL) NOPASSWD:ALL
+{{- end -}}
+
+{{- define "oidcFiles" -}}
+{{- if ne .Values.oidc.caPem "" }}
+- path: /etc/ssl/certs/oidc.pem
+  permissions: "0600"
+  encoding: base64
+  content: {{ tpl ($.Files.Get "files/etc/ssl/certs/oidc.pem") . | b64enc }}
+{{- end }}
+{{- end -}}
+
+{{/*
+Hash function based on data provided
+Expects two arguments (as a `dict`) E.g.
+  {{ include "hash" (dict "data" . "global" $global) }}
+Where `data` is the data to has on and `global` is the top level scope.
+*/}}
+{{- define "hash" -}}
+{{- $data := mustToJson .data | toString  }}
+{{- (printf "%s%s" $data) | quote | sha1sum | trunc 8 }}
 {{- end -}}

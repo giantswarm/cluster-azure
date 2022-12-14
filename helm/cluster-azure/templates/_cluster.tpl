@@ -11,6 +11,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   clusterNetwork:
+    services:
+      cidrBlocks:
+       - {{ .Values.network.serviceCIDR }}
     pods:
       cidrBlocks:
       - {{ .Values.network.podCIDR }}
