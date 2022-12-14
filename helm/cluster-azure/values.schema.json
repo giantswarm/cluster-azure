@@ -10,6 +10,14 @@
                 }
             }
         },
+        "azureCloud": {
+            "type": "object",
+            "properties": {
+                "subscriptionId": {
+                    "type": "string"
+                }
+            }
+        },
         "bastion": {
             "type": "object",
             "properties": {
