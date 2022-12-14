@@ -135,14 +135,10 @@ spec:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
     spec:
-      {{- if .Values.vmIdentity.type }}
-      identity: {{ .Values.vmIdentity.type }}
-      {{- if gt (len .Values.vmIdentity.userAssignedIdentitiesIds) 0 }}
+      {{- if .Values.vmUaIdentityPrefix }}
+      identity: UserAssigned
       userAssignedIdentities:
-      {{- range $id := .Values.vmIdentity.userAssignedIdentitiesIds }}
-        - providerID: {{ $id }}
-      {{- end }}
-      {{- end }}
+        - providerID: {{ .Values.vmUaIdentityPrefix }}-cp
       {{- end }}
       dataDisks:
         - diskSizeGB: 256
