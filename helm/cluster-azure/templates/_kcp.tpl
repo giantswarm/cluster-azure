@@ -138,6 +138,9 @@ spec:
       identity: UserAssigned
       userAssignedIdentities:
         - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
+        {{- if .Values.managementCluster }}
+        - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
+        {{- end }}
       dataDisks:
         - diskSizeGB: 256
           lun: 0

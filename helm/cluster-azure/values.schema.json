@@ -107,6 +107,9 @@
                 }
             }
         },
+        "managementCluster": {
+            "type": "boolean"
+        },
         "network": {
             "type": "object",
             "properties": {

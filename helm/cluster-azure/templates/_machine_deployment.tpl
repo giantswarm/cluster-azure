@@ -44,6 +44,9 @@ spec:
       identity: UserAssigned
       userAssignedIdentities:
         - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes
+        {{- if .Values.managementCluster }}
+        - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
+        {{- end }}
       osDisk:
         diskSizeGB: 128
         osType: Linux
