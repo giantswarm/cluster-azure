@@ -1,4 +1,10 @@
 {{- define "machinepool-azuremachinepool-spec" -}}
+identity: UserAssigned
+userAssignedIdentities:
+  - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes
+  {{- if .Values.managementCluster }}
+  - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
+  {{- end }}
 location: {{ .machinePool.location }}
 strategy:
   rollingUpdate:

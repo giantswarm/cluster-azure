@@ -8,6 +8,8 @@ kubernetesVersion: 1.24.8
 
 azure:
   location: "westeurope"
+  # This value must be updated to the right value for the cluster to be installed
+  subscriptionId: PLACEHOLDER
 
 network:
   serviceCIDR: 172.31.0.0/16
@@ -33,6 +35,9 @@ machinePools:
     # - key: ""
     #   value: ""
     #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
+
+# define if the cluster being installed is a MC or a WC (default) 
+managementCluster: false
 
 sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
 

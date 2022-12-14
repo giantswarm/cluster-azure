@@ -7,6 +7,9 @@
             "properties": {
                 "location": {
                     "type": "string"
+                },
+                "subscriptionId": {
+                    "type": "string"
                 }
             }
         },
@@ -70,6 +73,9 @@
                     }
                 }
             }
+        },
+        "managementCluster": {
+            "type": "boolean"
         },
         "network": {
             "type": "object",
