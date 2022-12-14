@@ -36,6 +36,9 @@
                 }
             }
         },
+        "enablePerClusterIdentity": {
+            "type": "boolean"
+        },
         "kubernetesVersion": {
             "type": "string"
         },

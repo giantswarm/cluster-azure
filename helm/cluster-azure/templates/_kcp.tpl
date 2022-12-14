@@ -4,12 +4,14 @@ template:
     labels:
       {{- include "labels.common" $ | nindent 8 }}
   spec:
+    {{- if .Values.enablePerClusterIdentity }}
     identity: UserAssigned
     userAssignedIdentities:
       - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
       {{- if .Values.managementCluster }}
       - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
       {{- end }}
+    {{- end }}
     dataDisks:
       - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
         lun: 0
