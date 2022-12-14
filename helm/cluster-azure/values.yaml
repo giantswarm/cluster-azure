@@ -36,7 +36,7 @@ machinePools:
     #   value: ""
     #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
 
-# define if the cluster being installed is a MC or a WC (default) 
+# define if the cluster being installed is a MC or a WC (default)
 managementCluster: false
 
 # TODO: This is temporary so we can deploy clusters without dedicated UA Identity until the operator for WC clusters are ready
