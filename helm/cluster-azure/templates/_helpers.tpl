@@ -40,6 +40,11 @@ room for such suffix.
 {{- end -}}
 
 
+{{/*Helper to define per cluster User Assigned Identity prefix*/}}
+{{- define "vmUaIdentityPrefix" -}}
+/subscriptions/{{ .Values.azureCloud.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+{{- end -}}
+
 {{- define "sshFiles" -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"

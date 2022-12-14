@@ -130,9 +130,6 @@
         },
         "sshSSOPublicKey": {
             "type": "string"
-        },
-        "vmUaIdentityPrefix": {
-            "type": ["null", "string"]
         }
     }
 }

@@ -41,11 +41,9 @@ spec:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
     spec:
-      {{- if .Values.vmUaIdentityPrefix }}
       identity: UserAssigned
       userAssignedIdentities:
-        - providerID: {{ .Values.vmUaIdentityPrefix }}-nodes
-      {{- end }}
+        - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes
       osDisk:
         diskSizeGB: 128
         osType: Linux
