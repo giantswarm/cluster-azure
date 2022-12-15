@@ -86,7 +86,7 @@ spec:
   - contentFrom:
       secret:
         key: worker-node-azure.json
-        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-kubeadmconfig-spec" $) .) }}-azure-json
+        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-azuremachinepool-spec" $data) .) }}-azure-json
     owner: root:root
     path: /etc/kubernetes/azure.json
     permissions: "0644"
