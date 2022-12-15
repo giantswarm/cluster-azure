@@ -82,14 +82,14 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   joinConfiguration: {{ include "machinepool-kubeadmconfig-spec" $ | nindent 4 }}
-    files:
-    - contentFrom:
-        secret:
-          key: worker-node-azure.json
-          name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-kubeadmconfig-spec" $) .) }}-azure-json
-      owner: root:root
-      path: /etc/kubernetes/azure.json
-      permissions: "0644"
+  files:
+  - contentFrom:
+      secret:
+        key: worker-node-azure.json
+        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-kubeadmconfig-spec" $) .) }}-azure-json
+    owner: root:root
+    path: /etc/kubernetes/azure.json
+    permissions: "0644"
 ---
 {{- end }}
 {{- end -}}
