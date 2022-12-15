@@ -1,5 +1,5 @@
 {{- define "machinepool-azuremachinepool-spec" -}}
-{{- if .Values.enablePerClusterIdentity }}
+{{- if .Values.enablePerClusterIdentity -}}
 identity: UserAssigned
 userAssignedIdentities:
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes
@@ -20,7 +20,7 @@ template:
     managedDisk:
       storageAccountType: Premium_LRS
     osType: Linux
-  sshPublicKey: {{ .global.sshSSOPublicKey | b64enc }}
+  sshPublicKey: {{ .Values.sshSSOPublicKey | b64enc }}
   vmSize: {{ .machinePool.instanceType }}
 {{- end -}}
 
@@ -34,7 +34,7 @@ nodeRegistration:
 
 {{- define "machine-pools" -}}
 {{- range $machinePool := .Values.machinePools }}
-{{ $data := dict "machinePool" $machinePool "global" $.Values }}
+{{ $data := dict "machinePool" $machinePool "Values" $.Values "Release" $.Release }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:
