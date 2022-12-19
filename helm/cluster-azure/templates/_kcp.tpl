@@ -165,6 +165,8 @@ spec:
       encoding: base64
       content: {{ $.Files.Get "files/etc/kubernetes/policies/audit-policy.yaml" | b64enc }}
     initConfiguration:
+      skipPhases:
+      - addon/coredns
       nodeRegistration:
         kubeletExtraArgs:
           azure-container-registry-config: /etc/kubernetes/azure.json
