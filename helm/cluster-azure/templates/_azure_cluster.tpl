@@ -10,7 +10,8 @@ spec:
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
-    name: cluster-identity
+    name: {{ .Values.azure.azureClusterIdentity.name }}
+    namepsace: {{ .Values.azure.azureClusterIdentity.namespace }}
   location: {{ .Values.azure.location }}
   networkSpec:
     subnets:

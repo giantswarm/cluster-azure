@@ -10,6 +10,9 @@ azure:
   location: "westeurope"
   # This value must be updated to the right value for the cluster to be installed
   subscriptionId: PLACEHOLDER
+  azureClusterIdentity:
+    name: "cluster-identity"
+    namespace: "org-giantswarm"
 
 network:
   serviceCIDR: 172.31.0.0/16

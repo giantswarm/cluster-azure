@@ -5,6 +5,17 @@
         "azure": {
             "type": "object",
             "properties": {
+                "azureClusterIdentity": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "location": {
                     "type": "string"
                 },
