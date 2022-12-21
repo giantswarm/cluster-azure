@@ -16,4 +16,4 @@ repos:
     rev: v0.1.17
     hooks:
       - id: shellcheck
-      # - id: helmlint  # Does not work with Version: [[ .Version ]] in Chart.yaml
+      - id: helmlint  # Does not work with Version: [[ .Version ]] in Chart.yaml
