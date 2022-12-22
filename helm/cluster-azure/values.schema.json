@@ -2,6 +2,9 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "attachCapzControllerIdentity": {
+            "type": "boolean"
+        },
         "azure": {
             "type": "object",
             "properties": {
@@ -87,9 +90,6 @@
                     }
                 }
             }
-        },
-        "managementCluster": {
-            "type": "boolean"
         },
         "network": {
             "type": "object",

@@ -8,7 +8,7 @@ template:
     identity: UserAssigned
     userAssignedIdentities:
       - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
-      {{- if .Values.managementCluster }}
+      {{- if .Values.attachCapzControllerIdentity }}
       - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
       {{- end }}
     {{- end }}

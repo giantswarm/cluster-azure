@@ -3,7 +3,7 @@
 identity: UserAssigned
 userAssignedIdentities:
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes
-  {{- if .Values.managementCluster }}
+  {{- if .Values.attachCapzControllerIdentity }}
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
   {{- end }}
 {{- end }}
