@@ -24,5 +24,5 @@ spec:
     vnet:
       name: {{ include "resource.default.name" $ }}-vnet
   resourceGroup: {{ include "resource.default.name" $ }}
-  subscriptionID: {{ .Values.azure.subsciptionID }}
+  subscriptionID: {{ .Values.azure.subscriptionId }}
 {{ end }}
