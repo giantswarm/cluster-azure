@@ -46,7 +46,7 @@ managementCluster: false
 # https://github.com/giantswarm/giantswarm/issues/25039
 enablePerClusterIdentity: false
 
-sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
+sshSSOPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnfhWCBrplizz7XzX1Sc+I57TvCe+EEARTeYBuqWa3BRNVysSdPdbxHHJ6qzVY66snO4wq4yokno0yBdA7hAV73Y38/yZEzdKux+UyRwrnoerOdOw/590U6Pkm1mB9YhUQ4XrS5j67ZNUc/LeSQ+aWf65HATcLUccfIIVNt7OOEl+VGvg9Pvoukg+A/mSoYdBQssGNbzB+8niK5ohIsKMxS0aqaLlEZMtXxZuD8YDvIRO2m8n+djQ6wqi4HTVcBKRREa5blVu3Ug42O4XDvcdHxqHyPCUSU7ho/PJDR1B45gub+hKt/O4EdtzVZE4Z7hGQEfXUd5C0mbg+V5gcxLtt"
 
 oidc:
   issuerUrl: ""
