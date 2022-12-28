@@ -2,7 +2,7 @@
 template:
   metadata:
     labels:
-      {{- include "labels.common" $ | nindent 8 }}
+      {{- include "labels.common" $ | nindent 6 }}
   spec:
     {{- if .Values.enablePerClusterIdentity }}
     identity: UserAssigned

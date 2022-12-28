@@ -6,7 +6,7 @@ userAssignedIdentities:
   {{- if .Values.attachCapzControllerIdentity }}
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
   {{- end }}
-{{- end }}
+{{ end -}}
 location: {{ .machinePool.location }}
 strategy:
   rollingUpdate:
@@ -25,11 +25,22 @@ template:
 {{- end -}}
 
 {{- define "machinepool-kubeadmconfig-spec" -}}
-nodeRegistration:
-  kubeletExtraArgs:
-    cloud-config: /etc/kubernetes/azure.json
-    cloud-provider: external
-  name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+{{- $thisMachinePool := dict -}}
+{{- $thisMachinePool = .machinePool -}}
+joinConfiguration:
+  nodeRegistration:
+    kubeletExtraArgs:
+      cloud-config: /etc/kubernetes/azure.json
+      cloud-provider: external
+    name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+files:
+- contentFrom:
+    secret:
+      key: worker-node-azure.json
+      name: {{ include "resource.default.name" $ }}-{{ $thisMachinePool.name }}-azure-json
+  owner: root:root
+  path: /etc/kubernetes/azure.json
+  permissions: "0644"
 {{- end }}
 
 {{- define "machine-pools" -}}
@@ -59,7 +70,7 @@ spec:
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachinePool
-        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-azuremachinepool-spec" $data ) .) }}
+        name: {{ include "resource.default.name" $ }}-{{ .name }}
       version: {{ $.Values.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
@@ -68,9 +79,9 @@ metadata:
   labels:
     giantswarm.io/machine-pool: {{ include "resource.default.name" $ }}-{{ .name }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-azuremachinepool-spec" $data ) .) }}
+  name: {{ include "resource.default.name" $ }}-{{ .name }}
   namespace: {{ $.Release.Namespace }}
-spec: {{ include "machinepool-azuremachinepool-spec" $data | nindent 2}}
+spec: {{- include "machinepool-azuremachinepool-spec" $data | nindent 2}}
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfig
@@ -80,16 +91,7 @@ metadata:
     {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-kubeadmconfig-spec" $) .) }}
   namespace: {{ $.Release.Namespace }}
-spec:
-  joinConfiguration: {{ include "machinepool-kubeadmconfig-spec" $ | nindent 4 }}
-  files:
-  - contentFrom:
-      secret:
-        key: worker-node-azure.json
-        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ include "hash" (dict "data" (include "machinepool-azuremachinepool-spec" $data) .) }}-azure-json
-    owner: root:root
-    path: /etc/kubernetes/azure.json
-    permissions: "0644"
+spec: {{- include "machinepool-kubeadmconfig-spec" $data | nindent 2 }}
 ---
 {{- end }}
 {{- end -}}
