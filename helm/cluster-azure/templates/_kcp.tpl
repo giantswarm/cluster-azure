@@ -2,7 +2,6 @@
 template:
   metadata:
     labels:
-        placeholder/test: value
       {{- include "labels.common" $ | nindent 8 }}
   spec:
     {{- if .Values.enablePerClusterIdentity }}
