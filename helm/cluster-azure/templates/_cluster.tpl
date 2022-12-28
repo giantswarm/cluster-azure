@@ -10,6 +10,16 @@ metadata:
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
+  topology:
+    class: marioc-clusterclass-v0.1.2
+    version: v1.24.8
+    controlPlane:
+      replicas: 1
+    workers:
+      machineDeployments:
+      - class: default-worker
+        name: md-0
+        replicas: 2
   clusterNetwork:
     services:
       cidrBlocks:
@@ -17,12 +27,4 @@ spec:
     pods:
       cidrBlocks:
       - {{ .Values.network.podCIDR }}
-  controlPlaneRef:
-    apiVersion: controlplane.cluster.x-k8s.io/v1beta1
-    kind: KubeadmControlPlane
-    name: {{ include "resource.default.name" $ }}
-  infrastructureRef:
-    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-    kind: AzureCluster
-    name: {{ include "resource.default.name" $ }}
 {{- end -}}

@@ -2,7 +2,7 @@ apiVersion: v2
 name: cluster-azure
 description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPZ).
 type: application
-version: [[.Version]]
+version: 0.0.1-29abf2852607e580aaa6930c578a210123f4e08e
 annotations:
   application.giantswarm.io/team: "clippy"
 restrictions:

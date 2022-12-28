@@ -1,0 +1,44 @@
+# Cluster name. Defaults to chart release name
+clusterName: "marioc1"
+# Cluster description used in metadata.
+clusterDescription: "marioc1 test cluster"
+# Organization in which to create the cluster.
+organization: "org-multi-project"
+kubernetesVersion: 1.24.8
+azure:
+  location: "westeurope"
+network:
+  serviceCIDR: 172.31.0.0/16
+  podCIDR: "192.168.0.0/16"
+controlPlane:
+  instanceType: Standard_D4s_v3
+  # Number of replicas in control plane. Should be an odd number.
+  replicas: 1
+  rootVolumeSizeGB: 50
+  etcdVolumeSizeGB: 10
+machinePools:
+  - name: def00
+    location: "westeurope"
+    instanceType: Standard_D2s_v3
+    minSize: 1
+    maxSize: 1
+    rootVolumeSizeGB: 50
+    customNodeLabels:
+      - label=default
+    customNodeTaints: []
+  - name: def01
+    location: "westeurope"
+    instanceType: Standard_D4s_v3
+    minSize: 1
+    maxSize: 1
+    rootVolumeSizeGB: 50
+    customNodeLabels:
+      - label=default
+    customNodeTaints: []
+sshSSOPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnfhWCBrplizz7XzX1Sc+I57TvCe+EEARTeYBuqWa3BRNVysSdPdbxHHJ6qzVY66snO4wq4yokno0yBdA7hAV73Y38/yZEzdKux+UyRwrnoerOdOw/590U6Pkm1mB9YhUQ4XrS5j67ZNUc/LeSQ+aWf65HATcLUccfIIVNt7OOEl+VGvg9Pvoukg+A/mSoYdBQssGNbzB+8niK5ohIsKMxS0aqaLlEZMtXxZuD8YDvIRO2m8n+djQ6wqi4HTVcBKRREa5blVu3Ug42O4XDvcdHxqHyPCUSU7ho/PJDR1B45gub+hKt/O4EdtzVZE4Z7hGQEfXUd5C0mbg+V5gcxLtt"
+oidc:
+  issuerUrl: ""
+  caPem: ""
+  clientId: ""
+  usernameClaim: ""
+  groupsClaim: ""

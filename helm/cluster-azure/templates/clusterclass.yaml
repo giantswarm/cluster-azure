@@ -1,0 +1,40 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: ClusterClass
+metadata:
+  name: marioc-clusterclass-v0.1.2
+  namespace: {{ $.Release.Namespace }}
+spec:
+  controlPlane:
+    ref:
+      apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+      kind: KubeadmControlPlaneTemplate
+      name: clusterclass-v0.1.0-kcp-template
+      namespace: {{ $.Release.Namespace }}
+    machineInfrastructure:
+      ref:
+        kind: AzureMachineTemplate
+        apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+        name: clusterclass-v0.1.0-azure-machine-template
+        namespace: {{ $.Release.Namespace }}
+  infrastructure:
+    ref:
+      apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+      kind: AzureClusterTemplate
+      name: clusterclass-v0.1.0-control-plane
+      namespace: {{ $.Release.Namespace }}
+  workers:
+    machineDeployments:
+    - class: default-worker
+      template:
+        bootstrap:
+          ref:
+            apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+            kind: KubeadmConfigTemplate
+            name: clusterclass-v0.1.0-kubeadm-config-template
+            namespace: {{ $.Release.Namespace }}
+        infrastructure:
+          ref:
+            apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+            kind: AzureMachineTemplate
+            name: clusterclass-v0.1.1-azure-machine-template-worker
+            namespace: {{ $.Release.Namespace }}
