@@ -35,7 +35,7 @@ files:
 - contentFrom:
     secret:
       key: worker-node-azure.json
-      name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}-{{ .mpHash }}-azure-json
+      name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}{{ ternary ( printf "-%s" .mpHash ) "" .Values.enableMachinePoolHashing }}-azure-json
   owner: root:root
   path: /etc/kubernetes/azure.json
   permissions: "0644"
@@ -64,12 +64,12 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfig
-          name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $mpHash }}
+          name: {{ include "resource.default.name" $ }}-{{ .name }}{{ ternary ( printf "-%s" $mpHash ) "" $.Values.enableMachinePoolHashing }}
       clusterName: {{ include "resource.default.name" $ }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachinePool
-        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $mpHash }}
+        name: {{ include "resource.default.name" $ }}-{{ .name }}{{ ternary ( printf "-%s" $mpHash ) "" $.Values.enableMachinePoolHashing }}
       version: {{ $.Values.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
@@ -78,7 +78,7 @@ metadata:
   labels:
     giantswarm.io/machine-pool: {{ include "resource.default.name" $ }}-{{ .name }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $mpHash }}
+  name: {{ include "resource.default.name" $ }}-{{ .name }}{{ ternary ( printf "-%s" $mpHash ) "" $.Values.enableMachinePoolHashing }}
   namespace: {{ $.Release.Namespace }}
 spec: {{- include "machinepool-azuremachinepool-spec" $data | nindent 2}}
 ---
@@ -90,7 +90,7 @@ metadata:
   labels:
     giantswarm.io/machine-pool: {{ include "resource.default.name" $ }}-{{ .name }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $mpHash }}
+  name: {{ include "resource.default.name" $ }}-{{ .name }}{{ ternary ( printf "-%s" $mpHash ) "" $.Values.enableMachinePoolHashing }}
   namespace: {{ $.Release.Namespace }}
 spec: {{- include "machinepool-kubeadmconfig-spec" (merge $data ( dict "mpHash" $mpHash ) )  | nindent 2 }}
 ---
