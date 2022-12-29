@@ -38,7 +38,7 @@ files:
       name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}-azure-json
   owner: root:root
   path: /etc/kubernetes/azure.json
-  permissions: "0644"
+  permissions: "0664"
 {{- end }}
 
 {{- define "machine-pools" -}}
