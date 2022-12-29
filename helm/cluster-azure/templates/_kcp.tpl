@@ -1,26 +1,21 @@
 {{- define "controlplane-azuremachinetemplate-spec" -}}
-template:
-  metadata:
-    labels:
-      {{- include "labels.common" $ | nindent 6 }}
-  spec:
-    {{- if .Values.enablePerClusterIdentity }}
-    identity: UserAssigned
-    userAssignedIdentities:
-      - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
-      {{- if .Values.attachCapzControllerIdentity }}
-      - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
-      {{- end }}
-    {{- end }}
-    dataDisks:
-      - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
-        lun: 0
-        nameSuffix: etcddisk
-    osDisk:
-      diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
-      osType: Linux
-    sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc }}
-    vmSize: {{ $.Values.controlPlane.instanceType }}
+{{- if .Values.enablePerClusterIdentity -}}
+identity: UserAssigned
+userAssignedIdentities:
+  - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
+  {{- if .Values.attachCapzControllerIdentity }}
+  - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
+  {{- end }}
+{{ end -}}
+dataDisks:
+  - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
+    lun: 0
+    nameSuffix: etcddisk
+osDisk:
+  diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
+  osType: Linux
+sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc }}
+vmSize: {{ $.Values.controlPlane.instanceType }}
 {{- end }}
 
 {{- define "control-plane" }}
@@ -198,5 +193,10 @@ metadata:
     {{- include "labels.common" $ | nindent 4 }}
   name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}
   namespace: {{ $.Release.Namespace }}
-spec: {{ include "controlplane-azuremachinetemplate-spec" $ | nindent 2 }}
+spec:
+  template:
+    metadata:
+      labels:
+        {{- include "labels.common" $ | nindent 6 }}
+    spec: {{ include "controlplane-azuremachinetemplate-spec" $ | nindent 6 }}
 {{- end -}}
