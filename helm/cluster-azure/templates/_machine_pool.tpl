@@ -85,6 +85,8 @@ spec: {{- include "machinepool-azuremachinepool-spec" $data | nindent 2}}
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfig
 metadata:
+  annotations:
+    "helm.sh/resource-policy": keep
   labels:
     giantswarm.io/machine-pool: {{ include "resource.default.name" $ }}-{{ .name }}
     {{- include "labels.common" $ | nindent 4 }}
