@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Added
 
 - Initial support to create a workload cluster via CAPI/CAPZ.
+- Add `cluster.x-k8s.io/watch-filter: capi` to common labels.
 
 ## [0.0.1] - 2022-11-22
 
