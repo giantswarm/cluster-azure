@@ -40,15 +40,12 @@ machinePools:
     #   value: ""
     #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
 
-# Only required until we have AZWI for CAPZ
+# Only required until we have AZWI for CAPZ and only required on MC cluster
 attachCapzControllerIdentity: false
 
 # TODO: This is temporary so we can deploy clusters without dedicated UA Identity until the operator for WC clusters are ready
 # https://github.com/giantswarm/giantswarm/issues/25039
 enablePerClusterIdentity: false
-
-# TODO: This is temporary to control the use of the has in naming of machinepool resources
-enableMachinePoolHashing: false
 
 sshSSOPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnfhWCBrplizz7XzX1Sc+I57TvCe+EEARTeYBuqWa3BRNVysSdPdbxHHJ6qzVY66snO4wq4yokno0yBdA7hAV73Y38/yZEzdKux+UyRwrnoerOdOw/590U6Pkm1mB9YhUQ4XrS5j67ZNUc/LeSQ+aWf65HATcLUccfIIVNt7OOEl+VGvg9Pvoukg+A/mSoYdBQssGNbzB+8niK5ohIsKMxS0aqaLlEZMtXxZuD8YDvIRO2m8n+djQ6wqi4HTVcBKRREa5blVu3Ug42O4XDvcdHxqHyPCUSU7ho/PJDR1B45gub+hKt/O4EdtzVZE4Z7hGQEfXUd5C0mbg+V5gcxLtt"
 

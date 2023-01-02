@@ -94,6 +94,9 @@
         "network": {
             "type": "object",
             "properties": {
+                "hostCIDR": {
+                    "type": "string"
+                },
                 "podCIDR": {
                     "type": "string"
                 },
