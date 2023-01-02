@@ -26,6 +26,7 @@ giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
 giantswarm.io/organization: {{ .Values.organization | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
+cluster.x-k8s.io/watch-filter: capi
 {{- end -}}
 
 {{/*

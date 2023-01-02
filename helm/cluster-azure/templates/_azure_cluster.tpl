@@ -23,6 +23,8 @@ spec:
         role: node
     vnet:
       name: {{ include "resource.default.name" $ }}-vnet
+      cidrBlocks:        
+      - {{ .Values.network.hostCIDR }}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
 {{ end }}
