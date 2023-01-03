@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial support to create a workload cluster via CAPI/CAPZ.
 - Add support for creating cluster with `UserAssigned Identity` for `VM Identity`
 - Add `cluster.x-k8s.io/watch-filter: capi` to common labels.
-- Add `pre-commit-config` to run pre-commit checks and save time
 
 
 ### Changed
