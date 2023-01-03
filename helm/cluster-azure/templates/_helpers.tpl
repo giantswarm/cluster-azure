@@ -39,6 +39,10 @@ room for such suffix.
 {{- .Values.clusterName | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
+{{/*Helper to define per cluster User Assigned Identity prefix*/}}
+{{- define "vmUaIdentityPrefix" -}}
+/subscriptions/{{ .Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+{{- end -}}
 
 {{- define "sshFiles" -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
