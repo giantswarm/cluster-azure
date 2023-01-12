@@ -81,6 +81,18 @@ room for such suffix.
 {{- end }}
 {{- end -}}
 
+
+{{- define "kubeletReservationFiles" -}}
+- path: /opt/calculate_kubelet_reservations.sh
+  permissions: "0700"
+  encoding: base64
+  content: {{ $.Files.Get "files/opt/calculate_kubelet_reservations.sh" | b64enc }}
+{{- end -}}
+
+{{- define "kubeletReservationPreCommands" -}}
+- /opt/calculate_kubelet_reservations.sh > /var/log/kubereservations
+{{- end -}}
+
 {{/*
 Hash function based on data provided
 Expects two arguments (as a `dict`) E.g.

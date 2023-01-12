@@ -35,18 +35,22 @@ joinConfiguration:
       eviction-hard: {{ .machinePool.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
 files:
-- contentFrom:
-    secret:
-      key: worker-node-azure.json
-      name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}-azure-json
-  owner: root:root
-  path: /etc/kubernetes/azure.json
-  permissions: "0644"
+  - contentFrom:
+      secret:
+        key: worker-node-azure.json
+        name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}-azure-json
+    owner: root:root
+    path: /etc/kubernetes/azure.json
+    permissions: "0644"
+{{- include "kubeletReservationFiles" $ | nindent 2 }}
+preKubeadmCommands:
+{{- include "kubeletReservationPreCommands" . | nindent 2 }}
+postKubeadmCommands: []
 {{- end }}
 
 {{- define "machine-pools" -}}
 {{- range $machinePool := .Values.machinePools }}
-{{ $data := dict "machinePool" $machinePool "Values" $.Values "Release" $.Release }}
+{{ $data := dict "machinePool" $machinePool "Values" $.Values "Release" $.Release "Files" $.Files }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:

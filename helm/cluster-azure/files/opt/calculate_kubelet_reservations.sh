@@ -1,7 +1,8 @@
 #!/bin/bash
+# shellcheck disable=SC2004,SC2206,SC2155
 
-# TODO 
-# Eviction - should this be hardcoded in kubeadmconfig ? 
+# TODO
+# Eviction - should this be hardcoded in kubeadmconfig ?
 # Ephemeral Storage
 
 # Helper function which calculates the amount of the given resource (either CPU or memory)
@@ -41,14 +42,14 @@ get_resource_to_reserve_in_range() {
 get_cpu_millicores_to_reserve() {
   #local total_cpu_on_instance=$(($(nproc) * 1000))
   local total_cpu_on_instance=$((12 * 1000))
-  local cpu_ranges=(0 1000 2000 4000 $total_cpu_on_instance)
+  local cpu_ranges=(0 1000 2000 4000 "$total_cpu_on_instance")
   local cpu_percentage_reserved_for_ranges=(600 100 50 25)
   cpu_to_reserve="0"
   for i in "${!cpu_percentage_reserved_for_ranges[@]}"; do
     local start_range=${cpu_ranges[$i]}
     local end_range=${cpu_ranges[(($i + 1))]}
     local percentage_to_reserve_for_range=${cpu_percentage_reserved_for_ranges[$i]}
-    cpu_to_reserve=$(($cpu_to_reserve + $(get_resource_to_reserve_in_range $total_cpu_on_instance $start_range $end_range $percentage_to_reserve_for_range)))
+    cpu_to_reserve=$(($cpu_to_reserve + $(get_resource_to_reserve_in_range "$total_cpu_on_instance" "$start_range" "$end_range" "$percentage_to_reserve_for_range")))
   done
   echo $cpu_to_reserve
 }
@@ -61,7 +62,7 @@ get_cpu_millicores_to_reserve() {
 
 get_memory_to_reserve() {
   #local total_memory_on_instance_in_gb=$( echo $(awk '/MemTotal/ {print $2}' /proc/meminfo)/1024/1024 | bc )
-  local total_memory_on_instance_in_bytes=$( awk '/MemTotal/ {print $2}' /proc/meminfo ) 
+  local total_memory_on_instance_in_bytes=$( awk '/MemTotal/ {print $2}' /proc/meminfo )
   local memory_ranges=(0 4000000 8000000 16000000 128000000 $total_memory_on_instance_in_bytes)
   local memory_percentage_reserved_for_ranges=(2500 2000 1000 600 200)
   memory_to_reserve_in_kbytes="0"
@@ -69,7 +70,7 @@ get_memory_to_reserve() {
     local start_range=${memory_ranges[$i]}
     local end_range=${memory_ranges[(($i + 1))]}
     local percentage_to_reserve_for_range=${memory_percentage_reserved_for_ranges[$i]}
-    memory_to_reserve_in_kbytes=$(($memory_to_reserve_in_kbytes + $(get_resource_to_reserve_in_range $total_memory_on_instance_in_bytes $start_range $end_range $percentage_to_reserve_for_range)))
+    memory_to_reserve_in_kbytes=$(($memory_to_reserve_in_kbytes + $(get_resource_to_reserve_in_range "$total_memory_on_instance_in_bytes" "$start_range" "$end_range" "$percentage_to_reserve_for_range")))
   done
   # Output in Mi
   echo $memory_to_reserve_in_kbytes/1024 | bc
