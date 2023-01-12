@@ -30,6 +30,9 @@ joinConfiguration:
     kubeletExtraArgs:
       cloud-config: /etc/kubernetes/azure.json
       cloud-provider: external
+      eviction-soft: {{ .machinePool.softEvictionThresholds | default .Values.defaults.softEvictionThresholds }}
+      eviction-soft-grace-period: {{ .machinePool.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
+      eviction-hard: {{ .machinePool.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
 files:
 - contentFrom:

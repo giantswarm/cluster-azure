@@ -26,6 +26,11 @@ controlPlane:
   rootVolumeSizeGB: 50
   etcdVolumeSizeGB: 10
 
+defaults:
+  softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%
+  softEvictionGracePeriod: memory.available=2m,nodefs.available=2m,nodefs.inodesFree=2m,imagefs.available=2m
+  hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%
+
 machinePools:
   - name: def00
     location: "westeurope"
