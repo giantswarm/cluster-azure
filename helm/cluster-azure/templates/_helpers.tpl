@@ -89,7 +89,7 @@ room for such suffix.
   content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
 {{- end -}}
 
-{{- define "kubeletReservationPostCommands" -}}
+{{- define "kubeletReservationPreCommands" -}}
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
