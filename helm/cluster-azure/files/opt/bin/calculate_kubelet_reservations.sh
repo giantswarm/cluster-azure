@@ -76,4 +76,7 @@ get_memory_to_reserve() {
   echo $memory_to_reserve_in_kbytes/1024 | bc
 }
 
-echo "--kube-reserved cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi"
+# add Settings to /var/lib/kubelet/config.yaml join configuration
+# TODO: Should we install yq and use it for this editing ?
+#echo "--kube-reserved cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi"
+echo "kubeReserved: cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi" >> /var/lib/kubelet/config.yaml

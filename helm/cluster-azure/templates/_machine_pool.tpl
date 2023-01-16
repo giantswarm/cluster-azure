@@ -43,9 +43,9 @@ files:
     path: /etc/kubernetes/azure.json
     permissions: "0644"
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
-preKubeadmCommands:
-{{- include "kubeletReservationPreCommands" . | nindent 2 }}
-postKubeadmCommands: []
+preKubeadmCommands: []
+postKubeadmCommands:
+{{- include "kubeletReservationPostCommands" . | nindent 2 }}
 {{- end }}
 
 {{- define "machine-pools" -}}
