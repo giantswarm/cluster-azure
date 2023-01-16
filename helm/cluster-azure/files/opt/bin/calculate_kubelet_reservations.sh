@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2004,SC2206,SC2155
+set -e
 
-# TODO
-# Eviction - should this be hardcoded in kubeadmconfig ?
-# Ephemeral Storage
+# Values for reservation copied from https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#memory_cpu
+# Code copied mostly from https://github.com/awslabs/amazon-eks-ami/blob/master/files/bootstrap.sh#L446
 
 # Helper function which calculates the amount of the given resource (either CPU or memory)
 # to reserve in a given resource range, specified by a start and end of the range and a percentage
@@ -54,6 +54,7 @@ get_cpu_millicores_to_reserve() {
   echo $cpu_to_reserve
 }
 
+# NOTE I reduced the percentage of the first 3 ranges
 #25% of the first 4 GiB of memory
 #20% of the next 4 GiB of memory (up to 8 GiB)
 #10% of the next 8 GiB of memory (up to 16 GiB)
@@ -64,7 +65,8 @@ get_memory_to_reserve() {
   #local total_memory_on_instance_in_gb=$( echo $(awk '/MemTotal/ {print $2}' /proc/meminfo)/1024/1024 | bc )
   local total_memory_on_instance_in_bytes=$( awk '/MemTotal/ {print $2}' /proc/meminfo )
   local memory_ranges=(0 4000000 8000000 16000000 128000000 $total_memory_on_instance_in_bytes)
-  local memory_percentage_reserved_for_ranges=(2500 2000 1000 600 200)
+  #local memory_percentage_reserved_for_ranges=(2500 2000 1000 600 200)
+  local memory_percentage_reserved_for_ranges=(2000 1500 800 600 200)
   memory_to_reserve_in_kbytes="0"
   for i in "${!memory_percentage_reserved_for_ranges[@]}"; do
     local start_range=${memory_ranges[$i]}
@@ -77,4 +79,4 @@ get_memory_to_reserve() {
 }
 
 # add Settings to KUBELET_EXTRA_ARGS in /etc/default/kubelet
-sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /dev/default/kubelet
+sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /etc/default/kubelet
