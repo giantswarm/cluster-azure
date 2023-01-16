@@ -40,8 +40,7 @@ get_resource_to_reserve_in_range() {
 # Return:
 #   CPU resources to reserve in millicores (m)
 get_cpu_millicores_to_reserve() {
-  #local total_cpu_on_instance=$(($(nproc) * 1000))
-  local total_cpu_on_instance=$((12 * 1000))
+  local total_cpu_on_instance=$(($(nproc) * 1000))
   local cpu_ranges=(0 1000 2000 4000 "$total_cpu_on_instance")
   local cpu_percentage_reserved_for_ranges=(600 100 50 25)
   cpu_to_reserve="0"
@@ -62,7 +61,6 @@ get_cpu_millicores_to_reserve() {
 #2% of any memory above 128 GiB
 
 get_memory_to_reserve() {
-  #local total_memory_on_instance_in_gb=$( echo $(awk '/MemTotal/ {print $2}' /proc/meminfo)/1024/1024 | bc )
   local total_memory_on_instance_in_bytes=$( awk '/MemTotal/ {print $2}' /proc/meminfo )
   local memory_ranges=(0 4000000 8000000 16000000 128000000 $total_memory_on_instance_in_bytes)
   #local memory_percentage_reserved_for_ranges=(2500 2000 1000 600 200)
