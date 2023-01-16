@@ -84,7 +84,7 @@ room for such suffix.
 
 {{- define "kubeletReservationFiles" -}}
 - path: /opt/bin/calculate_kubelet_reservations.sh
-  permissions: "0700"
+  permissions: "0754"
   encoding: base64
   content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
 {{- end -}}
