@@ -83,14 +83,14 @@ room for such suffix.
 
 
 {{- define "kubeletReservationFiles" -}}
-- path: /opt/calculate_kubelet_reservations.sh
+- path: /opt/bin/calculate_kubelet_reservations.sh
   permissions: "0700"
   encoding: base64
-  content: {{ $.Files.Get "files/opt/calculate_kubelet_reservations.sh" | b64enc }}
+  content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
 {{- end -}}
 
 {{- define "kubeletReservationPreCommands" -}}
-- /opt/calculate_kubelet_reservations.sh > /var/log/kubereservations
+- /opt/bin/calculate_kubelet_reservations.sh > /var/log/kubereservations
 {{- end -}}
 
 {{/*
