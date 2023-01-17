@@ -188,6 +188,8 @@ spec:
     preKubeadmCommands:
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
     postKubeadmCommands: []
+    users:
+    {{- include "sshUsers" . | nindent 6 }}
   replicas: {{ .Values.controlPlane.replicas | default "3" }}
   version: {{ .Values.kubernetesVersion }}
 ---
