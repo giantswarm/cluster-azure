@@ -32,13 +32,13 @@ defaults:
   hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
   evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
   identity:
-    #Only SystemAssigned or UserAssigned supported
+    # Only SystemAssigned or UserAssigned supported
     type: SystemAssigned
-    #Not used yet https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965/files
+    # Not used yet https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965/files
     scope: </subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP_NAME}>
-    #Not used yet https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965/files
+    # Not used yet https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965/files
     roleDefinitionID: </subscriptions/${AZURE_SUBSCRIPTION_ID}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c>
-    #Pass list of UA Identities to attach to nodes, if empty defaults -cp ,-nodes, -capz are used
+    # Pass list of UA Identities to attach to nodes, if empty defaults -cp ,-nodes, -capz are used
     userAssignedIdentities: []
 
 machinePools:
