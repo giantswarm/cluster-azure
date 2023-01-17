@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- add giantswam user to the KCP configuration
+- add giantswam user to the KCP and Machinepool configuration
 - Set EvictionThresholds soft and hard on all nodes
 - Add a script to calculate the `kube-reserved` settings for nodes based on the available CPU and Memory using the formulas defined by [GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#memory_cpu)
   - The memory reservation is slighly less aggressive than what GKE suggests

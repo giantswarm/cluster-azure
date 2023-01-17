@@ -47,6 +47,8 @@ files:
 preKubeadmCommands:
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
 postKubeadmCommands: []
+users:
+{{- include "sshUsers" . | nindent 2 }}
 {{- end }}
 
 {{- define "machine-pools" -}}
