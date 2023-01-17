@@ -170,6 +170,10 @@ spec:
           cloud-provider: external
           feature-gates: CSIMigrationAzureDisk=true
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+        {{- if .Values.controlPlane.customNodeTaints }}
+        taints:
+        {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
+        {{- end }}
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
@@ -182,6 +186,10 @@ spec:
           eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+        {{- if .Values.controlPlane.customNodeTaints }}
+        taints:
+        {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
+        {{- end }}
     mounts:
       - - LABEL=etcd_disk
         - /var/lib/etcddisk

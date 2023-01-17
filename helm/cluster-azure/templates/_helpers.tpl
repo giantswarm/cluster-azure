@@ -44,6 +44,20 @@ room for such suffix.
 /subscriptions/{{ .Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
+{{/*Render list of custom Taints from passed values*/}}
+{{- define "customNodeTaints" -}}
+{{- if (gt (len .) 0) }}
+{{- range . }}
+{{- if or (not .key) (not .value) (not .effect) }}
+{{ fail (printf ".customNodeTaints element must have [key, value, effect]")}}
+{{- end }}
+- key: {{ .key | quote }}
+  value: {{ .value | quote }}
+  effect: {{ .effect | quote }}
+{{- end }}
+{{- end }}
+{{- end -}}
+
 {{- define "sshFiles" -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"
