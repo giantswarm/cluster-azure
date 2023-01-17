@@ -33,6 +33,7 @@ joinConfiguration:
       eviction-soft: {{ .machinePool.softEvictionThresholds | default .Values.defaults.softEvictionThresholds }}
       eviction-soft-grace-period: {{ .machinePool.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
       eviction-hard: {{ .machinePool.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
+      eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
 files:
   - contentFrom:
