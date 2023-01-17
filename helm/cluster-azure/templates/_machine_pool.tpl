@@ -30,20 +30,28 @@ joinConfiguration:
     kubeletExtraArgs:
       cloud-config: /etc/kubernetes/azure.json
       cloud-provider: external
+      eviction-soft: {{ .machinePool.softEvictionThresholds | default .Values.defaults.softEvictionThresholds }}
+      eviction-soft-grace-period: {{ .machinePool.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
+      eviction-hard: {{ .machinePool.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
+      eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
 files:
-- contentFrom:
-    secret:
-      key: worker-node-azure.json
-      name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}-azure-json
-  owner: root:root
-  path: /etc/kubernetes/azure.json
-  permissions: "0644"
+  - contentFrom:
+      secret:
+        key: worker-node-azure.json
+        name: {{ include "resource.default.name" $ }}-{{ .machinePool.name }}-azure-json
+    owner: root:root
+    path: /etc/kubernetes/azure.json
+    permissions: "0644"
+{{- include "kubeletReservationFiles" $ | nindent 2 }}
+preKubeadmCommands:
+{{- include "kubeletReservationPreCommands" . | nindent 2 }}
+postKubeadmCommands: []
 {{- end }}
 
 {{- define "machine-pools" -}}
 {{- range $machinePool := .Values.machinePools }}
-{{ $data := dict "machinePool" $machinePool "Values" $.Values "Release" $.Release }}
+{{ $data := dict "machinePool" $machinePool "Values" $.Values "Release" $.Release "Files" $.Files }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:
