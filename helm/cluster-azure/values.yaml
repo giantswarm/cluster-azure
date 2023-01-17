@@ -31,6 +31,15 @@ defaults:
   softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
   hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
   evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
+  identity:
+    #Only SystemAssigned or UserAssigned supported
+    type: SystemAssigned
+    #Not used yet https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965/files
+    scope: </subscriptions/${AZURE_SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP_NAME}>
+    #Not used yet https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965/files
+    roleDefinitionID: </subscriptions/${AZURE_SUBSCRIPTION_ID}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c>
+    #Pass list of UA Identities to attach to nodes, if empty defaults -cp ,-nodes, -capz are used
+    userAssignedIdentities: []
 
 machinePools:
   - name: def00
@@ -46,12 +55,8 @@ machinePools:
     #   value: ""
     #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
 
-# Only required until we have AZWI for CAPZ and only required on MC cluster
-attachCapzControllerIdentity: false
-
-# TODO: This is temporary so we can deploy clusters without dedicated UA Identity until the operator for WC clusters are ready
-# https://github.com/giantswarm/giantswarm/issues/25039
-enablePerClusterIdentity: false
+# Categorize this cluster as Management Cluster or Workload Cluster
+managementCluster: false
 
 sshSSOPublicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnfhWCBrplizz7XzX1Sc+I57TvCe+EEARTeYBuqWa3BRNVysSdPdbxHHJ6qzVY66snO4wq4yokno0yBdA7hAV73Y38/yZEzdKux+UyRwrnoerOdOw/590U6Pkm1mB9YhUQ4XrS5j67ZNUc/LeSQ+aWf65HATcLUccfIIVNt7OOEl+VGvg9Pvoukg+A/mSoYdBQssGNbzB+8niK5ohIsKMxS0aqaLlEZMtXxZuD8YDvIRO2m8n+djQ6wqi4HTVcBKRREa5blVu3Ug42O4XDvcdHxqHyPCUSU7ho/PJDR1B45gub+hKt/O4EdtzVZE4Z7hGQEfXUd5C0mbg+V5gcxLtt"
 

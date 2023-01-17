@@ -39,11 +39,44 @@ room for such suffix.
 {{- .Values.clusterName | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
-{{/*Helper to define per cluster User Assigned Identity prefix*/}}
-{{- define "vmUaIdentityPrefix" -}}
-/subscriptions/{{ .Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+{{/*
+Helpers to define Identity blocks
+
+Type can be either "SystemAssigned" or "UserAssigned"
+
+with UserAssigned we support both a list of Identities passed through the Values or a default set of
+* -cp ( controlplane nodes )
+* -nodes ( worker nodes )
+* -capz ( On management Clusters used by the capz controller NMI )
+*/}}
+{{- define "renderIdentityConfiguration" -}}
+{{- $identity := .this.identity | default .Values.defaults.identity  -}}
+identity: {{ $identity.type }}
+{{- if eq $identity.type "SystemAssigned" }}
+{{- /* depends on https://github.com/kubernetes-sigs/cluster-api-provider-azure/pull/2965
+scope: {{ $identity.scope }}
+roleDefinitionID: {{ $identity.roleDefinitionID }}
+*/}}
+{{- else if eq $identity.type "UserAssigned" }}
+userAssignedIdentities:
+  {{- if and ($identity.userAssignedIdentities) (not (empty $identity.userAssignedIdentities)) }}
+    {{- range $identity.userAssignedIdentities}}
+  - providerID: {{ . }}
+    {{- end -}}
+  {{- else }}
+    {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .instance "controlPlane")) (ternary "capz" "" (.Values.managementCluster)) }}
+    {{- range compact $defaultIdentities }}
+  - providerID: /subscriptions/{{ $.Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+{{ fail (printf "Only SystemAssigned and UserAssigned identities are supported") }}
+{{- end }}
 {{- end -}}
 
+
+
+{{/*Helpers to define Files Rendering*/}}
 {{- define "sshFiles" -}}
 - path: /etc/ssh/trusted-user-ca-keys.pem
   permissions: "0600"

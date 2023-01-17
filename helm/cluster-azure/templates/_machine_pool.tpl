@@ -1,12 +1,6 @@
 {{- define "machinepool-azuremachinepool-spec" -}}
-{{- if .Values.enablePerClusterIdentity -}}
-identity: UserAssigned
-userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes
-  {{- if .Values.attachCapzControllerIdentity }}
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
-  {{- end }}
-{{ end -}}
+{{ $identity := dict "instance" "nodes" "this" $.machinePool "Values" $.Values "Release" $.Release }}
+{{- include "renderIdentityConfiguration" $identity }}
 location: {{ .machinePool.location }}
 strategy:
   rollingUpdate:

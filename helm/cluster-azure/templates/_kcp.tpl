@@ -1,12 +1,6 @@
 {{- define "controlplane-azuremachinetemplate-spec" -}}
-{{- if .Values.enablePerClusterIdentity -}}
-identity: UserAssigned
-userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
-  {{- if .Values.attachCapzControllerIdentity }}
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
-  {{- end }}
-{{ end -}}
+{{ $identity := dict "instance" "controlPlane" "this" $.Values.controlPlane "Values" $.Values "Release" $.Release }}
+{{- include "renderIdentityConfiguration" $identity }}
 dataDisks:
   - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
     lun: 0

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add support for both SystemAssigned and UserAssigned Identities
+  - UserAssigned identities support both passing the list of identities through the Values or use a default set
 - Set EvictionThresholds soft and hard on all nodes
 - Add a script to calculate the `kube-reserved` settings for nodes based on the available CPU and Memory using the formulas defined by [GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#memory_cpu)
   - The memory reservation is slighly less aggressive than what GKE suggests
