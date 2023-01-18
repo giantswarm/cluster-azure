@@ -64,7 +64,7 @@ spec:
           audit-log-path: /var/log/apiserver/audit.log
           audit-policy-file: /etc/kubernetes/policies/audit-policy.yaml
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
-          enable-admission-plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,DefaultStorageClass,PersistentVolumeClaimResize,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook
+          enable-admission-plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,DefaultStorageClass,PersistentVolumeClaimResize,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,PodSecurityPolicy
           feature-gates: TTLAfterFinished=true
           kubelet-preferred-address-types: InternalIP
           profiling: "false"
@@ -174,6 +174,10 @@ spec:
           eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+        {{- if .Values.controlPlane.customNodeTaints }}
+        taints:
+        {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
+        {{- end }}
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
@@ -186,6 +190,10 @@ spec:
           eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+        {{- if .Values.controlPlane.customNodeTaints }}
+        taints:
+        {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
+        {{- end }}
     mounts:
       - - LABEL=etcd_disk
         - /var/lib/etcddisk
