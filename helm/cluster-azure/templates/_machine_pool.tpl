@@ -34,7 +34,12 @@ joinConfiguration:
       eviction-soft-grace-period: {{ .machinePool.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
       eviction-hard: {{ .machinePool.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
       eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
+      node-labels: role=worker,giantswarm.io/machine-pool={{ include "resource.default.name" $ }}-{{ .machinePool.name }}{{- if (gt (len .machinePool.customNodeLabels) 0) }},{{- join "," .machinePool.customNodeLabels }}{{- end }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+    {{- if .machinePool.customNodeTaints }}
+    taints:
+    {{- include "customNodeTaints" .machinePool.customNodeTaints | indent 6 }}
+    {{- end }}
 files:
   - contentFrom:
       secret:
@@ -47,6 +52,8 @@ files:
 preKubeadmCommands:
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
 postKubeadmCommands: []
+users:
+{{- include "sshUsers" . | nindent 2 }}
 {{- end }}
 
 {{- define "machine-pools" -}}

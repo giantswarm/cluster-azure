@@ -39,8 +39,7 @@ machinePools:
     minSize: 3
     maxSize: 3
     rootVolumeSizeGB: 50
-    customNodeLabels:
-      - label=default
+    customNodeLabels: []
     customNodeTaints: []
     # - key: ""
     #   value: ""
