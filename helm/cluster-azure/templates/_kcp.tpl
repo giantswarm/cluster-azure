@@ -169,6 +169,10 @@ spec:
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           feature-gates: CSIMigrationAzureDisk=true
+          eviction-soft: {{ .Values.controlPlane.softEvictionThresholds | default .Values.defaults.softEvictionThresholds }}
+          eviction-soft-grace-period: {{ .Values.controlPlane.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
+          eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
+          eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:
