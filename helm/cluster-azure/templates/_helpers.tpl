@@ -47,6 +47,8 @@ List of admission plugins to enable based on apiVersion
 {{- $enabledPlugins := list "" -}}
 {{- if semverCompare "<1.25.0" .Capabilities.KubeVersion.Version -}}
 {{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
+{{- end -}}
+{{- if not (empty (compact $enabledPlugins)) -}}
 ,{{- join "," (compact $enabledPlugins) }}
 {{- end -}}
 {{- end -}}
