@@ -39,6 +39,18 @@ room for such suffix.
 {{- .Values.clusterName | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
+
+{{/*
+List of admission plugins to enable based on apiVersion
+*/}}
+{{- define "enabled-admission-plugins" -}}
+{{- $enabledPlugins := list "" -}}
+{{- if semverCompare "<1.25.0" .Capabilities.KubeVersion.Version -}}
+{{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
+,{{- join "," (compact $enabledPlugins) }}
+{{- end -}}
+{{- end -}}
+
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
 {{- define "vmUaIdentityPrefix" -}}
 /subscriptions/{{ .Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
