@@ -141,6 +141,7 @@ spec:
           tableType: gpt
     files:
     {{- include "oidcFiles" . | nindent 4 }}
+    {{- include "sshFiles" . | nindent 4 }}
     {{- include "kubeletReservationFiles" $ | nindent 4 }}
     - contentFrom:
         secret:
