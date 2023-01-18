@@ -22,7 +22,7 @@ network:
 controlPlane:
   instanceType: Standard_D4s_v3
   # Number of replicas in control plane. Should be an odd number.
-  replicas: 1
+  replicas: 3
   rootVolumeSizeGB: 50
   etcdVolumeSizeGB: 10
 

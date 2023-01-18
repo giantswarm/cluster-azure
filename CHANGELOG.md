@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Default to 3 replicas for control plane
 - add giantswam user to the KCP and Machinepool configuration
 - Add support for custom taints and labels on machinepools
   - also add hardcoded `role=worker` and `giantswarm.io/machine-pool` labels
