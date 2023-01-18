@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add support for custom taints and labels on machinepools
+  - also add hardcoded `role=worker` and `giantswarm.io/machine-pool` labels
+- Add support for custom taints on control plane nodes
 - Add `PodSecurityPolicy` to list of enabled admission plugins
 - Set EvictionThresholds soft and hard on all nodes
 - Add a script to calculate the `kube-reserved` settings for nodes based on the available CPU and Memory using the formulas defined by [GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#memory_cpu)
