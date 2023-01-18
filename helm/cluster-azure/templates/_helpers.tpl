@@ -98,6 +98,8 @@ List of admission plugins to enable based on apiVersion
 - name: giantswarm
   groups: sudo
   sudo: ALL=(ALL) NOPASSWD:ALL
+  sshAuthorizedKeys:
+    - {{ .Values.sshSSOPublicKey }}
 {{- end -}}
 
 {{- define "oidcFiles" -}}
