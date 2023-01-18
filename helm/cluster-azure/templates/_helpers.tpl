@@ -74,7 +74,19 @@ userAssignedIdentities:
 {{- end }}
 {{- end -}}
 
-
+{{/*Render list of custom Taints from passed values*/}}
+{{- define "customNodeTaints" -}}
+{{- if (gt (len .) 0) }}
+{{- range . }}
+{{- if or (not .key) (not .value) (not .effect) }}
+{{ fail (printf ".customNodeTaints element must have [key, value, effect]")}}
+{{- end }}
+- key: {{ .key | quote }}
+  value: {{ .value | quote }}
+  effect: {{ .effect | quote }}
+{{- end }}
+{{- end }}
+{{- end -}}
 
 {{/*Helpers to define Files Rendering*/}}
 {{- define "sshFiles" -}}
