@@ -1,3 +1,8 @@
+{{- if semverCompare "<1.25.0" .Capabilities.KubeVersion.Version -}}
+---
+{{- include "psps" . }}
+{{- end }}
+---
 {{- include "cluster" . }}
 ---
 {{- include "azure-cluster" . }}

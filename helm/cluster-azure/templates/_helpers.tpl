@@ -18,15 +18,21 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "labels.common" -}}
-app: {{ include "name" . | quote }}
-app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+{{- include "labels.selector" $ }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
-giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
-giantswarm.io/organization: {{ .Values.organization | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
-cluster.x-k8s.io/watch-filter: capi
+{{- end -}}
+
+{{/*
+Selector labels
+*/}}
+{{- define "labels.selector" -}}
+app: {{ include "name" . | quote }}
+app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
+cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
+giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
+giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.organization | quote }}
 {{- end -}}
 
 {{/*
@@ -37,6 +43,20 @@ room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
 {{- .Values.clusterName | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
+{{- end -}}
+
+
+{{/*
+List of admission plugins to enable based on apiVersion
+*/}}
+{{- define "enabled-admission-plugins" -}}
+{{- $enabledPlugins := list "" -}}
+{{- if semverCompare "<1.25.0" .Capabilities.KubeVersion.Version -}}
+{{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
+{{- end -}}
+{{- if not (empty (compact $enabledPlugins)) -}}
+,{{- join "," (compact $enabledPlugins) }}
+{{- end -}}
 {{- end -}}
 
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
