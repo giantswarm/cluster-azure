@@ -29,6 +29,9 @@ spec:
       name: {{ include "resource.default.name" $ }}-vnet
       cidrBlocks:
       - {{ .Values.network.hostCIDR }}
+      {{- if .Values.network.peerings }}
+      peerings: {{ toYaml .Values.network.peerings | nindent 6 }}
+      {{- end }}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
 {{ end }}

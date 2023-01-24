@@ -22,6 +22,7 @@ network:
     cidr: 10.0.0.0/20
   workers:
     cidr: 10.0.16.0/20
+  peerings: []
 
 controlPlane:
   instanceType: Standard_D4s_v3
