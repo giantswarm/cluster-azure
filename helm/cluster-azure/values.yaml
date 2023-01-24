@@ -23,7 +23,11 @@ connectivity:
   network:
     serviceCidr: "172.31.0.0/16"
     podCidr: "192.168.0.0/16"
-    hostCidr: "10.0.0.0/8"
+    hostCIDR: "10.0.0.0/16"
+    controlPlane:
+      cidr: 10.0.0.0/20
+    workers:
+      cidr: 10.0.16.0/20
     mode: public
   sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
 

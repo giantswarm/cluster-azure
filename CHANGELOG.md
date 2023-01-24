@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Disallow additional properties on the values scherma root level.
+- Reduce default network range from 10.0.0.0/8 (default CAPZ) to 10.0.0.0/16.
 
 ### Removed
 
