@@ -35,6 +35,7 @@ spec:
     {{- if (eq .Values.network.mode "private") }}
     apiServerLB:
       type: Internal
+      frontendIPs: {{ toYaml .Values.network.apiServer.frontendIPs | nindent 6 }}
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
