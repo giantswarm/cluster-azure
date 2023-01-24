@@ -32,6 +32,10 @@ spec:
       {{- if .Values.network.peerings }}
       peerings: {{ toYaml .Values.network.peerings | nindent 6 }}
       {{- end }}
+    {{- if (eq .Values.network.mode "private") }}
+    apiServerLB:
+      type: Internal
+    {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
 {{ end }}
