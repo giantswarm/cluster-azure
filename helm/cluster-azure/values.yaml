@@ -17,7 +17,11 @@ azure:
 network:
   serviceCIDR: 172.31.0.0/16
   podCIDR: "192.168.0.0/16"
-  hostCIDR: "10.0.0.0/8"
+  hostCIDR: "10.0.0.0/16"
+  controlPlane:
+    cidr: 10.0.0.0/20
+  workers:
+    cidr: 10.0.16.0/20
 
 controlPlane:
   instanceType: Standard_D4s_v3
