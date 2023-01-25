@@ -26,6 +26,7 @@ network:
     frontendIPs: []
   mode: public
   peerings: []
+  privateDNSZoneName: ""
 
 controlPlane:
   instanceType: Standard_D4s_v3

@@ -33,6 +33,7 @@ spec:
       peerings: {{ toYaml .Values.network.peerings | nindent 6 }}
       {{- end }}
     {{- if (eq .Values.network.mode "private") }}
+    privateDNSZoneName: {{ .Values.network.privateDNSZoneName }}
     apiServerLB:
       type: Internal
       frontendIPs: {{ toYaml .Values.network.apiServer.frontendIPs | nindent 6 }}
