@@ -37,6 +37,8 @@ spec:
     apiServerLB:
       type: Internal
       frontendIPs: {{ toYaml .Values.network.apiServer.frontendIPs | nindent 6 }}
+    nodeOutboundLB:
+      frontendIPsCount: 1
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
