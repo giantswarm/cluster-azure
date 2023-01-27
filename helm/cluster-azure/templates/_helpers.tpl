@@ -128,6 +128,17 @@ List of admission plugins to enable based on apiVersion
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
+{{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
+- if [ -f /tmp/kubeadm.yaml ] || [ -f /run/kubeadm/kubeadm.yaml ]; then echo '127.0.0.1   apiserver.${CLUSTER_NAME}.capz.io
+  apiserver' >> /etc/hosts; fi
+{{- end -}}
+
+{{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
+- if [ -f /tmp/kubeadm-join-config.yaml ] || [ -f /run/kubeadm/kubeadm-join-config.yaml
+  ]; then echo '127.0.0.1   apiserver.${CLUSTER_NAME}.capz.io apiserver' >> /etc/hosts;
+  fi
+{{- end -}}
+
 {{/*
 Hash function based on data provided
 Expects two arguments (as a `dict`) E.g.
