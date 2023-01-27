@@ -37,6 +37,8 @@ spec:
     apiServerLB:
       type: Internal
       frontendIPs: {{ toYaml .Values.network.apiServer.frontendIPs | nindent 6 }}
+    controlPlaneOutboundLB:
+      frontendIPsCount: 1
     nodeOutboundLB:
       frontendIPsCount: 1
     {{end}}
