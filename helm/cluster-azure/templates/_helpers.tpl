@@ -129,13 +129,13 @@ List of admission plugins to enable based on apiVersion
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
-- if [ -f /tmp/kubeadm.yaml ] || [ -f /run/kubeadm/kubeadm.yaml ]; then echo '127.0.0.1   apiserver.${CLUSTER_NAME}.capz.io
+- if [ -f /tmp/kubeadm.yaml ] || [ -f /run/kubeadm/kubeadm.yaml ]; then echo '127.0.0.1   apiserver.{{ .Values.network.privateDNSZoneName }}
   apiserver' >> /etc/hosts; fi
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
 - if [ -f /tmp/kubeadm-join-config.yaml ] || [ -f /run/kubeadm/kubeadm-join-config.yaml
-  ]; then echo '127.0.0.1   apiserver.${CLUSTER_NAME}.capz.io apiserver' >> /etc/hosts;
+  ]; then echo '127.0.0.1   apiserver.{{ .Values.network.privateDNSZoneName }}' >> /etc/hosts;
   fi
 {{- end -}}
 
