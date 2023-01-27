@@ -22,6 +22,7 @@ Common labels
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
+cluster.x-k8s.io/watch-filter: capi
 {{- end -}}
 
 {{/*
