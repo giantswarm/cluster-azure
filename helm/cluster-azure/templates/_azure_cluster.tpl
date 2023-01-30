@@ -21,7 +21,9 @@ spec:
         - {{ .Values.network.controlPlane.cidr }}
       - name: node-subnet
         natGateway:
-          name: node-natgateway
+          name: {{ include "resource.default.name" $ }}-node-natgateway
+          NatGatewayIP:
+            name: {{ include "resource.default.name" $ }}-node-natgateway-ip
         role: node
         cidrBlocks:
         - {{ .Values.network.workers.cidr }}
@@ -35,12 +37,17 @@ spec:
     {{- if (eq .Values.network.mode "private") }}
     privateDNSZoneName: {{ .Values.network.privateDNSZoneName }}
     apiServerLB:
+      name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal
       frontendIPs: {{ toYaml .Values.network.apiServer.frontendIPs | nindent 6 }}
     controlPlaneOutboundLB:
+      name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb
+      type: Public
       frontendIPsCount: 1
-    nodeOutboundLB:
-      frontendIPsCount: 1
+      frontendIPs:
+      - name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb-frontend
+        publicIP:
+          name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb-ip
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
