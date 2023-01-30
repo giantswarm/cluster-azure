@@ -1,15 +1,12 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "type": "object",
     "properties": {
         "attachCapzControllerIdentity": {
             "type": "boolean"
         },
         "azure": {
-            "type": "object",
             "properties": {
                 "azureClusterIdentity": {
-                    "type": "object",
                     "properties": {
                         "name": {
                             "type": "string"
@@ -17,7 +14,8 @@
                         "namespace": {
                             "type": "string"
                         }
-                    }
+                    },
+                    "type": "object"
                 },
                 "location": {
                     "type": "string"
@@ -25,7 +23,8 @@
                 "subscriptionId": {
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         "clusterDescription": {
             "type": "string"
@@ -34,7 +33,6 @@
             "type": "string"
         },
         "controlPlane": {
-            "type": "object",
             "properties": {
                 "etcdVolumeSizeGB": {
                     "type": "integer"
@@ -48,7 +46,8 @@
                 "rootVolumeSizeGB": {
                     "type": "integer"
                 }
-            }
+            },
+            "type": "object"
         },
         "enablePerClusterIdentity": {
             "type": "boolean"
@@ -57,15 +56,13 @@
             "type": "string"
         },
         "machinePools": {
-            "type": "array",
             "items": {
-                "type": "object",
                 "properties": {
                     "customNodeLabels": {
-                        "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "type": "array"
                     },
                     "customNodeTaints": {
                         "type": "array"
@@ -88,11 +85,12 @@
                     "rootVolumeSizeGB": {
                         "type": "integer"
                     }
-                }
-            }
+                },
+                "type": "object"
+            },
+            "type": "array"
         },
         "network": {
-            "type": "object",
             "properties": {
                 "hostCIDR": {
                     "type": "string"
@@ -103,10 +101,10 @@
                 "serviceCIDR": {
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         "oidc": {
-            "type": "object",
             "properties": {
                 "caPem": {
                     "type": "string"
@@ -123,7 +121,8 @@
                 "usernameClaim": {
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         "organization": {
             "type": "string"
@@ -131,5 +130,6 @@
         "sshSSOPublicKey": {
             "type": "string"
         }
-    }
+    },
+    "type": "object"
 }
