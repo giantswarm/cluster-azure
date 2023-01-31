@@ -9,6 +9,7 @@
         "azure": {
             "properties": {
                 "azureClusterIdentity": {
+                    "description": "AzureClusterIdentity resource to use for this cluster.",
                     "properties": {
                         "name": {
                             "title": "Name",
@@ -20,7 +21,6 @@
                         }
                     },
                     "title": "Identity",
-                    "description": "AzureClusterIdentity resource to use for this cluster.",
                     "type": "object"
                 },
                 "location": {
@@ -36,13 +36,13 @@
             "type": "object"
         },
         "clusterDescription": {
-            "title": "Cluster description",
             "description": "User-friendly description of the cluster's purpose.",
+            "title": "Cluster description",
             "type": "string"
         },
         "clusterName": {
-            "title": "Cluster name",
             "description": "Unique identifier, cannot be changed after creation.",
+            "title": "Cluster name",
             "type": "string"
         },
         "controlPlane": {
@@ -107,8 +107,8 @@
                         "type": "integer"
                     },
                     "name": {
-                        "title": "Name",
                         "description": "Unique identifier, cannot be changed after creation.",
+                        "title": "Name",
                         "type": "string"
                     },
                     "rootVolumeSizeGB": {
@@ -143,8 +143,8 @@
         "oidc": {
             "properties": {
                 "caPem": {
-                    "title": "Certificate authority",
                     "description": "Identity provider's CA certificate in PEM format.",
+                    "title": "Certificate authority",
                     "type": "string"
                 },
                 "clientId": {
