@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add support for MachineDeployments
+- Add MachineDeployments to Values.yaml
+
+### Changed
+
+- Move common templates between MachineDeployments and MachinePools into an helper file ( \_machine_helpers.tpl )
+
 ## [0.0.3] - 2023-01-19
 
 ### Added
