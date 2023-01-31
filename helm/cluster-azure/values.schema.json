@@ -1,5 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "title": "Cluster configuration",
+    "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
         "attachCapzControllerIdentity": {
             "type": "boolean"
