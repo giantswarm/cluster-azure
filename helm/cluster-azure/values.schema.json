@@ -115,6 +115,7 @@
                         "type": "integer"
                     }
                 },
+                "title": "Node pool",
                 "type": "object"
             },
             "title": "Node pools",
