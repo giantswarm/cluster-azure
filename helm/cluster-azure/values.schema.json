@@ -41,7 +41,7 @@
         },
         "clusterName": {
             "title": "Cluster name",
-            "description": "Unique identifier, cannot be change after creation.",
+            "description": "Unique identifier, cannot be changed after creation.",
             "type": "string"
         },
         "controlPlane": {
