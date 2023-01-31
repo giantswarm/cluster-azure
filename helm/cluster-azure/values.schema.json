@@ -19,7 +19,8 @@
                             "type": "string"
                         }
                     },
-                    "title": "Cluster identity",
+                    "title": "Identity",
+                    "description": "AzureClusterIdentity resource to use for this cluster.",
                     "type": "object"
                 },
                 "location": {
