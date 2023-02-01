@@ -18,8 +18,7 @@
                         "namespace": {
                             "title": "Namespace",
                             "type": "string"
-                        },
-                        "type": "object"
+                        }
                     },
                     "title": "Identity",
                     "type": "object"
@@ -31,10 +30,9 @@
                 "subscriptionId": {
                     "title": "Subscription ID",
                     "type": "string"
-                },
-                "type": "object"
+                }
             },
-                "title": "Azure settings",
+            "title": "Azure settings",
             "type": "object"
         },
         "clusterDescription": {
@@ -64,8 +62,7 @@
                 "rootVolumeSizeGB": {
                     "title": "Root volume size (GB)",
                     "type": "integer"
-                },
-                "type": "object"
+                }
             },
             "title": "Control plane settings",
             "type": "object"
@@ -166,8 +163,7 @@
                     "rootVolumeSizeGB": {
                         "title": "Root volume size (GB)",
                         "type": "integer"
-                    },
-                    "type": "object"
+                    }
                 },
                 "title": "Node pool",
                 "type": "object"
@@ -191,8 +187,7 @@
                 "serviceCIDR": {
                     "title": "Service CIDR",
                     "type": "string"
-                },
-                "type": "object"
+                }
             },
             "title": "Network settings",
             "type": "object"
@@ -216,7 +211,6 @@
                     "title": "Issuer URL",
                     "type": "string"
                 },
-                "type": "object",
                 "usernameClaim": {
                     "title": "Username claim",
                     "type": "string"
