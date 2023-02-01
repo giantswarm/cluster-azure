@@ -19,9 +19,9 @@
                             "title": "Namespace",
                             "type": "string"
                         },
-                        "title": "Identity",
                         "type": "object"
                     },
+                    "title": "Identity",
                     "type": "object"
                 },
                 "location": {
@@ -65,9 +65,9 @@
                     "title": "Root volume size (GB)",
                     "type": "integer"
                 },
-                "title": "Control plane settings",
                 "type": "object"
             },
+            "title": "Control plane settings",
             "type": "object"
         },
         "defaults": {
@@ -167,9 +167,9 @@
                         "title": "Root volume size (GB)",
                         "type": "integer"
                     },
-                    "title": "Node pool",
                     "type": "object"
                 },
+                "title": "Node pool",
                 "type": "object"
             },
             "title": "Node pools",
