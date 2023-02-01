@@ -44,18 +44,10 @@ spec:
       name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb
       type: Public
       frontendIPsCount: 1
-      frontendIPs:
-      - name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb-frontend
-        publicIP:
-          name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb-ip
     nodeOutboundLB:
       name: {{ include "resource.default.name" $ }}-node-outbound-lb
       type: Public
       frontendIPsCount: 1
-      frontendIPs:
-      - name: {{ include "resource.default.name" $ }}-node-outbound-lb-frontend
-        publicIP:
-          name: {{ include "resource.default.name" $ }}-node-outbound-lb-ip
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.azure.subscriptionId }}
