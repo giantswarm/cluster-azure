@@ -55,9 +55,6 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-{{- /* Do we need this annotation when hashing is enabled to avoid deleting the Secret when the name change ? Do we even need to hash this ? */}}
-{{- /*  annotations: */}}
-{{- /*    "helm.sh/resource-policy": keep */}}
   labels:
     giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ .name }}
     {{- include "labels.common" $ | nindent 4 }}
