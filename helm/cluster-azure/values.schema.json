@@ -87,6 +87,35 @@
                         "type": "array"
                     },
                     "customNodeTaints": {
+                        "descriptions": "Taints that will be set on all nodes in the node pool, to avoid the scheduling of certain workloads.",
+                        "items": {
+                            "properties": {
+                                "effect": {
+                                    "enum": [
+                                        "NoSchedule",
+                                        "PreferNoSchedule",
+                                        "NoExecute"
+                                    ],
+                                    "title": "Effect",
+                                    "type": "string"
+                                },
+                                "key": {
+                                    "title": "Key",
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "title": "Value",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "effect",
+                                "key",
+                                "value"
+                            ],
+                            "title": "Node taint",
+                            "type": "object"
+                        },
                         "title": "Custom node taints",
                         "type": "array"
                     },
