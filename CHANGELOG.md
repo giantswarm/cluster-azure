@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add support for MachineDeployments
 - Add MachineDeployments to Values.yaml
+- Add MachineHealthChecks for Worker Nodes in MachineDeployments. Enabled by default
 
 ### Changed
 
