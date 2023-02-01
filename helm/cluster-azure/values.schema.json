@@ -1,15 +1,18 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "Configuration of an Azure cluster using Cluster API",
+    "type": "object",
     "properties": {
         "attachCapzControllerIdentity": {
             "title": "Attach controller identity",
             "type": "boolean"
         },
         "azure": {
+            "type": "object",
             "properties": {
                 "azureClusterIdentity": {
                     "description": "AzureClusterIdentity resource to use for this cluster.",
+                    "type": "object",
                     "properties": {
                         "name": {
                             "title": "Name",
@@ -18,10 +21,10 @@
                         "namespace": {
                             "title": "Namespace",
                             "type": "string"
-                        }
-                    },
+                        },
                     "title": "Identity",
                     "type": "object"
+                    }
                 },
                 "location": {
                     "title": "Location",
@@ -30,10 +33,10 @@
                 "subscriptionId": {
                     "title": "Subscription ID",
                     "type": "string"
-                }
-            },
+                },
             "title": "Azure settings",
             "type": "object"
+            }
         },
         "clusterDescription": {
             "description": "User-friendly description of the cluster's purpose.",
@@ -46,6 +49,7 @@
             "type": "string"
         },
         "controlPlane": {
+            "type": "object",
             "properties": {
                 "etcdVolumeSizeGB": {
                     "title": "Etcd volume size (GB)",
@@ -62,21 +66,43 @@
                 "rootVolumeSizeGB": {
                     "title": "Root volume size (GB)",
                     "type": "integer"
-                }
-            },
+                },
             "title": "Control plane settings",
             "type": "object"
+            }
+        },
+        "defaults": {
+            "type": "object",
+            "properties": {
+                "evictionMinimumReclaim": {
+                    "type": "string"
+                },
+                "hardEvictionThresholds": {
+                    "type": "string"
+                },
+                "softEvictionGracePeriod": {
+                    "type": "string"
+                },
+                "softEvictionThresholds": {
+                    "type": "string"
+                }
+            }
         },
         "enablePerClusterIdentity": {
             "title": "Enable identity per cluster",
+            "type": "boolean"
+        },
+        "includeClusterResourceSet": {
             "type": "boolean"
         },
         "kubernetesVersion": {
             "title": "Kubernetes version",
             "type": "string"
         },
-        "machinePools": {
+        "machineDeployments": {
+            "type": "array",
             "items": {
+                "type": "object",
                 "properties": {
                     "customNodeLabels": {
                         "items": {
@@ -119,20 +145,15 @@
                         "title": "Custom node taints",
                         "type": "array"
                     },
+                    "disableHealthCheck": {
+                        "type": "boolean"
+                    },
                     "instanceType": {
                         "title": "VM size",
                         "type": "string"
                     },
-                    "location": {
-                        "title": "Location",
-                        "type": "string"
-                    },
-                    "maxSize": {
-                        "title": "Maximum number of nodes",
-                        "type": "integer"
-                    },
-                    "minSize": {
-                        "title": "Minimum number of nodes",
+                    "replicas": {
+                        "title": "Number of nodes in the MachineDeployment",
                         "type": "integer"
                     },
                     "name": {
@@ -143,15 +164,18 @@
                     "rootVolumeSizeGB": {
                         "title": "Root volume size (GB)",
                         "type": "integer"
-                    }
-                },
+                    },
                 "title": "Node pool",
                 "type": "object"
+                }
             },
-            "title": "Node pools",
+            "title": "Node pools"
+        },
+        "machinePools": {
             "type": "array"
         },
         "network": {
+            "type": "object",
             "properties": {
                 "hostCIDR": {
                     "title": "Host CIDR",
@@ -164,12 +188,13 @@
                 "serviceCIDR": {
                     "title": "Service CIDR",
                     "type": "string"
-                }
-            },
+                },
             "title": "Network settings",
             "type": "object"
+            }
         },
         "oidc": {
+            "type": "object",
             "properties": {
                 "caPem": {
                     "description": "Identity provider's CA certificate in PEM format.",
@@ -191,10 +216,10 @@
                 "usernameClaim": {
                     "title": "Username claim",
                     "type": "string"
-                }
-            },
+                },
             "title": "OIDC settings",
             "type": "object"
+            }
         },
         "organization": {
             "title": "Organization",
@@ -203,8 +228,8 @@
         "sshSSOPublicKey": {
             "title": "SSH Public key for SSO",
             "type": "string"
-        }
-    },
+        },
     "title": "Cluster configuration",
     "type": "object"
+    }
 }
