@@ -16,8 +16,6 @@ metadata:
 spec:
   clusterName: {{ include "resource.default.name" $ }}
   replicas: {{ .replicas }}
-  selector:
-    matchLabels: null
   template:
     metadata:
       labels:
