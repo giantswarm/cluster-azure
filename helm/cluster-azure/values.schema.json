@@ -67,15 +67,39 @@
             "title": "Control plane settings",
             "type": "object"
         },
+        "defaults": {
+            "properties": {
+                "evictionMinimumReclaim": {
+                    "title": "Default settings for eviction minimum reclaim",
+                    "type": "string"
+                },
+                "hardEvictionThresholds": {
+                    "title": "Default settings for hard eviction thresholds",
+                    "type": "string"
+                },
+                "softEvictionGracePeriod": {
+                    "title": "Default settings for soft eviction grace period",
+                    "type": "string"
+                },
+                "softEvictionThresholds": {
+                    "title": "Default settings for soft eviction thresholds",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "enablePerClusterIdentity": {
             "title": "Enable identity per cluster",
+            "type": "boolean"
+        },
+        "includeClusterResourceSet": {
             "type": "boolean"
         },
         "kubernetesVersion": {
             "title": "Kubernetes version",
             "type": "string"
         },
-        "machinePools": {
+        "machineDeployments": {
             "items": {
                 "properties": {
                     "customNodeLabels": {
@@ -119,26 +143,22 @@
                         "title": "Custom node taints",
                         "type": "array"
                     },
+                    "disableHealthCheck": {
+                        "title": "Disable HealthChecks for the MachineDeployment",
+                        "type": "boolean"
+                    },
                     "instanceType": {
                         "title": "VM size",
                         "type": "string"
-                    },
-                    "location": {
-                        "title": "Location",
-                        "type": "string"
-                    },
-                    "maxSize": {
-                        "title": "Maximum number of nodes",
-                        "type": "integer"
-                    },
-                    "minSize": {
-                        "title": "Minimum number of nodes",
-                        "type": "integer"
                     },
                     "name": {
                         "description": "Unique identifier, cannot be changed after creation.",
                         "title": "Name",
                         "type": "string"
+                    },
+                    "replicas": {
+                        "title": "Number of nodes in the MachineDeployment",
+                        "type": "integer"
                     },
                     "rootVolumeSizeGB": {
                         "title": "Root volume size (GB)",
@@ -149,6 +169,9 @@
                 "type": "object"
             },
             "title": "Node pools",
+            "type": "array"
+        },
+        "machinePools": {
             "type": "array"
         },
         "network": {
