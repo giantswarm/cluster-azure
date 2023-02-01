@@ -32,9 +32,9 @@
                     "title": "Subscription ID",
                     "type": "string"
                 },
-                "title": "Azure settings",
                 "type": "object"
             },
+                "title": "Azure settings",
             "type": "object"
         },
         "clusterDescription": {
