@@ -16,7 +16,7 @@ jobs:
 
       - name: Install schemalint
         run: |
-          go install go install github.com/giantswarm/schemalint@latest
+          go install github.com/giantswarm/schemalint@latest
       - name: Run schemalint
         run: |
           schemalint verify ./helm/cluster-azure/values.schema.json
