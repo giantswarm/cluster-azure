@@ -4,7 +4,7 @@ on:
 
 jobs:
   validate:
-    name: Validate values.schema.json with schemalint
+    name: Validate values.schema.json
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
