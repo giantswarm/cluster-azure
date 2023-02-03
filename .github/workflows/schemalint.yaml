@@ -1,4 +1,4 @@
-name: Schemalint
+name: schemalint
 on:
   pull_request: {}
 
