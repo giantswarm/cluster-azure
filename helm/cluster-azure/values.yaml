@@ -24,6 +24,7 @@ bastion:
   instanceType: Standard_D2s_v5
   replicas: 1
   # TODO: Subnet selection , hardcoded to CONTROL PLANE one NOW  for public access
+  subnetSuffix: "control-plane"
 
 controlPlane:
   instanceType: Standard_D4s_v3

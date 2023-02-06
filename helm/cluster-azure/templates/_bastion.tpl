@@ -13,6 +13,7 @@ osDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 sshPublicKey: {{ $.Values.placeholderSshRSAPublicKey | b64enc }}
+subnetName: {{ include "resource.default.name" $ }}-{{ $.spec.subnetSuffix }}
 allocatePublicIP: true
 vmSize: {{ .spec.instanceType }}
 {{- end -}}
