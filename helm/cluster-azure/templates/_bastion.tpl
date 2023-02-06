@@ -30,7 +30,7 @@ users:
 {{- end }}
 
 {{- define "bastion-machine-deployment" -}}
-{{ $spec := merge (dict "name" "bastion" "rootVolumeSizeGB" "10" ) $.Values.bastion }}
+{{ $spec := merge (dict "name" "bastion" "rootVolumeSizeGB" "30" ) $.Values.bastion }}
 {{ $data := dict "spec" $spec "type" "bastionMachineDeployment" "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "bastion-machine-kubeadmconfig-spec" $data) "global" $) ) }}
 {{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" (include "bastion-machine-spec" $data) "global" $) ) }}
