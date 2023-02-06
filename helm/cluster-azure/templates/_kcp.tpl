@@ -14,7 +14,7 @@ dataDisks:
 osDisk:
   diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
   osType: Linux
-sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc }}
+sshPublicKey: {{ $.Values.placeholderSshRSAPublicKey | b64enc }}
 vmSize: {{ $.Values.controlPlane.instanceType }}
 {{- end }}
 

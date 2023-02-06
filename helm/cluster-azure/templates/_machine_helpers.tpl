@@ -19,7 +19,7 @@ osDisk:
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
-sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc }}
+sshPublicKey: {{ $.Values.placeholderSshRSAPublicKey | b64enc }}
 vmSize: {{ .spec.instanceType }}
 {{- end -}}
 
