@@ -12,7 +12,7 @@ osDisk:
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
-sshPublicKey: {{ $.Values.placeholderSshRSAPublicKey | b64enc }}
+sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 subnetName: {{ $.spec.subnetName | default (ternary "node-subnet" "control-plane-subnet" (eq .Values.network.mode "private" )) }}
 allocatePublicIP: {{ ternary false true (eq .Values.network.mode "private" ) }}
 vmSize: {{ .spec.instanceType }}
