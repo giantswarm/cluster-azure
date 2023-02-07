@@ -198,6 +198,7 @@ spec:
       - - LABEL=etcd_disk
         - /var/lib/etcddisk
     preKubeadmCommands:
+    {{- include "varLibKubeletDir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
     postKubeadmCommands: []
     users:
