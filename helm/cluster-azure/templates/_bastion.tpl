@@ -49,6 +49,11 @@ metadata:
 spec:
   clusterName: {{ include "resource.default.name" $ }}
   replicas: {{ $spec.replicas }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
