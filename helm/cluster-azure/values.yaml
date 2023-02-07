@@ -18,13 +18,12 @@ network:
   serviceCIDR: 172.31.0.0/16
   podCIDR: "192.168.0.0/16"
   hostCIDR: "10.0.0.0/8"
+  mode: public
 
 bastion:
   enabled: true
   instanceType: Standard_D2s_v5
   replicas: 1
-  # TODO: Subnet selection , hardcoded to CONTROL PLANE one NOW  for public access
-  subnetName: "control-plane-subnet"
 
 controlPlane:
   instanceType: Standard_D4s_v3

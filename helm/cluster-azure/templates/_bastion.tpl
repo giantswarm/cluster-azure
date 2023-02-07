@@ -2,7 +2,7 @@
 {{- if .Values.enablePerClusterIdentity -}}
 identity: UserAssigned
 userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes {{/* TODO Review this identity */}}
+  - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes {{/* TODO Review this identity, with SA Identity we can set it to empty */}}
 {{ end -}}
 {{- end -}}
 
@@ -13,8 +13,8 @@ osDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 sshPublicKey: {{ $.Values.placeholderSshRSAPublicKey | b64enc }}
-subnetName: {{ $.spec.subnetName }}
-allocatePublicIP: true
+subnetName: {{ $.spec.subnetName | default (ternary "node-subnet" "control-plane-subnet" (eq .Values.network.mode "private" )) }}
+allocatePublicIP: {{ ternary false true (eq .Values.network.mode "private" ) }}
 vmSize: {{ .spec.instanceType }}
 {{- end -}}
 
