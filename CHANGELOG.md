@@ -7,16 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.5] - 2023-02-08
-
 ### Changed
+
+- **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
+  - Renamed /azure to /provider
+
+## [0.0.5] - 2023-02-08
 
 **Breaking Change** - make sure to update your values before updating to this release
 - Values schema:
   - Moved /clusterName to /metadata/name
   - Moved /clusterDescription to /metadata/description
   - Moved /organization to /metadata/organization
-  - Renamed /azure to /provider
 
 ## [0.0.4] - 2023-02-01
 
