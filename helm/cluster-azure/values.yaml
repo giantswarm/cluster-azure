@@ -1,5 +1,7 @@
-# Cluster name. Defaults to chart release name
-clusterName: ""
+metadata:
+  # Cluster name. Defaults to chart release name
+  name: ""
+
 # Cluster description used in metadata.
 clusterDescription: "test"
 # Organization in which to create the cluster.
