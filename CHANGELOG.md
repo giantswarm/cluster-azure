@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Moved /clusterName to /metadata/name
   - Moved /clusterDescription to /metadata/description
   - Moved /organization to /metadata/organization
+  - Renamed /azure to /provider
 
 ## [0.0.4] - 2023-02-01
 
