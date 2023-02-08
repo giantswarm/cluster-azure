@@ -23,7 +23,6 @@ network:
 bastion:
   enabled: true
   instanceType: Standard_D2s_v5
-  replicas: 1
 
 controlPlane:
   instanceType: Standard_D4s_v3

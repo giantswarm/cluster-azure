@@ -48,7 +48,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
-  replicas: {{ $spec.replicas }}
+  replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 1

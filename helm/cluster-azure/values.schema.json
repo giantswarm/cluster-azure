@@ -44,10 +44,6 @@
                 "instanceType": {
                     "title": "Bastion Node instance size",
                     "type": "string"
-                },
-                "replicas": {
-                    "title": "Number of Bastion nodes",
-                    "type": "integer"
                 }
             },
             "title": "Bastion settings",
