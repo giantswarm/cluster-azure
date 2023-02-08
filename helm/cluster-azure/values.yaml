@@ -1,9 +1,13 @@
-# Cluster name. Defaults to chart release name
-clusterName: ""
-# Cluster description used in metadata.
-clusterDescription: "test"
-# Organization in which to create the cluster.
-organization: ""
+metadata:
+  # Cluster name. Defaults to chart release name
+  name: ""
+
+  # Cluster description used in metadata.
+  description: "test"
+
+  # Organization in which to create the cluster.
+  organization: ""
+
 kubernetesVersion: 1.24.8
 
 azure:

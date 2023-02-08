@@ -266,6 +266,26 @@
             "title": "Machine pools (deprecated)",
             "type": "array"
         },
+        "metadata": {
+            "properties": {
+                "description": {
+                    "description": "User-friendly description of the cluster's purpose.",
+                    "title": "Cluster description",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Unique identifier, cannot be changed after creation.",
+                    "title": "Cluster name",
+                    "type": "string"
+                },
+                "organization": {
+                    "title": "Organization",
+                    "type": "string"
+                }
+            },
+            "title": "Metadata",
+            "type": "object"
+        },
         "network": {
             "properties": {
                 "hostCIDR": {
@@ -318,10 +338,6 @@
             },
             "title": "OIDC settings",
             "type": "object"
-        },
-        "organization": {
-            "title": "Organization",
-            "type": "string"
         },
         "sshSSOPublicKey": {
             "title": "SSH Public key for SSO",
