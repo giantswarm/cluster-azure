@@ -248,11 +248,15 @@
             "type": "array"
         },
         "metadata": {
-            "name": {
-                "description": "Unique identifier, cannot be changed after creation.",
-                "title": "Cluster name",
-                "type": "string"
-            }
+            "properties": {
+                "name": {
+                    "description": "Unique identifier, cannot be changed after creation.",
+                    "title": "Cluster name",
+                    "type": "string"
+                }
+            },
+            "title": "Metadata",
+            "type": "object"
         },
         "network": {
             "properties": {
