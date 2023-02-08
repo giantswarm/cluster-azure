@@ -32,7 +32,7 @@ app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
-giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.organization | quote }}
+giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.metadata.organization | quote }}
 {{- end -}}
 
 {{/*
