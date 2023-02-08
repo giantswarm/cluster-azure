@@ -12,3 +12,8 @@
 {{- include "machine-pools" . }}
 ---
 {{- include "machine-deployments" . }}
+---
+{{- if .Values.bastion.enabled -}}
+{{- include "bastion-machine-deployment" . }}
+---
+{{- end }}

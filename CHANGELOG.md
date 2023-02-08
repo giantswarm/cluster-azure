@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add support for Bastion host as a MachineDeployment
+
 ## [0.0.5] - 2023-02-08
 
 ### Changed
