@@ -35,11 +35,6 @@
             "title": "Azure settings",
             "type": "object"
         },
-        "clusterDescription": {
-            "description": "User-friendly description of the cluster's purpose.",
-            "title": "Cluster description",
-            "type": "string"
-        },
         "controlPlane": {
             "properties": {
                 "etcdVolumeSizeGB": {
@@ -249,6 +244,11 @@
         },
         "metadata": {
             "properties": {
+                "description": {
+                    "description": "User-friendly description of the cluster's purpose.",
+                    "title": "Cluster description",
+                    "type": "string"
+                },
                 "name": {
                     "description": "Unique identifier, cannot be changed after creation.",
                     "title": "Cluster name",

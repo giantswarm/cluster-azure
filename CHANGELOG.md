@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Values schema: moved /clusterName to /metadata/name
+- Values schema: moved /clusterDescription to /metadata/description
+
 ## [0.0.4] - 2023-02-01
 
 ### Added
