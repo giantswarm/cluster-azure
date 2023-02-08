@@ -40,11 +40,6 @@
             "title": "Cluster description",
             "type": "string"
         },
-        "clusterName": {
-            "description": "Unique identifier, cannot be changed after creation.",
-            "title": "Cluster name",
-            "type": "string"
-        },
         "controlPlane": {
             "properties": {
                 "etcdVolumeSizeGB": {
@@ -251,6 +246,13 @@
             },
             "title": "Machine pools (deprecated)",
             "type": "array"
+        },
+        "metadata": {
+            "name": {
+                "description": "Unique identifier, cannot be changed after creation.",
+                "title": "Cluster name",
+                "type": "string"
+            }
         },
         "network": {
             "properties": {
