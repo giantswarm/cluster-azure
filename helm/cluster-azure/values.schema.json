@@ -253,6 +253,10 @@
                     "description": "Unique identifier, cannot be changed after creation.",
                     "title": "Cluster name",
                     "type": "string"
+                },
+                "organization": {
+                    "title": "Organization",
+                    "type": "string"
                 }
             },
             "title": "Metadata",
@@ -302,10 +306,6 @@
             },
             "title": "OIDC settings",
             "type": "object"
-        },
-        "organization": {
-            "title": "Organization",
-            "type": "string"
         },
         "sshSSOPublicKey": {
             "title": "SSH Public key for SSO",
