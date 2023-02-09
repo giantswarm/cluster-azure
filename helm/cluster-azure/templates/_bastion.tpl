@@ -13,8 +13,8 @@ osDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
-subnetName: {{ $.spec.subnetName | default (ternary "node-subnet" "control-plane-subnet" (eq .Values.network.mode "private" )) }}
-allocatePublicIP: {{ ternary false true (eq .Values.network.mode "private" ) }}
+subnetName: {{ $.spec.subnetName | default (ternary "node-subnet" "control-plane-subnet" (eq .Values.connectivity.network.mode "private" )) }}
+allocatePublicIP: {{ ternary false true (eq .Values.connectivity.network.mode "private" ) }}
 vmSize: {{ .spec.instanceType }}
 {{- end -}}
 

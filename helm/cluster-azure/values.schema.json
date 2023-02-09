@@ -21,6 +21,35 @@
                     },
                     "title": "Bastion settings",
                     "type": "object"
+                },
+                "network": {
+                    "properties": {
+                        "hostCidr": {
+                            "description": "IPv4 address range for nodes, in CIDR notation.",
+                            "title": "Node subnet",
+                            "type": "string"
+                        },
+                        "mode": {
+                            "enum": [
+                                "public",
+                                "private"
+                            ],
+                            "title": "Network mode",
+                            "type": "string"
+                        },
+                        "podCidr": {
+                            "description": "IPv4 address range for pods, in CIDR notation.",
+                            "title": "Pod subnet",
+                            "type": "string"
+                        },
+                        "serviceCidr": {
+                            "description": "IPv4 address range for services, in CIDR notation.",
+                            "title": "Service subnet",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Network settings",
+                    "type": "object"
                 }
             },
             "title": "Connectivity settings",
@@ -284,32 +313,6 @@
                 }
             },
             "title": "Metadata",
-            "type": "object"
-        },
-        "network": {
-            "properties": {
-                "hostCIDR": {
-                    "title": "Host CIDR",
-                    "type": "string"
-                },
-                "mode": {
-                    "enum": [
-                        "public",
-                        "private"
-                    ],
-                    "title": "Network mode",
-                    "type": "string"
-                },
-                "podCIDR": {
-                    "title": "Pod CIDR",
-                    "type": "string"
-                },
-                "serviceCIDR": {
-                    "title": "Service CIDR",
-                    "type": "string"
-                }
-            },
-            "title": "Network settings",
             "type": "object"
         },
         "providerSpecific": {
