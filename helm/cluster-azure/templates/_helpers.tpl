@@ -127,6 +127,10 @@ List of admission plugins to enable based on apiVersion
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
+{{- define "prepare-varLibKubelet-Dir" -}}
+- /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
+{{- end -}}
+
 {{/*
 Hash function based on data provided
 Expects two arguments (as a `dict`) E.g.
