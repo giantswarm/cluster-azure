@@ -50,6 +50,10 @@
                     },
                     "title": "Network settings",
                     "type": "object"
+                },
+                "sshSSOPublicKey": {
+                    "title": "SSH Public key for single sign-on",
+                    "type": "string"
                 }
             },
             "title": "Connectivity settings",
@@ -343,10 +347,6 @@
             },
             "title": "Azure settings",
             "type": "object"
-        },
-        "sshSSOPublicKey": {
-            "title": "SSH Public key for SSO",
-            "type": "string"
         }
     },
     "title": "Cluster configuration",
