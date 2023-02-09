@@ -107,7 +107,7 @@ List of admission plugins to enable based on apiVersion
 {{- end -}}
 
 {{- define "oidcFiles" -}}
-{{- if ne .Values.oidc.caPem "" }}
+{{- if ne .Values.controlPlane.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
   permissions: "0600"
   encoding: base64
