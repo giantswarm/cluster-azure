@@ -2,10 +2,6 @@
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
-        "attachCapzControllerIdentity": {
-            "title": "Attach controller identity",
-            "type": "boolean"
-        },
         "connectivity": {
             "properties": {
                 "bastion": {
@@ -104,10 +100,6 @@
             "title": "Control plane settings",
             "type": "object"
         },
-        "enablePerClusterIdentity": {
-            "title": "Enable identity per cluster",
-            "type": "boolean"
-        },
         "includeClusterResourceSet": {
             "description": "If true, a ClusterResourceSet resource is generated for the cluster.",
             "title": "Include ClusterResourceSet",
@@ -135,6 +127,19 @@
                         }
                     },
                     "title": "Default settings",
+                    "type": "object"
+                },
+                "identity": {
+                    "properties": {
+                        "attachCapzControllerIdentity": {
+                            "title": "Attach controller identity",
+                            "type": "boolean"
+                        },
+                        "enablePerClusterIdentity": {
+                            "title": "Enable identity per cluster",
+                            "type": "boolean"
+                        }
+                    },
                     "type": "object"
                 }
             },
