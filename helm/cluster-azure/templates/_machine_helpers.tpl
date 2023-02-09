@@ -52,7 +52,7 @@ files:
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
 {{- include "sshFiles" $ | nindent 2 }}
 preKubeadmCommands:
-{{- include "varLibKubeletDir" . | nindent 2 }}
+{{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
 postKubeadmCommands: []
 users:
