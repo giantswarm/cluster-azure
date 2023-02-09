@@ -300,7 +300,7 @@
             "title": "OIDC settings",
             "type": "object"
         },
-        "provider": {
+        "providerSpecific": {
             "properties": {
                 "azureClusterIdentity": {
                     "description": "AzureClusterIdentity resource to use for this cluster.",

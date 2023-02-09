@@ -10,7 +10,7 @@ metadata:
 
 kubernetesVersion: 1.24.8
 
-provider:
+providerSpecific:
   location: "westeurope"
   # This value must be updated to the right value for the cluster to be installed
   subscriptionId: PLACEHOLDER
