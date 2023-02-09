@@ -6,6 +6,30 @@
             "title": "Attach controller identity",
             "type": "boolean"
         },
+        "bastion": {
+            "properties": {
+                "enabled": {
+                    "title": "Enable bastion host for this cluster",
+                    "type": "boolean"
+                },
+                "instanceType": {
+                    "title": "Bastion Node instance size",
+                    "type": "string"
+                }
+            },
+            "title": "Bastion settings",
+            "type": "object"
+        },
+        "clusterDescription": {
+            "description": "User-friendly description of the cluster's purpose.",
+            "title": "Cluster description",
+            "type": "string"
+        },
+        "clusterName": {
+            "description": "Unique identifier, cannot be changed after creation.",
+            "title": "Cluster name",
+            "type": "string"
+        },
         "controlPlane": {
             "properties": {
                 "etcdVolumeSizeGB": {
@@ -237,6 +261,14 @@
             "properties": {
                 "hostCIDR": {
                     "title": "Host CIDR",
+                    "type": "string"
+                },
+                "mode": {
+                    "enum": [
+                        "public",
+                        "private"
+                    ],
+                    "title": "Network Mode",
                     "type": "string"
                 },
                 "podCIDR": {

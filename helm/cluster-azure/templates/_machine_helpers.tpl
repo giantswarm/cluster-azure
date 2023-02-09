@@ -19,7 +19,7 @@ osDisk:
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
-sshPublicKey: {{ $.Values.sshSSOPublicKey | b64enc }}
+sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ .spec.instanceType }}
 {{- end -}}
 
@@ -56,4 +56,12 @@ preKubeadmCommands:
 postKubeadmCommands: []
 users:
 {{- include "sshUsers" . | nindent 2 }}
+{{- end }}
+
+{{/*
+# Azure MAchine spec requires us to pass a key anyway and this key MUST be an RSA one - https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/ed25519-ssh-keys
+# This is not the key we actually use for ssh
+*/}}
+{{- define "fake-rsa-ssh-key" -}}
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCl9dTHYnfaRf75FTwv2lj5RAvBf4R9o39J5z+Pyf101cNDRSDmbJM1tsadowrvPg8IMqPN2WO77Lbiam3L+WQDxhCCR87mW9qDJa4aVHJZul4GLA+Ij85rOq1Uy2oIAXtuaipVU5H2IdUiDrPZ+Dy9YxsZfWp+3+8WI/OVyxhIwQpb4PN3sbwiSJDF2M91exwnAiHysE3BS0Dk75OMGuzZOmWQ0dnDW0Kazor06stYaIAbeSlf4MQlUE9KcoPMjeBl5GWJVy5nbrm5yl4P+VI6npp8rcFB9YXH9q3nmtkxJF1EdYyHY1VioFlbjwnztvIKgybPC+mlD9LrLFueidS7
 {{- end }}
