@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
   - Renamed /azure to /providerSpecific
   - Moved /bastion to /connectivity/bastion
+  - Moved /oidc to /controlPlane/oidc
 
 ### Removed
 

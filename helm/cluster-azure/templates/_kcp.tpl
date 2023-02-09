@@ -47,8 +47,8 @@ spec:
           {{- end }}
           cloud-provider: external
           cloud-config: /etc/kubernetes/azure.json
-          {{- if .Values.oidc.issuerUrl }}
-          {{- with .Values.oidc }}
+          {{- if .Values.controlPlane.oidc.issuerUrl }}
+          {{- with .Values.controlPlane.oidc }}
           oidc-issuer-url: {{ .issuerUrl }}
           oidc-client-id: {{ .clientId }}
           oidc-username-claim: {{ .usernameClaim }}

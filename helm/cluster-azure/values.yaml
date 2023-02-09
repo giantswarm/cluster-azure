@@ -36,6 +36,13 @@ controlPlane:
   rootVolumeSizeGB: 50
   etcdVolumeSizeGB: 10
 
+  oidc:
+    issuerUrl: ""
+    caPem: ""
+    clientId: ""
+    usernameClaim: ""
+    groupsClaim: ""
+
 defaults:
   softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
   softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
@@ -78,10 +85,3 @@ sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+Nh
 
 # Used by `cluster-shared` library chart
 includeClusterResourceSet: true
-
-oidc:
-  issuerUrl: ""
-  caPem: ""
-  clientId: ""
-  usernameClaim: ""
-  groupsClaim: ""

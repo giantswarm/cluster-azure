@@ -36,6 +36,33 @@
                     "title": "Node VM size",
                     "type": "string"
                 },
+                "oidc": {
+                    "properties": {
+                        "caPem": {
+                            "description": "Identity provider's CA certificate in PEM format.",
+                            "title": "Certificate authority",
+                            "type": "string"
+                        },
+                        "clientId": {
+                            "title": "Client ID",
+                            "type": "string"
+                        },
+                        "groupsClaim": {
+                            "title": "Groups claim",
+                            "type": "string"
+                        },
+                        "issuerUrl": {
+                            "title": "Issuer URL",
+                            "type": "string"
+                        },
+                        "usernameClaim": {
+                            "title": "Username claim",
+                            "type": "string"
+                        }
+                    },
+                    "title": "OIDC settings",
+                    "type": "object"
+                },
                 "replicas": {
                     "title": "Number of nodes",
                     "type": "integer"
@@ -277,33 +304,6 @@
                 }
             },
             "title": "Network settings",
-            "type": "object"
-        },
-        "oidc": {
-            "properties": {
-                "caPem": {
-                    "description": "Identity provider's CA certificate in PEM format.",
-                    "title": "Certificate authority",
-                    "type": "string"
-                },
-                "clientId": {
-                    "title": "Client ID",
-                    "type": "string"
-                },
-                "groupsClaim": {
-                    "title": "Groups claim",
-                    "type": "string"
-                },
-                "issuerUrl": {
-                    "title": "Issuer URL",
-                    "type": "string"
-                },
-                "usernameClaim": {
-                    "title": "Username claim",
-                    "type": "string"
-                }
-            },
-            "title": "OIDC settings",
             "type": "object"
         },
         "providerSpecific": {
