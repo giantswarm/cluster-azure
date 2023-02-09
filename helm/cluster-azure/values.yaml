@@ -43,12 +43,6 @@ controlPlane:
     usernameClaim: ""
     groupsClaim: ""
 
-defaults:
-  softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
-  softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
-  hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
-  evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
-
 machinePools: []
 #  - name: def00
 #    location: "westeurope"
@@ -85,3 +79,10 @@ sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+Nh
 
 # Used by `cluster-shared` library chart
 includeClusterResourceSet: true
+
+internal:
+  defaults:
+    softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
+    softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
+    hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
+    evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%

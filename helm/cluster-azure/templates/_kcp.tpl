@@ -169,10 +169,10 @@ spec:
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           feature-gates: CSIMigrationAzureDisk=true
-          eviction-soft: {{ .Values.controlPlane.softEvictionThresholds | default .Values.defaults.softEvictionThresholds }}
-          eviction-soft-grace-period: {{ .Values.controlPlane.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
-          eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
-          eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
+          eviction-soft: {{ .Values.controlPlane.softEvictionThresholds | default .Values.internal.defaults.softEvictionThresholds }}
+          eviction-soft-grace-period: {{ .Values.controlPlane.softEvictionGracePeriod | default .Values.internal.defaults.softEvictionGracePeriod }}
+          eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.internal.defaults.hardEvictionThresholds }}
+          eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.internal.defaults.evictionMinimumReclaim }}
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:
@@ -185,10 +185,10 @@ spec:
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           feature-gates: CSIMigrationAzureDisk=true
-          eviction-soft: {{ .Values.controlPlane.softEvictionThresholds | default .Values.defaults.softEvictionThresholds }}
-          eviction-soft-grace-period: {{ .Values.controlPlane.softEvictionGracePeriod | default .Values.defaults.softEvictionGracePeriod }}
-          eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.defaults.hardEvictionThresholds }}
-          eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.defaults.evictionMinimumReclaim }}
+          eviction-soft: {{ .Values.controlPlane.softEvictionThresholds | default .Values.internal.defaults.softEvictionThresholds }}
+          eviction-soft-grace-period: {{ .Values.controlPlane.softEvictionGracePeriod | default .Values.internal.defaults.softEvictionGracePeriod }}
+          eviction-hard: {{ .Values.controlPlane.hardEvictionThresholds | default .Values.internal.defaults.hardEvictionThresholds }}
+          eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.internal.defaults.evictionMinimumReclaim }}
         name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:

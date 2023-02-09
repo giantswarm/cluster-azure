@@ -75,28 +75,6 @@
             "title": "Control plane settings",
             "type": "object"
         },
-        "defaults": {
-            "properties": {
-                "evictionMinimumReclaim": {
-                    "title": "Default settings for eviction minimum reclaim",
-                    "type": "string"
-                },
-                "hardEvictionThresholds": {
-                    "title": "Default settings for hard eviction thresholds",
-                    "type": "string"
-                },
-                "softEvictionGracePeriod": {
-                    "title": "Default settings for soft eviction grace period",
-                    "type": "string"
-                },
-                "softEvictionThresholds": {
-                    "title": "Default settings for soft eviction thresholds",
-                    "type": "string"
-                }
-            },
-            "title": "Default settings",
-            "type": "object"
-        },
         "enablePerClusterIdentity": {
             "title": "Enable identity per cluster",
             "type": "boolean"
@@ -105,6 +83,34 @@
             "description": "If true, a ClusterResourceSet resource is generated for the cluster.",
             "title": "Include ClusterResourceSet",
             "type": "boolean"
+        },
+        "internal": {
+            "properties": {
+                "defaults": {
+                    "properties": {
+                        "evictionMinimumReclaim": {
+                            "title": "Default settings for eviction minimum reclaim",
+                            "type": "string"
+                        },
+                        "hardEvictionThresholds": {
+                            "title": "Default settings for hard eviction thresholds",
+                            "type": "string"
+                        },
+                        "softEvictionGracePeriod": {
+                            "title": "Default settings for soft eviction grace period",
+                            "type": "string"
+                        },
+                        "softEvictionThresholds": {
+                            "title": "Default settings for soft eviction thresholds",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Default settings",
+                    "type": "object"
+                }
+            },
+            "title": "Internal settings",
+            "type": "object"
         },
         "kubernetesVersion": {
             "title": "Kubernetes version",
