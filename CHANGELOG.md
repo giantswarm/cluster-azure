@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
-  - Renamed /azure to /provider
+  - Renamed /azure to /providerSpecific
 
 ### Removed
 
