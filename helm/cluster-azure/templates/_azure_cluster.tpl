@@ -24,7 +24,7 @@ spec:
     vnet:
       name: {{ include "resource.default.name" $ }}-vnet
       cidrBlocks:
-      - {{ .Values.network.hostCIDR }}
+      - {{ .Values.connectivity.network.hostCidr }}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.providerSpecific.subscriptionId }}
 {{ end }}
