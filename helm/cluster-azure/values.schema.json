@@ -13,7 +13,7 @@
                     "type": "boolean"
                 },
                 "instanceType": {
-                    "title": "Bastion Node instance size",
+                    "title": "Bastion node instance size",
                     "type": "string"
                 }
             },
@@ -258,7 +258,7 @@
                         "public",
                         "private"
                     ],
-                    "title": "Network Mode",
+                    "title": "Network mode",
                     "type": "string"
                 },
                 "podCIDR": {
