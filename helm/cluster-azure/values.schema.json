@@ -6,18 +6,24 @@
             "title": "Attach controller identity",
             "type": "boolean"
         },
-        "bastion": {
+        "connectivity": {
             "properties": {
-                "enabled": {
-                    "title": "Enable bastion host for this cluster",
-                    "type": "boolean"
-                },
-                "instanceType": {
-                    "title": "Bastion Node instance size",
-                    "type": "string"
+                "bastion": {
+                    "properties": {
+                        "enabled": {
+                            "title": "Enable bastion host for this cluster",
+                            "type": "boolean"
+                        },
+                        "instanceType": {
+                            "title": "Bastion Node instance size",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Bastion settings",
+                    "type": "object"
                 }
             },
-            "title": "Bastion settings",
+            "title": "Connectivity settings",
             "type": "object"
         },
         "controlPlane": {

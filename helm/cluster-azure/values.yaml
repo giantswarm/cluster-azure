@@ -24,9 +24,10 @@ network:
   hostCIDR: "10.0.0.0/8"
   mode: public
 
-bastion:
-  enabled: true
-  instanceType: Standard_D2s_v5
+connectivity:
+  bastion:
+    enabled: true
+    instanceType: Standard_D2s_v5
 
 controlPlane:
   instanceType: Standard_D4s_v3
