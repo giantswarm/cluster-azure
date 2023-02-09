@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
+  - Renamed /azure to /provider
+
 ### Removed
 
 - Values schema: removed redundant and unused /clusterName and /clusterDescription properties.
@@ -18,8 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for Bastion host as a MachineDeployment
 
 ## [0.0.5] - 2023-02-08
-
-### Changed
 
 **Breaking Change** - make sure to update your values before updating to this release
 

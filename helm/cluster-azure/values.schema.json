@@ -6,35 +6,6 @@
             "title": "Attach controller identity",
             "type": "boolean"
         },
-        "azure": {
-            "properties": {
-                "azureClusterIdentity": {
-                    "description": "AzureClusterIdentity resource to use for this cluster.",
-                    "properties": {
-                        "name": {
-                            "title": "Name",
-                            "type": "string"
-                        },
-                        "namespace": {
-                            "title": "Namespace",
-                            "type": "string"
-                        }
-                    },
-                    "title": "Identity",
-                    "type": "object"
-                },
-                "location": {
-                    "title": "Location",
-                    "type": "string"
-                },
-                "subscriptionId": {
-                    "title": "Subscription ID",
-                    "type": "string"
-                }
-            },
-            "title": "Azure settings",
-            "type": "object"
-        },
         "bastion": {
             "properties": {
                 "enabled": {
@@ -327,6 +298,35 @@
                 }
             },
             "title": "OIDC settings",
+            "type": "object"
+        },
+        "provider": {
+            "properties": {
+                "azureClusterIdentity": {
+                    "description": "AzureClusterIdentity resource to use for this cluster.",
+                    "properties": {
+                        "name": {
+                            "title": "Name",
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "title": "Namespace",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Identity",
+                    "type": "object"
+                },
+                "location": {
+                    "title": "Location",
+                    "type": "string"
+                },
+                "subscriptionId": {
+                    "title": "Subscription ID",
+                    "type": "string"
+                }
+            },
+            "title": "Azure settings",
             "type": "object"
         },
         "sshSSOPublicKey": {
