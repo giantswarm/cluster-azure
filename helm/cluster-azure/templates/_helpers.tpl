@@ -129,7 +129,7 @@ List of admission plugins to enable based on apiVersion
 
 {{- define "varLibKubeletDir" -}}
 - /bin/mkdir -p /var/lib/kubelet
-- /bin/chmod 0755 /var/lib/kubelet
+- /bin/chmod 0750 /var/lib/kubelet
 {{- end -}}
 
 {{/*
