@@ -67,12 +67,6 @@ machineDeployments:
     #   value: ""
     #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
 
-# Only required until we have AZWI for CAPZ and only required on MC cluster
-attachCapzControllerIdentity: false
-
-# TODO: This is temporary so we can deploy clusters without dedicated UA Identity until the operator for WC clusters are ready
-# https://github.com/giantswarm/giantswarm/issues/25039
-enablePerClusterIdentity: false
 
 sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
 
@@ -85,3 +79,10 @@ internal:
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
+  identity:
+    # Only required until we have AZWI for CAPZ and only required on MC cluster
+    attachCapzControllerIdentity: false
+
+    # TODO: This is temporary so we can deploy clusters without dedicated UA Identity until the operator for WC clusters are ready
+    # https://github.com/giantswarm/giantswarm/issues/25039
+    enablePerClusterIdentity: false

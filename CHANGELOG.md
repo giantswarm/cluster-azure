@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Moved /bastion to /connectivity/bastion
   - Moved /oidc to /controlPlane/oidc
   - Moved /defaults to /internal/defaults
+  - Moved /attachCapzControllerIdentity into /internal/identy
+  - Moved /enablePerClusterIdentity into /internal/identy
   - Moved /sshSSOPublicKey to /connectivity/sshSSOPublicKey
 
 ### Removed

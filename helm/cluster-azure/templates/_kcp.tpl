@@ -1,9 +1,9 @@
 {{- define "controlplane-azuremachinetemplate-spec" -}}
-{{- if .Values.enablePerClusterIdentity -}}
+{{- if .Values.internal.identity.enablePerClusterIdentity -}}
 identity: UserAssigned
 userAssignedIdentities:
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
-  {{- if .Values.attachCapzControllerIdentity }}
+  {{- if .Values.internal.identity.attachCapzControllerIdentity }}
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
   {{- end }}
 {{ end -}}
