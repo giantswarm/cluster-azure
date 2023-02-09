@@ -13,7 +13,7 @@
 ---
 {{- include "machine-deployments" . }}
 ---
-{{- if .Values.bastion.enabled -}}
+{{- if .Values.connectivity.bastion.enabled -}}
 {{- include "bastion-machine-deployment" . }}
 ---
 {{- end }}
