@@ -20,16 +20,6 @@
             "title": "Bastion settings",
             "type": "object"
         },
-        "clusterDescription": {
-            "description": "User-friendly description of the cluster's purpose.",
-            "title": "Cluster description",
-            "type": "string"
-        },
-        "clusterName": {
-            "description": "Unique identifier, cannot be changed after creation.",
-            "title": "Cluster name",
-            "type": "string"
-        },
         "controlPlane": {
             "properties": {
                 "etcdVolumeSizeGB": {

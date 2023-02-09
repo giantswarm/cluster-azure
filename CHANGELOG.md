@@ -12,14 +12,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
   - Renamed /azure to /provider
 
+### Removed
+
+- Values schema: removed redundant and unused /clusterName and /clusterDescription properties.
+
 ## [0.0.6] - 2023-02-08
 
 ### Added
+
 - Add support for Bastion host as a MachineDeployment
 
 ## [0.0.5] - 2023-02-08
 
 **Breaking Change** - make sure to update your values before updating to this release
+
 - Values schema:
   - Moved /clusterName to /metadata/name
   - Moved /clusterDescription to /metadata/description
@@ -28,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.4] - 2023-02-01
 
 ### Added
+
 - Add support for MachineDeployments
 - Add MachineDeployments to Values.yaml
 - Add MachineHealthChecks for Worker Nodes in MachineDeployments. Enabled by default
