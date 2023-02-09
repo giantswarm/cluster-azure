@@ -10,9 +10,9 @@ spec:
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
-    name: {{ .Values.azure.azureClusterIdentity.name }}
-    namespace: {{ .Values.azure.azureClusterIdentity.namespace }}
-  location: {{ .Values.azure.location }}
+    name: {{ .Values.provider.azureClusterIdentity.name }}
+    namespace: {{ .Values.provider.azureClusterIdentity.namespace }}
+  location: {{ .Values.provider.location }}
   networkSpec:
     subnets:
       - name: control-plane-subnet
@@ -26,5 +26,5 @@ spec:
       cidrBlocks:
       - {{ .Values.network.hostCIDR }}
   resourceGroup: {{ include "resource.default.name" $ }}
-  subscriptionID: {{ .Values.azure.subscriptionId }}
+  subscriptionID: {{ .Values.provider.subscriptionId }}
 {{ end }}

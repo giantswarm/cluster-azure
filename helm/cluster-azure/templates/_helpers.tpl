@@ -32,7 +32,7 @@ app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
-giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.organization | quote }}
+giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.metadata.organization | quote }}
 {{- end -}}
 
 {{/*
@@ -42,7 +42,7 @@ Given that Kubernetes allows 63 characters for resource names, the stem is trunc
 room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
-{{- .Values.clusterName | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
+{{- .Values.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
 
@@ -61,7 +61,7 @@ List of admission plugins to enable based on apiVersion
 
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
 {{- define "vmUaIdentityPrefix" -}}
-/subscriptions/{{ .Values.azure.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+/subscriptions/{{ .Values.provider.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
 {{/*Render list of custom Taints from passed values*/}}

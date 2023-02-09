@@ -6,44 +6,19 @@
             "title": "Attach controller identity",
             "type": "boolean"
         },
-        "azure": {
+        "bastion": {
             "properties": {
-                "azureClusterIdentity": {
-                    "description": "AzureClusterIdentity resource to use for this cluster.",
-                    "properties": {
-                        "name": {
-                            "title": "Name",
-                            "type": "string"
-                        },
-                        "namespace": {
-                            "title": "Namespace",
-                            "type": "string"
-                        }
-                    },
-                    "title": "Identity",
-                    "type": "object"
+                "enabled": {
+                    "title": "Enable bastion host for this cluster",
+                    "type": "boolean"
                 },
-                "location": {
-                    "title": "Location",
-                    "type": "string"
-                },
-                "subscriptionId": {
-                    "title": "Subscription ID",
+                "instanceType": {
+                    "title": "Bastion Node instance size",
                     "type": "string"
                 }
             },
-            "title": "Azure settings",
+            "title": "Bastion settings",
             "type": "object"
-        },
-        "clusterDescription": {
-            "description": "User-friendly description of the cluster's purpose.",
-            "title": "Cluster description",
-            "type": "string"
-        },
-        "clusterName": {
-            "description": "Unique identifier, cannot be changed after creation.",
-            "title": "Cluster name",
-            "type": "string"
         },
         "controlPlane": {
             "properties": {
@@ -252,10 +227,38 @@
             "title": "Machine pools (deprecated)",
             "type": "array"
         },
+        "metadata": {
+            "properties": {
+                "description": {
+                    "description": "User-friendly description of the cluster's purpose.",
+                    "title": "Cluster description",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Unique identifier, cannot be changed after creation.",
+                    "title": "Cluster name",
+                    "type": "string"
+                },
+                "organization": {
+                    "title": "Organization",
+                    "type": "string"
+                }
+            },
+            "title": "Metadata",
+            "type": "object"
+        },
         "network": {
             "properties": {
                 "hostCIDR": {
                     "title": "Host CIDR",
+                    "type": "string"
+                },
+                "mode": {
+                    "enum": [
+                        "public",
+                        "private"
+                    ],
+                    "title": "Network Mode",
                     "type": "string"
                 },
                 "podCIDR": {
@@ -297,9 +300,34 @@
             "title": "OIDC settings",
             "type": "object"
         },
-        "organization": {
-            "title": "Organization",
-            "type": "string"
+        "provider": {
+            "properties": {
+                "azureClusterIdentity": {
+                    "description": "AzureClusterIdentity resource to use for this cluster.",
+                    "properties": {
+                        "name": {
+                            "title": "Name",
+                            "type": "string"
+                        },
+                        "namespace": {
+                            "title": "Namespace",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Identity",
+                    "type": "object"
+                },
+                "location": {
+                    "title": "Location",
+                    "type": "string"
+                },
+                "subscriptionId": {
+                    "title": "Subscription ID",
+                    "type": "string"
+                }
+            },
+            "title": "Azure settings",
+            "type": "object"
         },
         "sshSSOPublicKey": {
             "title": "SSH Public key for SSO",

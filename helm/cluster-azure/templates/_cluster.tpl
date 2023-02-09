@@ -3,7 +3,7 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.clusterDescription }}"
+    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
   labels:
     cluster-apps-operator.giantswarm.io/watching: ""
     {{- include "labels.common" $ | nindent 4 }}
