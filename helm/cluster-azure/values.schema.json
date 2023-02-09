@@ -140,6 +140,7 @@
                             "type": "boolean"
                         }
                     },
+                    "title": "Identity",
                     "type": "object"
                 }
             },
