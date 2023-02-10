@@ -1,3 +1,4 @@
 metadata:
-  organization: "test"
+  organization: test
+  servicePriority: lowest
 baseDomain: example.com
