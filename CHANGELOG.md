@@ -25,7 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Values schema: removed redundant and unused /clusterName and /clusterDescription properties.
+- Values schema
+  - Removed redundant and unused /clusterName and /clusterDescription properties.
+  - Removed unused /includeClusterResourceSet
 
 ## [0.0.6] - 2023-02-08
 
