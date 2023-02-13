@@ -9,8 +9,6 @@
 ---
 {{- include "control-plane" . }}
 ---
-{{- include "machine-pools" . }}
----
 {{- include "machine-deployments" . }}
 ---
 {{- if .Values.connectivity.bastion.enabled -}}
