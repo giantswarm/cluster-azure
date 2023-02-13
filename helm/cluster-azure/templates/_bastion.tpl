@@ -70,7 +70,7 @@ spec:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachineTemplate
         name: {{ include "resource.default.name" $ }}-{{ $spec.name }}-{{ $azureMachineTemplateHash.hash }}
-      version: {{ $.Values.kubernetesVersion }}
+      version: {{ $.Values.internal.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate

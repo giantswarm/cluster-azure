@@ -104,11 +104,6 @@
             "title": "Control plane settings",
             "type": "object"
         },
-        "includeClusterResourceSet": {
-            "description": "If true, a ClusterResourceSet resource is generated for the cluster.",
-            "title": "Include ClusterResourceSet",
-            "type": "boolean"
-        },
         "internal": {
             "properties": {
                 "defaults": {
@@ -146,14 +141,14 @@
                     },
                     "title": "Identity",
                     "type": "object"
+                },
+                "kubernetesVersion": {
+                    "title": "Kubernetes version",
+                    "type": "string"
                 }
             },
             "title": "Internal settings",
             "type": "object"
-        },
-        "kubernetesVersion": {
-            "title": "Kubernetes version",
-            "type": "string"
         },
         "machineDeployments": {
             "items": {
