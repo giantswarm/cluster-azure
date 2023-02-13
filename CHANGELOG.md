@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Moved /attachCapzControllerIdentity into /internal/identy
   - Moved /enablePerClusterIdentity into /internal/identy
   - Moved /sshSSOPublicKey to /connectivity/sshSSOPublicKey
+  - Moved /kubernetesVersion to /internal/kubernetesVersion
 
 ### Removed
 
