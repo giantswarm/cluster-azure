@@ -320,6 +320,18 @@
                 "organization": {
                     "title": "Organization",
                     "type": "string"
+                },
+                "servicePriority": {
+                    "$comment": "Defined in https://github.com/giantswarm/rfc/tree/main/classify-cluster-priority",
+                    "default": "highest",
+                    "description": "The relative importance of this cluster.",
+                    "enum": [
+                        "highest",
+                        "medium",
+                        "lowest"
+                    ],
+                    "title": "Service priority",
+                    "type": "string"
                 }
             },
             "title": "Metadata",

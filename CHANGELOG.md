@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add option to specify the `giantswarm.io/service-priority` cluster label.
+
 ### Changed
 
 - **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
