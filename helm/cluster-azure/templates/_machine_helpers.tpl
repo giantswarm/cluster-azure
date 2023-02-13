@@ -31,10 +31,10 @@ joinConfiguration:
       cloud-config: /etc/kubernetes/azure.json
       cloud-provider: external
       feature-gates: CSIMigrationAzureDisk=true
-      eviction-soft: {{ .spec.softEvictionThresholds | default .Values.internal.defaults.softEvictionThresholds }}
-      eviction-soft-grace-period: {{ .spec.softEvictionGracePeriod | default .Values.internal.defaults.softEvictionGracePeriod }}
-      eviction-hard: {{ .spec.hardEvictionThresholds | default .Values.internal.defaults.hardEvictionThresholds }}
-      eviction-minimum-reclaim: {{ .Values.controlPlane.evictionMinimumReclaim | default .Values.internal.defaults.evictionMinimumReclaim }}
+      eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
+      eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
+      eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
+      eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
       node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .type "machinePool")}}={{ include "resource.default.name" $ }}-{{ .spec.name }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
     {{- if .spec.customNodeTaints }}
