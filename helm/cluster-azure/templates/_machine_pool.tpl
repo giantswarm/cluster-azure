@@ -26,7 +26,7 @@ spec:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachinePool
         name: {{ include "resource.default.name" $ }}-{{ .name }}
-      version: {{ $.Values.kubernetesVersion }}
+      version: {{ $.Values.internal.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachinePool

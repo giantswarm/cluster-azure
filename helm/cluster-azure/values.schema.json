@@ -141,14 +141,14 @@
                     },
                     "title": "Identity",
                     "type": "object"
+                },
+                "kubernetesVersion": {
+                    "title": "Kubernetes version",
+                    "type": "string"
                 }
             },
             "title": "Internal settings",
             "type": "object"
-        },
-        "kubernetesVersion": {
-            "title": "Kubernetes version",
-            "type": "string"
         },
         "machineDeployments": {
             "items": {
