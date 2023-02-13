@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
   - Renamed /azure to /providerSpecific
+  - Rename /machineDeployments to /nodePools
   - Moved /bastion to /connectivity/bastion
   - Moved /oidc to /controlPlane/oidc
   - Moved /defaults to /internal/defaults
