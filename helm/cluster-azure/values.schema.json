@@ -155,78 +155,6 @@
             "title": "Kubernetes version",
             "type": "string"
         },
-        "machineDeployments": {
-            "items": {
-                "properties": {
-                    "customNodeLabels": {
-                        "items": {
-                            "title": "Label",
-                            "type": "string"
-                        },
-                        "title": "Custom node labels",
-                        "type": "array"
-                    },
-                    "customNodeTaints": {
-                        "descriptions": "Taints that will be set on all nodes in the node pool, to avoid the scheduling of certain workloads.",
-                        "items": {
-                            "properties": {
-                                "effect": {
-                                    "enum": [
-                                        "NoSchedule",
-                                        "PreferNoSchedule",
-                                        "NoExecute"
-                                    ],
-                                    "title": "Effect",
-                                    "type": "string"
-                                },
-                                "key": {
-                                    "title": "Key",
-                                    "type": "string"
-                                },
-                                "value": {
-                                    "title": "Value",
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "effect",
-                                "key",
-                                "value"
-                            ],
-                            "title": "Node taint",
-                            "type": "object"
-                        },
-                        "title": "Custom node taints",
-                        "type": "array"
-                    },
-                    "disableHealthCheck": {
-                        "title": "Disable HealthChecks for the MachineDeployment",
-                        "type": "boolean"
-                    },
-                    "instanceType": {
-                        "title": "VM size",
-                        "type": "string"
-                    },
-                    "name": {
-                        "description": "Unique identifier, cannot be changed after creation.",
-                        "title": "Name",
-                        "type": "string"
-                    },
-                    "replicas": {
-                        "title": "Number of nodes in the MachineDeployment",
-                        "type": "integer"
-                    },
-                    "rootVolumeSizeGB": {
-                        "title": "Root volume size (GB)",
-                        "type": "integer"
-                    }
-                },
-                "title": "Node pool",
-                "type": "object"
-            },
-            "title": "Node pools",
-            "type": "array"
-        },
         "machinePools": {
             "$comment": "/machineDeployments is used instead.",
             "deprecated": true,
@@ -336,6 +264,78 @@
             },
             "title": "Metadata",
             "type": "object"
+        },
+        "nodePools": {
+            "items": {
+                "properties": {
+                    "customNodeLabels": {
+                        "items": {
+                            "title": "Label",
+                            "type": "string"
+                        },
+                        "title": "Custom node labels",
+                        "type": "array"
+                    },
+                    "customNodeTaints": {
+                        "descriptions": "Taints that will be set on all nodes in the node pool, to avoid the scheduling of certain workloads.",
+                        "items": {
+                            "properties": {
+                                "effect": {
+                                    "enum": [
+                                        "NoSchedule",
+                                        "PreferNoSchedule",
+                                        "NoExecute"
+                                    ],
+                                    "title": "Effect",
+                                    "type": "string"
+                                },
+                                "key": {
+                                    "title": "Key",
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "title": "Value",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "effect",
+                                "key",
+                                "value"
+                            ],
+                            "title": "Node taint",
+                            "type": "object"
+                        },
+                        "title": "Custom node taints",
+                        "type": "array"
+                    },
+                    "disableHealthCheck": {
+                        "title": "Disable HealthChecks for the MachineDeployment",
+                        "type": "boolean"
+                    },
+                    "instanceType": {
+                        "title": "VM size",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Unique identifier, cannot be changed after creation.",
+                        "title": "Name",
+                        "type": "string"
+                    },
+                    "replicas": {
+                        "title": "Number of nodes in the MachineDeployment",
+                        "type": "integer"
+                    },
+                    "rootVolumeSizeGB": {
+                        "title": "Root volume size (GB)",
+                        "type": "integer"
+                    }
+                },
+                "title": "Node pool",
+                "type": "object"
+            },
+            "title": "Node pools",
+            "type": "array"
         },
         "providerSpecific": {
             "properties": {
