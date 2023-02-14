@@ -205,10 +205,6 @@
                         "title": "VM size",
                         "type": "string"
                     },
-                    "location": {
-                        "title": "Location",
-                        "type": "string"
-                    },
                     "maxSize": {
                         "title": "Maximum number of nodes",
                         "type": "integer"

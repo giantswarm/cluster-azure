@@ -39,7 +39,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   {{- include "machine-identity" $data | nindent 2}}
-  location: {{ $data.spec.location }}
+  location: {{ $.Values.providerSpecific.location }}
   strategy:
     rollingUpdate:
       deletePolicy: Oldest
