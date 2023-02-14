@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Disallow additional properties on the values scherma root level.
+
+### Removed
+
+- Removed `baseDomain` from CI values.
+
 ## [0.0.7] - 2023-02-14
 
 ### Added
