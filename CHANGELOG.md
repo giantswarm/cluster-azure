@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add option to specify the `giantswarm.io/service-priority` cluster label.
 - Add icon property to Chart metadata.
 - Pre-Create /var/lib/kubelet with `0750` if it does not exist already to address issue with node-exporter
+- Add example manifests to create cluster
 
 ### Changed
 
