@@ -56,7 +56,9 @@ machinePools: []
 
 nodePools:
   - name: md00
+    type: machineDeployment
     instanceType: Standard_D2s_v3
+    location: "westeurope"
     replicas: 3
     rootVolumeSizeGB: 50
     disableHealthCheck: false

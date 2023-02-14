@@ -35,7 +35,7 @@ joinConfiguration:
       eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
       eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
       eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
-      node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .type "machinePool")}}={{ include "resource.default.name" $ }}-{{ .spec.name }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
+      node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .spec.type "machinePool")}}={{ include "resource.default.name" $ }}-{{ .spec.name }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
     name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
     {{- if .spec.customNodeTaints }}
     taints:

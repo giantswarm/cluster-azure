@@ -1,6 +1,7 @@
 {{- define "machine-pools" -}}
-{{- range $machinePool := .Values.machinePools }}
-{{ $data := dict "spec" $machinePool "type" "machinePool" "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
+{{- range $nodePool := .Values.nodePools }}
+{{- if eq $nodePool.type "machinePool" }}
+{{ $data := dict "spec" $nodePool "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:
@@ -58,5 +59,6 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec: {{- include "machine-kubeadmconfig-spec" $data | nindent 2 }}
 ---
+{{- end }}
 {{- end }}
 {{- end -}}

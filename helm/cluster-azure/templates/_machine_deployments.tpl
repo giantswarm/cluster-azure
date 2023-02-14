@@ -1,6 +1,7 @@
 {{- define "machine-deployments" -}}
 {{- range $nodePool := .Values.nodePools }}
-{{ $data := dict "spec" $nodePool "type" "machineDeployment" "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
+{{- if eq $nodePool.type "machineDeployment" }}
+{{ $data := dict "spec" $nodePool "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $data) "global" $) ) }}
 {{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $data) "identity" (include "machine-identity" $data) ) "global" $) ) }}
 apiVersion: cluster.x-k8s.io/v1beta1
@@ -92,6 +93,7 @@ spec:
   - type: Ready
     status: "False"
     timeout: 300s
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end -}}
