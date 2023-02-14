@@ -317,6 +317,10 @@
                         "title": "VM size",
                         "type": "string"
                     },
+                    "location": {
+                        "title": "machinePool location",
+                        "type": "string"
+                    },
                     "name": {
                         "description": "Unique identifier, cannot be changed after creation.",
                         "title": "Name",
@@ -329,6 +333,14 @@
                     "rootVolumeSizeGB": {
                         "title": "Root volume size (GB)",
                         "type": "integer"
+                    },
+                    "type": {
+                        "enum": [
+                            "machineDeployment",
+                            "machinePool"
+                        ],
+                        "title": "type of NodePool",
+                        "type": "string"
                     }
                 },
                 "title": "Node pool",
