@@ -1,0 +1,40 @@
+---
+apiVersion: application.giantswarm.io/v1alpha1
+kind: App
+metadata:
+  labels:
+    app-operator.giantswarm.io/version: 0.0.0
+  name: cluster01
+  namespace: org-multi-project
+spec:
+  catalog: cluster
+  kubeConfig:
+    inCluster: true
+  name: cluster-azure
+  namespace: org-multi-project
+  userConfig:
+    configMap:
+      name: cluster01-user-values
+      namespace: org-multi-project
+  version: 0.0.7
+---
+apiVersion: application.giantswarm.io/v1alpha1
+kind: App
+metadata:
+  labels:
+    app-operator.giantswarm.io/version: 0.0.0
+    giantswarm.io/cluster: cluster01
+    app.kubernetes.io/name: default-apps-azure
+  name: cluster01-default-apps
+  namespace: org-multi-project
+spec:
+  catalog: cluster
+  kubeConfig:
+    inCluster: true
+  name: default-apps-azure
+  namespace: org-multi-project
+  userConfig:
+    configMap:
+      name: cluster01-default-apps-user-values
+      namespace: org-multi-project
+  version: v0.0.10
