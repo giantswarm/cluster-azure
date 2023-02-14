@@ -4,7 +4,8 @@
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
         "cluster-shared": {
-            "title": "Library chart"
+            "title": "Library chart",
+            "type": "object"
         },
         "connectivity": {
             "properties": {
