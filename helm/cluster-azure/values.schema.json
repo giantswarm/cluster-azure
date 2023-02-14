@@ -1,7 +1,11 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": false,
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
+        "cluster-shared": {
+            "title": "Library chart"
+        },
         "connectivity": {
             "properties": {
                 "bastion": {
@@ -104,11 +108,6 @@
             "title": "Control plane settings",
             "type": "object"
         },
-        "includeClusterResourceSet": {
-            "description": "If true, a ClusterResourceSet resource is generated for the cluster.",
-            "title": "Include ClusterResourceSet",
-            "type": "boolean"
-        },
         "internal": {
             "properties": {
                 "defaults": {
@@ -146,14 +145,14 @@
                     },
                     "title": "Identity",
                     "type": "object"
+                },
+                "kubernetesVersion": {
+                    "title": "Kubernetes version",
+                    "type": "string"
                 }
             },
             "title": "Internal settings",
             "type": "object"
-        },
-        "kubernetesVersion": {
-            "title": "Kubernetes version",
-            "type": "string"
         },
         "machinePools": {
             "$comment": "/machineDeployments is used instead.",

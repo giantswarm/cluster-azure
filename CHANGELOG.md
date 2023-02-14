@@ -7,9 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Disallow additional properties on the values scherma root level.
+
+### Removed
+
+- Removed `baseDomain` from CI values.
+
+## [0.0.7] - 2023-02-14
+
 ### Added
 
 - Add option to specify the `giantswarm.io/service-priority` cluster label.
+- Add icon property to Chart metadata.
+- Pre-Create /var/lib/kubelet with `0750` if it does not exist already to address issue with node-exporter
+- Add example manifests to create cluster
 
 ### Changed
 
@@ -22,10 +35,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Moved /attachCapzControllerIdentity into /internal/identy
   - Moved /enablePerClusterIdentity into /internal/identy
   - Moved /sshSSOPublicKey to /connectivity/sshSSOPublicKey
+  - Moved /kubernetesVersion to /internal/kubernetesVersion
 
 ### Removed
 
-- Values schema: removed redundant and unused /clusterName and /clusterDescription properties.
+- Values schema
+  - Removed redundant and unused /clusterName and /clusterDescription properties.
+  - Removed unused /includeClusterResourceSet
 
 ## [0.0.6] - 2023-02-08
 
@@ -96,7 +112,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.6...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.7...HEAD
+[0.0.7]: https://github.com/giantswarm/cluster-azure/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/giantswarm/cluster-azure/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/giantswarm/cluster-azure/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/giantswarm/cluster-azure/compare/v0.0.3...v0.0.4

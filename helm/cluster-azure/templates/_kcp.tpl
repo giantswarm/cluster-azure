@@ -204,7 +204,7 @@ spec:
     users:
     {{- include "sshUsers" . | nindent 6 }}
   replicas: {{ .Values.controlPlane.replicas | default "3" }}
-  version: {{ .Values.kubernetesVersion }}
+  version: {{ .Values.internal.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
