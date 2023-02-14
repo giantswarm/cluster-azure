@@ -3,6 +3,9 @@
     "additionalProperties": false,
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
+        "cluster-shared": {
+            "title": "Library chart"
+        },
         "connectivity": {
             "properties": {
                 "bastion": {
