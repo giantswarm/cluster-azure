@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Disallow additional properties on the values scherma root level.
+
+### Removed
+
+- Removed `baseDomain` from CI values.
+
 ## [0.0.7] - 2023-02-14
 
 ### Added
@@ -19,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
-  - Disallow additional properties on the root level
   - Renamed /azure to /providerSpecific
   - Moved /bastion to /connectivity/bastion
   - Moved /oidc to /controlPlane/oidc
