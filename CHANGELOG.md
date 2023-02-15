@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add `managementCluster`, `baseDomain` and `provider` properties to the schema because they are added by the AppOperator and the schema has `additionalProperties: false`
+
 ## [0.0.10] - 2023-02-15
 
 ### Changed
