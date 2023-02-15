@@ -23,7 +23,7 @@ connectivity:
   network:
     serviceCidr: "172.31.0.0/16"
     podCidr: "192.168.0.0/16"
-    hostCIDR: "10.0.0.0/16"
+    hostCidr: "10.0.0.0/16"
     controlPlane:
       cidr: 10.0.0.0/20
     workers:
