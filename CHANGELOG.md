@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Re-Add selector to Bastion machineDeployment , this is a required field and the webhook validation fail without it ( only in our kind mc-bootstrap)
+
 ## [0.0.9] - 2023-02-15
 
 ### Changed
