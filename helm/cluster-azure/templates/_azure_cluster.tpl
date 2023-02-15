@@ -17,10 +17,14 @@ spec:
     subnets:
       - name: control-plane-subnet
         role: control-plane
+        cidrBlocks:
+        - {{ .Values.connectivity.network.controlPlane.cidr }}
       - name: node-subnet
         natGateway:
           name: node-natgateway
         role: node
+        cidrBlocks:
+        - {{ .Values.connectivity.network.workers.cidr }}
     vnet:
       name: {{ include "resource.default.name" $ }}-vnet
       cidrBlocks:
