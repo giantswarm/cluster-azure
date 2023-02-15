@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Disallow additional properties on the values scherma root level.
+- Update example manifests to create cluster
 
 ### Removed
 
