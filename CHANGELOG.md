@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.9] - 2023-02-15
+
 ### Changed
 
 - Update example manifests to create cluster
@@ -119,7 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.8...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.9...HEAD
+[0.0.9]: https://github.com/giantswarm/cluster-azure/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/giantswarm/cluster-azure/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/giantswarm/cluster-azure/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/giantswarm/cluster-azure/compare/v0.0.5...v0.0.6
