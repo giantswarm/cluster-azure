@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update example manifests to create cluster
+- Re-Add selector to machineDeployment , this is a required field and the webhook validation fail without it ( only in our kind mc-bootstrap)
 
 ## [0.0.8] - 2023-02-15
 
