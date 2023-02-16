@@ -337,14 +337,6 @@
                     "rootVolumeSizeGB": {
                         "title": "Root volume size (GB)",
                         "type": "integer"
-                    },
-                    "type": {
-                        "enum": [
-                            "machineDeployment",
-                            "machinePool"
-                        ],
-                        "title": "type of NodePool",
-                        "type": "string"
                     }
                 },
                 "title": "Node pool",
