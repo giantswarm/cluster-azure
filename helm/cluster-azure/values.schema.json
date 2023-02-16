@@ -321,10 +321,6 @@
                         "title": "VM size",
                         "type": "string"
                     },
-                    "location": {
-                        "title": "machinePool location",
-                        "type": "string"
-                    },
                     "name": {
                         "description": "Unique identifier, cannot be changed after creation.",
                         "title": "Name",
