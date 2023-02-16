@@ -49,6 +49,8 @@ metadata:
 spec:
   clusterName: {{ include "resource.default.name" $ }}
   replicas: 1
+  selector:
+    matchLabels: null
   strategy:
     rollingUpdate:
       maxSurge: 1

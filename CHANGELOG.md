@@ -7,9 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.11] - 2023-02-15
+
+### Changed
+
+- Add `managementCluster`, `baseDomain` and `provider` properties to the schema because they are added by the AppOperator and the schema has `additionalProperties: false`
+
+## [0.0.10] - 2023-02-15
+
+### Changed
+
+- Re-Add selector to Bastion machineDeployment , this is a required field and the webhook validation fail without it ( only in our kind mc-bootstrap)
+
+## [0.0.9] - 2023-02-15
+
+### Changed
+
+- Update example manifests to create cluster
+- Re-Add selector to machineDeployment , this is a required field and the webhook validation fail without it ( only in our kind mc-bootstrap)
+
+## [0.0.8] - 2023-02-15
+
 ### Changed
 
 - Disallow additional properties on the values scherma root level.
+- Reduce default network range from 10.0.0.0/8 (default CAPZ) to 10.0.0.0/16.
 
 ### Removed
 
@@ -112,7 +134,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.7...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.11...HEAD
+[0.0.11]: https://github.com/giantswarm/cluster-azure/compare/v0.0.10...v0.0.11
+[0.0.10]: https://github.com/giantswarm/cluster-azure/compare/v0.0.9...v0.0.10
+[0.0.9]: https://github.com/giantswarm/cluster-azure/compare/v0.0.8...v0.0.9
+[0.0.8]: https://github.com/giantswarm/cluster-azure/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/giantswarm/cluster-azure/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/giantswarm/cluster-azure/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/giantswarm/cluster-azure/compare/v0.0.4...v0.0.5
