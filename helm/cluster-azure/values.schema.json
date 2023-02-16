@@ -3,6 +3,10 @@
     "additionalProperties": false,
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
+        "baseDomain": {
+            "title": "The base dns domain",
+            "type": "string"
+        },
         "cluster-shared": {
             "title": "Library chart",
             "type": "object"
@@ -305,6 +309,10 @@
             "title": "Machine pools (deprecated)",
             "type": "array"
         },
+        "managementCluster": {
+            "title": "The capi MC managing this cluster",
+            "type": "string"
+        },
         "metadata": {
             "properties": {
                 "description": {
@@ -336,6 +344,10 @@
             },
             "title": "Metadata",
             "type": "object"
+        },
+        "provider": {
+            "title": "The capi Provider for this cluster",
+            "type": "string"
         },
         "providerSpecific": {
             "properties": {
