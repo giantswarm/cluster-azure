@@ -76,6 +76,10 @@ internal:
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
+  image:
+    gallery: flatcar4capi-742ef0cb-dcaa-4ecb-9cb0-bfd2e43dccc0
+    name: '{{ printf "flatcar-stable-amd64-capi-%s" .Values.internal.kubernetesVersion }}'
+    version: 3374.2.1
   identity:
     # Only required until we have AZWI for CAPZ and only required on MC cluster
     attachCapzControllerIdentity: false

@@ -14,6 +14,11 @@ userAssignedIdentities:
 {{- end -}}
 
 {{- define "machine-spec" -}}
+image:
+  computeGallery:
+    gallery: {{  $.Values.internal.image.gallery }}
+    name: {{ tpl $.Values.internal.image.name $ }}
+    version: {{ $.Values.internal.image.version }}
 osDisk:
   diskSizeGB: {{ .spec.rootVolumeSizeGB }}
   managedDisk:
@@ -24,6 +29,18 @@ vmSize: {{ .spec.instanceType }}
 {{- end -}}
 
 {{- define "machine-kubeadmconfig-spec" -}}
+format: ignition
+ignition:
+  containerLinuxConfig:
+    additionalConfig: |
+      systemd:
+        units:
+        - name: kubeadm.service
+          dropins:
+          - name: 10-flatcar.conf
+            contents: |
+              [Unit]
+              After=oem-cloudinit.service
 joinConfiguration:
   nodeRegistration:
     kubeletExtraArgs:
@@ -52,8 +69,8 @@ files:
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
 {{- include "sshFiles" $ | nindent 2 }}
 preKubeadmCommands:
-{{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
-{{- include "kubeletReservationPreCommands" . | nindent 2 }}
+  - sed -i "s/'{{ `{{ ds.meta_data.local_hostname }}` }}'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
+  - echo '{{ `{{ ds.meta_data.local_hostname }}` }}' > /tmp/name
 postKubeadmCommands: []
 users:
 {{- include "sshUsers" . | nindent 2 }}
