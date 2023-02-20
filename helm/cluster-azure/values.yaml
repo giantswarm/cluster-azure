@@ -78,7 +78,7 @@ internal:
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
   image:
     gallery: flatcar4capi-742ef0cb-dcaa-4ecb-9cb0-bfd2e43dccc0
-    name: '{{ printf "flatcar-stable-amd64-capi-%s" .Values.internal.kubernetesVersion }}'
+    name: '{{ printf "flatcar-stable-amd64-capi-v%s" .Values.internal.kubernetesVersion }}'
     version: 3374.2.1
   identity:
     # Only required until we have AZWI for CAPZ and only required on MC cluster
