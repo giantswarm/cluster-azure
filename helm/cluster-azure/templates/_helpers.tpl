@@ -131,6 +131,12 @@ List of admission plugins to enable based on apiVersion
 - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
 {{- end -}}
 
+# the replacement must match the value from `joinConfiguration.nodeConfiguration.name`
+# When migrated all to flatcar can use a placeholder string rather than the template
+{{- define "override-hostname-in-kubeadm-configuration" -}}
+- sed -i "s/'{{ `{{ ds.meta_data.local_hostname }}` }}'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
+{{- end -}}
+
 {{/*
 Hash function based on data provided
 Expects two arguments (as a `dict`) E.g.

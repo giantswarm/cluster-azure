@@ -76,5 +76,9 @@ get_memory_to_reserve() {
   echo $memory_to_reserve_in_kbytes/1024 | bc
 }
 
-# add Settings to KUBELET_EXTRA_ARGS in /etc/default/kubelet
-sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /etc/default/kubelet
+# add Settings to KUBELET_EXTRA_ARGS in /etc/default/kubelet or /etc/sysconfig/kubelet
+if [[ -f "/etc/sysconfig/kubelet" ]]; then
+  sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /etc/sysconfig/kubelet
+else
+  sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /etc/default/kubelet
+fi

@@ -69,8 +69,9 @@ files:
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
 {{- include "sshFiles" $ | nindent 2 }}
 preKubeadmCommands:
-  - sed -i "s/'{{ `{{ ds.meta_data.local_hostname }}` }}'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
-  - echo '{{ `{{ ds.meta_data.local_hostname }}` }}' > /tmp/name
+{{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
+{{- include "kubeletReservationPreCommands" . | nindent 2 }}
+{{- include "override-hostname-in-kubeadm-configuration" . | nindent 2 }}
 postKubeadmCommands: []
 users:
 {{- include "sshUsers" . | nindent 2 }}
