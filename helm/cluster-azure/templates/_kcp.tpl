@@ -69,6 +69,7 @@ spec:
                 device: /dev/disk/azure/scsi1/lun0
                 format: ext4
                 label: etcd_disk
+                path: /var/lib/etcddisk
                 options:
                 - -E
                 - lazy_itable_init=1,lazy_journal_init=1
@@ -213,9 +214,6 @@ spec:
         taints:
         {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
         {{- end }}
-    mounts:
-      - - LABEL=etcd_disk
-        - /var/lib/etcddisk
     preKubeadmCommands:
     {{- include "prepare-varLibKubelet-Dir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
