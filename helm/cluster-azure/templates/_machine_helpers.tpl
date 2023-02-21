@@ -53,7 +53,7 @@ joinConfiguration:
       eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
       eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
       node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .type "machinePool")}}={{ include "resource.default.name" $ }}-{{ .spec.name }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
-    name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+    name: '@@HOSTNAME@@'
     {{- if .spec.customNodeTaints }}
     taints:
     {{- include "customNodeTaints" .spec.customNodeTaints | indent 6 }}
