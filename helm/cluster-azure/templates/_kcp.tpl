@@ -42,9 +42,26 @@ spec:
       name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}
   kubeadmConfigSpec:
     # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
+    #diskSetup:
+      #filesystems: []
+      #partitions: []
     diskSetup:
-      filesystems: []
-      partitions: []
+      filesystems:
+      - device: /dev/disk/azure/scsi1/lun0
+        extraOpts:
+        - -E
+        - lazy_itable_init=1,lazy_journal_init=1
+        filesystem: ext4
+        label: etcd_disk
+        overwrite: false
+      partitions:
+      - device: /dev/disk/azure/scsi1/lun0
+        layout: true
+        tableType: gpt
+        overwrite: false
+    mounts:
+    - - etcd_disk
+      - /var/lib/etcddisk
     format: ignition
     ignition:
       containerLinuxConfig:
@@ -57,22 +74,22 @@ spec:
                 contents: |
                   [Unit]
                   After=oem-cloudinit.service
-          # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
-          storage:
-            disks:
-            - device: /dev/disk/azure/scsi1/lun0
-              partitions:
-              - number: 1
-            filesystems:
-            - name: etcd_disk
-              mount:
-                device: /dev/disk/azure/scsi1/lun0
-                format: ext4
-                label: etcd_disk
-                path: /var/lib/etcddisk
-                options:
-                - -E
-                - lazy_itable_init=1,lazy_journal_init=1
+      #    # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
+      #    storage:
+      #      disks:
+      #      - device: /dev/disk/azure/scsi1/lun0
+      #        partitions:
+      #        - number: 1
+      #      filesystems:
+      #      - name: etcd_disk
+      #        mount:
+      #          device: /dev/disk/azure/scsi1/lun0
+      #          format: ext4
+      #          label: etcd_disk
+      #          path: /var/lib/etcddisk
+      #          options:
+      #          - -E
+      #          - lazy_itable_init=1,lazy_journal_init=1
     clusterConfiguration:
       apiServer:
         certSANs:
