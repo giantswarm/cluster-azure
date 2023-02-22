@@ -53,3 +53,4 @@ providerSpecific:
     name: cluster-identity
     namespace: org-giantswarm
   location: westeurope
+  subscriptionId: PLACEHOLDER
