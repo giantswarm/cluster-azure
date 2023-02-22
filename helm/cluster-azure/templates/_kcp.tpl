@@ -42,9 +42,7 @@ spec:
       name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}
   kubeadmConfigSpec:
     # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
-    #diskSetup:
-      #filesystems: []
-      #partitions: []
+    # Don't define partitions here, they are defined in "ignition.containerLinuxConfig.additionalConfig"
     diskSetup:
       filesystems:
       - device: /dev/disk/azure/scsi1/lun0
@@ -75,6 +73,7 @@ spec:
                   [Unit]
                   After=oem-cloudinit.service
           # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
+          # Filesystems is defined in `kubeadmConfigSpec.diskSetup` because without it the `mounts` section does not generate any mount unit
           storage:
             disks:
             - device: /dev/disk/azure/scsi1/lun0
