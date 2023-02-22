@@ -11,8 +11,7 @@ connectivity:
     serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
-  sshSSOPublicKey:
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU
+  sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU
     vault-ca@vault.operations.giantswarm.io
 controlPlane:
   etcdVolumeSizeGB: 10
@@ -31,19 +30,18 @@ internal:
     hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
-    someNewKey: someNewValue
   identity:
     attachCapzControllerIdentity: false
     enablePerClusterIdentity: false
   kubernetesVersion: 1.24.8
 machineDeployments:
-  - customNodeLabels: []
-    customNodeTaints: []
-    disableHealthCheck: false
-    instanceType: Standard_D2s_v3
-    name: md00
-    replicas: 3
-    rootVolumeSizeGB: 50
+- customNodeLabels: []
+  customNodeTaints: []
+  disableHealthCheck: false
+  instanceType: Standard_D2s_v3
+  name: md00
+  replicas: 3
+  rootVolumeSizeGB: 50
 machinePools: []
 metadata:
   description: test
@@ -55,3 +53,4 @@ providerSpecific:
     name: cluster-identity
     namespace: org-giantswarm
   location: westeurope
+  subscriptionId: PLACEHOLDER
