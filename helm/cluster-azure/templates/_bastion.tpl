@@ -7,6 +7,11 @@ userAssignedIdentities:
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}
+image:
+  computeGallery:
+    gallery: {{  $.Values.internal.image.gallery }}
+    name: {{ tpl $.Values.internal.image.name $ }}
+    version: {{ $.Values.internal.image.version }}
 osDisk:
   diskSizeGB: {{ .spec.rootVolumeSizeGB }}
   managedDisk:
@@ -19,6 +24,14 @@ vmSize: {{ .spec.instanceType }}
 {{- end -}}
 
 {{- define "bastion-machine-kubeadmconfig-spec" -}}
+format: ignition
+ignition:
+  containerLinuxConfig:
+    additionalConfig: |
+      systemd:
+        units:
+        - name: kubeadm.service
+          mask: true
 joinConfiguration:
 files:
 {{- include "sshFilesBastion" $ | nindent 2 }}
