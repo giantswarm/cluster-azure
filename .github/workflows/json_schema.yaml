@@ -1,0 +1,42 @@
+name: JSON schema validation
+on:
+  pull_request: {}
+
+jobs:
+  validate:
+    name: Validate values.schema.json with schemalint
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "^1.19"
+
+      - name: Install schemalint
+        run: |
+          go install github.com/giantswarm/schemalint@latest
+
+      - name: Run schemalint
+        run: |
+          schemalint verify ./helm/cluster-azure/values.schema.json --rule-set cluster-app
+  generate:
+    name: Check that values.yaml is generated from values.schema.json with helm-values-gen
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "^1.19"
+
+      - name: Install helm-values-gen
+        run: |
+          go install github.com/giantswarm/helm-values-gen@latest
+
+      - name: Run helm-values-gen
+        run: >
+          diff --unified ./helm/cluster-azure/values.yaml <(helm-values-gen helm/cluster-azure/values.schema.json) 
+          || (echo "values.yaml is out of sync with values.schema.json. Run \`helm-values-gen helm/cluster-azure/values.schema.json -o helm/cluster-azure/values.yaml --force\` to fix this." && exit 1)

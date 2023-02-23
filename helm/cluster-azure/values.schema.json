@@ -16,10 +16,12 @@
                 "bastion": {
                     "properties": {
                         "enabled": {
+                            "default": true,
                             "title": "Enable bastion host for this cluster",
                             "type": "boolean"
                         },
                         "instanceType": {
+                            "default": "Standard_D2s_v5",
                             "title": "Bastion node instance size",
                             "type": "string"
                         }
@@ -29,12 +31,25 @@
                 },
                 "network": {
                     "properties": {
+                        "controlPlane": {
+                            "properties": {
+                                "cidr": {
+                                    "default": "10.0.0.0/20",
+                                    "title": "Subnet",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "Control plane",
+                            "type": "object"
+                        },
                         "hostCidr": {
+                            "default": "10.0.0.0/16",
                             "description": "IPv4 address range for nodes, in CIDR notation.",
                             "title": "Node subnet",
                             "type": "string"
                         },
                         "mode": {
+                            "default": "public",
                             "enum": [
                                 "public",
                                 "private"
@@ -43,20 +58,34 @@
                             "type": "string"
                         },
                         "podCidr": {
+                            "default": "192.168.0.0/16",
                             "description": "IPv4 address range for pods, in CIDR notation.",
                             "title": "Pod subnet",
                             "type": "string"
                         },
                         "serviceCidr": {
+                            "default": "172.31.0.0/16",
                             "description": "IPv4 address range for services, in CIDR notation.",
                             "title": "Service subnet",
                             "type": "string"
+                        },
+                        "workers": {
+                            "properties": {
+                                "cidr": {
+                                    "default": "10.0.16.0/20",
+                                    "title": "Subnet",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "Workers",
+                            "type": "object"
                         }
                     },
                     "title": "Network settings",
                     "type": "object"
                 },
                 "sshSSOPublicKey": {
+                    "default": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io",
                     "title": "SSH Public key for single sign-on",
                     "type": "string"
                 }
@@ -67,33 +96,40 @@
         "controlPlane": {
             "properties": {
                 "etcdVolumeSizeGB": {
+                    "default": 10,
                     "title": "Etcd volume size (GB)",
                     "type": "integer"
                 },
                 "instanceType": {
+                    "default": "Standard_D4s_v3",
                     "title": "Node VM size",
                     "type": "string"
                 },
                 "oidc": {
                     "properties": {
                         "caPem": {
+                            "default": "",
                             "description": "Identity provider's CA certificate in PEM format.",
                             "title": "Certificate authority",
                             "type": "string"
                         },
                         "clientId": {
+                            "default": "",
                             "title": "Client ID",
                             "type": "string"
                         },
                         "groupsClaim": {
+                            "default": "",
                             "title": "Groups claim",
                             "type": "string"
                         },
                         "issuerUrl": {
+                            "default": "",
                             "title": "Issuer URL",
                             "type": "string"
                         },
                         "usernameClaim": {
+                            "default": "",
                             "title": "Username claim",
                             "type": "string"
                         }
@@ -102,10 +138,12 @@
                     "type": "object"
                 },
                 "replicas": {
+                    "default": 3,
                     "title": "Number of nodes",
                     "type": "integer"
                 },
                 "rootVolumeSizeGB": {
+                    "default": 50,
                     "title": "Root volume size (GB)",
                     "type": "integer"
                 }
@@ -118,18 +156,22 @@
                 "defaults": {
                     "properties": {
                         "evictionMinimumReclaim": {
+                            "default": "imagefs.available=5%,memory.available=100Mi,nodefs.available=5%",
                             "title": "Default settings for eviction minimum reclaim",
                             "type": "string"
                         },
                         "hardEvictionThresholds": {
+                            "default": "memory.available\u003c200Mi,nodefs.available\u003c10%,nodefs.inodesFree\u003c3%,imagefs.available\u003c10%,pid.available\u003c20%",
                             "title": "Default settings for hard eviction thresholds",
                             "type": "string"
                         },
                         "softEvictionGracePeriod": {
+                            "default": "memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m",
                             "title": "Default settings for soft eviction grace period",
                             "type": "string"
                         },
                         "softEvictionThresholds": {
+                            "default": "memory.available\u003c500Mi,nodefs.available\u003c15%,nodefs.inodesFree\u003c5%,imagefs.available\u003c15%,pid.available\u003c30%",
                             "title": "Default settings for soft eviction thresholds",
                             "type": "string"
                         }
@@ -140,10 +182,12 @@
                 "identity": {
                     "properties": {
                         "attachCapzControllerIdentity": {
+                            "default": false,
                             "title": "Attach controller identity",
                             "type": "boolean"
                         },
                         "enablePerClusterIdentity": {
+                            "default": false,
                             "title": "Enable identity per cluster",
                             "type": "boolean"
                         }
@@ -152,6 +196,7 @@
                     "type": "object"
                 },
                 "kubernetesVersion": {
+                    "default": "1.24.8",
                     "title": "Kubernetes version",
                     "type": "string"
                 }
@@ -160,6 +205,17 @@
             "type": "object"
         },
         "machineDeployments": {
+            "default": [
+                {
+                    "customNodeLabels": [],
+                    "customNodeTaints": [],
+                    "disableHealthCheck": false,
+                    "instanceType": "Standard_D2s_v3",
+                    "name": "md00",
+                    "replicas": 3,
+                    "rootVolumeSizeGB": 50
+                }
+            ],
             "items": {
                 "properties": {
                     "customNodeLabels": {
@@ -233,6 +289,7 @@
         },
         "machinePools": {
             "$comment": "/machineDeployments is used instead.",
+            "default": [],
             "deprecated": true,
             "items": {
                 "properties": {
@@ -316,16 +373,19 @@
         "metadata": {
             "properties": {
                 "description": {
+                    "default": "test",
                     "description": "User-friendly description of the cluster's purpose.",
                     "title": "Cluster description",
                     "type": "string"
                 },
                 "name": {
+                    "default": "",
                     "description": "Unique identifier, cannot be changed after creation.",
                     "title": "Cluster name",
                     "type": "string"
                 },
                 "organization": {
+                    "default": "",
                     "title": "Organization",
                     "type": "string"
                 },
@@ -355,10 +415,12 @@
                     "description": "AzureClusterIdentity resource to use for this cluster.",
                     "properties": {
                         "name": {
+                            "default": "cluster-identity",
                             "title": "Name",
                             "type": "string"
                         },
                         "namespace": {
+                            "default": "org-giantswarm",
                             "title": "Namespace",
                             "type": "string"
                         }
@@ -367,10 +429,12 @@
                     "type": "object"
                 },
                 "location": {
+                    "default": "westeurope",
                     "title": "Location",
                     "type": "string"
                 },
                 "subscriptionId": {
+                    "default": "PLACEHOLDER",
                     "title": "Subscription ID",
                     "type": "string"
                 }

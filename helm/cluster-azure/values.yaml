@@ -1,86 +1,55 @@
-metadata:
-  # Cluster name. Defaults to chart release name
-  name: ""
-
-  # Cluster description used in metadata.
-  description: "test"
-
-  # Organization in which to create the cluster.
-  organization: ""
-
-providerSpecific:
-  location: "westeurope"
-  # This value must be updated to the right value for the cluster to be installed
-  subscriptionId: PLACEHOLDER
-  azureClusterIdentity:
-    name: "cluster-identity"
-    namespace: "org-giantswarm"
-
 connectivity:
   bastion:
     enabled: true
     instanceType: Standard_D2s_v5
   network:
-    serviceCidr: "172.31.0.0/16"
-    podCidr: "192.168.0.0/16"
-    hostCidr: "10.0.0.0/16"
     controlPlane:
       cidr: 10.0.0.0/20
+    hostCidr: 10.0.0.0/16
+    mode: public
+    podCidr: 192.168.0.0/16
+    serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
-    mode: public
-  sshSSOPublicKey: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
-
+  sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
-  instanceType: Standard_D4s_v3
-  # Number of replicas in control plane. Should be an odd number.
-  replicas: 3
-  rootVolumeSizeGB: 50
   etcdVolumeSizeGB: 10
-
+  instanceType: Standard_D4s_v3
   oidc:
-    issuerUrl: ""
     caPem: ""
     clientId: ""
-    usernameClaim: ""
     groupsClaim: ""
-
-machinePools: []
-#  - name: def00
-#    location: "westeurope"
-#    instanceType: Standard_D2s_v3
-#    minSize: 3
-#    maxSize: 3
-#    rootVolumeSizeGB: 50
-#    customNodeLabels: []
-#    customNodeTaints: []
-#    # - key: ""
-#    #   value: ""
-#    #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
-
-machineDeployments:
-  - name: md00
-    instanceType: Standard_D2s_v3
-    replicas: 3
-    rootVolumeSizeGB: 50
-    disableHealthCheck: false
-    customNodeLabels: []
-    customNodeTaints: []
-    # - key: ""
-    #   value: ""
-    #   effect: "" # Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
-
+    issuerUrl: ""
+    usernameClaim: ""
+  replicas: 3
+  rootVolumeSizeGB: 50
 internal:
   defaults:
-    softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
-    softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
-    hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
+    hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
+    softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
+    softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
   identity:
-    # Only required until we have AZWI for CAPZ and only required on MC cluster
     attachCapzControllerIdentity: false
-
-    # TODO: This is temporary so we can deploy clusters without dedicated UA Identity until the operator for WC clusters are ready
-    # https://github.com/giantswarm/giantswarm/issues/25039
     enablePerClusterIdentity: false
   kubernetesVersion: 1.24.8
+machineDeployments:
+  - customNodeLabels: []
+    customNodeTaints: []
+    disableHealthCheck: false
+    instanceType: Standard_D2s_v3
+    name: md00
+    replicas: 3
+    rootVolumeSizeGB: 50
+machinePools: []
+metadata:
+  description: test
+  name: ""
+  organization: ""
+  servicePriority: highest
+providerSpecific:
+  azureClusterIdentity:
+    name: cluster-identity
+    namespace: org-giantswarm
+  location: westeurope
+  subscriptionId: PLACEHOLDER
