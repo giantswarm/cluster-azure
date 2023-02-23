@@ -1,3 +1,9 @@
+.PHONY: schema-normalize
+schema-normalize:
+	go install github.com/giantswarm/schemalint@latest
+	schemalint verify ./helm/cluster-azure/values.schema.json --rule-set=cluster-app
+
+
 .PHONY: schema-validate
 schema-validate:
 	go install github.com/giantswarm/schemalint@latest
