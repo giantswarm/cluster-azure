@@ -11,8 +11,7 @@ connectivity:
     serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
-  sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU
-    vault-ca@vault.operations.giantswarm.io
+  sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
   etcdVolumeSizeGB: 10
   instanceType: Standard_D4s_v3
@@ -35,13 +34,13 @@ internal:
     enablePerClusterIdentity: false
   kubernetesVersion: 1.24.8
 machineDeployments:
-- customNodeLabels: []
-  customNodeTaints: []
-  disableHealthCheck: false
-  instanceType: Standard_D2s_v3
-  name: md00
-  replicas: 3
-  rootVolumeSizeGB: 50
+  - customNodeLabels: []
+    customNodeTaints: []
+    disableHealthCheck: false
+    instanceType: Standard_D2s_v3
+    name: md00
+    replicas: 3
+    rootVolumeSizeGB: 50
 machinePools: []
 metadata:
   description: test
