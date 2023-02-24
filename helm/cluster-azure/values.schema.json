@@ -22,11 +22,11 @@
                         },
                         "instanceType": {
                             "default": "Standard_D2s_v5",
-                            "title": "Bastion node instance size",
+                            "title": "VM size",
                             "type": "string"
                         }
                     },
-                    "title": "Bastion settings",
+                    "title": "Bastion host",
                     "type": "object"
                 },
                 "network": {
@@ -81,7 +81,7 @@
                             "type": "object"
                         }
                     },
-                    "title": "Network settings",
+                    "title": "Network",
                     "type": "object"
                 },
                 "sshSSOPublicKey": {
@@ -134,7 +134,7 @@
                             "type": "string"
                         }
                     },
-                    "title": "OIDC settings",
+                    "title": "OIDC authentication",
                     "type": "object"
                 },
                 "replicas": {
