@@ -4,7 +4,7 @@
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
         "baseDomain": {
-            "title": "The base dns domain",
+            "title": "Base DNS domain",
             "type": "string"
         },
         "cluster-shared": {
@@ -22,11 +22,12 @@
                         },
                         "instanceType": {
                             "default": "Standard_D2s_v5",
-                            "title": "Bastion node instance size",
+                            "description": "Type of virtual machine to use for the bastion host.",
+                            "title": "VM size",
                             "type": "string"
                         }
                     },
-                    "title": "Bastion settings",
+                    "title": "Bastion host",
                     "type": "object"
                 },
                 "network": {
@@ -81,7 +82,7 @@
                             "type": "object"
                         }
                     },
-                    "title": "Network settings",
+                    "title": "Network",
                     "type": "object"
                 },
                 "sshSSOPublicKey": {
@@ -90,7 +91,7 @@
                     "type": "string"
                 }
             },
-            "title": "Connectivity settings",
+            "title": "Connectivity",
             "type": "object"
         },
         "controlPlane": {
@@ -134,7 +135,7 @@
                             "type": "string"
                         }
                     },
-                    "title": "OIDC settings",
+                    "title": "OIDC authentication",
                     "type": "object"
                 },
                 "replicas": {
@@ -148,7 +149,7 @@
                     "type": "integer"
                 }
             },
-            "title": "Control plane settings",
+            "title": "Control plane",
             "type": "object"
         },
         "internal": {
@@ -367,7 +368,7 @@
             "type": "array"
         },
         "managementCluster": {
-            "title": "The capi MC managing this cluster",
+            "title": "Management cluster name",
             "type": "string"
         },
         "metadata": {
@@ -406,7 +407,7 @@
             "type": "object"
         },
         "provider": {
-            "title": "The capi Provider for this cluster",
+            "title": "Cluster API provider name",
             "type": "string"
         },
         "providerSpecific": {
