@@ -23,6 +23,7 @@
                         "instanceType": {
                             "default": "Standard_D2s_v5",
                             "title": "VM size",
+                            "description": "Type of virtual machine to use for the bastion host."
                             "type": "string"
                         }
                     },
