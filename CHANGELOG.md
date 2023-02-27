@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Breaking change** to values schema - make sure to update your values before updating to this releaseValues schema:
+  - Rename /machineDeployments to /nodePools
+  - Remove /machinePools from schema
 - Values schema: Use draft 2020-12 and update default value encoding based on latest `schemalint normalize` output.
 
 ## [0.0.11] - 2023-02-15

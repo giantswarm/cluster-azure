@@ -33,7 +33,9 @@ internal:
     attachCapzControllerIdentity: false
     enablePerClusterIdentity: false
   kubernetesVersion: 1.24.8
-machineDeployments:
+metadata:
+  servicePriority: highest
+nodePools:
   - customNodeLabels: []
     customNodeTaints: []
     disableHealthCheck: false
@@ -41,12 +43,6 @@ machineDeployments:
     name: md00
     replicas: 3
     rootVolumeSizeGB: 50
-machinePools: []
-metadata:
-  description: test
-  name: ""
-  organization: ""
-  servicePriority: highest
 providerSpecific:
   azureClusterIdentity:
     name: cluster-identity

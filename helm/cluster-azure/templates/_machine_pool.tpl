@@ -1,6 +1,7 @@
+{{/* This code is currently disabled and never render to anything , we need it to test migration from MD to MP */}}
 {{- define "machine-pools" -}}
-{{- range $machinePool := .Values.machinePools }}
-{{ $data := dict "spec" $machinePool "type" "machinePool" "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
+{{- range $nodePool := (.Values.machinePools | default list ) }}
+{{ $data := dict "spec" ( merge $nodePool ( dict  "type" "machinePool" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:
@@ -38,7 +39,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   {{- include "machine-identity" $data | nindent 2}}
-  location: {{ $data.spec.location }}
+  location: {{ $.Values.providerSpecific.location }}
   strategy:
     rollingUpdate:
       deletePolicy: Oldest
