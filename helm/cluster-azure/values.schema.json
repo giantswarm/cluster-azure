@@ -316,11 +316,6 @@
                     "rootVolumeSizeGB": {
                         "title": "Root volume size (GB)",
                         "type": "integer"
-                    },
-                    "type": {
-                        "const": "machineDeployment",
-                        "title": "Node pool type",
-                        "type": "string"
                     }
                 },
                 "title": "Node pool",
