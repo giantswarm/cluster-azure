@@ -1,5 +1,5 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "additionalProperties": false,
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
@@ -162,7 +162,7 @@
                             "type": "string"
                         },
                         "hardEvictionThresholds": {
-                            "default": "memory.available\u003c200Mi,nodefs.available\u003c10%,nodefs.inodesFree\u003c3%,imagefs.available\u003c10%,pid.available\u003c20%",
+                            "default": "memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%",
                             "title": "Default settings for hard eviction thresholds",
                             "type": "string"
                         },
@@ -172,7 +172,7 @@
                             "type": "string"
                         },
                         "softEvictionThresholds": {
-                            "default": "memory.available\u003c500Mi,nodefs.available\u003c15%,nodefs.inodesFree\u003c5%,imagefs.available\u003c15%,pid.available\u003c30%",
+                            "default": "memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%",
                             "title": "Default settings for soft eviction thresholds",
                             "type": "string"
                         }
