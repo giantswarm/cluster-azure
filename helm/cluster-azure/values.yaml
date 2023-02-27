@@ -83,7 +83,7 @@ internal:
     plan:
       publisher: kinvolk
       offer: flatcar-container-linux-free
-      sku: stable
+      sku: stable-gen2
   identity:
     # Only required until we have AZWI for CAPZ and only required on MC cluster
     attachCapzControllerIdentity: false
