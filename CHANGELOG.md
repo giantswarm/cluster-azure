@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Generate SAN entries for `api.<clusterName>.<baseDomain>` (e.g. `api.glippy.azuretest.gigantic.io`)
+
 ## [0.0.12] - 2023-02-27
 
 ### Changed

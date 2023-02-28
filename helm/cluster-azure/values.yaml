@@ -1,3 +1,4 @@
+baseDomain: azuretest.gigantic.io
 connectivity:
   bastion:
     enabled: true
