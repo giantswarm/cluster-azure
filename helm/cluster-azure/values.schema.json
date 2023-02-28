@@ -4,6 +4,7 @@
     "description": "Configuration of an Azure cluster using Cluster API",
     "properties": {
         "baseDomain": {
+            "default": "azuretest.gigantic.io",
             "title": "Base DNS domain",
             "type": "string"
         },
