@@ -19,10 +19,6 @@ image:
     gallery: {{  $.Values.internal.image.gallery }}
     name: {{ tpl $.Values.internal.image.name $ }}
     version: {{ $.Values.internal.image.version }}
-    plan:
-      publisher: {{ $.Values.internal.image.plan.publisher }}
-      offer: {{ $.Values.internal.image.plan.offer }}
-      sku: {{ $.Values.internal.image.plan.sku }}
 osDisk:
   diskSizeGB: {{ .spec.rootVolumeSizeGB }}
   managedDisk:
