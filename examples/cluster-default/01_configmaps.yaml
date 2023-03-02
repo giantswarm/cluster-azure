@@ -16,7 +16,7 @@ data:
       azureClusterIdentity:
         name: "cluster-identity-static-sp"
 
-    machineDeployments:
+    nodePools:
     - name: md00
       instanceType: Standard_D2s_v5
       replicas: 3
