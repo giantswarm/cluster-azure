@@ -21,7 +21,9 @@ spec:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
       - name: node-subnet
         natGateway:
-          name: node-natgateway
+          name: {{ include "resource.default.name" $ }}-node-natgateway
+          NatGatewayIP:
+            name: {{ include "resource.default.name" $ }}-node-natgateway-ip
         role: node
         cidrBlocks:
         - {{ .Values.connectivity.network.workers.cidr }}
@@ -29,6 +31,25 @@ spec:
       name: {{ include "resource.default.name" $ }}-vnet
       cidrBlocks:
       - {{ .Values.connectivity.network.hostCidr }}
+      {{- if .Values.providerSpecific.network.peerings }}
+      peerings: {{ toYaml .Values.providerSpecific.network.peerings | nindent 6 }}
+      {{- end }}
+    {{- if (eq .Values.connectivity.network.mode "private") }}
+    privateDNSZoneName: {{ .Values.providerSpecific.network.privateDNSZoneName }}
+    apiServerLB:
+      name: {{ include "resource.default.name" $ }}-api-internal-lb
+      type: Internal
+      frontendIPs:
+      - {{ .Values.connectivity.network.controlPlane.apiServerLbIp }}
+    controlPlaneOutboundLB:
+      name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb
+      type: Public
+      frontendIPsCount: 1
+    nodeOutboundLB:
+      name: {{ include "resource.default.name" $ }}-node-outbound-lb
+      type: Public
+      frontendIPsCount: 1
+    {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.providerSpecific.subscriptionId }}
 {{ end }}

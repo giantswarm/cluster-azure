@@ -154,6 +154,17 @@ List of admission plugins to enable based on apiVersion
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
+{{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
+- if [ -f /tmp/kubeadm.yaml ] || [ -f /run/kubeadm/kubeadm.yaml ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}
+  apiserver' >> /etc/hosts; fi
+{{- end -}}
+
+{{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
+- if [ -f /tmp/kubeadm-join-config.yaml ] || [ -f /run/kubeadm/kubeadm-join-config.yaml
+  ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}' >> /etc/hosts;
+  fi
+{{- end -}}
+
 {{- define "prepare-varLibKubelet-Dir" -}}
 - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
 {{- end -}}

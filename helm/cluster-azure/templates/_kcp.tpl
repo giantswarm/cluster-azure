@@ -233,7 +233,15 @@ spec:
     {{- include "prepare-varLibKubelet-Dir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
     {{- include "override-hostname-in-kubeadm-configuration" . | nindent 6 }}
+    {{- if (eq .Values.connectivity.network.mode "private") }}
+    {{- include "kubeadm.controlPlane.privateNetwork.preCommands" . | nindent 6 }}
+    {{- end }}
+    {{- if (eq .Values.connectivity.network.mode "private") }}
+    postKubeadmCommands:
+    {{- include "kubeadm.controlPlane.privateNetwork.postCommands" . | nindent 6 }}
+    {{- else }}
     postKubeadmCommands: []
+    {{ end }}
     users:
     {{- include "sshUsers" . | nindent 6 }}
   replicas: {{ .Values.controlPlane.replicas | default "3" }}
