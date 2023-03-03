@@ -39,6 +39,13 @@
                                     "default": "10.0.0.0/20",
                                     "title": "Subnet",
                                     "type": "string"
+                                },
+                                "apiServerLbIp": {
+                                    "default": "10.0.0.2",
+                                    "description": "IP address for API server internal load balancer.",
+                                    "format": "ipv4",
+                                    "title": "API Server IP address",
+                                    "type": "string"
                                 }
                             },
                             "title": "Control plane",
@@ -398,6 +405,44 @@
                     "default": "PLACEHOLDER",
                     "title": "Subscription ID",
                     "type": "string"
+                },
+                "network": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "peerings": {
+                            "default": [],
+                            "description": "Specifying VNets (their resource groups and names) to which the peering is established.",
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "resourceGroup": {
+                                        "description": "Resource group for the remote VNet to which the peering is established.",
+                                        "pattern": "^[-\\w\\._\\(\\)]+$",
+                                        "minLength":  1,
+                                        "maxLength": 90,
+                                        "title": "Resource group name",
+                                        "type": "string"
+                                    },
+                                    "remoteVnetName": {
+                                        "description": "Name of the remote VNet to which the peering is established.",
+                                        "pattern": "^[-\\w\\._]+$",
+                                        "minLength":  2,
+                                        "maxLength": 64,
+                                        "title": "VNet name",
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "VNet peering",
+                                "type": "object",
+                                "uniqueItems": true
+                            },
+                            "title": "VNet peerings",
+                            "type": "array"
+                        }
+                    },
+                    "description": "Azure VNet peering and other Azure-specific network settings.",
+                    "title": "Azure network settings",
+                    "type": "object"
                 }
             },
             "title": "Azure settings",
