@@ -40,7 +40,8 @@ spec:
       name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal
       frontendIPs:
-      - {{ .Values.connectivity.network.controlPlane.apiServerLbIp }}
+      - name: {{ include "resource.default.name" $ }}-api-internal-lb-ip
+        privateIP: {{ .Values.connectivity.network.controlPlane.apiServerLbIp }}
     controlPlaneOutboundLB:
       name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb
       type: Public
