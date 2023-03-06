@@ -1,6 +1,3 @@
-# Always report changes to the audit subsystem itself.
--a exclude,never -F msgtype=CONFIG_CHANGE
-
 # Overridden by Giant Swarm.
 -a exit,always -F arch=b64 -S execve -k auditing
 -a exit,always -F arch=b32 -S execve -k auditing
