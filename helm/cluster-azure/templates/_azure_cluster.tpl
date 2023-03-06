@@ -35,7 +35,7 @@ spec:
       peerings: {{ toYaml .Values.providerSpecific.network.peerings | nindent 6 }}
       {{- end }}
     {{- if (eq .Values.connectivity.network.mode "private") }}
-    privateDNSZoneName: {{ .Values.providerSpecific.network.privateDNSZoneName }}
+    privateDNSZoneName: {{ .Values.internal.privateDNSZoneName }}
     apiServerLB:
       name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal
