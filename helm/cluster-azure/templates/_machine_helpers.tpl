@@ -68,6 +68,7 @@ files:
     permissions: "0644"
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
 {{- include "sshFiles" $ | nindent 2 }}
+{{- include "commonSysctlConfigurations" $ | nindent 2 }}
 preKubeadmCommands:
 {{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}

@@ -123,6 +123,16 @@ List of admission plugins to enable based on apiVersion
   content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
 {{- end -}}
 
+# Custom Sysctl settings
+# https://github.com/giantswarm/roadmap/issues/1659#issuecomment-1452359468
+{{- define "commonSysctlConfigurations" -}}
+- path: /etc/sysctl.d/10_giantswarm_tuning.conf
+  permissions: "0444"
+  encoding: base64
+  content: {{ $.Files.Get "files/etc/sysctl.d/tuning.conf" | b64enc }}
+{{- end -}}
+
+
 {{- define "kubeletReservationPreCommands" -}}
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
@@ -132,7 +142,6 @@ List of admission plugins to enable based on apiVersion
 {{- end -}}
 
 # the replacement must match the value from `joinConfiguration.nodeConfiguration.name`
-# When migrated all to flatcar can use a placeholder string rather than the template
 {{- define "override-hostname-in-kubeadm-configuration" -}}
 - sed -i "s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
 {{- end -}}
