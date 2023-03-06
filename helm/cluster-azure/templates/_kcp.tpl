@@ -180,6 +180,7 @@ spec:
     {{- include "sshFiles" . | nindent 4 }}
     {{- include "kubeletReservationFiles" $ | nindent 4 }}
     {{- include "commonSysctlConfigurations" $ | nindent 4 }}
+    {{- include "auditRules99Default" $ | nindent 4 }}
     - contentFrom:
         secret:
           key: control-plane-azure.json

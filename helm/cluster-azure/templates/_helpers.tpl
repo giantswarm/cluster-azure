@@ -132,6 +132,12 @@ List of admission plugins to enable based on apiVersion
   content: {{ $.Files.Get "files/etc/sysctl.d/tuning.conf" | b64enc }}
 {{- end -}}
 
+{{- define "auditRules99Default" -}}
+- path: /etc/audit/rules.d/99-default.rules
+  permissions: "0444"
+  encoding: base64
+  content: {{ $.Files.Get "files/etc/audit/rules.d/99-default.rules" | b64enc }}
+{{- end -}}
 
 {{- define "kubeletReservationPreCommands" -}}
 - /opt/bin/calculate_kubelet_reservations.sh
