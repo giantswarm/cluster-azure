@@ -211,6 +211,7 @@ spec:
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
+          protect-kernel-defaults: "true"
         name: '@@HOSTNAME@@'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:
@@ -227,6 +228,7 @@ spec:
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
+          protect-kernel-defaults: "true"
         name: '@@HOSTNAME@@'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:
