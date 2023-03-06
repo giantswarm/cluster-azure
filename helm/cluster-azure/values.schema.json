@@ -197,8 +197,29 @@
                     "title": "Identity",
                     "type": "object"
                 },
+                "image": {
+                    "properties": {
+                        "gallery": {
+                            "default": "gsCAPITest1-5cb24dcf-a2d0-4aba-820f-b52ca78f96e6",
+                            "title": "Name of the Community gallery hosting the image",
+                            "type": "string"
+                        },
+                        "name": {
+                            "default": "{{ printf \"capi-flatcar-stable-%s-gen2\" .Values.internal.kubernetesVersion }}",
+                            "title": "Name of the image definition , this is parsed as a `gotpl`",
+                            "type": "string"
+                        },
+                        "version": {
+                            "default": "latest",
+                            "title": "Version of the image",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Node Image",
+                    "type": "object"
+                },
                 "kubernetesVersion": {
-                    "default": "1.24.8",
+                    "default": "1.24.11",
                     "title": "Kubernetes version",
                     "type": "string"
                 }

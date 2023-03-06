@@ -30,14 +30,14 @@ internal:
     hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
+  identity:
+    attachCapzControllerIdentity: false
+    enablePerClusterIdentity: false
   image:
     gallery: gsCAPITest1-5cb24dcf-a2d0-4aba-820f-b52ca78f96e6
     name: '{{ printf "capi-flatcar-stable-%s-gen2" .Values.internal.kubernetesVersion }}'
     version: latest
-  identity:
-    attachCapzControllerIdentity: false
-    enablePerClusterIdentity: false
-  kubernetesVersion: 1.24.10
+  kubernetesVersion: 1.24.11
 metadata:
   servicePriority: highest
 nodePools:
