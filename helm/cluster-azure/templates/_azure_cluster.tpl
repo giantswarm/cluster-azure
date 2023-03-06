@@ -43,10 +43,8 @@ spec:
       - name: {{ include "resource.default.name" $ }}-api-internal-lb-ip
         privateIP: {{ .Values.connectivity.network.controlPlane.apiServerLbIp }}
     controlPlaneOutboundLB:
-      name: {{ include "resource.default.name" $ }}-control-plane-outbound-lb
       frontendIPsCount: 1
     nodeOutboundLB:
-      name: {{ include "resource.default.name" $ }}-node-outbound-lb
       frontendIPsCount: 1
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
