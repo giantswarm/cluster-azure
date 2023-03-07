@@ -212,7 +212,7 @@
                         },
                         "version": {
                             "default": "latest",
-                            "title": "Version of the image",
+                            "title": "Image version",
                             "type": "string"
                         }
                     },
