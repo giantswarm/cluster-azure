@@ -1,6 +1,9 @@
 name: JSON schema validation
 on:
-  push: {}
+  pull_request: 
+    paths:
+      - 'helm/**/values.yaml'
+      - 'helm/**/values.schema.json'
 
 jobs:
   validate:
