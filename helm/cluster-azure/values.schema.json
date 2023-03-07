@@ -159,7 +159,7 @@
                     "properties": {
                         "evictionMinimumReclaim": {
                             "default": "imagefs.available=5%,memory.available=100Mi,nodefs.available=5%",
-                            "title": "Default settings for eviction minimum reclaim",
+                            "title": "test",
                             "type": "string"
                         },
                         "hardEvictionThresholds": {
