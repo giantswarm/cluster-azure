@@ -34,7 +34,7 @@ internal:
     attachCapzControllerIdentity: false
     enablePerClusterIdentity: false
   image:
-    gallery: gsCAPITest1-5cb24dcf-a2d0-4aba-820f-b52ca78f96e6
+    gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
     name: '{{ printf "capi-flatcar-stable-%s-gen2" .Values.internal.kubernetesVersion }}'
     version: latest
   kubernetesVersion: 1.24.11
