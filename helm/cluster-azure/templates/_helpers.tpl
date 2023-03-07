@@ -45,6 +45,17 @@ room for such suffix.
 {{- .Values.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
+{{/*
+The default name for our images in the Community Gallery is  "capi-flatcar-stable-<KUBERNETES_VERSION>-gen2",
+use it when no value is passed in
+*/}}
+{{- define "flatcarImageName" -}}
+{{- if empty .Values.internal.image.name -}}
+{{ printf "capi-flatcar-stable-%s-gen2" .Values.internal.kubernetesVersion }}
+{{- else -}}
+{{ .Values.internal.image.name }}
+{{- end -}}
+{{- end -}}
 
 {{/*
 List of admission plugins to enable based on apiVersion

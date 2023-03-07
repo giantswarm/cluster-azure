@@ -17,7 +17,7 @@ userAssignedIdentities:
 image:
   computeGallery:
     gallery: {{  $.Values.internal.image.gallery }}
-    name: {{ tpl $.Values.internal.image.name $ }}
+    name: {{ include "flatcarImageName" $ }}
     version: {{ $.Values.internal.image.version }}
 osDisk:
   diskSizeGB: {{ .spec.rootVolumeSizeGB }}

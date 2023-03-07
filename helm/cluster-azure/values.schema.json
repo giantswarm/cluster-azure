@@ -206,8 +206,9 @@
                             "type": "string"
                         },
                         "name": {
-                            "default": "{{ printf \"capi-flatcar-stable-%s-gen2\" .Values.internal.kubernetesVersion }}",
-                            "title": "Name of the image definition this is parsed as a `gotpl`",
+                            "default": "",
+                            "description": "Name of the image definition in the Gallery",
+                            "title": "Image Definition",
                             "type": "string"
                         },
                         "version": {
