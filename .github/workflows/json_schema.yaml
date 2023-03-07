@@ -50,7 +50,7 @@ jobs:
           go install github.com/giantswarm/helm-values-gen@latest
 
       - name: Run helm-values-gen
-        run: >
+        run: |
           HELM_DIR=$(git diff --name-only origin/${GITHUB_BASE_REF} ${GITHUB_SHA} \
            | grep 'helm/[-a-z].*\/' | head -1 | awk -F '/' '{print $1"/"$2}')
           VALUES_SCHEMA=${HELM_DIR}/values.schema.json
