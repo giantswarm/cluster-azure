@@ -50,3 +50,4 @@ providerSpecific:
     namespace: org-giantswarm
   location: westeurope
   subscriptionId: PLACEHOLDER
+  test: test
