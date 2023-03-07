@@ -201,7 +201,8 @@
                     "properties": {
                         "gallery": {
                             "default": "gsCAPITest1-5cb24dcf-a2d0-4aba-820f-b52ca78f96e6",
-                            "title": "Name of the Community gallery hosting the image",
+                            "description": "Name of the community gallery hosting the image",
+                            "title": "Gallery",
                             "type": "string"
                         },
                         "name": {
