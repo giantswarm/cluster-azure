@@ -212,7 +212,7 @@
                             "type": "string"
                         },
                         "version": {
-                            "default": "latest",
+                            "default": "3374.2.4",
                             "title": "Image version",
                             "type": "string"
                         }
