@@ -45,6 +45,17 @@ room for such suffix.
 {{- .Values.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
+{{/*
+The default name for our images in the Community Gallery is  "capi-flatcar-stable-<KUBERNETES_VERSION>-gen2",
+use it when no value is passed in
+*/}}
+{{- define "flatcarImageName" -}}
+{{- if empty .Values.internal.image.name -}}
+{{ printf "capi-flatcar-stable-%s-gen2" .Values.internal.kubernetesVersion }}
+{{- else -}}
+{{ .Values.internal.image.name }}
+{{- end -}}
+{{- end -}}
 
 {{/*
 List of admission plugins to enable based on apiVersion
@@ -123,12 +134,33 @@ List of admission plugins to enable based on apiVersion
   content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
 {{- end -}}
 
+# Custom Sysctl settings
+# https://github.com/giantswarm/roadmap/issues/1659#issuecomment-1452359468
+{{- define "commonSysctlConfigurations" -}}
+- path: /etc/sysctl.d/10_giantswarm_tuning.conf
+  permissions: "0444"
+  encoding: base64
+  content: {{ $.Files.Get "files/etc/sysctl.d/tuning.conf" | b64enc }}
+{{- end -}}
+
+{{- define "auditRules99Default" -}}
+- path: /etc/audit/rules.d/99-default.rules
+  permissions: "0444"
+  encoding: base64
+  content: {{ $.Files.Get "files/etc/audit/rules.d/99-default.rules" | b64enc }}
+{{- end -}}
+
 {{- define "kubeletReservationPreCommands" -}}
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
 {{- define "prepare-varLibKubelet-Dir" -}}
 - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
+{{- end -}}
+
+# the replacement must match the value from `joinConfiguration.nodeConfiguration.name`
+{{- define "override-hostname-in-kubeadm-configuration" -}}
+- sed -i "s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
 {{- end -}}
 
 {{/*

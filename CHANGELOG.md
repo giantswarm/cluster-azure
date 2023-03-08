@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Switch Cluster Images from Ubuntu to Flatcar
+- Port hardening and tuning settings from Vintage to CAPZ Flatcar
+- Fix `schema-normalize` Make target to actually do the normalize
+
 ## [0.0.13] - 2023-02-28
 
 ### Added

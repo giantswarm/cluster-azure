@@ -7,6 +7,11 @@ userAssignedIdentities:
   - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
   {{- end }}
 {{ end -}}
+image:
+  computeGallery:
+    gallery: {{  $.Values.internal.image.gallery }}
+    name: {{ include "flatcarImageName" $ }}
+    version: {{ $.Values.internal.image.version }}
 dataDisks:
   - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
     lun: 0
@@ -36,6 +41,54 @@ spec:
       kind: AzureMachineTemplate
       name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) .) }}
   kubeadmConfigSpec:
+    # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
+    # Don't define partitions here, they are defined in "ignition.containerLinuxConfig.additionalConfig"
+    diskSetup:
+      filesystems:
+      - device: /dev/disk/azure/scsi1/lun0
+        extraOpts:
+        - -E
+        - lazy_itable_init=1,lazy_journal_init=1
+        filesystem: ext4
+        label: etcd_disk
+        overwrite: false
+      #partitions:
+      #- device: /dev/disk/azure/scsi1/lun0
+      #  layout: true
+      #  tableType: gpt
+      #  overwrite: false
+    mounts:
+    - - etcd_disk
+      - /var/lib/etcddisk
+    format: ignition
+    ignition:
+      containerLinuxConfig:
+        additionalConfig: |
+          systemd:
+            units:
+            - name: kubeadm.service
+              dropins:
+              - name: 10-flatcar.conf
+                contents: |
+                  [Unit]
+                  After=oem-cloudinit.service
+          # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
+          # Filesystems is defined in `kubeadmConfigSpec.diskSetup` because without it the `mounts` section does not generate any mount unit
+          storage:
+            disks:
+            - device: /dev/disk/azure/scsi1/lun0
+              partitions:
+              - number: 1
+            #filesystems:
+            #- name: etcd_disk
+            #  mount:
+            #    device: /dev/disk/azure/scsi1/lun0
+            #    format: ext4
+            #    label: etcd_disk
+            #    path: /var/lib/etcddisk
+            #    options:
+            #    - -E
+            #    - lazy_itable_init=1,lazy_journal_init=1
     clusterConfiguration:
       apiServer:
         certSANs:
@@ -123,27 +176,12 @@ spec:
             quota-backend-bytes: "8589934592"
       networking:
         serviceSubnet: {{ .Values.connectivity.network.serviceCidr }}
-    diskSetup:
-      filesystems:
-        - device: /dev/disk/azure/scsi1/lun0
-          extraOpts:
-            - -E
-            - lazy_itable_init=1,lazy_journal_init=1
-          filesystem: ext4
-          label: etcd_disk
-        - device: ephemeral0.1
-          filesystem: ext4
-          label: ephemeral0
-          replaceFS: ntfs
-      partitions:
-        - device: /dev/disk/azure/scsi1/lun0
-          layout: true
-          overwrite: false
-          tableType: gpt
     files:
     {{- include "oidcFiles" . | nindent 4 }}
     {{- include "sshFiles" . | nindent 4 }}
     {{- include "kubeletReservationFiles" $ | nindent 4 }}
+    {{- include "commonSysctlConfigurations" $ | nindent 4 }}
+    {{- include "auditRules99Default" $ | nindent 4 }}
     - contentFrom:
         secret:
           key: control-plane-azure.json
@@ -174,7 +212,8 @@ spec:
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
-        name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+          protect-kernel-defaults: "true"
+        name: '@@HOSTNAME@@'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:
         {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
@@ -190,17 +229,16 @@ spec:
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
           eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
-        name: '{{ `{{ ds.meta_data.local_hostname }}` }}'
+          protect-kernel-defaults: "true"
+        name: '@@HOSTNAME@@'
         {{- if .Values.controlPlane.customNodeTaints }}
         taints:
         {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
         {{- end }}
-    mounts:
-      - - LABEL=etcd_disk
-        - /var/lib/etcddisk
     preKubeadmCommands:
     {{- include "prepare-varLibKubelet-Dir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
+    {{- include "override-hostname-in-kubeadm-configuration" . | nindent 6 }}
     postKubeadmCommands: []
     users:
     {{- include "sshUsers" . | nindent 6 }}

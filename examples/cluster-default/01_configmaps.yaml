@@ -6,9 +6,6 @@ data:
       description: "cluster01 test cluster"
       organization: "multi-project"
 
-    internal:
-      kubernetesVersion: 1.24.10
-
     providerSpecific:
       location: "westeurope"
       #This is the GHOST subscription

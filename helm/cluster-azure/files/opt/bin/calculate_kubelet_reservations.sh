@@ -73,8 +73,7 @@ get_memory_to_reserve() {
     memory_to_reserve_in_kbytes=$(($memory_to_reserve_in_kbytes + $(get_resource_to_reserve_in_range "$total_memory_on_instance_in_bytes" "$start_range" "$end_range" "$percentage_to_reserve_for_range")))
   done
   # Output in Mi
-  echo $memory_to_reserve_in_kbytes/1024 | bc
+  echo $(( $memory_to_reserve_in_kbytes/1024 ))
 }
 
-# add Settings to KUBELET_EXTRA_ARGS in /etc/default/kubelet
-sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /etc/default/kubelet
+sed -i -e "/^KUBELET_EXTRA_ARGS/ s/$/ --kube-reserved=cpu=$(get_cpu_millicores_to_reserve)m,memory=$(get_memory_to_reserve)Mi/" /etc/sysconfig/kubelet

@@ -33,7 +33,11 @@ internal:
   identity:
     attachCapzControllerIdentity: false
     enablePerClusterIdentity: false
-  kubernetesVersion: 1.24.8
+  image:
+    gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
+    name: ""
+    version: 3374.2.4
+  kubernetesVersion: 1.24.11
 metadata:
   servicePriority: highest
 nodePools:
