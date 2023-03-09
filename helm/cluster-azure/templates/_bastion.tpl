@@ -1,5 +1,6 @@
 {{- define "bastion-machine-identity" -}}
-identity: SystemAssigned
+identity: UserAssigned
+userAssignedIdentities: []
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}
