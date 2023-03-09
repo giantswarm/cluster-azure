@@ -1,7 +1,9 @@
 {{- define "bastion-machine-identity" -}}
+{{/* We need to set a role, set a very low priviliged for now (Workbook Reader) and TODO Look into this */}}
 identity: SystemAssigned
 systemAssignedIdentityRole:
-  name: {{ include "resource.default.name" $ }}-{{ $.spec.name }}
+  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}
+  definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b279062a-9be3-42a0-92ae-8b3cf002ec4d
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}
