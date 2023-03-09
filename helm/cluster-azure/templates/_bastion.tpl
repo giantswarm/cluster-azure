@@ -1,6 +1,7 @@
 {{- define "bastion-machine-identity" -}}
-identity: UserAssigned
-userAssignedIdentities: []
+identity: SystemAssigned
+systemAssignedIdentityRole:
+  name: {{ include "resource.default.name" $ }}-{{ $.spec.name }}
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}
