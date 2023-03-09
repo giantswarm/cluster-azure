@@ -1,9 +1,6 @@
 {{- define "bastion-machine-identity" -}}
-{{- if .Values.internal.identity.enablePerClusterIdentity -}}
-identity: UserAssigned
-userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes {{/* TODO Review this identity, with SA Identity we can set it to empty */}}
-{{ end -}}
+identity: SystemAssigned
+systemAssignedIdentityRole: {}
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}

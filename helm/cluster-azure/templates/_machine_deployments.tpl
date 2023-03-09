@@ -2,7 +2,7 @@
 {{- range $nodePool := .Values.nodePools }}
 {{ $data := dict "spec" ( merge $nodePool ( dict  "type" "machineDeployment" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $data) "global" $) ) }}
-{{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $data) "identity" (include "machine-identity" $data) ) "global" $) ) }}
+{{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $data) "identity" (include "renderIdentityConfiguration" $data) ) "global" $) ) }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
@@ -49,7 +49,7 @@ spec:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
     spec:
-      {{- include "machine-identity" $data | nindent 6}}
+      {{- include "renderIdentityConfiguration" $data | nindent 6}}
       {{- include "machine-spec" $data | nindent 6}}
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1

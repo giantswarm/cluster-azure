@@ -183,15 +183,24 @@
                 },
                 "identity": {
                     "properties": {
-                        "attachCapzControllerIdentity": {
+                        "attachCapzControllerUserAssignedIdentity": {
                             "default": false,
-                            "title": "Attach controller identity",
+                            "title": "Attach CAPZ controller UserAssigned identity",
                             "type": "boolean"
                         },
-                        "enablePerClusterIdentity": {
-                            "default": false,
-                            "title": "Enable identity per cluster",
-                            "type": "boolean"
+                        "type": {
+                            "default": "SystemAssigned",
+                            "enum": [
+                                "SystemAssigned",
+                                "UserAssigned"
+                            ],
+                            "title": "Type of Identity",
+                            "type": "string"
+                        },
+                        "userAssignedCustomIdentities": {
+                            "default": [],
+                            "title": "List of custom UserAssigned Identities to attach to all nodes",
+                            "type": "array"
                         }
                     },
                     "title": "Identity",

@@ -1,12 +1,6 @@
 {{- define "controlplane-azuremachinetemplate-spec" -}}
-{{- if .Values.internal.identity.enablePerClusterIdentity -}}
-identity: UserAssigned
-userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
-  {{- if .Values.internal.identity.attachCapzControllerIdentity }}
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
-  {{- end }}
-{{ end -}}
+{{ $identity := dict "type" "controlPlane" "Values" $.Values "Release" $.Release }}
+{{- include "renderIdentityConfiguration" $identity }}
 image:
   computeGallery:
     gallery: {{  $.Values.internal.image.gallery }}
