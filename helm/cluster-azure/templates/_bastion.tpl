@@ -1,6 +1,5 @@
 {{- define "bastion-machine-identity" -}}
 identity: SystemAssigned
-systemAssignedIdentityRole: {}
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}
