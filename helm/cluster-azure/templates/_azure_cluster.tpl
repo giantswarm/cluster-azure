@@ -32,7 +32,31 @@ spec:
       cidrBlocks:
       - {{ .Values.connectivity.network.hostCidr }}
       {{- if .Values.providerSpecific.network.peerings }}
-      peerings: {{ toYaml .Values.providerSpecific.network.peerings | nindent 6 }}
+      peerings:
+      {{- range .Values.providerSpecific.network.peerings }}
+      - resourceGroup: {{ .resourceGroup }}
+        remoteVnetName: {{ .remoteVnetName }}
+        {{- if (eq $.Values.connectivity.network.mode "private") }}
+        forwardPeeringProperties:
+          allowForwardedTraffic: true
+          {{- if (eq $.Values.internal.network.vpn.gatewayMode "remote") }}
+          allowGatewayTransit: false
+          useRemoteGateways: true
+          {{- else }}
+          allowGatewayTransit: true
+          useRemoteGateways: false
+          {{ end }}
+        reversePeeringProperties:
+          allowForwardedTraffic: true
+          {{- if (eq $.Values.internal.network.vpn.gatewayMode "remote") }}
+          allowGatewayTransit: true
+          useRemoteGateways: false
+          {{- else }}
+          allowGatewayTransit: false
+          useRemoteGateways: true
+          {{ end }}
+        {{- end }}
+      {{- end}}
       {{- end }}
     {{- if (eq .Values.connectivity.network.mode "private") }}
     privateDNSZoneName: {{ .Values.internal.privateDNSZoneName }}

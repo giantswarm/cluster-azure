@@ -35,16 +35,16 @@
                     "properties": {
                         "controlPlane": {
                             "properties": {
-                                "cidr": {
-                                    "default": "10.0.0.0/20",
-                                    "title": "Subnet",
-                                    "type": "string"
-                                },
                                 "apiServerLbIp": {
                                     "default": "10.0.0.2",
                                     "description": "IP address for API server internal load balancer.",
                                     "format": "ipv4",
                                     "title": "API Server IP address",
+                                    "type": "string"
+                                },
+                                "cidr": {
+                                    "default": "10.0.0.0/20",
+                                    "title": "Subnet",
                                     "type": "string"
                                 }
                             },
@@ -242,6 +242,29 @@
                     "title": "Kubernetes version",
                     "type": "string"
                 },
+                "network": {
+                    "description": "Internal network configuration that is susceptible to more frequent change",
+                    "properties": {
+                        "vpn": {
+                            "description": "Internal VPN configuration that is susceptible to more frequent change",
+                            "properties": {
+                                "gatewayMode": {
+                                    "default": "remote",
+                                    "enum": [
+                                        "local",
+                                        "remote"
+                                    ],
+                                    "title": "VPN gateway mode",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "VPN configuration",
+                            "type": "object"
+                        }
+                    },
+                    "title": "Network configuration",
+                    "type": "object"
+                },
                 "privateDNSZoneName": {
                     "description": "In practice this is the base domain of the cluster.",
                     "examples": [
@@ -411,13 +434,9 @@
                     "title": "Location",
                     "type": "string"
                 },
-                "subscriptionId": {
-                    "default": "PLACEHOLDER",
-                    "title": "Subscription ID",
-                    "type": "string"
-                },
                 "network": {
                     "additionalProperties": false,
+                    "description": "Azure VNet peering and other Azure-specific network settings.",
                     "properties": {
                         "peerings": {
                             "default": [],
@@ -425,20 +444,20 @@
                             "items": {
                                 "additionalProperties": false,
                                 "properties": {
-                                    "resourceGroup": {
-                                        "description": "Resource group for the remote VNet to which the peering is established.",
-                                        "pattern": "^[-\\w\\._\\(\\)]+$",
-                                        "minLength":  1,
-                                        "maxLength": 90,
-                                        "title": "Resource group name",
-                                        "type": "string"
-                                    },
                                     "remoteVnetName": {
                                         "description": "Name of the remote VNet to which the peering is established.",
-                                        "pattern": "^[-\\w\\._]+$",
-                                        "minLength":  2,
                                         "maxLength": 64,
+                                        "minLength": 2,
+                                        "pattern": "^[-\\w\\._]+$",
                                         "title": "VNet name",
+                                        "type": "string"
+                                    },
+                                    "resourceGroup": {
+                                        "description": "Resource group for the remote VNet to which the peering is established.",
+                                        "maxLength": 90,
+                                        "minLength": 1,
+                                        "pattern": "^[-\\w\\._\\(\\)]+$",
+                                        "title": "Resource group name",
                                         "type": "string"
                                     }
                                 },
@@ -450,9 +469,13 @@
                             "type": "array"
                         }
                     },
-                    "description": "Azure VNet peering and other Azure-specific network settings.",
                     "title": "Azure network settings",
                     "type": "object"
+                },
+                "subscriptionId": {
+                    "default": "PLACEHOLDER",
+                    "title": "Subscription ID",
+                    "type": "string"
                 }
             },
             "title": "Azure settings",
