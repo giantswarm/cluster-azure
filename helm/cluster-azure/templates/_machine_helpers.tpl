@@ -2,17 +2,6 @@
 Helpers to reuse when defining specs for MachinePools and MachineDeployments
 */}}
 
-{{- define "machine-identity" -}}
-{{- if .Values.internal.identity.enablePerClusterIdentity -}}
-identity: UserAssigned
-userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-cp
-  {{- if .Values.internal.identity.attachCapzControllerIdentity }}
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-capz
-  {{- end }}
-{{ end -}}
-{{- end -}}
-
 {{- define "machine-spec" -}}
 image:
   computeGallery:

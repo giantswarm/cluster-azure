@@ -1,9 +1,9 @@
 {{- define "bastion-machine-identity" -}}
-{{- if .Values.internal.identity.enablePerClusterIdentity -}}
-identity: UserAssigned
-userAssignedIdentities:
-  - providerID: {{ include "vmUaIdentityPrefix" $ }}-nodes {{/* TODO Review this identity, with SA Identity we can set it to empty */}}
-{{ end -}}
+{{/* We need to set a role, set a very low priviliged for now (Workbook Reader) and TODO Look into this */}}
+identity: SystemAssigned
+systemAssignedIdentityRole:
+  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}
+  definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b279062a-9be3-42a0-92ae-8b3cf002ec4d
 {{- end -}}
 
 {{- define "bastion-machine-spec" -}}

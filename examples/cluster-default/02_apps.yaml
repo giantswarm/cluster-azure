@@ -16,7 +16,7 @@ spec:
     configMap:
       name: cluster01-user-values
       namespace: org-multi-project
-  version: 0.0.14
+  version: 0.0.15
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App

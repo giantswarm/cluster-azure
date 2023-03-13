@@ -173,3 +173,42 @@ Where `data` is the data to has on and `global` is the top level scope.
 {{- $data := mustToJson .data | toString  }}
 {{- (printf "%s%s" $data) | quote | sha1sum | trunc 8 }}
 {{- end -}}
+
+{{/*
+Helpers to define Identity Configuration
+
+Type can be either "SystemAssigned" or "UserAssigned"
+
+with UserAssigned we support both a list of Identities passed through the Values to be attached on top of the default set of
+* -cp ( controlplane nodes )
+* -nodes ( worker nodes )
+* -capz ( On management Clusters used by the capz controller NMI )
+
+with SystemAssigned we set the `Contributor` Role on the resourceGroup
+the list of roles is https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
+
+this function requires an object like this to be passed in
+
+{{ $identity := dict "type" "controlPlane" "Values" $.Values "Release" $.Release }}
+
+*/}}
+{{- define "renderIdentityConfiguration" -}}
+{{- $identity := .Values.internal.identity -}}
+identity: {{ $identity.type }}
+{{- if eq $identity.type "SystemAssigned" }}
+systemAssignedIdentityRole:
+  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}
+  definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
+{{- else }}
+userAssignedIdentities:
+  {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .type "controlPlane")) (ternary "capz" "" ($identity.attachCapzControllerUserAssignedIdentity)) }}
+  {{- range compact $defaultIdentities }}
+  - providerID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
+  {{- end -}}
+  {{- if and ($identity.userAssignedIdentities) (not (empty $identity.userAssignedIdentities)) }}
+    {{- range $identity.userAssignedIdentities}}
+  - providerID: {{ . }}
+    {{- end -}}
+  {{- end -}}
+{{- end }}
+{{- end -}}

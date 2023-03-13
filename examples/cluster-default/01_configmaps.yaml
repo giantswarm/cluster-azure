@@ -10,8 +10,6 @@ data:
       location: "westeurope"
       #This is the GHOST subscription
       subscriptionId: 6b1f6e4a-6d0e-4aa4-9a5a-fbaca65a23b3
-      azureClusterIdentity:
-        name: "cluster-identity-static-sp"
 
     nodePools:
     - name: md00

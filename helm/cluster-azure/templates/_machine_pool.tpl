@@ -38,7 +38,7 @@ metadata:
   name: {{ include "resource.default.name" $ }}-{{ .name }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  {{- include "machine-identity" $data | nindent 2}}
+  {{- include "renderIdentityConfiguration" $data | nindent 2}}
   location: {{ $.Values.providerSpecific.location }}
   strategy:
     rollingUpdate:

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add support for creating WC with SystemAssigned Identities and make it the default - `Contributor` Role in the `resourceGroup` where the cluster Lives
+
 ## [0.0.14] - 2023-03-08
 
 ### Changed
