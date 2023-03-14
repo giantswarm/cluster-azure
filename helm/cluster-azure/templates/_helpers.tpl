@@ -161,7 +161,9 @@ List of admission plugins to enable based on apiVersion
 - echo '---------- hosts before change' >> /tmp/cluster-azure.log
 - cat /etc/hosts >> /tmp/cluster-azure.log
 - echo '----------' >> /tmp/cluster-azure.log
-- if [ -f /tmp/kubeadm.yaml ] || [ -f /run/kubeadm/kubeadm.yaml ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}
+- if [ -f /tmp/kubeadm.yaml ] ||
+  [ -f /run/kubeadm/kubeadm.yaml ] ||
+  [ -f /etc/kubeadm.yml ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}
   apiserver' >> /etc/hosts; fi
 - echo '---------- hosts after change' >> /tmp/cluster-azure.log
 - cat /etc/hosts >> /tmp/cluster-azure.log
@@ -172,11 +174,14 @@ List of admission plugins to enable based on apiVersion
 - if [ -f /tmp/kubeadm-join-config.yaml ]; then echo 'found /tmp/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; else echo 'not found /tmp/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; fi
 - if [ -f /run/kubeadm/kubeadm-join-config.yaml ]; then echo 'found /run/kubeadm/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; else echo 'not found /run/kubeadm/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; fi
 - if [ -f /etc/kubeadm-join-config.yaml ]; then echo 'found /etc/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; else echo 'not found /etc/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; fi
+- if [ -f /etc/kubeadm-join-config.yml ]; then echo 'found /etc/kubeadm-join-config.yml' >> /tmp/cluster-azure.log; else echo 'not found /etc/kubeadm-join-config.yml' >> /tmp/cluster-azure.log; fi
 - echo '---------- hosts before change' >> /tmp/cluster-azure.log
 - cat /etc/hosts >> /tmp/cluster-azure.log
 - echo '----------' >> /tmp/cluster-azure.log
-- if [ -f /tmp/kubeadm-join-config.yaml ] || [ -f /run/kubeadm/kubeadm-join-config.yaml
-  ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}' >> /etc/hosts;
+- if [ -f /tmp/kubeadm-join-config.yaml ] ||
+  [ -f /run/kubeadm/kubeadm-join-config.yaml ] ||
+  [ -f /etc/kubeadm-join-config.yml ]; then
+  echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}' >> /etc/hosts;
   fi
 - echo '---------- hosts after change' >> /tmp/cluster-azure.log
 - cat /etc/hosts >> /tmp/cluster-azure.log
