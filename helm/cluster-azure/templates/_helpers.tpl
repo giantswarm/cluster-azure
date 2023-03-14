@@ -155,14 +155,32 @@ List of admission plugins to enable based on apiVersion
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
+- if [ -f /tmp/kubeadm.yaml ]; then echo 'found /tmp/kubeadm.yaml' >> /tmp/cluster-azure.log; else echo 'not found /tmp/kubeadm.yaml' >> /tmp/cluster-azure.log; fi
+- if [ -f /run/kubeadm/kubeadm.yaml ]; then echo 'found /run/kubeadm/kubeadm.yaml' >> /tmp/cluster-azure.log; else echo 'not found /run/kubeadm/kubeadm.yaml' >> /tmp/cluster-azure.log; fi
+- if [ -f /etc/kubeadm.yml ]; then echo 'found /etc/kubeadm.yml' >> /tmp/cluster-azure.log; else echo 'not found /etc/kubeadm.yml' >> /tmp/cluster-azure.log; fi
+- echo '---------- hosts before change' >> /tmp/cluster-azure.log
+- cat /etc/hosts >> /tmp/cluster-azure.log
+- echo '----------' >> /tmp/cluster-azure.log
 - if [ -f /tmp/kubeadm.yaml ] || [ -f /run/kubeadm/kubeadm.yaml ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}
   apiserver' >> /etc/hosts; fi
+- echo '---------- hosts after change' >> /tmp/cluster-azure.log
+- cat /etc/hosts >> /tmp/cluster-azure.log
+- echo '----------' >> /tmp/cluster-azure.log
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
+- if [ -f /tmp/kubeadm-join-config.yaml ]; then echo 'found /tmp/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; else echo 'not found /tmp/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; fi
+- if [ -f /run/kubeadm/kubeadm-join-config.yaml ]; then echo 'found /run/kubeadm/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; else echo 'not found /run/kubeadm/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; fi
+- if [ -f /etc/kubeadm-join-config.yaml ]; then echo 'found /etc/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; else echo 'not found /etc/kubeadm-join-config.yaml' >> /tmp/cluster-azure.log; fi
+- echo '---------- hosts before change' >> /tmp/cluster-azure.log
+- cat /etc/hosts >> /tmp/cluster-azure.log
+- echo '----------' >> /tmp/cluster-azure.log
 - if [ -f /tmp/kubeadm-join-config.yaml ] || [ -f /run/kubeadm/kubeadm-join-config.yaml
   ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}' >> /etc/hosts;
   fi
+- echo '---------- hosts after change' >> /tmp/cluster-azure.log
+- cat /etc/hosts >> /tmp/cluster-azure.log
+- echo '----------' >> /tmp/cluster-azure.log
 {{- end -}}
 
 {{- define "prepare-varLibKubelet-Dir" -}}

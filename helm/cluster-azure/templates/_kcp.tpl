@@ -230,15 +230,21 @@ spec:
         {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
         {{- end }}
     preKubeadmCommands:
+      - echo 'start preKubeadmCommands' >> /tmp/cluster-azure.log
     {{- include "prepare-varLibKubelet-Dir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
     {{- include "override-hostname-in-kubeadm-configuration" . | nindent 6 }}
+      - echo 'before /etc/hosts setup' >> /tmp/cluster-azure.log
     {{- if (eq .Values.connectivity.network.mode "private") }}
     {{- include "kubeadm.controlPlane.privateNetwork.preCommands" . | nindent 6 }}
+      - echo 'after /etc/hosts setup' >> /tmp/cluster-azure.log
     {{- end }}
+      - echo 'end preKubeadmCommands' >> /tmp/cluster-azure.log
     {{- if (eq .Values.connectivity.network.mode "private") }}
     postKubeadmCommands:
+      - echo 'start postKubeadmCommands' >> /tmp/cluster-azure.log
     {{- include "kubeadm.controlPlane.privateNetwork.postCommands" . | nindent 6 }}
+      - echo 'end postKubeadmCommands' >> /tmp/cluster-azure.log
     {{- else }}
     postKubeadmCommands: []
     {{ end }}
