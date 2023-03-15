@@ -89,6 +89,7 @@ spec:
           - 127.0.0.1
           - localhost
           - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
+          - "apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
         extraArgs:
           {{- if .Values.controlPlane.serviceAccountIssuer }}
           service-account-issuer: {{ .Values.controlPlane.serviceAccountIssuer }}
