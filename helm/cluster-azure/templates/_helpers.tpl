@@ -155,26 +155,14 @@ List of admission plugins to enable based on apiVersion
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
-- echo '---------- hosts before change' >> /tmp/cluster-azure.log
-- cat /etc/hosts >> /tmp/cluster-azure.log
-- echo '----------' >> /tmp/cluster-azure.log
 - if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}
   apiserver' >> /etc/hosts; fi
-- echo '---------- hosts after change' >> /tmp/cluster-azure.log
-- cat /etc/hosts >> /tmp/cluster-azure.log
-- echo '----------' >> /tmp/cluster-azure.log
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
-- echo '---------- hosts before change' >> /tmp/cluster-azure.log
-- cat /etc/hosts >> /tmp/cluster-azure.log
-- echo '----------' >> /tmp/cluster-azure.log
 - if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
   echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}' >> /etc/hosts;
   fi
-- echo '---------- hosts after change' >> /tmp/cluster-azure.log
-- cat /etc/hosts >> /tmp/cluster-azure.log
-- echo '----------' >> /tmp/cluster-azure.log
 {{- end -}}
 
 {{- define "prepare-varLibKubelet-Dir" -}}
