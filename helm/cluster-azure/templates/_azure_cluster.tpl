@@ -68,8 +68,6 @@ spec:
         privateIP: {{ .Values.connectivity.network.controlPlane.apiServerLbIp }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
-    nodeOutboundLB:
-      frontendIPsCount: 1
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.providerSpecific.subscriptionId }}
