@@ -37,7 +37,7 @@
                             "properties": {
                                 "apiServerLbIp": {
                                     "default": "10.0.0.2",
-                                    "description": "IP address for API server internal load balancer.",
+                                    "description": "IPv4 address of the internal API server load balancer.",
                                     "format": "ipv4",
                                     "title": "API Server IP address",
                                     "type": "string"
