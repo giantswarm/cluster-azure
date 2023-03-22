@@ -1,0 +1,57 @@
+apiVersion: v1
+data:
+  values: |
+    metadata:
+      name: "private01"
+      description: "private01 test cluster"
+      organization: "multi-project"
+
+    providerSpecific:
+      location: "westeurope"
+      subscriptionId: __REPLACE_THIS__
+      network:
+        peerings:
+        - resourceGroup: <MC_NAME>
+          remoteVnetName: <MC_NAME>-vnet
+
+    connectivity:
+      network:
+        controlPlane:
+          cidr: x.x.x.x/x
+          apiServerLbIp: x.x.x.x
+        hostCidr: x.x.x.x/x
+        mode: private
+        podCidr: 192.168.0.0/16
+        serviceCidr: 172.31.0.0/16
+        workers:
+          cidr: x.x.x.x/x
+
+    nodePools:
+    - name: md00
+      instanceType: Standard_D2s_v5
+      replicas: 3
+      rootVolumeSizeGB: 50
+
+    internal:
+      privateDNSZoneName: private01.azuretest.gigantic.io
+      network:
+        vpn:
+          gatewayMode: remote
+
+kind: ConfigMap
+metadata:
+  name: cluster01-user-values
+  namespace: org-multi-project
+---
+apiVersion: v1
+data:
+  values: |
+    clusterName: cluster01
+    managementCluster: glippy
+    organization: multi-project
+kind: ConfigMap
+metadata:
+  labels:
+    app-operator.giantswarm.io/watching: "true"
+  name: cluster01-default-apps-user-values
+  namespace: org-multi-project
