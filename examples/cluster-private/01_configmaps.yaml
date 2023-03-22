@@ -40,18 +40,18 @@ data:
 
 kind: ConfigMap
 metadata:
-  name: cluster01-user-values
+  name: private01-user-values
   namespace: org-multi-project
 ---
 apiVersion: v1
 data:
   values: |
-    clusterName: cluster01
+    clusterName: private01
     managementCluster: glippy
     organization: multi-project
 kind: ConfigMap
 metadata:
   labels:
     app-operator.giantswarm.io/watching: "true"
-  name: cluster01-default-apps-user-values
+  name: private01-default-apps-user-values
   namespace: org-multi-project

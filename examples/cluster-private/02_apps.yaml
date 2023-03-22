@@ -4,7 +4,7 @@ kind: App
 metadata:
   labels:
     app-operator.giantswarm.io/version: 0.0.0
-  name: cluster01
+  name: private01
   namespace: org-multi-project
 spec:
   catalog: cluster-test
@@ -14,7 +14,7 @@ spec:
   namespace: org-multi-project
   userConfig:
     configMap:
-      name: cluster01-user-values
+      name: private01-user-values
       namespace: org-multi-project
   version: 0.0.15-52cb072da073542c9e6739bb2aa47e4207b3a963
 ---
@@ -23,9 +23,9 @@ kind: App
 metadata:
   labels:
     app-operator.giantswarm.io/version: 0.0.0
-    giantswarm.io/cluster: cluster01
+    giantswarm.io/cluster: private01
     app.kubernetes.io/name: default-apps-azure
-  name: cluster01-default-apps
+  name: private01-default-apps
   namespace: org-multi-project
 spec:
   catalog: cluster
@@ -35,6 +35,6 @@ spec:
   namespace: org-multi-project
   userConfig:
     configMap:
-      name: cluster01-default-apps-user-values
+      name: private01-default-apps-user-values
       namespace: org-multi-project
   version: v0.0.12
