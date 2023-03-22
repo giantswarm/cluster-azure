@@ -5,7 +5,6 @@ connectivity:
     instanceType: Standard_D2s_v5
   network:
     controlPlane:
-      apiServerLbIp: 10.0.0.2
       cidr: 10.0.0.0/20
     hostCidr: 10.0.0.0/16
     mode: public

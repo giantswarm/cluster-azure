@@ -223,3 +223,15 @@ userAssignedIdentities:
   {{- end -}}
 {{- end }}
 {{- end -}}
+
+{{/*
+Calculating API server load balancer IP based on control plane subnet CIDR.
+
+It expects one argument which is the control plane subnet network range in format "a.b.c.d/xx"
+*/}}
+{{- define "controlPlane.apiServerLbIp" -}}
+{{ $cidrParts := split "/" . }}
+{{ $ipParts := split "." $cidrParts._0 }}
+{{ $lastPart := $ipParts._3 | int | add 10 }}
+{{- $ipParts._0 -}}.{{- $ipParts._1 -}}.{{- $ipParts._2 -}}.{{- $lastPart -}}
+{{- end -}}

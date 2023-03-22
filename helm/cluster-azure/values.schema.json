@@ -35,13 +35,6 @@
                     "properties": {
                         "controlPlane": {
                             "properties": {
-                                "apiServerLbIp": {
-                                    "default": "10.0.0.2",
-                                    "description": "IPv4 address of the internal API server load balancer.",
-                                    "format": "ipv4",
-                                    "title": "API Server IP address",
-                                    "type": "string"
-                                },
                                 "cidr": {
                                     "default": "10.0.0.0/20",
                                     "title": "Subnet",
