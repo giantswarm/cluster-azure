@@ -34,6 +34,7 @@ spec:
         kind: AzureMachineTemplate
         name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $azureMachineTemplateHash.hash }}
       version: {{ $.Values.internal.kubernetesVersion }}
+      failureDomain: {{ $nodePool.failureDomain | default "1" }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate

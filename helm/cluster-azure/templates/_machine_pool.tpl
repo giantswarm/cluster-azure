@@ -14,6 +14,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
+  failureDomains: {{ $nodePool.failureDomain | default list "1" }}
   replicas: {{ .minSize }}
   template:
     spec:

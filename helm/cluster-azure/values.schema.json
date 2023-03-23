@@ -333,6 +333,15 @@
                         "title": "Disable HealthChecks for the MachineDeployment",
                         "type": "boolean"
                     },
+                    "failureDomain": {
+                        "enum": [
+                            "1",
+                            "2",
+                            "3"
+                        ],
+                        "title": "Select zone where to deploy the nodePool",
+                        "type": "string"
+                    },
                     "instanceType": {
                         "title": "VM size",
                         "type": "string"
