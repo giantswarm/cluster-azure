@@ -257,15 +257,6 @@
                     },
                     "title": "Network configuration",
                     "type": "object"
-                },
-                "privateDNSZoneName": {
-                    "description": "In practice this is the base domain of the cluster.",
-                    "examples": [
-                        "my-org.example.com"
-                    ],
-                    "format": "hostname",
-                    "title": "Private DNS zone name",
-                    "type": "string"
                 }
             },
             "title": "Internal settings",

@@ -59,7 +59,7 @@ spec:
       {{- end}}
       {{- end }}
     {{- if (eq .Values.connectivity.network.mode "private") }}
-    privateDNSZoneName: {{ .Values.internal.privateDNSZoneName }}
+    privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
     apiServerLB:
       name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal
