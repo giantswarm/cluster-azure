@@ -31,32 +31,8 @@ spec:
       name: {{ include "resource.default.name" $ }}-vnet
       cidrBlocks:
       - {{ .Values.connectivity.network.hostCidr }}
-      {{- if .Values.providerSpecific.network.peerings }}
-      peerings:
-      {{- range .Values.providerSpecific.network.peerings }}
-      - resourceGroup: {{ .resourceGroup }}
-        remoteVnetName: {{ .remoteVnetName }}
-        {{- if (eq $.Values.connectivity.network.mode "private") }}
-        forwardPeeringProperties:
-          allowForwardedTraffic: true
-          {{- if (eq $.Values.internal.network.vpn.gatewayMode "remote") }}
-          allowGatewayTransit: false
-          useRemoteGateways: true
-          {{- else }}
-          allowGatewayTransit: true
-          useRemoteGateways: false
-          {{ end }}
-        reversePeeringProperties:
-          allowForwardedTraffic: true
-          {{- if (eq $.Values.internal.network.vpn.gatewayMode "remote") }}
-          allowGatewayTransit: true
-          useRemoteGateways: false
-          {{- else }}
-          allowGatewayTransit: false
-          useRemoteGateways: true
-          {{ end }}
-        {{- end }}
-      {{- end}}
+      {{- if (include "providerSpecific.vnetPeerings" $) }}
+      peering: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
       {{- end }}
     {{- if (eq .Values.connectivity.network.mode "private") }}
     privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"

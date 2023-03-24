@@ -235,3 +235,40 @@ It expects one argument which is the control plane subnet network range in forma
 {{ $lastPart := $ipParts._3 | int | add 10 }}
 {{- $ipParts._0 -}}.{{- $ipParts._1 -}}.{{- $ipParts._2 -}}.{{- $lastPart -}}
 {{- end -}}
+
+{{- define "providerSpecific.peeringFromWCToMC" -}}
+- resourceGroup: {{ $.Values.managementCluster }}
+  remoteVnetName: {{ $.Values.managementCluster }}-vnet
+  forwardPeeringProperties:
+    allowForwardedTraffic: true
+    allowGatewayTransit: false
+    useRemoteGateways: true
+  reversePeeringProperties:
+    allowForwardedTraffic: true
+    allowGatewayTransit: true
+    useRemoteGateways: false
+{{- end -}}
+
+{{/*
+  All peerings, both explicit and implicit.
+  1. Explicit peerings that are defined in config under .providerSpecific.network.peerings.
+  2. Implicit WC VNet toMC Vnet peering.
+*/}}
+{{- define "providerSpecific.vnetPeerings" }}
+
+{{- /*
+  Include explicitly configured VNet peerings
+*/}}
+{{- if .Values.providerSpecific.network.peerings }}
+{{ .Values.providerSpecific.network.peerings | toYaml }}
+{{- end }}
+
+{{- /*
+  Include peering from workload cluster to management cluster. This is added only to the WC VNets,
+  which are peered to the MC VNMet (so checking that cluster name is different than MC name).
+*/ -}}
+{{- if ne $.Values.metadata.name $.Values.managementCluster }}
+{{ include "providerSpecific.peeringFromWCToMC" $ }}
+{{- end }}
+
+{{- end -}}
