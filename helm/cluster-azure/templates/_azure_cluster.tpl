@@ -32,7 +32,7 @@ spec:
       cidrBlocks:
       - {{ .Values.connectivity.network.hostCidr }}
       {{- if (include "providerSpecific.vnetPeerings" $) }}
-      peering: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
+      peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
       {{- end }}
     {{- if (eq .Values.connectivity.network.mode "private") }}
     privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
