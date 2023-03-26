@@ -21,9 +21,7 @@ spec:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
       - name: node-subnet
         natGateway:
-          name: {{ include "resource.default.name" $ }}-node-natgateway
-          NatGatewayIP:
-            name: {{ include "resource.default.name" $ }}-node-natgateway-ip
+          name: node-natgateway
         role: node
         cidrBlocks:
         - {{ .Values.connectivity.network.workers.cidr }}
