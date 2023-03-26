@@ -267,7 +267,7 @@ It expects one argument which is the control plane subnet network range in forma
   Include peering from workload cluster to management cluster. This is added only to the WC VNets,
   which are peered to the MC VNMet (so checking that cluster name is different than MC name).
 */ -}}
-{{- if ne $.Values.metadata.name $.Values.managementCluster }}
+{{- if and (eq .Values.connectivity.network.mode "private") (ne $.Values.metadata.name $.Values.managementCluster) }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 
