@@ -155,13 +155,13 @@ List of admission plugins to enable based on apiVersion
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
-- if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}
+- if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}
   apiserver' >> /etc/hosts; fi
 {{- end -}}
 
 {{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
 - if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
-  echo '127.0.0.1   apiserver.{{ .Values.internal.privateDNSZoneName }}' >> /etc/hosts;
+  echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}' >> /etc/hosts;
   fi
 {{- end -}}
 
