@@ -38,7 +38,7 @@ spec:
       name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal
       frontendIPs:
-      - name: {{ include "resource.default.name" $ }}-api-internal-lb-ip
+      - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.connectivity.network.controlPlane.cidr | trim -}}"
     controlPlaneOutboundLB:
       frontendIPsCount: 1
