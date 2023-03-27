@@ -35,28 +35,24 @@ jobs:
       - name: list rendering values
         id: get-rendering-values
         run: |
-          echo "installations=[\"$(ls -m management-clusters | tr -d ' \n' | sed 's/,/\", \"/g')\"]"
+          echo "values=[\"$(ls -m helm/cluster-azure/ci/test-*-values.yaml | tr -d ' \n' | sed 's/,/\", \"/g')\"]"
           echo
-          echo "installations=[\"$(ls -m management-clusters | tr -d ' \n' | sed 's/,/\", \"/g')\"]" >> $GITHUB_OUTPUT
+          echo "values=[\"$(ls -m helm/cluster-azure/ci/test-*-values.yaml | tr -d ' \n' | sed 's/,/\", \"/g')\"]" >> $GITHUB_OUTPUT
     outputs:
-      installations: ${{ steps.get-installations.outputs.installations }}
-  cmp-kustomizations:
-    needs: get-installations
+      values: ${{ steps.get-rendering-values.outputs.values }}
+  cmp-helm-rendering:
+    needs: get-rendering-values
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        installation: ${{ fromJson(needs.get-installations.outputs.installations) }}
+        values: ${{ fromJson(needs.get-rendering-values.outputs.values) }}
     if: github.event_name == 'pull_request'
     steps:
-      - name: install kustomize
-        uses: giantswarm/install-binary-action@v1
+      - name: install helm
+        uses: azure/setup-helm@v3
         with:
-          binary: kustomize
-          download_url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${version}/kustomize_v${version}_linux_amd64.tar.gz"
-          smoke_test: "${binary} version"
-          tarball_binary_path: "${binary}"
-          version: ${{ env.kustomize_ver }}
-      - run: which kustomize
+           version: ${{ env.helm_ver }}
+      - run: which helm
       - name: install yq
         uses: giantswarm/install-binary-action@v1
         with:
@@ -77,28 +73,31 @@ jobs:
       - run: which dyff
       - run: ls -la /opt/hostedtoolcache
       - uses: actions/checkout@v3
-      - name: build and save installation
+      - name: render helm with current code
         run: |
-          mkdir /tmp/${{ matrix.installation }}
-          kustomize build \
-          --enable-helm \
-          --load-restrictor=LoadRestrictionsNone \
-          management-clusters/${{ matrix.installation }} \
-          | yq e 'select(.kind == "Kustomization") | select(.metadata.name == "flux")' - > /tmp/${{ matrix.installation }}/new.yaml
-      - uses: actions/checkout@v3
-        with:
-          ref: 'main'
-          path: 'old'
-      - name: template all for the old branch
-        run: |
-          kustomize build \
-          --enable-helm \
-          --load-restrictor=LoadRestrictionsNone \
-          old/management-clusters/${{ matrix.installation }} 2>/dev/null \
-          | yq e 'select(.kind == "Kustomization") | select(.metadata.name == "flux")' - > /tmp/${{ matrix.installation }}/old.yaml
-      - name: get the diffs
-        uses: mathiasvr/command-output@v1
-        id: diff
-        with:
-          run: |
-            dyff between -s -i -b -g /tmp/${{ matrix.installation }}/old.yaml /tmp/${{ matrix.installation }}/new.yaml
+          mkdir /tmp/${{ matrix.values }}
+      #- name: build and save installation
+      #  run: |
+      #    mkdir /tmp/${{ matrix.installation }}
+      #    kustomize build \
+      #    --enable-helm \
+      #    --load-restrictor=LoadRestrictionsNone \
+      #    management-clusters/${{ matrix.installation }} \
+      #    | yq e 'select(.kind == "Kustomization") | select(.metadata.name == "flux")' - > /tmp/${{ matrix.installation }}/new.yaml
+      #- uses: actions/checkout@v3
+      #  with:
+      #    ref: 'main'
+      #    path: 'old'
+      #- name: template all for the old branch
+      #  run: |
+      #    kustomize build \
+      #    --enable-helm \
+      #    --load-restrictor=LoadRestrictionsNone \
+      #    old/management-clusters/${{ matrix.installation }} 2>/dev/null \
+      #    | yq e 'select(.kind == "Kustomization") | select(.metadata.name == "flux")' - > /tmp/${{ matrix.installation }}/old.yaml
+      #- name: get the diffs
+      #  uses: mathiasvr/command-output@v1
+      #  id: diff
+      #  with:
+      #    run: |
+      #      dyff between -s -i -b -g /tmp/${{ matrix.installation }}/old.yaml /tmp/${{ matrix.installation }}/new.yaml
