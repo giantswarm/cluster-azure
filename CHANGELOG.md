@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add support for failuredomains field to MachineDeployments
 
+### Changed
+
+- Remove machinepool code , this code is currently not used and it will confused the team that picks up this APP
+
 ## [0.0.15] - 2023-03-13
 
 ### Changed
