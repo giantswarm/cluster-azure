@@ -121,6 +121,7 @@ jobs:
             <details>
             <summary> (${{ matrix.values }}) rendered manifest diff </summary>
             <!-- mandatory empty line -->
+
             ```diff
             ${{ steps.diff.outputs.stdout }}
             ```
