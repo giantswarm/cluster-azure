@@ -94,4 +94,4 @@ jobs:
         id: diff
         with:
           run: |
-            dyff between -s -i -b -g /tmp/${{ matrix.installation }}/render-old.yaml /tmp/${{ matrix.installation }}/render-new.yaml
+            dyff between -s -i -b -g /tmp/${{ matrix.values }}/render-old.yaml /tmp/${{ matrix.values }}/render-new.yaml
