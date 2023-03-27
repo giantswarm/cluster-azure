@@ -1,8 +1,8 @@
 {{- define "machine-deployments" -}}
 {{- range $nodePool := .Values.nodePools }}
-{{ $data := dict "spec" ( merge $nodePool ( dict  "type" "machineDeployment" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
-{{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $data) "global" $) ) }}
-{{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $data) "identity" (include "renderIdentityConfiguration" $data) ) "global" $) ) }}
+{{ $thisNodePool := dict "spec" ( merge $nodePool ( dict  "type" "machineDeployment" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
+{{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $thisNodePool) "global" $) ) }}
+{{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $thisNodePool) "identity" (include "renderIdentityConfiguration" $thisNodePool) ) "global" $) ) }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
@@ -52,8 +52,8 @@ spec:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
     spec:
-      {{- include "renderIdentityConfiguration" $data | nindent 6}}
-      {{- include "machine-spec" $data | nindent 6}}
+      {{- include "renderIdentityConfiguration" $thisNodePool | nindent 6}}
+      {{- include "machine-spec" $thisNodePool | nindent 6}}
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
@@ -65,7 +65,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
-    spec: {{- include "machine-kubeadmconfig-spec" (merge $data $azureMachineTemplateHash ) | nindent 6 }}
+    spec: {{- include "machine-kubeadmconfig-spec" (merge $thisNodePool $azureMachineTemplateHash ) | nindent 6 }}
 ---
 {{- if not .disableHealthChecks }}
 apiVersion: cluster.x-k8s.io/v1beta1
