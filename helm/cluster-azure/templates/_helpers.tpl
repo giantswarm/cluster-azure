@@ -154,11 +154,19 @@ List of admission plugins to enable based on apiVersion
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
+{{/*
+Modify /etc/hosts in order to route API server requests to the local API server replica.
+See more details here https://github.com/giantswarm/roadmap/issues/2223.
+*/}}
 {{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
 - if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}
   apiserver' >> /etc/hosts; fi
 {{- end -}}
 
+{{/*
+Modify /etc/hosts in order to route API server requests to the local API server replica.
+See more details here https://github.com/giantswarm/roadmap/issues/2223.
+*/}}
 {{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
 - if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
   echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}' >> /etc/hosts;
