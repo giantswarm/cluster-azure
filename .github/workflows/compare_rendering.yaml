@@ -79,30 +79,19 @@ jobs:
           # TODO split files by "API"_"KIND"_"NAMESPACE|clusterwide"_"NAME"
           helm repo add cluster-catalog https://giantswarm.github.io/cluster-catalog/
           helm dependency build helm/cluster-azure
-          helm template -n org-multi-project -f ${{ matrix.values }} helm/cluster-azure > /tmp/${{ matrix.values }}/render.yaml
-          cat /tmp/${{ matrix.values }}/render.yaml
-      #- name: build and save installation
-      #  run: |
-      #    mkdir /tmp/${{ matrix.installation }}
-      #    kustomize build \
-      #    --enable-helm \
-      #    --load-restrictor=LoadRestrictionsNone \
-      #    management-clusters/${{ matrix.installation }} \
-      #    | yq e 'select(.kind == "Kustomization") | select(.metadata.name == "flux")' - > /tmp/${{ matrix.installation }}/new.yaml
-      #- uses: actions/checkout@v3
-      #  with:
-      #    ref: 'main'
-      #    path: 'old'
-      #- name: template all for the old branch
-      #  run: |
-      #    kustomize build \
-      #    --enable-helm \
-      #    --load-restrictor=LoadRestrictionsNone \
-      #    old/management-clusters/${{ matrix.installation }} 2>/dev/null \
-      #    | yq e 'select(.kind == "Kustomization") | select(.metadata.name == "flux")' - > /tmp/${{ matrix.installation }}/old.yaml
-      #- name: get the diffs
-      #  uses: mathiasvr/command-output@v1
-      #  id: diff
-      #  with:
-      #    run: |
-      #      dyff between -s -i -b -g /tmp/${{ matrix.installation }}/old.yaml /tmp/${{ matrix.installation }}/new.yaml
+          helm template -n org-multi-project -f ${{ matrix.values }} helm/cluster-azure > /tmp/${{ matrix.values }}/render-new.yaml
+      - uses: actions/checkout@v3
+        with:
+          ref: 'main'
+          path: 'old'
+      - name: render helm with main branch code
+        run: |
+          # TODO split files by "API"_"KIND"_"NAMESPACE|clusterwide"_"NAME"
+          helm dependency build old/helm/cluster-azure
+          helm template -n org-multi-project -f ${{ matrix.values }} old/helm/cluster-azure > /tmp/${{ matrix.values }}/render-old.yaml
+      - name: get the diffs
+        uses: mathiasvr/command-output@v1
+        id: diff
+        with:
+          run: |
+            dyff between -s -i -b -g /tmp/${{ matrix.installation }}/render-old.yaml /tmp/${{ matrix.installation }}/render-new.yaml
