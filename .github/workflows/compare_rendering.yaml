@@ -23,7 +23,7 @@ jobs:
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body-includes: /no_drift_detection
+          body-includes: /no_diffs_printing
     outputs:
       suspendcmp: ${{ steps.fc.outputs.comment-id }}
   get-rendering-values:
@@ -94,4 +94,35 @@ jobs:
         id: diff
         with:
           run: |
-            dyff between -s -i -b -g /tmp/${{ matrix.values }}/render-old.yaml /tmp/${{ matrix.values }}/render-new.yaml
+            dyff between -s -i -b -g /tmp/${{ matrix.values }}/render-old.yaml /tmp/${{ matrix.values }}/render-new.yaml && echo "No diff detected" || if [[ $? -eq 255 ]]; then echo "Diff error"; fi;
+      - name: Find diff comment
+        uses: peter-evans/find-comment@v2
+        continue-on-error: true
+        id: fc
+        if: ${{ !contains(steps.diff.outputs.stdout,'No diff detected') }}
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: (${{ matrix.installation }}) rendered manifest diff
+      - name: Delete old comment
+        uses: jungwinter/comment@v1
+        continue-on-error: true
+        if: ${{ !contains(steps.diff.outputs.stdout,'No diff detected') }}
+        with:
+          type: delete
+          comment_id: ${{ steps.fc.outputs.comment-id }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create or update validation comment
+        uses: peter-evans/create-or-update-comment@v2
+        if: ${{ !contains(steps.diff.outputs.stdout,'No diff detected') }}
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            <details>
+            <summary> (${{ matrix.installation }}) rendered manifest diff </summary>
+            <!-- mandatory empty line -->
+            ```diff
+            ${{ steps.diff.outputs.stdout }}
+            ```
+            </details>
+            <!-- mandatory empty line -->
