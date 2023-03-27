@@ -77,6 +77,7 @@ jobs:
         run: |
           mkdir -p /tmp/${{ matrix.values }}
           # TODO split files by "API"_"KIND"_"NAMESPACE|clusterwide"_"NAME"
+          helm repo add cluster-catalog https://giantswarm.github.io/cluster-catalog/
           helm dependency build helm/cluster-azure
           helm template -n org-multi-project -f ${{ matrix.values }} helm/cluster-azure > /tmp/${{ matrix.values }}/render.yaml
           cat /tmp/${{ matrix.values }}/render.yaml
