@@ -127,3 +127,9 @@ jobs:
             ```
             </details>
             <!-- mandatory empty line -->
+  diff-rendering-completed:
+    needs: cmp-helm-rendering
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - run: echo "All diff jobs completed"
