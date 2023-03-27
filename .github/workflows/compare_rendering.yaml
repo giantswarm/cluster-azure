@@ -75,7 +75,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: render helm with current code
         run: |
-          mkdir /tmp/${{ matrix.values }}
+          mkdir -p /tmp/${{ matrix.values }}
+          # TODO split files by "API"_"KIND"_"NAMESPACE|clusterwide"_"NAME"
+          helm template -n org-multi-project -f ${{ matrix.values }} helm/cluster-azure > /tmp/${{ matrix.values }}/render.yaml
+          cat /tmp/${{ matrix.values }}/render.yaml
       #- name: build and save installation
       #  run: |
       #    mkdir /tmp/${{ matrix.installation }}
