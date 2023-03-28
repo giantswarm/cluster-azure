@@ -7,7 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add support for private clusters.
+
 ## [0.0.16] - 2023-03-27
+
 ### Added
 
 - Add support for failuredomains field to MachineDeployments
