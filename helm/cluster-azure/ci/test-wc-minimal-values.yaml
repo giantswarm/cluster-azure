@@ -1,0 +1,8 @@
+metadata:
+  name: test-wc-minimal
+  organization: test
+  servicePriority: lowest
+
+providerSpecific:
+  location: "westeurope"
+  subscriptionId: "PLACEHOLDER_SUBSCRIPTION_ID"
