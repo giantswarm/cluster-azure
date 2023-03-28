@@ -39,6 +39,9 @@ internal:
     name: ""
     version: 3374.2.4
   kubernetesVersion: 1.24.11
+  network:
+    vpn:
+      gatewayMode: remote
 metadata:
   servicePriority: highest
 nodePools:
@@ -54,4 +57,6 @@ providerSpecific:
     name: cluster-identity
     namespace: org-giantswarm
   location: westeurope
+  network:
+    peerings: []
   subscriptionId: PLACEHOLDER

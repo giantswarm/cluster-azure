@@ -154,6 +154,25 @@ List of admission plugins to enable based on apiVersion
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
+{{/*
+Modify /etc/hosts in order to route API server requests to the local API server replica.
+See more details here https://github.com/giantswarm/roadmap/issues/2223.
+*/}}
+{{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
+- if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}
+  apiserver' >> /etc/hosts; fi
+{{- end -}}
+
+{{/*
+Modify /etc/hosts in order to route API server requests to the local API server replica.
+See more details here https://github.com/giantswarm/roadmap/issues/2223.
+*/}}
+{{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
+- if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
+  echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}' >> /etc/hosts;
+  fi
+{{- end -}}
+
 {{- define "prepare-varLibKubelet-Dir" -}}
 - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
 {{- end -}}
@@ -211,4 +230,53 @@ userAssignedIdentities:
     {{- end -}}
   {{- end -}}
 {{- end }}
+{{- end -}}
+
+{{/*
+Calculating API server load balancer IP based on control plane subnet CIDR.
+
+It expects one argument which is the control plane subnet network range in format "a.b.c.d/xx"
+*/}}
+{{- define "controlPlane.apiServerLbIp" -}}
+{{ $cidrParts := split "/" . }}
+{{ $ipParts := split "." $cidrParts._0 }}
+{{ $lastPart := $ipParts._3 | int | add 10 }}
+{{- $ipParts._0 -}}.{{- $ipParts._1 -}}.{{- $ipParts._2 -}}.{{- $lastPart -}}
+{{- end -}}
+
+{{- define "providerSpecific.peeringFromWCToMC" -}}
+- resourceGroup: {{ $.Values.managementCluster }}
+  remoteVnetName: {{ $.Values.managementCluster }}-vnet
+  forwardPeeringProperties:
+    allowForwardedTraffic: true
+    allowGatewayTransit: false
+    useRemoteGateways: true
+  reversePeeringProperties:
+    allowForwardedTraffic: true
+    allowGatewayTransit: true
+    useRemoteGateways: false
+{{- end -}}
+
+{{/*
+  All peerings, both explicit and implicit.
+  1. Explicit peerings that are defined in config under .providerSpecific.network.peerings.
+  2. Implicit WC VNet toMC Vnet peering.
+*/}}
+{{- define "providerSpecific.vnetPeerings" }}
+
+{{- /*
+  Include explicitly configured VNet peerings
+*/}}
+{{- if .Values.providerSpecific.network.peerings }}
+{{ .Values.providerSpecific.network.peerings | toYaml }}
+{{- end }}
+
+{{- /*
+  Include peering from workload cluster to management cluster. This is added only to the WC VNets,
+  which are peered to the MC VNMet (so checking that cluster name is different than MC name).
+*/ -}}
+{{- if and (eq .Values.connectivity.network.mode "private") (ne $.Values.metadata.name $.Values.managementCluster) }}
+{{ include "providerSpecific.peeringFromWCToMC" $ }}
+{{- end }}
+
 {{- end -}}

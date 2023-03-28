@@ -52,6 +52,7 @@
                         },
                         "mode": {
                             "default": "public",
+                            "description": "Specifying if the cluster resources are publicly accessible or not.",
                             "enum": [
                                 "public",
                                 "private"
@@ -233,6 +234,29 @@
                     "default": "1.24.11",
                     "title": "Kubernetes version",
                     "type": "string"
+                },
+                "network": {
+                    "description": "Internal network configuration that is susceptible to more frequent change",
+                    "properties": {
+                        "vpn": {
+                            "description": "Internal VPN configuration that is susceptible to more frequent change",
+                            "properties": {
+                                "gatewayMode": {
+                                    "default": "remote",
+                                    "enum": [
+                                        "local",
+                                        "remote"
+                                    ],
+                                    "title": "VPN gateway mode",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "VPN configuration",
+                            "type": "object"
+                        }
+                    },
+                    "title": "Network configuration",
+                    "type": "object"
                 }
             },
             "title": "Internal settings",
@@ -393,6 +417,44 @@
                     "default": "westeurope",
                     "title": "Location",
                     "type": "string"
+                },
+                "network": {
+                    "additionalProperties": false,
+                    "description": "Azure VNet peering and other Azure-specific network settings.",
+                    "properties": {
+                        "peerings": {
+                            "default": [],
+                            "description": "Specifying VNets (their resource groups and names) to which the peering is established.",
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "remoteVnetName": {
+                                        "description": "Name of the remote VNet to which the peering is established.",
+                                        "maxLength": 64,
+                                        "minLength": 2,
+                                        "pattern": "^[-\\w\\._]+$",
+                                        "title": "VNet name",
+                                        "type": "string"
+                                    },
+                                    "resourceGroup": {
+                                        "description": "Resource group for the remote VNet to which the peering is established.",
+                                        "maxLength": 90,
+                                        "minLength": 1,
+                                        "pattern": "^[-\\w\\._\\(\\)]+$",
+                                        "title": "Resource group name",
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "VNet peering",
+                                "type": "object",
+                                "uniqueItems": true
+                            },
+                            "title": "VNet peerings",
+                            "type": "array"
+                        }
+                    },
+                    "title": "Azure network settings",
+                    "type": "object"
                 },
                 "subscriptionId": {
                     "default": "PLACEHOLDER",
