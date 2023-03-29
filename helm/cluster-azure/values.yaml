@@ -1,5 +1,6 @@
 baseDomain: azuretest.gigantic.io
 connectivity:
+  allowedCIDRs: []
   bastion:
     enabled: true
     instanceType: Standard_D2s_v5

@@ -19,6 +19,12 @@ spec:
         role: control-plane
         cidrBlocks:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
+        {{- if (gt (len .Values.connectivity.allowedCIDRs) 0) }}
+        securityGroup:
+          name: {{ include "resource.default.name" $ }}-controlplane-nsg
+          securityRules:
+          {{- include "controlPlaneSecurityGroups" .Values.connectivity.allowedCIDRs | nindent 12 }}
+        {{- end }}
       - name: node-subnet
         natGateway:
           name: node-natgateway
