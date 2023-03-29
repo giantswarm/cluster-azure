@@ -252,6 +252,23 @@ It expects one argument which is the control plane subnet network range in forma
 {{- $ipParts._0 -}}.{{- $ipParts._1 -}}.{{- $ipParts._2 -}}.{{- $lastPart -}}
 {{- end -}}
 
+{{- define "network.vnet.resourceGroup" -}}
+{{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
+{{ $.Values.internal.network.vnet.resourceGroup }}
+{{- end -}}
+{{- end -}}
+
+{{- define "network.vnet.name" -}}
+{{- if $.Values.internal.network.vnet.name -}}
+{{ $.Values.internal.network.vnet.name }}
+{{- else -}}
+{{- if ($.Values.internal.network.vnet.resourceGroup) -}}
+{{- fail "When explicitly specifying VNet resource group, you also must explicitly specify the VNet name" }}
+{{- end -}}
+{{ include "resource.default.name" $ }}-vnet
+{{- end -}}
+{{- end -}}
+
 {{- define "providerSpecific.peeringFromWCToMC" -}}
 - resourceGroup: {{ $.Values.managementCluster }}
   remoteVnetName: {{ $.Values.managementCluster }}-vnet

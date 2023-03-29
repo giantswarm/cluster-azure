@@ -51,7 +51,10 @@ spec:
         cidrBlocks:
         - {{ .Values.connectivity.network.workers.cidr }}
     vnet:
-      name: {{ include "resource.default.name" $ }}-vnet
+      {{- if (include "network.vnet.resourceGroup" $) }}
+      resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
+      {{- end }}
+      name: {{ include "network.vnet.name" $ }}
       cidrBlocks:
       - {{ .Values.connectivity.network.hostCidr }}
       {{- if (include "providerSpecific.vnetPeerings" $) }}

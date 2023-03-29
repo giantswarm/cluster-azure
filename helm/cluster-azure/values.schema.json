@@ -246,6 +246,30 @@
                 "network": {
                     "description": "Internal network configuration that is susceptible to more frequent change",
                     "properties": {
+                        "vnet": {
+                            "default": {},
+                            "description": "Existing VNet configuration. This is susceptible to more frequent change or removal.",
+                            "properties": {
+                                "name": {
+                                    "description": "Name of the existing VNet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "VNet name",
+                                    "type": "string"
+                                },
+                                "resourceGroup": {
+                                    "description": "Resource group where the existing VNet is deployed.",
+                                    "maxLength": 90,
+                                    "minLength": 1,
+                                    "pattern": "^[-\\w\\._\\(\\)]+$",
+                                    "title": "Resource group name",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "VNet spec",
+                            "type": "object"
+                        },
                         "vpn": {
                             "description": "Internal VPN configuration that is susceptible to more frequent change",
                             "properties": {
