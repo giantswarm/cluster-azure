@@ -274,9 +274,10 @@
                             "description": "Internal VPN configuration that is susceptible to more frequent change",
                             "properties": {
                                 "gatewayMode": {
-                                    "default": "remote",
+                                    "default": "none",
                                     "enum": [
                                         "local",
+                                        "none",
                                         "remote"
                                     ],
                                     "title": "VPN gateway mode",

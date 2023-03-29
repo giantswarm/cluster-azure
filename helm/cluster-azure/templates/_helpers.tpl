@@ -297,10 +297,15 @@ It expects one argument which is the control plane subnet network range in forma
 {{- end }}
 
 {{- /*
-  Include peering from workload cluster to management cluster. This is added only to the WC VNets,
-  which are peered to the MC VNMet (so checking that cluster name is different than MC name).
+  Include peering from workload cluster to management cluster. This is added only to clusters that meet all of the
+  following conditions:
+  - The cluster is not the managment cluster itself (as it cannot have peering to its own network). For this we check
+    that cluster name is different than MC name.
+  - The cluster is a private workload cluster.
+  - The VPN gateway mode is set to "remote" (which means that the cluster uses a remote VPN gateway thought the VNet
+    peering)
 */ -}}
-{{- if and (eq .Values.connectivity.network.mode "private") (ne $.Values.metadata.name $.Values.managementCluster) }}
+{{- if and (ne $.Values.metadata.name $.Values.managementCluster) (eq .Values.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 

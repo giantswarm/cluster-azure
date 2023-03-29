@@ -43,7 +43,7 @@ internal:
   network:
     vnet: {}
     vpn:
-      gatewayMode: remote
+      gatewayMode: none
 metadata:
   servicePriority: highest
 nodePools:
