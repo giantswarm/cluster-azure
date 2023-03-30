@@ -7,15 +7,12 @@ connectivity:
   network:
     controlPlane:
       cidr: 10.0.0.0/20
-      name: control-plane-subnet
     hostCidr: 10.0.0.0/16
     mode: public
     podCidr: 192.168.0.0/16
     serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
-      name: node-subnet
-      natGatewayName: node-natgateway
   sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
   etcdVolumeSizeGB: 10
@@ -44,6 +41,7 @@ internal:
     version: 3374.2.4
   kubernetesVersion: 1.24.11
   network:
+    subnets: {}
     vnet: {}
     vpn:
       gatewayMode: none

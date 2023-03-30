@@ -47,11 +47,6 @@
                                     "default": "10.0.0.0/20",
                                     "title": "Subnet",
                                     "type": "string"
-                                },
-                                "name": {
-                                    "default": "control-plane-subnet",
-                                    "title": "Subnet name",
-                                    "type": "string"
                                 }
                             },
                             "title": "Control plane",
@@ -90,16 +85,6 @@
                                 "cidr": {
                                     "default": "10.0.16.0/20",
                                     "title": "Subnet",
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "default": "node-subnet",
-                                    "title": "Subnet name",
-                                    "type": "string"
-                                },
-                                "natGatewayName": {
-                                    "default": "node-natgateway",
-                                    "title": "Node subnet nat gateway name",
                                     "type": "string"
                                 }
                             },
@@ -261,6 +246,38 @@
                 "network": {
                     "description": "Internal network configuration that is susceptible to more frequent change",
                     "properties": {
+                        "subnets": {
+                            "default": {},
+                            "description": "Customize subnets configuration",
+                            "properties": {
+                                "controlPlaneSubnetName": {
+                                    "description": "Name of the control plane subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "ControlPlane subnet name",
+                                    "type": "string"
+                                },
+                                "nodesSubnetName": {
+                                    "description": "Name of the nodes subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "Nodes subnet name",
+                                    "type": "string"
+                                },
+                                "nodeSubnetNatGatewayName": {
+                                    "description": "Name of the nat gateway on the nodes subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "Nodes subnet nat-gateway name",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "VNet spec",
+                            "type": "object"
+                        },
                         "vnet": {
                             "default": {},
                             "description": "Existing VNet configuration. This is susceptible to more frequent change or removal.",
