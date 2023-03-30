@@ -47,6 +47,11 @@
                                     "default": "10.0.0.0/20",
                                     "title": "Subnet",
                                     "type": "string"
+                                },
+                                "name": {
+                                    "default": "control-plane-subnet",
+                                    "title": "Subnet name",
+                                    "type": "string"
                                 }
                             },
                             "title": "Control plane",
@@ -85,6 +90,16 @@
                                 "cidr": {
                                     "default": "10.0.16.0/20",
                                     "title": "Subnet",
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "default": "node-subnet",
+                                    "title": "Subnet name",
+                                    "type": "string"
+                                },
+                                "natGatewayName": {
+                                    "default": "node-natgateway",
+                                    "title": "Node subnet nat gateway name",
                                     "type": "string"
                                 }
                             },
