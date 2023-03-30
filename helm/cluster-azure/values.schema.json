@@ -258,20 +258,20 @@
                                     "title": "ControlPlane subnet name",
                                     "type": "string"
                                 },
-                                "nodesSubnetName": {
-                                    "description": "Name of the nodes subnet.",
-                                    "maxLength": 64,
-                                    "minLength": 2,
-                                    "pattern": "^[-\\w\\._]+$",
-                                    "title": "Nodes subnet name",
-                                    "type": "string"
-                                },
                                 "nodeSubnetNatGatewayName": {
                                     "description": "Name of the nat gateway on the nodes subnet.",
                                     "maxLength": 64,
                                     "minLength": 2,
                                     "pattern": "^[-\\w\\._]+$",
                                     "title": "Nodes subnet nat-gateway name",
+                                    "type": "string"
+                                },
+                                "nodesSubnetName": {
+                                    "description": "Name of the nodes subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "Nodes subnet name",
                                     "type": "string"
                                 }
                             },
