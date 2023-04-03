@@ -255,24 +255,18 @@ It expects one argument which is the control plane subnet network range in forma
 {{- define "network.subnets.controlPlane.name" -}}
 {{- if hasKey $.Values.internal.network.subnets "controlPlaneSubnetName" -}}
 {{ $.Values.internal.network.subnets.controlPlaneSubnetName }}
-{{- else -}}
-control-plane-subnet
 {{- end -}}
 {{- end -}}
 
 {{- define "network.subnets.nodes.name" -}}
 {{- if hasKey $.Values.internal.network.subnets "nodesSubnetName" -}}
 {{ $.Values.internal.network.subnets.nodesSubnetName }}
-{{- else -}}
-node-subnet
 {{- end -}}
 {{- end -}}
 
 {{- define "network.subnets.nodes.natGatewayName" -}}
 {{- if hasKey $.Values.internal.network.subnets "nodeSubnetNatGatewayName" -}}
 {{ $.Values.internal.network.subnets.nodeSubnetNatGatewayName }}
-{{- else -}}
-node-natgateway
 {{- end -}}
 {{- end -}}
 
