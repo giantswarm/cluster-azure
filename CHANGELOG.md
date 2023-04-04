@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Skip `kube-proxy` during kubeadm init/join to replace with cilium-proxy
+- :boom: Breaking - Skip `kube-proxy` during kubeadm init/join to replace with cilium-proxy
   - This change requies default-apps >= 0.0.14
 
 ## [0.0.16] - 2023-03-27
