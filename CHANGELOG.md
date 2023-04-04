@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.17] - 2023-04-04
+### Changed
+
+- Rename JSON schema makefile commands to `normalize-schema`, `validate-schema`, `generate-values`.
 
 ## [0.0.17] - 2023-04-04
 
