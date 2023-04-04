@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Rename JSON schema makefile commands to `normalize-schema`, `validate-schema`, `generate-values`.
+- Add replacement of pause image for kubelet and containerd to use `quay.io/giantswarm/pause`
 
 ## [0.0.17] - 2023-04-04
 
