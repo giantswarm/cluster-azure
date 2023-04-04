@@ -64,6 +64,7 @@ preKubeadmCommands:
 {{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
 {{- include "override-hostname-in-kubeadm-configuration" . | nindent 2 }}
+{{- include "override-pause-image-with-quay" . | nindent 2 }}
 postKubeadmCommands: []
 users:
 {{- include "sshUsers" . | nindent 2 }}
