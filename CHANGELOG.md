@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.17] - 2023-04-04
+
+## [0.0.17] - 2023-04-04
+
 ### Added
 
 - Add support for private clusters.
@@ -182,7 +186,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.16...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...HEAD
+[0.0.17]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...v0.0.17
+[0.0.17]: https://github.com/giantswarm/cluster-azure/compare/v0.0.16...v0.0.17
 [0.0.16]: https://github.com/giantswarm/cluster-azure/compare/v0.0.15...v0.0.16
 [0.0.15]: https://github.com/giantswarm/cluster-azure/compare/v0.0.14...v0.0.15
 [0.0.14]: https://github.com/giantswarm/cluster-azure/compare/v0.0.13...v0.0.14
