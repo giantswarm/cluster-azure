@@ -197,7 +197,6 @@ spec:
     initConfiguration:
       skipPhases:
       - addon/coredns
-      - addon/kube-proxy
       nodeRegistration:
         kubeletExtraArgs:
           azure-container-registry-config: /etc/kubernetes/azure.json
