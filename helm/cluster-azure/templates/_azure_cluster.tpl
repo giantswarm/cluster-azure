@@ -25,6 +25,15 @@ spec:
         {{- if (gt (len .Values.connectivity.allowedCIDRs) 0) }}
         {{- include "controlPlaneSecurityGroups" .Values.connectivity.allowedCIDRs | nindent 12 }}
         {{- else }}
+           - name: "allow_ssh_from_all"
+             description: "allow SSH"
+             direction: "Inbound"
+             priority: 148
+             protocol: "*"
+             destination: "*"
+             destinationPorts: "22"
+             source: "0.0.0.0"
+             sourcePorts: "*"
            - name: "allow_apiserver_from_all"
              description: "Allow K8s API Server"
              direction: "Inbound"
