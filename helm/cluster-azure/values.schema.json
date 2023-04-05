@@ -14,6 +14,14 @@
         },
         "connectivity": {
             "properties": {
+                "allowedCIDRs": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "List of CIDRs which have to been allowed to connect to the API Server endpoint",
+                    "type": "array"
+                },
                 "bastion": {
                     "properties": {
                         "enabled": {

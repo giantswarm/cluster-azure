@@ -19,6 +19,31 @@ spec:
         role: control-plane
         cidrBlocks:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
+        securityGroup:
+          name: {{ include "resource.default.name" $ }}-controlplane-nsg
+          securityRules:
+        {{- if (gt (len .Values.connectivity.allowedCIDRs) 0) }}
+        {{- include "controlPlaneSecurityGroups" .Values.connectivity.allowedCIDRs | nindent 12 }}
+        {{- else }}
+           - name: "allow_ssh_from_all"
+             description: "allow SSH"
+             direction: "Inbound"
+             priority: 148
+             protocol: "*"
+             destination: "*"
+             destinationPorts: "22"
+             source: "*"
+             sourcePorts: "*"
+           - name: "allow_apiserver_from_all"
+             description: "Allow K8s API Server"
+             direction: "Inbound"
+             priority: 149
+             protocol: "*"
+             destination: "*"
+             destinationPorts: "6443"
+             source: "*"
+             sourcePorts: "*"
+        {{- end }}
       - name: node-subnet
         natGateway:
           name: node-natgateway

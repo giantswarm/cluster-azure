@@ -288,3 +288,108 @@ It expects one argument which is the control plane subnet network range in forma
 {{- end }}
 
 {{- end -}}
+
+{{/*
+k explain azurecluster.spec.networkSpec.subnets.securityGroup.securityRules.priority
+KIND:     AzureCluster
+VERSION:  infrastructure.cluster.x-k8s.io/v1beta1
+
+FIELD:    priority <integer>
+
+DESCRIPTION:
+     Priority is a number between 100 and 4096. Each rule should have a unique
+     value for priority. Rules are processed in priority order, with lower
+     numbers processed before higher numbers. Once traffic matches a rule,
+     processing stops.
+
+From: https://learn.microsoft.com/en-us/azure/virtual-network/service-tags-overview
+
+VirtualNetwork
+
+The virtual network address space (all IP address ranges defined for the virtual network),
+all connected on-premises address spaces, peered virtual networks, virtual networks connected
+to a virtual network gateway, the virtual IP address of the host, and address prefixes used
+on user-defined routes. This tag might also contain default routes.
+
+AzureLoadBalancer
+
+The Azure infrastructure load balancer. The tag translates to the virtual IP address of
+the host (168.63.129.16) where the Azure health probes originate. This only includes
+probe traffic, not real traffic to your backend resource. If you're not using
+Azure Load Balancer, you can override this rule.
+
+
+For a new WC, the following IPs must be also set:
+glippy outbound lb ip 20.4.101.180
+glippy nat-ip 20.4.101.216
+
+
+*/}}
+
+{{- define "controlPlaneSecurityGroups" -}}
+- name: "allow_ssh_from_gridscale"
+  description: "allow SSH"
+  direction: "Inbound"
+  priority: 150
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "22"
+  source: "185.102.95.187"
+  sourcePorts: "*"
+- name: "allow_ssh_from_vultr"
+  description: "allow SSH"
+  direction: "Inbound"
+  priority: 151
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "22"
+  source: "95.179.153.65"
+  sourcePorts: "*"
+- name: "allow_apiserver_from_gridscale"
+  description: "Allow K8s API Server"
+  direction: "Inbound"
+  priority: 152
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "6443"
+  source: "185.102.95.187"
+  sourcePorts: "*"
+- name: "allow_apiserver_from_vultr"
+  description: "Allow K8s API Server"
+  direction: "Inbound"
+  priority: 153
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "6443"
+  source: "95.179.153.65"
+  sourcePorts: "*"
+- name: "allow_apiserver_from_virtual_network"
+  description: "Allow K8s API Server"
+  direction: "Inbound"
+  priority: 154
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "6443"
+  source: "VirtualNetwork"
+  sourcePorts: "*"
+- name: "allow_apiserver_from_azure_lb"
+  description: "Allow K8s API Server"
+  direction: "Inbound"
+  priority: 155
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "6443"
+  source: "AzureLoadBalancer"
+  sourcePorts: "*"
+{{- range $index, $value := . }}
+- name: "allow_apiserver_from_{{ $value | replace "/" "_" }}"
+  description: "Allow K8s API Server"
+  direction: "Inbound"
+  priority: {{ add $index 500 }}
+  protocol: "*"
+  destination: "*"
+  destinationPorts: "6443"
+  source: {{ $value | quote}}
+  sourcePorts: "*"
+{{- end }}
+{{- end -}}

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Add `connectivity.allowedCIDRs` to define a list of network addresses to connect to the API server.
+
 ## [0.0.18] - 2023-04-05
 
 ### Changed
