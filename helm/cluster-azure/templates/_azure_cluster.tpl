@@ -32,7 +32,7 @@ spec:
              protocol: "*"
              destination: "*"
              destinationPorts: "22"
-             source: "0.0.0.0"
+             source: "*"
              sourcePorts: "*"
            - name: "allow_apiserver_from_all"
              description: "Allow K8s API Server"
@@ -41,7 +41,7 @@ spec:
              protocol: "*"
              destination: "*"
              destinationPorts: "6443"
-             source: "0.0.0.0"
+             source: "*"
              sourcePorts: "*"
         {{- end }}
       - name: node-subnet
