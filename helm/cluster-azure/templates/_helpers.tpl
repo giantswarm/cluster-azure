@@ -304,18 +304,18 @@ DESCRIPTION:
 
 From: https://learn.microsoft.com/en-us/azure/virtual-network/service-tags-overview
 
-VirtualNetwork	
+VirtualNetwork
 
-The virtual network address space (all IP address ranges defined for the virtual network), 
-all connected on-premises address spaces, peered virtual networks, virtual networks connected 
-to a virtual network gateway, the virtual IP address of the host, and address prefixes used 
+The virtual network address space (all IP address ranges defined for the virtual network),
+all connected on-premises address spaces, peered virtual networks, virtual networks connected
+to a virtual network gateway, the virtual IP address of the host, and address prefixes used
 on user-defined routes. This tag might also contain default routes.
 
-AzureLoadBalancer	
+AzureLoadBalancer
 
-The Azure infrastructure load balancer. The tag translates to the virtual IP address of 
-the host (168.63.129.16) where the Azure health probes originate. This only includes 
-probe traffic, not real traffic to your backend resource. If you're not using 
+The Azure infrastructure load balancer. The tag translates to the virtual IP address of
+the host (168.63.129.16) where the Azure health probes originate. This only includes
+probe traffic, not real traffic to your backend resource. If you're not using
 Azure Load Balancer, you can override this rule.
 
 
@@ -380,9 +380,9 @@ glippy nat-ip 20.4.101.216
   destination: "*"
   destinationPorts: "6443"
   source: "AzureLoadBalancer"
-  sourcePorts: "*"  
+  sourcePorts: "*"
 {{- range $index, $value := . }}
-- name: "allow_apiserver_from_{{ $value }}"
+- name: "allow_apiserver_from_{{ $value | replace "/" "_" }}"
   description: "Allow K8s API Server"
   direction: "Inbound"
   priority: {{ add $index 500 }}
