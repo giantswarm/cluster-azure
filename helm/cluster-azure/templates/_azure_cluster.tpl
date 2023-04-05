@@ -19,11 +19,21 @@ spec:
         role: control-plane
         cidrBlocks:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
-        {{- if (gt (len .Values.connectivity.allowedCIDRs) 0) }}
         securityGroup:
           name: {{ include "resource.default.name" $ }}-controlplane-nsg
           securityRules:
-          {{- include "controlPlaneSecurityGroups" .Values.connectivity.allowedCIDRs | nindent 12 }}
+        {{- if (gt (len .Values.connectivity.allowedCIDRs) 0) }}
+        {{- include "controlPlaneSecurityGroups" .Values.connectivity.allowedCIDRs | nindent 12 }}
+        {{- else }}
+           - name: "allow_apiserver_from_all"
+             description: "Allow K8s API Server"
+             direction: "Inbound"
+             priority: 149
+             protocol: "*"
+             destination: "*"
+             destinationPorts: "6443"
+             source: "0.0.0.0"
+             sourcePorts: "*"
         {{- end }}
       - name: node-subnet
         natGateway:
