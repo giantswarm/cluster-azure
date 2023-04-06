@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Add `connectivity.allowedCIDRs` to define a list of network addresses to connect to the API server.
+- Allow defining the scope of the SystemAssigned Identity on WC nodes
 
 ## [0.0.18] - 2023-04-05
 

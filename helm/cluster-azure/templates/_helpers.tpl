@@ -224,7 +224,7 @@ this function requires an object like this to be passed in
 identity: {{ $identity.type }}
 {{- if eq $identity.type "SystemAssigned" }}
 systemAssignedIdentityRole:
-  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}
+  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
   definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
 {{- else }}
 userAssignedIdentities:

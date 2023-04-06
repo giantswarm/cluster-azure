@@ -197,6 +197,15 @@
                             "title": "Attach CAPZ controller UserAssigned identity",
                             "type": "boolean"
                         },
+                        "systemAssignedScope": {
+                            "default": "ResourceGroup",
+                            "enum": [
+                                "Subscription",
+                                "ResourceGroup"
+                            ],
+                            "title": "Scope of SystemAssignedIdentity",
+                            "type": "string"
+                        },
                         "type": {
                             "default": "SystemAssigned",
                             "enum": [

@@ -33,6 +33,7 @@ internal:
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
   identity:
     attachCapzControllerUserAssignedIdentity: false
+    systemAssignedScope: ResourceGroup
     type: SystemAssigned
     userAssignedCustomIdentities: []
   image:
