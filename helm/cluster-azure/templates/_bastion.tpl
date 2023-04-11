@@ -18,9 +18,23 @@ osDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
-subnetName: {{ $.spec.subnetName | default (ternary "node-subnet" "control-plane-subnet" (eq .Values.connectivity.network.mode "private" )) }}
 allocatePublicIP: {{ ternary false true (eq .Values.connectivity.network.mode "private" ) }}
 vmSize: {{ .spec.instanceType }}
+{{- if (hasKey $.spec "subnetName") }}
+subnetName: {{ $.spec.subnetName }}
+{{- else if (eq .Values.connectivity.network.mode "private") }}
+  {{- if ( include "network.subnets.controlPlane.name" $ ) }}
+subnetName: {{ include "network.subnets.controlPlane.name" $ }}
+  {{- else }}
+subnetName: "node-subnet"
+  {{- end }}
+{{- else }}
+  {{- if ( include "network.subnets.controlPlane.name" $ ) }}
+subnetName: {{ include "network.subnets.controlPlane.name" $ }}
+  {{- else }}
+subnetName: "control-plane-subnet"
+  {{- end }}
+{{- end }}
 {{- end -}}
 
 {{- define "bastion-machine-kubeadmconfig-spec" -}}
