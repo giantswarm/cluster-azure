@@ -197,6 +197,15 @@
                             "title": "Attach CAPZ controller UserAssigned identity",
                             "type": "boolean"
                         },
+                        "systemAssignedScope": {
+                            "default": "ResourceGroup",
+                            "enum": [
+                                "Subscription",
+                                "ResourceGroup"
+                            ],
+                            "title": "Scope of SystemAssignedIdentity",
+                            "type": "string"
+                        },
                         "type": {
                             "default": "SystemAssigned",
                             "enum": [
@@ -246,13 +255,70 @@
                 "network": {
                     "description": "Internal network configuration that is susceptible to more frequent change",
                     "properties": {
+                        "subnets": {
+                            "default": {},
+                            "description": "Customize subnets configuration",
+                            "properties": {
+                                "controlPlaneSubnetName": {
+                                    "description": "Name of the control plane subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "ControlPlane subnet name",
+                                    "type": "string"
+                                },
+                                "nodeSubnetNatGatewayName": {
+                                    "description": "Name of the nat gateway on the nodes subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "Nodes subnet nat-gateway name",
+                                    "type": "string"
+                                },
+                                "nodesSubnetName": {
+                                    "description": "Name of the nodes subnet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "Nodes subnet name",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "VNet spec",
+                            "type": "object"
+                        },
+                        "vnet": {
+                            "default": {},
+                            "description": "Existing VNet configuration. This is susceptible to more frequent change or removal.",
+                            "properties": {
+                                "name": {
+                                    "description": "Name of the existing VNet.",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$",
+                                    "title": "VNet name",
+                                    "type": "string"
+                                },
+                                "resourceGroup": {
+                                    "description": "Resource group where the existing VNet is deployed.",
+                                    "maxLength": 90,
+                                    "minLength": 1,
+                                    "pattern": "^[-\\w\\._\\(\\)]+$",
+                                    "title": "Resource group name",
+                                    "type": "string"
+                                }
+                            },
+                            "title": "VNet spec",
+                            "type": "object"
+                        },
                         "vpn": {
                             "description": "Internal VPN configuration that is susceptible to more frequent change",
                             "properties": {
                                 "gatewayMode": {
-                                    "default": "remote",
+                                    "default": "none",
                                     "enum": [
                                         "local",
+                                        "none",
                                         "remote"
                                     ],
                                     "title": "VPN gateway mode",

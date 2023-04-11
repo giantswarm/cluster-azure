@@ -11,3 +11,8 @@ connectivity:
 providerSpecific:
   location: "westeurope"
   subscriptionId: "PLACEHOLDER_SUBSCRIPTION_ID"
+
+internal:
+  identity:
+    type: "SystemAssigned"
+    systemAssignedScope: "Subscription"

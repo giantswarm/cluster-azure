@@ -15,7 +15,7 @@ spec:
   location: {{ .Values.providerSpecific.location }}
   networkSpec:
     subnets:
-      - name: control-plane-subnet
+      - name: {{ if ( include "network.subnets.controlPlane.name" $ ) }}{{ include "network.subnets.controlPlane.name" $ }}{{ else }}control-plane-subnet{{ end }}
         role: control-plane
         cidrBlocks:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
@@ -44,14 +44,17 @@ spec:
              source: "*"
              sourcePorts: "*"
         {{- end }}
-      - name: node-subnet
+      - name: {{ if ( include "network.subnets.nodes.name" $ ) }}{{ include "network.subnets.nodes.name" $ }}{{ else }}node-subnet{{ end }}
         natGateway:
-          name: node-natgateway
+          name: {{ if ( include "network.subnets.nodes.natGatewayName" $ ) }}{{ include "network.subnets.nodes.natGatewayName" $ }}{{ else }}node-natgateway{{ end }}
         role: node
         cidrBlocks:
         - {{ .Values.connectivity.network.workers.cidr }}
     vnet:
-      name: {{ include "resource.default.name" $ }}-vnet
+      {{- if (include "network.vnet.resourceGroup" $) }}
+      resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
+      {{- end }}
+      name: {{ include "network.vnet.name" $ }}
       cidrBlocks:
       - {{ .Values.connectivity.network.hostCidr }}
       {{- if (include "providerSpecific.vnetPeerings" $) }}

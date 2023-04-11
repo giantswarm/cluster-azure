@@ -224,7 +224,7 @@ this function requires an object like this to be passed in
 identity: {{ $identity.type }}
 {{- if eq $identity.type "SystemAssigned" }}
 systemAssignedIdentityRole:
-  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}
+  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
   definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
 {{- else }}
 userAssignedIdentities:
@@ -250,6 +250,41 @@ It expects one argument which is the control plane subnet network range in forma
 {{ $ipParts := split "." $cidrParts._0 }}
 {{ $lastPart := $ipParts._3 | int | add 10 }}
 {{- $ipParts._0 -}}.{{- $ipParts._1 -}}.{{- $ipParts._2 -}}.{{- $lastPart -}}
+{{- end -}}
+
+{{- define "network.subnets.controlPlane.name" -}}
+{{- if hasKey $.Values.internal.network.subnets "controlPlaneSubnetName" -}}
+{{ $.Values.internal.network.subnets.controlPlaneSubnetName }}
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.nodes.name" -}}
+{{- if hasKey $.Values.internal.network.subnets "nodesSubnetName" -}}
+{{ $.Values.internal.network.subnets.nodesSubnetName }}
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.nodes.natGatewayName" -}}
+{{- if hasKey $.Values.internal.network.subnets "nodeSubnetNatGatewayName" -}}
+{{ $.Values.internal.network.subnets.nodeSubnetNatGatewayName }}
+{{- end -}}
+{{- end -}}
+
+{{- define "network.vnet.resourceGroup" -}}
+{{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
+{{ $.Values.internal.network.vnet.resourceGroup }}
+{{- end -}}
+{{- end -}}
+
+{{- define "network.vnet.name" -}}
+{{- if $.Values.internal.network.vnet.name -}}
+{{ $.Values.internal.network.vnet.name }}
+{{- else -}}
+{{- if ($.Values.internal.network.vnet.resourceGroup) -}}
+{{- fail "When explicitly specifying VNet resource group, you also must explicitly specify the VNet name" }}
+{{- end -}}
+{{ include "resource.default.name" $ }}-vnet
+{{- end -}}
 {{- end -}}
 
 {{- define "providerSpecific.peeringFromWCToMC" -}}
@@ -280,10 +315,15 @@ It expects one argument which is the control plane subnet network range in forma
 {{- end }}
 
 {{- /*
-  Include peering from workload cluster to management cluster. This is added only to the WC VNets,
-  which are peered to the MC VNMet (so checking that cluster name is different than MC name).
+  Include peering from workload cluster to management cluster. This is added only to clusters that meet all of the
+  following conditions:
+  - The cluster is not the managment cluster itself (as it cannot have peering to its own network). For this we check
+    that cluster name is different than MC name.
+  - The cluster is a private workload cluster.
+  - The VPN gateway mode is set to "remote" (which means that the cluster uses a remote VPN gateway thought the VNet
+    peering)
 */ -}}
-{{- if and (eq .Values.connectivity.network.mode "private") (ne $.Values.metadata.name $.Values.managementCluster) }}
+{{- if and (ne $.Values.metadata.name $.Values.managementCluster) (eq .Values.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 

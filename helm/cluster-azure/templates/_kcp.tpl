@@ -15,6 +15,9 @@ osDisk:
   osType: Linux
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ $.Values.controlPlane.instanceType }}
+{{- if ( include "network.subnets.controlPlane.name" $ ) }}
+subnetName: {{ include "network.subnets.controlPlane.name" $ }}
+{{- end }}
 {{- end }}
 
 {{- define "control-plane" }}

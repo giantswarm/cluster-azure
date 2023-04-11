@@ -15,6 +15,9 @@ osDisk:
   osType: Linux
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ .spec.instanceType }}
+{{- if ( include "network.subnets.nodes.name" $ ) }}
+subnetName: {{ include "network.subnets.nodes.name" $ }}
+{{- end }}
 {{- end -}}
 
 {{- define "machine-kubeadmconfig-spec" -}}
