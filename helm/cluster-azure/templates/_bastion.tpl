@@ -21,17 +21,9 @@ sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 {{- if (hasKey $.spec "subnetName") }}
 subnetName: {{ $.spec.subnetName }}
 {{- else if (eq .Values.connectivity.network.mode "private") }}
-  {{- if ( include "network.subnets.controlPlane.name" $ ) }}
-subnetName: {{ include "network.subnets.controlPlane.name" $ }}
-  {{- else }}
-subnetName: "node-subnet"
-  {{- end }}
+subnetName: {{ include "network.subnets.nodes.name" $ }}
 {{- else }}
-  {{- if ( include "network.subnets.controlPlane.name" $ ) }}
 subnetName: {{ include "network.subnets.controlPlane.name" $ }}
-  {{- else }}
-subnetName: "control-plane-subnet"
-  {{- end }}
 {{- end }}
 allocatePublicIP: {{ ternary false true (eq .Values.connectivity.network.mode "private" ) }}
 vmSize: {{ .spec.instanceType }}
