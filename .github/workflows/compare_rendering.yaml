@@ -113,7 +113,7 @@ jobs:
           comment_id: ${{ steps.fc.outputs.comment-id }}
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create or update validation comment
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@v3
         if: ${{ !contains(steps.diff.outputs.stdout,'No diff detected') }}
         with:
           issue-number: ${{ github.event.pull_request.number }}
