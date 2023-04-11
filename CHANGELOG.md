@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Add `connectivity.allowedCIDRs` to define a list of network addresses to connect to the API server.
+- Support defining custom vnet settings ( in the /internal section  of the schema )
+  - VNET name and ResourceGroup
+  - precreated subnet names
 - Allow defining the scope of the SystemAssigned Identity on WC nodes
 
 ## [0.0.18] - 2023-04-05
