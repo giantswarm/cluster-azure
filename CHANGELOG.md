@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.19] - 2023-04-18
+
 ### Changed
 - Add `connectivity.allowedCIDRs` to define a list of network addresses to connect to the API server.
 - Support defining custom vnet settings ( in the /internal section  of the schema )
@@ -200,7 +202,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.18...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.19...HEAD
+[0.0.19]: https://github.com/giantswarm/cluster-azure/compare/v0.0.18...v0.0.19
 [0.0.18]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...v0.0.18
 [0.0.17]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...v0.0.17
 [0.0.17]: https://github.com/giantswarm/cluster-azure/compare/v0.0.16...v0.0.17
