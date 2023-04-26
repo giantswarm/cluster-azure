@@ -53,7 +53,7 @@ users:
 {{ $spec := merge (dict "name" "bastion" "rootVolumeSizeGB" "30" ) $.Values.connectivity.bastion }}
 {{ $data := dict "spec" $spec "type" "bastionMachineDeployment" "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "bastion-machine-kubeadmconfig-spec" $data) "global" $) ) }}
-{{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" (include "bastion-machine-spec" $data) "global" $) ) }}
+{{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "bastion-machine-spec" $data) "identity" (include "bastion-machine-identity" $data) ) "global" $) ) }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
