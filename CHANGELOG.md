@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.20] - 2023-04-26
+
 ### Changed
 
 - Add `identity spec` to hash calculation for bastion node
@@ -206,7 +208,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.19...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.20...HEAD
+[0.0.20]: https://github.com/giantswarm/cluster-azure/compare/v0.0.19...v0.0.20
 [0.0.19]: https://github.com/giantswarm/cluster-azure/compare/v0.0.18...v0.0.19
 [0.0.18]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...v0.0.18
 [0.0.17]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...v0.0.17
