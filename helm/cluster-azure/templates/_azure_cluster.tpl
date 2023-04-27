@@ -72,7 +72,7 @@ spec:
       - name: {{ include "resource.default.name" $ }}-api-privatelink
         natIpConfigurations:
         - allocationMethod: Dynamic
-          subnet: {{ if ( include "network.subnets.nodes.name" $ ) }}{{ include "network.subnets.nodes.name" $ }}{{ else }}node-subnet{{ end }}
+          subnet: {{ include "network.subnets.nodes.name" $ }}
         lbFrontendIPConfigNames:
         - {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         allowedSubscriptions:
