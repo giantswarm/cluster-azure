@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restricted `.providerSpecific.location` value to a set of defined region names.
 - Disallow additional properties on the `.metadata.labels` object.
 
+### Added
+
+- Deploy private links for private clusters.
+
 ## [0.0.25] - 2023-06-14
 
 ### Changed
