@@ -247,6 +247,29 @@
                     "title": "Node Image",
                     "type": "object"
                 },
+                "kubectlImage": {
+                    "properties": {
+                        "name": {
+                            "default": "giantswarm/kubectl",
+                            "description": "Name of the image Registry",
+                            "title": "Image name",
+                            "type": "string"
+                        },
+                        "registry": {
+                            "default": "quay.io",
+                            "description": "Registry for the kubectl image",
+                            "title": "Kubectl Image Registry",
+                            "type": "string"
+                        },
+                        "tag": {
+                            "default": "1.23.5",
+                            "title": "Image tag",
+                            "type": "string"
+                        }
+                    },
+                    "title": "Kubectl Image settings",
+                    "type": "object"
+                },
                 "kubernetesVersion": {
                     "default": "1.24.11",
                     "title": "Kubernetes version",

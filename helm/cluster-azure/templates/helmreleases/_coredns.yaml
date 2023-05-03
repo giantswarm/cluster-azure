@@ -1,0 +1,54 @@
+{{- define "coredns-helm-release" }}
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: {{ include "resource.default.name" $ }}-coredns
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+  labels:
+    cluster-apps-operator.giantswarm.io/watching: ""
+    {{- if .Values.metadata.servicePriority }}
+    giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
+    {{- end }}
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  suspend: false
+  releaseName: coredns
+  targetNamespace: kube-system
+  storageNamespace: kube-system
+  chart:
+    spec:
+      chart: coredns-app
+      version: 1.14.2
+      sourceRef:
+        kind: HelmRepository
+        name: {{ include "resource.default.name" $ }}-default
+  dependsOn:
+    - name: {{ include "resource.default.name" $ }}-cilium
+      namespace: {{ .Release.Namespace }}
+  kubeConfig:
+    secretRef:
+      name: {{ include "resource.default.name" $ }}-kubeconfig
+  interval: 10m
+  install:
+    remediation:
+      retries: 30
+  # Default values
+  # https://github.com/giantswarm/coredns-app/blob/main/helm/coredns-app/values.yaml
+  values:
+    mastersInstance:
+      nodeSelector:
+        "node-role.kubernetes.io/master": null
+        "node-role.kubernetes.io/control-plane": '""'
+    cluster:
+      calico:
+        CIDR: {{ .Values.connectivity.network.podCidr | quote }}
+      kubernetes:
+        API:
+          # We are currently setting 10.96.0.0/12 due to a bug - https://github.com/giantswarm/giantswarm/issues/26664
+          # With this change we will be using the right value 
+          clusterIPRange: {{ .Values.connectivity.network.serviceCidr | quote }}
+        DNS:
+          IP: {{ include "clusterDNS" $ | quote }}
+{{- end -}}
