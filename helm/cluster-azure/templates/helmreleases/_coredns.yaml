@@ -37,10 +37,6 @@ spec:
   # Default values
   # https://github.com/giantswarm/coredns-app/blob/main/helm/coredns-app/values.yaml
   values:
-    mastersInstance:
-      nodeSelector:
-        "node-role.kubernetes.io/master": null
-        "node-role.kubernetes.io/control-plane": '""'
     cluster:
       calico:
         CIDR: {{ .Values.connectivity.network.podCidr | quote }}
