@@ -34,6 +34,7 @@ spec:
   # Default values
   # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
   values:
+    {{- include "values.common" . | nindent 4 }}
     controller:
       disableAvailabilitySetNodes: false
     linux:
