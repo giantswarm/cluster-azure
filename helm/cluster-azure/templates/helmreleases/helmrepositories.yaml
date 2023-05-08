@@ -14,3 +14,20 @@ metadata:
 spec:
   interval: 10m
   url: https://giantswarm.github.io/default-catalog
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: {{ include "resource.default.name" $ }}-default-test
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+  labels:
+    cluster-apps-operator.giantswarm.io/watching: ""
+    {{- if .Values.metadata.servicePriority }}
+    giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
+    {{- end }}
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  interval: 10m
+  url: https://giantswarm.github.io/default-test-catalog
