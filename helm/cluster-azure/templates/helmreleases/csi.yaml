@@ -1,8 +1,7 @@
-{{- define "cni-driver-helm-release" }}
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: {{ include "resource.default.name" $ }}-cilium
+  name: {{ include "resource.default.name" $ }}-azuredisk-csi-driver
   namespace: {{ .Release.Namespace }}
   annotations:
     cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
@@ -14,38 +13,28 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
 spec:
   suspend: false
-  releaseName: cilium
+  releaseName: azuredisk-csi-driver
   targetNamespace: kube-system
   storageNamespace: kube-system
   chart:
     spec:
-      chart: cilium
-      version: 0.9.3 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      chart: azuredisk-csi-driver-app
+      version: 1.26.2-gs1 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
-  interval: 10m
+  interval: 2m
   install:
     remediation:
       retries: 30
   # Default values
-  # https://github.com/giantswarm/cilium-app/blob/main/helm/cilium/values.yaml
+  # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
   values:
-    ipam:
-      mode: kubernetes
-    hubble:
-      relay:
-        enabled: true
-    defaultPolicies:
-      enabled: true
-      tolerations:
-        - effect: NoSchedule
-          operator: Exists
-        - effect: NoExecute
-          operator: Exists
-        - key: CriticalAddonsOnly
-          operator: Exists
-{{- end -}}
+    {{- include "values.common" . | nindent 4 }}
+    controller:
+      disableAvailabilitySetNodes: false
+    linux:
+      azure_credential_file: /etc/kubernetes/azure.json

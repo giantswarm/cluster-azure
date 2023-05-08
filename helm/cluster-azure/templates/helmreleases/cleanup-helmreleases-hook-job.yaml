@@ -18,7 +18,6 @@
 # To work around this, post-delete Job deletes all finalizers on all HelmRelease
 # CRs created with this chart.
 #
-{{- define "helmreleases-cleanup-hook" }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -120,4 +119,3 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "100m"
-{{- end -}}

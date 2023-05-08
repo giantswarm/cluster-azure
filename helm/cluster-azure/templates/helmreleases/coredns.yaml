@@ -1,4 +1,3 @@
-{{- define "coredns-helm-release" }}
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -30,7 +29,7 @@ spec:
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
-  interval: 10m
+  interval: 2m
   install:
     remediation:
       retries: 30
@@ -47,4 +46,3 @@ spec:
           clusterIPRange: {{ .Values.connectivity.network.serviceCidr | quote }}
         DNS:
           IP: {{ include "clusterDNS" $ | quote }}
-{{- end -}}

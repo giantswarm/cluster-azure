@@ -3,20 +3,6 @@
 {{- include "psps" . }}
 {{- end }}
 ---
-{{- include "helmrepository-default" . }}
----
-{{- include "cni-driver-helm-release" . }}
----
-{{- include "cloud-controller-manager-helm-release" . }}
----
-{{- include "cloud-node-manager-helm-release" . }}
----
-{{- include "csi-driver-helm-release" . }}
----
-{{- include "coredns-helm-release" . }}
----
-{{- include "helmreleases-cleanup-hook" . }}
----
 {{- include "cluster" . }}
 ---
 {{- include "azure-cluster" . }}
