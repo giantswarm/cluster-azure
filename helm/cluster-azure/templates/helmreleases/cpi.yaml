@@ -64,10 +64,10 @@ spec:
   chart:
     spec:
       chart: azure-cloud-node-manager-app
-      version: 1.24.18-gs1 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      version: 1.24.18-gs1-a9651b3c53d47cdf48109b6967e2bec0cd68784a # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
       sourceRef:
         kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-default
+        name: {{ include "resource.default.name" $ }}-default-test
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
