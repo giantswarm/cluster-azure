@@ -19,7 +19,7 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 0.9.3 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      version: 0.6.1 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default
