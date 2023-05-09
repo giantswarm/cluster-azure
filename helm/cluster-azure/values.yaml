@@ -33,6 +33,7 @@ internal:
     hardEvictionThresholds: memory.available<200Mi,nodefs.available<10%,nodefs.inodesFree<3%,imagefs.available<10%,pid.available<20%
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
+  enableVpaResources: true
   identity:
     attachCapzControllerUserAssignedIdentity: false
     systemAssignedScope: ResourceGroup

@@ -190,6 +190,11 @@
                     "title": "Default settings",
                     "type": "object"
                 },
+                "enableVpaResources": {
+                    "default": true,
+                    "title": "Enable VPA Resources in helmreleases",
+                    "type": "boolean"
+                },
                 "identity": {
                     "properties": {
                         "attachCapzControllerUserAssignedIdentity": {
@@ -274,11 +279,6 @@
                     "default": "1.24.11",
                     "title": "Kubernetes version",
                     "type": "string"
-                },
-                "enableVpaResources": {
-                    "default": true,
-                    "title": "Enable VPA Resources in helmreleases",
-                    "type": "bool"
                 },
                 "network": {
                     "description": "Internal network configuration that is susceptible to more frequent change",
