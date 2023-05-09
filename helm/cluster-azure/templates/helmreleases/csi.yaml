@@ -34,9 +34,14 @@ spec:
   # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
   values:
     {{- include "values.common" . | nindent 4 }}
-    verticalPodAutoscaler:
-      enabled: {{ .Values.internal.enableVpaResources }}
     controller:
       disableAvailabilitySetNodes: false
+      verticalPodAutoscaler:
+        enabled: {{ .Values.internal.enableVpaResources }}
     linux:
       azure_credential_file: /etc/kubernetes/azure.json
+      verticalPodAutoscaler:
+        enabled: {{ .Values.internal.enableVpaResources }}
+    snapshot:
+      verticalPodAutoscaler:
+        enabled: {{ .Values.internal.enableVpaResources }}
