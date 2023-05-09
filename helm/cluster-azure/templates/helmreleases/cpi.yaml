@@ -19,10 +19,10 @@ spec:
   chart:
     spec:
       chart: azure-cloud-controller-manager-app
-      version: 1.24.18-gs1-d6fac690d57601c2df6ed7883cd2adf5e0a355cb # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      version: 1.24.18-gs2 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
       sourceRef:
         kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-default-test
+        name: {{ include "resource.default.name" $ }}-default
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
@@ -64,10 +64,10 @@ spec:
   chart:
     spec:
       chart: azure-cloud-node-manager-app
-      version: 1.24.18-gs1-a9651b3c53d47cdf48109b6967e2bec0cd68784a # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      version: 1.24.18-gs2 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
       sourceRef:
         kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-default-test
+        name: {{ include "resource.default.name" $ }}-default
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
