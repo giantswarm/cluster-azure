@@ -35,7 +35,7 @@ spec:
   values:
     {{- include "values.common" . | nindent 4 }}
     verticalPodAutoscaler:
-      enabled: {{ .Values.internal.enableVpaResources | default(true) }}
+      enabled: {{ .Values.internal.enableVpaResources }}
     controller:
       disableAvailabilitySetNodes: false
     linux:

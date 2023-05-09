@@ -34,7 +34,7 @@ spec:
   # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
   values:
     verticalPodAutoscaler:
-      enabled: {{ .Values.internal.enableVpaResources | default(true) }}
+      enabled: {{ .Values.internal.enableVpaResources }}
     cluster:
       calico:
         CIDR: {{ .Values.connectivity.network.podCidr | quote }}
@@ -79,4 +79,4 @@ spec:
       retries: 30
   values:
     verticalPodAutoscaler:
-      enabled: {{ .Values.internal.enableVpaResources | default(true) }}
+      enabled: {{ .Values.internal.enableVpaResources }}
