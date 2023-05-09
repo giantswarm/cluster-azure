@@ -275,6 +275,11 @@
                     "title": "Kubernetes version",
                     "type": "string"
                 },
+                "enableVpaResources": {
+                    "default": true,
+                    "title": "Enable VPA Resources in helmreleases",
+                    "type": "bool"
+                },
                 "network": {
                     "description": "Internal network configuration that is susceptible to more frequent change",
                     "properties": {
