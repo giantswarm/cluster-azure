@@ -19,10 +19,10 @@ spec:
   chart:
     spec:
       chart: azuredisk-csi-driver-app
-      version: 1.26.2-gs3-322dbb08cfd548c9d33bde3ebe04732e03c52672 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      version: 1.26.2-gs4 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
       sourceRef:
         kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-default-test
+        name: {{ include "resource.default.name" $ }}-default
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
