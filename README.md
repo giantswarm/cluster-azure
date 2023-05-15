@@ -2,6 +2,9 @@
 
 `cluster-azure` is a an app that helps create a CRs for a Cluster API Azure cluster for Giant Swarm platform.
 
+## Configuration
+
+See our [full list of configuration options](helm/cluster-aws/README.md).
 
 ## Maintaining `values.schema.json` and `values.yaml`
 
