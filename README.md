@@ -4,7 +4,7 @@
 
 ## Configuration
 
-See our [full list of configuration options](helm/cluster-aws/README.md).
+See our [full list of configuration options](helm/cluster-azure/README.md).
 
 ## Maintaining `values.schema.json` and `values.yaml`
 
