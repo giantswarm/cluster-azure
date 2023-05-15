@@ -25,6 +25,7 @@ metadata:
     app-operator.giantswarm.io/version: 0.0.0
     giantswarm.io/cluster: cluster01
     app.kubernetes.io/name: default-apps-azure
+    giantswarm.io/managed-by: cluster
   name: cluster01-default-apps
   namespace: org-multi-project
 spec:
