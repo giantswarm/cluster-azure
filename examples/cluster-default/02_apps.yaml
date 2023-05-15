@@ -16,7 +16,7 @@ spec:
     configMap:
       name: cluster01-user-values
       namespace: org-multi-project
-  version: 0.0.17
+  version: 0.0.21
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App
@@ -33,8 +33,12 @@ spec:
     inCluster: true
   name: default-apps-azure
   namespace: org-multi-project
+  config:
+    configMap:
+      name: cluster01-cluster-values
+      namespace: org-multi-project
   userConfig:
     configMap:
       name: cluster01-default-apps-user-values
       namespace: org-multi-project
-  version: v0.0.14
+  version: v0.0.17
