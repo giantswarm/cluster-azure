@@ -2,6 +2,9 @@ baseDomain: azuretest.gigantic.io
 managementCluster: MCCLUSTER
 provider: capz
 
+providerSpecific:
+  subscriptionId: PLACEHOLDER
+
 metadata:
   organization: test
   servicePriority: lowest
