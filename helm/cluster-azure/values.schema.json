@@ -531,7 +531,6 @@
                     "type": "object"
                 },
                 "subscriptionId": {
-                    "default": "PLACEHOLDER",
                     "title": "Subscription ID",
                     "type": "string"
                 }
