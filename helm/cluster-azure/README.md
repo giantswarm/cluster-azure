@@ -105,7 +105,7 @@ Configuration of an Azure cluster using Cluster API
 | `Cluster configuration.providerSpecific.network.peerings[*]` | **VNet peering**|**Type:** `object`<br/>|
 | `Cluster configuration.providerSpecific.network.peerings[*].remoteVnetName` | **VNet name** - Name of the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `Cluster configuration.providerSpecific.network.peerings[*].resourceGroup` | **Resource group name** - Resource group for the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
-| `Cluster configuration.providerSpecific.subscriptionId` | **Subscription ID**|**Type:** `string`<br/>**Default:** `"PLACEHOLDER"`|
+| `Cluster configuration.providerSpecific.subscriptionId` | **Subscription ID**|**Type:** `string`<br/>|
 
 
 
