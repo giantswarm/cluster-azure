@@ -239,7 +239,7 @@
                             "type": "string"
                         },
                         "version": {
-                            "default": "3374.2.4",
+                            "default": "3510.2.1",
                             "title": "Image version",
                             "type": "string"
                         }
@@ -248,7 +248,7 @@
                     "type": "object"
                 },
                 "kubernetesVersion": {
-                    "default": "1.24.11",
+                    "default": "1.24.13",
                     "title": "Kubernetes version",
                     "type": "string"
                 },

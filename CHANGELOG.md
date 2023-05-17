@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade Flatcar image to [3510.2.1](https://www.flatcar.org/releases#release-3510.2.1)
+- Upgrade K8S version to `1.24.13`
+
 ### Added
 
 - Add full configuration values documentation.
