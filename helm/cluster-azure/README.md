@@ -61,8 +61,8 @@ Configuration of an Azure cluster using Cluster API
 | `Cluster configuration.internal.image` | **Node Image**|**Type:** `object`<br/>|
 | `Cluster configuration.internal.image.gallery` | **Gallery** - Name of the community gallery hosting the image|**Type:** `string`<br/>**Default:** `"gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0"`|
 | `Cluster configuration.internal.image.name` | **Image Definition** - Name of the image definition in the Gallery|**Type:** `string`<br/>**Default:** `""`|
-| `Cluster configuration.internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3374.2.4"`|
-| `Cluster configuration.internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.24.11"`|
+| `Cluster configuration.internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3510.2.1"`|
+| `Cluster configuration.internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.24.13"`|
 | `Cluster configuration.internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
 | `Cluster configuration.internal.network.subnets` | **VNet spec** - Customize subnets configuration|**Type:** `object`<br/>**Default:** `{}`|
 | `Cluster configuration.internal.network.subnets.controlPlaneSubnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
