@@ -1,6 +1,6 @@
 # DO NOT EDIT. Generated with:
 #
-#    devctl@5.22.0
+#    devctl@6.1.1
 #
 
 # This workflow validates the JSON schema of the cluster-app, which is located in
@@ -10,13 +10,15 @@
 
 name: JSON schema validation
 on:
-  pull_request: 
+  pull_request:
     branches:
       - master
       - main
     paths:
       - 'helm/**/values.yaml'
       - 'helm/**/values.schema.json'
+
+  push: {}
 
 jobs:
   validate:
@@ -27,7 +29,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run schemalint
         id: run-schemalint
-        uses: giantswarm/schemalint/actions/verify-helm-schema@v1
+        uses: giantswarm/schemalint/actions/verify-helm-schema@v2
         with:
           rule-set: 'cluster-app'
   generate:
