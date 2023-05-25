@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Add value schema constraints to all numeric types, using `exclusiveMinimum` of zero.
+- Add value schema constraints to all numeric types, using `exclusiveMinimum` or `minimum` of zero.
 
 ## [0.0.22] - 2023-05-17
 
