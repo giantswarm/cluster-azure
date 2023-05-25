@@ -450,7 +450,7 @@
                     "replicas": {
                         "type": "integer",
                         "title": "Number of nodes",
-                        "exclusiveMinimum": 0
+                        "minimum": 0
                     },
                     "rootVolumeSizeGB": {
                         "type": "integer",
