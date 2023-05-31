@@ -113,7 +113,8 @@
                 "etcdVolumeSizeGB": {
                     "type": "integer",
                     "title": "Etcd volume size (GB)",
-                    "default": 10
+                    "default": 10,
+                    "exclusiveMinimum": 0
                 },
                 "instanceType": {
                     "type": "string",
@@ -155,12 +156,14 @@
                 "replicas": {
                     "type": "integer",
                     "title": "Number of nodes",
-                    "default": 3
+                    "default": 3,
+                    "exclusiveMinimum": 0
                 },
                 "rootVolumeSizeGB": {
                     "type": "integer",
                     "title": "Root volume size (GB)",
-                    "default": 50
+                    "default": 50,
+                    "exclusiveMinimum": 0
                 }
             }
         },
@@ -446,11 +449,13 @@
                     },
                     "replicas": {
                         "type": "integer",
-                        "title": "Number of nodes"
+                        "title": "Number of nodes",
+                        "minimum": 0
                     },
                     "rootVolumeSizeGB": {
                         "type": "integer",
-                        "title": "Root volume size (GB)"
+                        "title": "Root volume size (GB)",
+                        "exclusiveMinimum": 0
                     }
                 }
             },
