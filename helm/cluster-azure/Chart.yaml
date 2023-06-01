@@ -13,5 +13,5 @@ restrictions:
 dependencies:
 # Do not update cluster-shared to anything > 0.6.4 until kube-proxy have been removed - https://github.com/giantswarm/cluster-shared/pull/60#issuecomment-1491516814
 - name: cluster-shared
-  version: "0.6.4"
+  version: "0.6.5"
   repository: "https://giantswarm.github.io/cluster-catalog"
