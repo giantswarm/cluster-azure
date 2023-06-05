@@ -356,7 +356,7 @@
                     "type": "object",
                     "title": "Cluster Labels",
                     "description": "Map of labels to be added to the cluster CR.",
-                    "additionalProperties": false,
+                    "additionalProperties": true,
                     "default": {}
                 },
                 "name": {
