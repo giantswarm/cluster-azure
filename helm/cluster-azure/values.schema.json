@@ -352,6 +352,13 @@
                     "title": "Cluster description",
                     "description": "User-friendly description of the cluster's purpose."
                 },
+                "clusterLabels": {
+                    "type": "object",
+                    "title": "Cluster Labels",
+                    "description": "Map of labels to be added to the cluster CR.",
+                    "additionalProperties": false,
+                    "default": {}
+                },
                 "name": {
                     "type": "string",
                     "title": "Cluster name",

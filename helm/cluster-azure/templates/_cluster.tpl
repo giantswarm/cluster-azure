@@ -10,6 +10,9 @@ metadata:
     giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
     {{- end }}
     {{- include "labels.common" $ | nindent 4 }}
+    {{- range $key, $val := .Values.metadata.clusterLabels }}
+    {{ $key }}: {{ $val | quote }}
+    {{- end}}
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
