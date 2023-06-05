@@ -2,6 +2,8 @@ metadata:
   name: test-wc
   organization: test
   servicePriority: lowest
+  clusterLabels:
+    cluster.giantswarm.io/test: value1
 
 providerSpecific:
   location: "westeurope"
