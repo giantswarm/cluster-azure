@@ -49,7 +49,6 @@ internal:
     vpn:
       gatewayMode: none
 metadata:
-  clusterLabels: {}
   servicePriority: highest
 nodePools:
   - customNodeLabels: []
