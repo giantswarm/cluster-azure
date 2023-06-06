@@ -352,14 +352,19 @@
                     "title": "Cluster description",
                     "description": "User-friendly description of the cluster's purpose."
                 },
-                "clusterLabels": {
+                "labels": {
                     "type": "object",
-                    "title": "Cluster Labels",
-                    "description": "Map of labels to be added to the cluster CR.",
-                    "additionalProperties": {
-                        "type": "string"
-                    },
-                    "default": {}
+                    "title": "Labels",
+                    "description": "These labels are added to the Kubernetes resourses defining this cluster.",
+                    "patternProperties": {
+                        "^[_-a-zA-Z0-9\\.]$": {
+                            "type": "string",
+                            "title": "Label",
+                            "maxLength": 63,
+                            "minLength": 0,
+                            "pattern": "^[_-a-zA-Z0-9\\.]$"
+                        }
+                    }
                 },
                 "name": {
                     "type": "string",
