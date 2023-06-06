@@ -2,7 +2,7 @@ metadata:
   name: test-mc
   organization: test
   servicePriority: lowest
-  clusterLabels:
+  labels:
     cluster.giantswarm.io/test: value1
 
 providerSpecific:
