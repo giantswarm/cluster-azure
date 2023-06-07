@@ -42,7 +42,7 @@ internal:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
     name: ""
     version: 3510.2.1
-  kubernetesVersion: 1.24.13
+  kubernetesVersion: 1.25.10
   network:
     subnets: {}
     vnet: {}
