@@ -255,7 +255,7 @@
                 "kubernetesVersion": {
                     "type": "string",
                     "title": "Kubernetes version",
-                    "default": "1.24.13"
+                    "default": "1.25.10"
                 },
                 "network": {
                     "type": "object",
