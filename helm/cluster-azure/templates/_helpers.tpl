@@ -59,10 +59,12 @@ use it when no value is passed in
 
 {{/*
 List of admission plugins to enable based on apiVersion
+
+When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
 */}}
 {{- define "enabled-admission-plugins" -}}
 {{- $enabledPlugins := list "" -}}
-{{- if semverCompare "<1.25-0" .Capabilities.KubeVersion.Version -}}
+{{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
 {{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
 {{- end -}}
 {{- if not (empty (compact $enabledPlugins)) -}}
