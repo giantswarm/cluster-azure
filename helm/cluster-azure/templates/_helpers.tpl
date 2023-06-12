@@ -68,7 +68,7 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 {{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
 {{- end -}}
 {{- if not (empty (compact $enabledPlugins)) -}}
-,{{- join "," (compact $enabledPlugins) }}
+{{- join "," (compact $enabledPlugins) }}
 {{- end -}}
 {{- end -}}
 

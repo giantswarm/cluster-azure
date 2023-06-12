@@ -116,7 +116,7 @@ spec:
           audit-log-path: /var/log/apiserver/audit.log
           audit-policy-file: /etc/kubernetes/policies/audit-policy.yaml
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
-          enable-admission-plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,DefaultStorageClass,PersistentVolumeClaimResize,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook{{- include "enabled-admission-plugins" $ }}
+          enable-admission-plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,DefaultStorageClass,PersistentVolumeClaimResize,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook{{print "," ( include "enabled-admission-plugins" $ ) }}
           feature-gates: {{ include "enabled-feature-gates" $ }}
           kubelet-preferred-address-types: InternalIP
           profiling: "false"
