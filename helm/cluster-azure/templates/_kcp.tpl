@@ -117,7 +117,7 @@ spec:
           audit-policy-file: /etc/kubernetes/policies/audit-policy.yaml
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
           enable-admission-plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,DefaultStorageClass,PersistentVolumeClaimResize,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook{{- include "enabled-admission-plugins" $ }}
-          feature-gates: ""
+          feature-gates: {{ include "enabled-feature-gates" $ }}
           kubelet-preferred-address-types: InternalIP
           profiling: "false"
           runtime-config: api/all=true,scheduling.k8s.io/v1alpha1=true
@@ -156,7 +156,7 @@ spec:
           cloud-provider: external
           cluster-name: {{ include "resource.default.name" $ }}
           external-cloud-volume-plugin: azure
-          feature-gates: "CSIMigrationAzureDisk=true"
+          feature-gates: CSIMigrationAzureDisk=true{{ print "," (include "enabled-feature-gates" $) }}
         extraVolumes:
           - hostPath: /etc/kubernetes/azure.json
             mountPath: /etc/kubernetes/azure.json

@@ -72,6 +72,21 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 {{- end -}}
 {{- end -}}
 
+{{/*
+List of feature gates to enable based on apiVersion
+
+When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
+*/}}
+{{- define "enabled-feature-gates" -}}
+{{- $enabledFeatureGates := list "" -}}
+{{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
+{{- $enabledFeatureGates = append $enabledFeatureGates "TTLAfterFinished=true" -}}
+{{- end -}}
+{{- if not (empty (compact $enabledFeatureGates)) -}}
+{{- join "," (compact $enabledFeatureGates) }}
+{{- end -}}
+{{- end -}}
+
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
 {{- define "vmUaIdentityPrefix" -}}
 /subscriptions/{{ .Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
