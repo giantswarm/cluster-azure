@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Value `.providerSpecific.subscriptionId` marked as required, constrained to UUID format.
+
+### Removed
+
+- Remove CSIMigration feature flag (enabled by default with k8s 1.23).
+
 ## [0.0.24] - 2023-06-07
 
 ### Changed
