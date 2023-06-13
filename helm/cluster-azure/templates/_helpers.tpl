@@ -64,6 +64,16 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 */}}
 {{- define "enabled-admission-plugins" -}}
 {{- $enabledPlugins := list "" -}}
+{{- $enabledPlugins = append $enabledPlugins "NamespaceLifecycle" -}}
+{{- $enabledPlugins = append $enabledPlugins "LimitRanger" -}}
+{{- $enabledPlugins = append $enabledPlugins "ServiceAccount" -}}
+{{- $enabledPlugins = append $enabledPlugins "ResourceQuota" -}}
+{{- $enabledPlugins = append $enabledPlugins "DefaultStorageClass" -}}
+{{- $enabledPlugins = append $enabledPlugins "PersistentVolumeClaimResize" -}}
+{{- $enabledPlugins = append $enabledPlugins "Priority" -}}
+{{- $enabledPlugins = append $enabledPlugins "DefaultTolerationSeconds" -}}
+{{- $enabledPlugins = append $enabledPlugins "MutatingAdmissionWebhook" -}}
+{{- $enabledPlugins = append $enabledPlugins "ValidatingAdmissionWebhook" -}}
 {{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
 {{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
 {{- end -}}
