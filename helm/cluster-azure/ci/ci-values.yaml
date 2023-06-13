@@ -3,7 +3,7 @@ managementCluster: MCCLUSTER
 provider: capz
 
 providerSpecific:
-  subscriptionId: PLACEHOLDER
+  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
 metadata:
   organization: test

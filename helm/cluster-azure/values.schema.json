@@ -490,6 +490,9 @@
         "providerSpecific": {
             "type": "object",
             "title": "Azure settings",
+            "required": [
+                "subscriptionId"
+            ],
             "properties": {
                 "azureClusterIdentity": {
                     "type": "object",
@@ -553,7 +556,14 @@
                 },
                 "subscriptionId": {
                     "type": "string",
-                    "title": "Subscription ID"
+                    "title": "Subscription ID",
+                    "description": "ID of the Azure subscription this cluster will run in.",
+                    "examples": [
+                        "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
+                    ],
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
                 }
             }
         }
