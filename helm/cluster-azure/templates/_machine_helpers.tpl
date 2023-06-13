@@ -39,7 +39,6 @@ joinConfiguration:
       azure-container-registry-config: /etc/kubernetes/azure.json
       cloud-config: /etc/kubernetes/azure.json
       cloud-provider: external
-      feature-gates: CSIMigrationAzureDisk=true
       eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
       eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
       eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
