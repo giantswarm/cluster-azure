@@ -156,7 +156,7 @@ spec:
           cloud-provider: external
           cluster-name: {{ include "resource.default.name" $ }}
           external-cloud-volume-plugin: azure
-          feature-gates: "CSIMigrationAzureDisk=true,TTLAfterFinished=true"
+          feature-gates: "TTLAfterFinished=true"
         extraVolumes:
           - hostPath: /etc/kubernetes/azure.json
             mountPath: /etc/kubernetes/azure.json
@@ -206,7 +206,6 @@ spec:
           azure-container-registry-config: /etc/kubernetes/azure.json
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
-          feature-gates: CSIMigrationAzureDisk=true
           eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
@@ -223,7 +222,6 @@ spec:
           azure-container-registry-config: /etc/kubernetes/azure.json
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
-          feature-gates: CSIMigrationAzureDisk=true
           eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
