@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Restricted `.providerSpecific.location` value to a set of defined region names.
+
 ## [0.0.25] - 2023-06-14
 
 ### Changed
