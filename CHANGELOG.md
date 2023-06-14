@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Value `.providerSpecific.subscriptionId` marked as required, constrained to UUID format.
+- `Enabled Admission Plugins` is now handled dynamically based on the kubernetes version of the cluster that is being installed
+- `Feature Gates` is now handled dynamically based on the kubernetes version of the cluster that is being installed
 
 ### Removed
 
