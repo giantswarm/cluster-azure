@@ -30,3 +30,6 @@ controlPlane:
     issuerUrl: https://dex.cluster.azuretest.gigantic.io
     groupsClaim: groups
     usernameClaim: email
+
+internal:
+  kubernetesVersion: 1.25.10

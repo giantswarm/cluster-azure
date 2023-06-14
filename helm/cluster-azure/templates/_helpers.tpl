@@ -59,14 +59,41 @@ use it when no value is passed in
 
 {{/*
 List of admission plugins to enable based on apiVersion
+
+When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
 */}}
 {{- define "enabled-admission-plugins" -}}
 {{- $enabledPlugins := list "" -}}
-{{- if semverCompare "<1.25.0" .Capabilities.KubeVersion.Version -}}
+{{- $enabledPlugins = append $enabledPlugins "NamespaceLifecycle" -}}
+{{- $enabledPlugins = append $enabledPlugins "LimitRanger" -}}
+{{- $enabledPlugins = append $enabledPlugins "ServiceAccount" -}}
+{{- $enabledPlugins = append $enabledPlugins "ResourceQuota" -}}
+{{- $enabledPlugins = append $enabledPlugins "DefaultStorageClass" -}}
+{{- $enabledPlugins = append $enabledPlugins "PersistentVolumeClaimResize" -}}
+{{- $enabledPlugins = append $enabledPlugins "Priority" -}}
+{{- $enabledPlugins = append $enabledPlugins "DefaultTolerationSeconds" -}}
+{{- $enabledPlugins = append $enabledPlugins "MutatingAdmissionWebhook" -}}
+{{- $enabledPlugins = append $enabledPlugins "ValidatingAdmissionWebhook" -}}
+{{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
 {{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
 {{- end -}}
 {{- if not (empty (compact $enabledPlugins)) -}}
-,{{- join "," (compact $enabledPlugins) }}
+{{- join "," (compact $enabledPlugins) }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+List of feature gates to enable based on apiVersion
+
+When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
+*/}}
+{{- define "enabled-feature-gates" -}}
+{{- $enabledFeatureGates := list "" -}}
+{{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
+{{- $enabledFeatureGates = append $enabledFeatureGates "TTLAfterFinished=true" -}}
+{{- end -}}
+{{- if not (empty (compact $enabledFeatureGates)) -}}
+{{- join "," (compact $enabledFeatureGates) }}
 {{- end -}}
 {{- end -}}
 
