@@ -26,7 +26,7 @@ Properties within the `.providerSpecific` top-level object
 | `providerSpecific.network.peerings[*]` | **VNet peering**|**Type:** `object`<br/>|
 | `providerSpecific.network.peerings[*].remoteVnetName` | **VNet name** - Name of the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `providerSpecific.network.peerings[*].resourceGroup` | **Resource group name** - Resource group for the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
-| `providerSpecific.subscriptionId` | **Subscription ID**|**Type:** `string`<br/>|
+| `providerSpecific.subscriptionId` | **Subscription ID** - ID of the Azure subscription this cluster will run in.|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 
 ### Connectivity
 Properties within the `.connectivity` top-level object
