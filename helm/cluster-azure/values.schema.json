@@ -515,6 +515,14 @@
                 "location": {
                     "type": "string",
                     "title": "Location",
+                    "$comment": "Valid options from https://github.com/giantswarm/capi-image-builder/blob/v1.6.10/helm/capi-image-builder/values.yaml#L48-L52",
+                    "enum": [
+                        "eastus",
+                        "germanywestcentral",
+                        "northeurope",
+                        "westeurope",
+                        "westus2"
+                    ],
                     "default": "westeurope"
                 },
                 "network": {
