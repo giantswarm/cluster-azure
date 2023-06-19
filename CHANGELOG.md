@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Disallow additional properties on the `.metadata.labels` object.
+
 ## [0.0.25] - 2023-06-14
 
 ### Changed

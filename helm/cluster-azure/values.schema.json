@@ -356,8 +356,9 @@
                     "type": "object",
                     "title": "Labels",
                     "description": "These labels are added to the Kubernetes resourses defining this cluster.",
+                    "additionalProperties": false,
                     "patternProperties": {
-                        "^[a-zA-Z0-9\\._-]+$": {
+                        "^[a-zA-Z0-9/\\._-]+$": {
                             "type": "string",
                             "title": "Label",
                             "maxLength": 63,

@@ -8,3 +8,5 @@ providerSpecific:
 metadata:
   organization: test
   servicePriority: lowest
+  labels:
+    test.io/testing: test-label

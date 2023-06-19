@@ -26,7 +26,7 @@ Properties within the `.providerSpecific` top-level object
 | `providerSpecific.network.peerings[*]` | **VNet peering**|**Type:** `object`<br/>|
 | `providerSpecific.network.peerings[*].remoteVnetName` | **VNet name** - Name of the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `providerSpecific.network.peerings[*].resourceGroup` | **Resource group name** - Resource group for the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
-| `providerSpecific.subscriptionId` | **Subscription ID**|**Type:** `string`<br/>|
+| `providerSpecific.subscriptionId` | **Subscription ID** - ID of the Azure subscription this cluster will run in.|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 
 ### Connectivity
 Properties within the `.connectivity` top-level object
@@ -102,6 +102,8 @@ Properties within the `.metadata` top-level object
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `metadata.description` | **Cluster description** - User-friendly description of the cluster's purpose.|**Type:** `string`<br/>|
+| `metadata.labels` | **Labels** - These labels are added to the Kubernetes resourses defining this cluster.|**Type:** `object`<br/>|
+| `metadata.labels.PATTERN` | **Label**|**Type:** `string`<br/>**Key pattern:**<br/>`PATTERN`=`^[a-zA-Z0-9/\._-]+$`<br/>**Value pattern:** `^[a-zA-Z0-9\._-]+$`<br/>|
 | `metadata.name` | **Cluster name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>|
 | `metadata.organization` | **Organization**|**Type:** `string`<br/>|
 | `metadata.servicePriority` | **Service priority** - The relative importance of this cluster.|**Type:** `string`<br/>**Default:** `"highest"`|
