@@ -444,7 +444,7 @@
                     },
                     "failureDomain": {
                         "type": "string",
-                        "title": "Select zone where to deploy the nodePool",
+                        "title": "Availability zone",
                         "enum": [
                             "1",
                             "2",
