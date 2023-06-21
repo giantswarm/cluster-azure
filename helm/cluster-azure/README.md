@@ -121,7 +121,7 @@ Properties within the `.nodePools` top-level object
 | `nodePools[*].customNodeTaints[*].key` | **Key**|**Type:** `string`<br/>|
 | `nodePools[*].customNodeTaints[*].value` | **Value**|**Type:** `string`<br/>|
 | `nodePools[*].disableHealthCheck` | **Disable HealthChecks for the MachineDeployment**|**Type:** `boolean`<br/>|
-| `nodePools[*].failureDomain` | **Select zone where to deploy the nodePool**|**Type:** `string`<br/>|
+| `nodePools[*].failureDomain` | **Availability zone**|**Type:** `string`<br/>|
 | `nodePools[*].instanceType` | **VM size**|**Type:** `string`<br/>|
 | `nodePools[*].name` | **Name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>|
 | `nodePools[*].replicas` | **Number of nodes**|**Type:** `integer`<br/>|
