@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.26] - 2023-06-28
+
 ### Changed
 
 - Restricted `.providerSpecific.location` value to a set of defined region names.
@@ -259,7 +261,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.25...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.26...HEAD
+[0.0.26]: https://github.com/giantswarm/cluster-azure/compare/v0.0.25...v0.0.26
 [0.0.25]: https://github.com/giantswarm/cluster-azure/compare/v0.0.24...v0.0.25
 [0.0.24]: https://github.com/giantswarm/cluster-azure/compare/v0.0.23...v0.0.24
 [0.0.23]: https://github.com/giantswarm/cluster-azure/compare/v0.0.22...v0.0.23
