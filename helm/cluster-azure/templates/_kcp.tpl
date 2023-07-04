@@ -151,6 +151,7 @@ spec:
           bind-address: "0.0.0.0"
           logtostderr: "true"
           profiling: "false"
+          terminated-pod-gc-threshold: "125"
           allocate-node-cidrs: "true"
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
