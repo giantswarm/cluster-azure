@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Reconcile `containerd` configuration with cluster-aws
+- Render `containerd` configuration at cluster creation time
   - add support for containerd registry mirrors
   - add support for containerd registry credentials
 
