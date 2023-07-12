@@ -38,6 +38,15 @@ Properties within the `.connectivity` top-level object
 | `connectivity.bastion` | **Bastion host**|**Type:** `object`<br/>|
 | `connectivity.bastion.enabled` | **Enable bastion host for this cluster**|**Type:** `boolean`<br/>**Default:** `true`|
 | `connectivity.bastion.instanceType` | **VM size** - Type of virtual machine to use for the bastion host.|**Type:** `string`<br/>**Default:** `"Standard_D2s_v5"`|
+| `connectivity.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}]}`|
+| `connectivity.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
+| `connectivity.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
+| `connectivity.containerRegistries.*[*].credentials` | **Credentials**|**Type:** `object`<br/>|
+| `connectivity.containerRegistries.*[*].credentials.auth` | **Auth** - Base64-encoded string from the concatenation of the username, a colon, and the password.|**Type:** `string`<br/>|
+| `connectivity.containerRegistries.*[*].credentials.identitytoken` | **Identity token** - Used to authenticate the user and obtain an access token for the registry.|**Type:** `string`<br/>|
+| `connectivity.containerRegistries.*[*].credentials.password` | **Password** - Used to authenticate for the registry with username/password.|**Type:** `string`<br/>|
+| `connectivity.containerRegistries.*[*].credentials.username` | **Username** - Used to authenticate for the registry with username/password.|**Type:** `string`<br/>|
+| `connectivity.containerRegistries.*[*].endpoint` | **Endpoint** - Endpoint for the container registry.|**Type:** `string`<br/>|
 | `connectivity.network` | **Network**|**Type:** `object`<br/>|
 | `connectivity.network.controlPlane` | **Control plane**|**Type:** `object`<br/>|
 | `connectivity.network.controlPlane.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.0.0/20"`|
@@ -95,6 +104,10 @@ Properties within the `.internal` top-level object
 | `internal.network.vnet.resourceGroup` | **Resource group name** - Resource group where the existing VNet is deployed.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
 | `internal.network.vpn` | **VPN configuration** - Internal VPN configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
 | `internal.network.vpn.gatewayMode` | **VPN gateway mode**|**Type:** `string`<br/>**Default:** `"none"`|
+| `internal.sandboxContainerImage` | **Kubectl image**|**Type:** `object`<br/>|
+| `internal.sandboxContainerImage.name` | **Repository**|**Type:** `string`<br/>**Default:** `"giantswarm/pause"`|
+| `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"quay.io"`|
+| `internal.sandboxContainerImage.tag` | **Tag**|**Type:** `string`<br/>**Default:** `"3.9"`|
 
 ### Metadata
 Properties within the `.metadata` top-level object
