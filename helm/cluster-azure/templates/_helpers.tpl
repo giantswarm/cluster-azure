@@ -213,8 +213,6 @@ See more details here https://github.com/giantswarm/roadmap/issues/2223.
 # Won't be needed anymore once https://github.com/giantswarm/capi-image-builder/pull/81 has been released and new images build out of it
 {{- define "override-pause-image-with-quay" -}}
 - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
-- sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/containerd/config.toml
-- systemctl restart containerd
 {{- end -}}
 
 {{/*
@@ -265,6 +263,15 @@ userAssignedIdentities:
     {{- end -}}
   {{- end -}}
 {{- end }}
+{{- end -}}
+
+{{- define "containerdConfig" -}}
+- path: /etc/containerd/config.toml
+  permissions: "0644"
+  contentFrom:
+    secret:
+      name: {{ include "resource.default.name" $ }}-containerd-configuration
+      key: registry-config.toml
 {{- end -}}
 
 {{/*

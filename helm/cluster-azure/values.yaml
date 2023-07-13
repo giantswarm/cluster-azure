@@ -6,6 +6,10 @@ connectivity:
   bastion:
     enabled: true
     instanceType: Standard_D2s_v5
+  containerRegistries:
+    docker.io:
+      - endpoint: registry-1.docker.io
+      - endpoint: giantswarm.azurecr.io
   network:
     controlPlane:
       cidr: 10.0.0.0/20
@@ -48,6 +52,10 @@ internal:
     vnet: {}
     vpn:
       gatewayMode: none
+  sandboxContainerImage:
+    name: giantswarm/pause
+    registry: quay.io
+    tag: "3.9"
 metadata:
   servicePriority: highest
 nodePools:
