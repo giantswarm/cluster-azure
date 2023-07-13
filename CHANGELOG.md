@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.27] - 2023-07-13
+
 ### Added
 
 - Render `containerd` configuration at cluster creation time
@@ -272,7 +274,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.26...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.27...HEAD
+[0.0.27]: https://github.com/giantswarm/cluster-azure/compare/v0.0.26...v0.0.27
 [0.0.26]: https://github.com/giantswarm/cluster-azure/compare/v0.0.25...v0.0.26
 [0.0.25]: https://github.com/giantswarm/cluster-azure/compare/v0.0.24...v0.0.25
 [0.0.24]: https://github.com/giantswarm/cluster-azure/compare/v0.0.23...v0.0.24
