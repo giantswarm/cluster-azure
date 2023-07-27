@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use multiple volumes for `containerd`,`kubelet`,`root` and `etcd` mounts for **control plane** nodes
+
 ## [0.0.27] - 2023-07-13
 
 ### Added

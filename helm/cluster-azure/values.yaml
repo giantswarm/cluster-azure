@@ -21,8 +21,10 @@ connectivity:
       cidr: 10.0.16.0/20
   sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
-  etcdVolumeSizeGB: 10
+  containerdVolumeSizeGB: 100
+  etcdVolumeSizeGB: 100
   instanceType: Standard_D4s_v3
+  kubeletVolumeSizeGB: 100
   oidc:
     caPem: ""
     clientId: ""

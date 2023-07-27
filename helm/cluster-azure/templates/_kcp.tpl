@@ -10,6 +10,12 @@ dataDisks:
   - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
     lun: 0
     nameSuffix: etcddisk
+  - diskSizeGB: {{ $.Values.controlPlane.containerdVolumeSizeGB }}
+    lun: 1
+    nameSuffix: containerddisk
+  - diskSizeGB: {{ $.Values.controlPlane.kubeletVolumeSizeGB }}
+    lun: 2
+    nameSuffix: kubeletdisk
 osDisk:
   diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
   osType: Linux
@@ -49,6 +55,20 @@ spec:
         filesystem: ext4
         label: etcd_disk
         overwrite: false
+      - device: /dev/disk/azure/scsi1/lun1
+        extraOpts:
+        - -E
+        - lazy_itable_init=1,lazy_journal_init=1
+        filesystem: ext4
+        label: containerd_disk
+        overwrite: false
+      - device: /dev/disk/azure/scsi1/lun2
+        extraOpts:
+        - -E
+        - lazy_itable_init=1,lazy_journal_init=1
+        filesystem: ext4
+        label: kubelet_disk
+        overwrite: false
       #partitions:
       #- device: /dev/disk/azure/scsi1/lun0
       #  layout: true
@@ -57,6 +77,10 @@ spec:
     mounts:
     - - etcd_disk
       - /var/lib/etcddisk
+    - - containerd_disk
+      - /var/lib/containerd
+    - - kubelet_disk
+      - /var/lib/kubelet
     format: ignition
     ignition:
       containerLinuxConfig:
