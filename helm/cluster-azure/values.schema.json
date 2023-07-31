@@ -227,7 +227,7 @@
                     "type": "integer",
                     "title": "Number of nodes",
                     "default": 3,
-                    "minimum": 20
+                    "exclusiveMinimum": 0
                 },
                 "rootVolumeSizeGB": {
                     "type": "integer",
