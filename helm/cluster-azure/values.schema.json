@@ -168,16 +168,28 @@
             "type": "object",
             "title": "Control plane",
             "properties": {
+                "containerdVolumeSizeGB": {
+                    "type": "integer",
+                    "title": "Containerd volume size (GB)",
+                    "default": 100,
+                    "minimum": 20
+                },
                 "etcdVolumeSizeGB": {
                     "type": "integer",
                     "title": "Etcd volume size (GB)",
-                    "default": 10,
-                    "exclusiveMinimum": 0
+                    "default": 100,
+                    "minimum": 20
                 },
                 "instanceType": {
                     "type": "string",
                     "title": "Node VM size",
                     "default": "Standard_D4s_v3"
+                },
+                "kubeletVolumeSizeGB": {
+                    "type": "integer",
+                    "title": "Kubelet volume size (GB)",
+                    "default": 100,
+                    "minimum": 20
                 },
                 "oidc": {
                     "type": "object",
@@ -221,7 +233,7 @@
                     "type": "integer",
                     "title": "Root volume size (GB)",
                     "default": 50,
-                    "exclusiveMinimum": 0
+                    "minimum": 20
                 }
             }
         },
