@@ -9,7 +9,7 @@ image:
     name: {{ include "flatcarImageName" $ }}
     version: {{ $.Values.internal.image.version }}
 osDisk:
-  diskSizeGB: {{ .spec.rootVolumeSizeGB }}
+  diskSizeGB: {{ .spec.rootVolumeSizeGB | default 300 }}
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
