@@ -233,7 +233,7 @@
                     "type": "integer",
                     "title": "Root volume size (GB)",
                     "default": 50,
-                    "exclusiveMinimum": 20
+                    "minimum": 20
                 }
             }
         },
