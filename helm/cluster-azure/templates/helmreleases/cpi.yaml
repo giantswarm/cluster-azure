@@ -26,6 +26,9 @@ spec:
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
+  dependsOn:
+    - name: {{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd
+      namespace: {{ $.Release.Namespace }}
   interval: 2m
   install:
     remediation:
@@ -73,6 +76,9 @@ spec:
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
+  dependsOn:
+    - name: {{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd
+      namespace: {{ $.Release.Namespace }}
   interval: 2m
   install:
     remediation:

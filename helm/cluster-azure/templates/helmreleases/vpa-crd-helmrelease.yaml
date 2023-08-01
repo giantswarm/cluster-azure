@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: {{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  releaseName: vertical-pod-autoscaler-crd
+  targetNamespace: kube-system
+  storageNamespace: kube-system
+  chart:
+    spec:
+      chart: vertical-pod-autoscaler-crd
+      # used by renovate
+      # repo: giantswarm/vertical-pod-autoscaler-crd
+      version: 2.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: {{ include "resource.default.name" $ }}-default
+  kubeConfig:
+    secretRef:
+      name: {{ include "resource.default.name" $ }}-kubeconfig
+  interval: 1m
+  install:
+    remediation:
+      retries: 30
