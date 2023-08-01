@@ -2,6 +2,11 @@ baseDomain: azuretest.gigantic.io
 managementCluster: MCCLUSTER
 provider: capz
 
+providerSpecific:
+  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
+
 metadata:
   organization: test
   servicePriority: lowest
+  labels:
+    test.io/testing: test-label

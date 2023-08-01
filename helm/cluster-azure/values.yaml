@@ -6,6 +6,10 @@ connectivity:
   bastion:
     enabled: true
     instanceType: Standard_D2s_v5
+  containerRegistries:
+    docker.io:
+      - endpoint: registry-1.docker.io
+      - endpoint: giantswarm.azurecr.io
   network:
     controlPlane:
       cidr: 10.0.0.0/20
@@ -17,8 +21,10 @@ connectivity:
       cidr: 10.0.16.0/20
   sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
-  etcdVolumeSizeGB: 10
+  containerdVolumeSizeGB: 100
+  etcdVolumeSizeGB: 100
   instanceType: Standard_D4s_v3
+  kubeletVolumeSizeGB: 100
   oidc:
     caPem: ""
     clientId: ""
@@ -42,17 +48,21 @@ internal:
   image:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
     name: ""
-    version: 3374.2.4
+    version: 3510.2.1
   kubectlImage:
     name: giantswarm/kubectl
     registry: quay.io
-    tag: 1.23.5
-  kubernetesVersion: 1.24.11
+    tag: 1.23.5 
+  kubernetesVersion: 1.24.13
   network:
     subnets: {}
     vnet: {}
     vpn:
       gatewayMode: none
+  sandboxContainerImage:
+    name: giantswarm/pause
+    registry: quay.io
+    tag: "3.9"
 metadata:
   servicePriority: highest
 nodePools:
@@ -70,4 +80,3 @@ providerSpecific:
   location: westeurope
   network:
     peerings: []
-  subscriptionId: PLACEHOLDER

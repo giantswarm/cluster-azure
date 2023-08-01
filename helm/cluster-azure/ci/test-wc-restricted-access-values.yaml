@@ -10,7 +10,7 @@ connectivity:
 
 providerSpecific:
   location: "westeurope"
-  subscriptionId: "PLACEHOLDER_SUBSCRIPTION_ID"
+  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
 internal:
   identity:

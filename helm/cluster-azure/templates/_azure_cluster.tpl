@@ -68,6 +68,17 @@ spec:
       frontendIPs:
       - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.connectivity.network.controlPlane.cidr | trim -}}"
+      privateLinks:
+      - name: {{ include "resource.default.name" $ }}-api-privatelink
+        natIpConfigurations:
+        - allocationMethod: Dynamic
+          subnet: {{ include "network.subnets.nodes.name" $ }}
+        lbFrontendIPConfigNames:
+        - {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
+        allowedSubscriptions:
+        - {{ .Values.providerSpecific.subscriptionId }}
+        autoApprovedSubscriptions:
+        - {{ .Values.providerSpecific.subscriptionId }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
     {{end}}

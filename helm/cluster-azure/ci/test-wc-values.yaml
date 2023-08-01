@@ -2,10 +2,12 @@ metadata:
   name: test-wc
   organization: test
   servicePriority: lowest
+  labels:
+    cluster.giantswarm.io/test: value1
 
 providerSpecific:
   location: "westeurope"
-  subscriptionId: "PLACEHOLDER_SUBSCRIPTION_ID"
+  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
 connectivity:
   network:
@@ -28,3 +30,6 @@ controlPlane:
     issuerUrl: https://dex.cluster.azuretest.gigantic.io
     groupsClaim: groups
     usernameClaim: email
+
+internal:
+  kubernetesVersion: 1.25.10

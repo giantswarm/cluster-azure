@@ -10,6 +10,12 @@ dataDisks:
   - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
     lun: 0
     nameSuffix: etcddisk
+  - diskSizeGB: {{ $.Values.controlPlane.containerdVolumeSizeGB }}
+    lun: 1
+    nameSuffix: containerddisk
+  - diskSizeGB: {{ $.Values.controlPlane.kubeletVolumeSizeGB }}
+    lun: 2
+    nameSuffix: kubeletdisk
 osDisk:
   diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
   osType: Linux
@@ -49,6 +55,20 @@ spec:
         filesystem: ext4
         label: etcd_disk
         overwrite: false
+      - device: /dev/disk/azure/scsi1/lun1
+        extraOpts:
+        - -E
+        - lazy_itable_init=1,lazy_journal_init=1
+        filesystem: ext4
+        label: containerd_disk
+        overwrite: false
+      - device: /dev/disk/azure/scsi1/lun2
+        extraOpts:
+        - -E
+        - lazy_itable_init=1,lazy_journal_init=1
+        filesystem: ext4
+        label: kubelet_disk
+        overwrite: false
       #partitions:
       #- device: /dev/disk/azure/scsi1/lun0
       #  layout: true
@@ -57,6 +77,10 @@ spec:
     mounts:
     - - etcd_disk
       - /var/lib/etcddisk
+    - - containerd_disk
+      - /var/lib/containerd
+    - - kubelet_disk
+      - /var/lib/kubelet
     format: ignition
     ignition:
       containerLinuxConfig:
@@ -116,8 +140,8 @@ spec:
           audit-log-path: /var/log/apiserver/audit.log
           audit-policy-file: /etc/kubernetes/policies/audit-policy.yaml
           encryption-provider-config: /etc/kubernetes/encryption/config.yaml
-          enable-admission-plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,DefaultStorageClass,PersistentVolumeClaimResize,Priority,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook{{- include "enabled-admission-plugins" $ }}
-          feature-gates: TTLAfterFinished=true
+          enable-admission-plugins: {{ include "enabled-admission-plugins" $ }}
+          feature-gates: {{ include "enabled-feature-gates" $ }}
           kubelet-preferred-address-types: InternalIP
           profiling: "false"
           runtime-config: api/all=true,scheduling.k8s.io/v1alpha1=true
@@ -151,12 +175,13 @@ spec:
           bind-address: "0.0.0.0"
           logtostderr: "true"
           profiling: "false"
+          terminated-pod-gc-threshold: "125"
           allocate-node-cidrs: "true"
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
           cluster-name: {{ include "resource.default.name" $ }}
           external-cloud-volume-plugin: azure
-          feature-gates: "CSIMigrationAzureDisk=true,TTLAfterFinished=true"
+          feature-gates: {{ include "enabled-feature-gates" $ }}
         extraVolumes:
           - hostPath: /etc/kubernetes/azure.json
             mountPath: /etc/kubernetes/azure.json
@@ -180,6 +205,7 @@ spec:
     {{- include "kubeletReservationFiles" $ | nindent 4 }}
     {{- include "commonSysctlConfigurations" $ | nindent 4 }}
     {{- include "auditRules99Default" $ | nindent 4 }}
+    {{- include "containerdConfig" $ | nindent 4 }}
     - contentFrom:
         secret:
           key: control-plane-azure.json
@@ -200,12 +226,12 @@ spec:
     initConfiguration:
       skipPhases:
       - addon/coredns
+      - addon/kube-proxy
       nodeRegistration:
         kubeletExtraArgs:
           azure-container-registry-config: /etc/kubernetes/azure.json
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
-          feature-gates: CSIMigrationAzureDisk=true
           eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
@@ -222,7 +248,6 @@ spec:
           azure-container-registry-config: /etc/kubernetes/azure.json
           cloud-config: /etc/kubernetes/azure.json
           cloud-provider: external
-          feature-gates: CSIMigrationAzureDisk=true
           eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
           eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
           eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}

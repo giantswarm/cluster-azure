@@ -59,14 +59,41 @@ use it when no value is passed in
 
 {{/*
 List of admission plugins to enable based on apiVersion
+
+When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
 */}}
 {{- define "enabled-admission-plugins" -}}
 {{- $enabledPlugins := list "" -}}
-{{- if semverCompare "<1.25.0" .Capabilities.KubeVersion.Version -}}
+{{- $enabledPlugins = append $enabledPlugins "NamespaceLifecycle" -}}
+{{- $enabledPlugins = append $enabledPlugins "LimitRanger" -}}
+{{- $enabledPlugins = append $enabledPlugins "ServiceAccount" -}}
+{{- $enabledPlugins = append $enabledPlugins "ResourceQuota" -}}
+{{- $enabledPlugins = append $enabledPlugins "DefaultStorageClass" -}}
+{{- $enabledPlugins = append $enabledPlugins "PersistentVolumeClaimResize" -}}
+{{- $enabledPlugins = append $enabledPlugins "Priority" -}}
+{{- $enabledPlugins = append $enabledPlugins "DefaultTolerationSeconds" -}}
+{{- $enabledPlugins = append $enabledPlugins "MutatingAdmissionWebhook" -}}
+{{- $enabledPlugins = append $enabledPlugins "ValidatingAdmissionWebhook" -}}
+{{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
 {{- $enabledPlugins = append $enabledPlugins "PodSecurityPolicy" -}}
 {{- end -}}
 {{- if not (empty (compact $enabledPlugins)) -}}
-,{{- join "," (compact $enabledPlugins) }}
+{{- join "," (compact $enabledPlugins) }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+List of feature gates to enable based on apiVersion
+
+When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
+*/}}
+{{- define "enabled-feature-gates" -}}
+{{- $enabledFeatureGates := list "" -}}
+{{- if semverCompare "<1.25-0" .Values.internal.kubernetesVersion -}}
+{{- $enabledFeatureGates = append $enabledFeatureGates "TTLAfterFinished=true" -}}
+{{- end -}}
+{{- if not (empty (compact $enabledFeatureGates)) -}}
+{{- join "," (compact $enabledFeatureGates) }}
 {{- end -}}
 {{- end -}}
 
@@ -186,8 +213,6 @@ See more details here https://github.com/giantswarm/roadmap/issues/2223.
 # Won't be needed anymore once https://github.com/giantswarm/capi-image-builder/pull/81 has been released and new images build out of it
 {{- define "override-pause-image-with-quay" -}}
 - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
-- sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/containerd/config.toml
-- systemctl restart containerd
 {{- end -}}
 
 {{/*
@@ -238,6 +263,15 @@ userAssignedIdentities:
     {{- end -}}
   {{- end -}}
 {{- end }}
+{{- end -}}
+
+{{- define "containerdConfig" -}}
+- path: /etc/containerd/config.toml
+  permissions: "0644"
+  contentFrom:
+    secret:
+      name: {{ include "resource.default.name" $ }}-containerd-configuration
+      key: registry-config.toml
 {{- end -}}
 
 {{/*

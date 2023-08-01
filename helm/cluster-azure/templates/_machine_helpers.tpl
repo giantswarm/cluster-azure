@@ -9,7 +9,7 @@ image:
     name: {{ include "flatcarImageName" $ }}
     version: {{ $.Values.internal.image.version }}
 osDisk:
-  diskSizeGB: {{ .spec.rootVolumeSizeGB }}
+  diskSizeGB: {{ .spec.rootVolumeSizeGB | default 300 }}
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
@@ -39,7 +39,6 @@ joinConfiguration:
       azure-container-registry-config: /etc/kubernetes/azure.json
       cloud-config: /etc/kubernetes/azure.json
       cloud-provider: external
-      feature-gates: CSIMigrationAzureDisk=true
       eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
       eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
       eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
@@ -63,6 +62,7 @@ files:
 {{- include "sshFiles" $ | nindent 2 }}
 {{- include "commonSysctlConfigurations" $ | nindent 2 }}
 {{- include "auditRules99Default" $ | nindent 2 }}
+{{- include "containerdConfig" $ | nindent 2 }}
 preKubeadmCommands:
 {{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}

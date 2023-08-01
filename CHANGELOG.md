@@ -7,6 +7,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.28] - 2023-07-31
+
+### Changed
+
+- Use multiple volumes for `containerd`,`kubelet`,`root` and `etcd` mounts for **control plane** nodes
+
+## [0.0.27] - 2023-07-13
+
+### Added
+
+- Render `containerd` configuration at cluster creation time
+  - add support for containerd registry mirrors
+  - add support for containerd registry credentials
+
+
+### Added
+
+- Set value for `controller-manager` `terminated-pod-gc-threshold` to `125` ( consistent with vintage )
+
+## [0.0.26] - 2023-06-28
+
+### Changed
+
+- Restricted `.providerSpecific.location` value to a set of defined region names.
+- Disallow additional properties on the `.metadata.labels` object.
+
+### Added
+
+- Deploy private links for private clusters.
+
+## [0.0.25] - 2023-06-14
+
+### Changed
+
+- Value `.providerSpecific.subscriptionId` marked as required, constrained to UUID format.
+- `Enabled Admission Plugins` is now handled dynamically based on the kubernetes version of the cluster that is being installed
+- `Feature Gates` is now handled dynamically based on the kubernetes version of the cluster that is being installed
+
+### Removed
+
+- Remove CSIMigration feature flag (enabled by default with k8s 1.23).
+
+## [0.0.24] - 2023-06-07
+
+### Changed
+
+- Add support for configurable labels to Cluster CR
+
+## [0.0.23] - 2023-06-01
+
+### Changed
+
+- Upgrade `cluster-shared` dependency to `0.6.5`
+- Add value schema constraints to all numeric types, using `exclusiveMinimum` or `minimum` of zero.
+
+## [0.0.22] - 2023-05-17
+
+### Changed
+
+- Upgrade Flatcar image to [3510.2.1](https://www.flatcar.org/releases#release-3510.2.1)
+- Upgrade K8S version to `1.24.13`
+
+### Added
+
+- Add full configuration values documentation.
+
+## [0.0.21] - 2023-05-15
+
+### Changed
+- :boom: Breaking - Skip `kube-proxy` during kubeadm init/join to replace with cilium-proxy
+  - This change requies default-apps >= 0.0.17
+
 ## [0.0.20] - 2023-04-26
 
 ### Changed
@@ -208,7 +280,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.20...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.28...HEAD
+[0.0.28]: https://github.com/giantswarm/cluster-azure/compare/v0.0.27...v0.0.28
+[0.0.27]: https://github.com/giantswarm/cluster-azure/compare/v0.0.26...v0.0.27
+[0.0.26]: https://github.com/giantswarm/cluster-azure/compare/v0.0.25...v0.0.26
+[0.0.25]: https://github.com/giantswarm/cluster-azure/compare/v0.0.24...v0.0.25
+[0.0.24]: https://github.com/giantswarm/cluster-azure/compare/v0.0.23...v0.0.24
+[0.0.23]: https://github.com/giantswarm/cluster-azure/compare/v0.0.22...v0.0.23
+[0.0.22]: https://github.com/giantswarm/cluster-azure/compare/v0.0.21...v0.0.22
+[0.0.21]: https://github.com/giantswarm/cluster-azure/compare/v0.0.20...v0.0.21
 [0.0.20]: https://github.com/giantswarm/cluster-azure/compare/v0.0.19...v0.0.20
 [0.0.19]: https://github.com/giantswarm/cluster-azure/compare/v0.0.18...v0.0.19
 [0.0.18]: https://github.com/giantswarm/cluster-azure/compare/v0.0.17...v0.0.18

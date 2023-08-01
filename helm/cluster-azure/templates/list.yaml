@@ -7,6 +7,8 @@
 ---
 {{- include "azure-cluster" . }}
 ---
+{{- include "containerd-config-secret" . }}
+---
 {{- include "control-plane" . }}
 ---
 {{- include "machine-deployments" . }}
