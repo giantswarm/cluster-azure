@@ -55,6 +55,12 @@ rules:
       - "{{ include "resource.default.name" $ }}-coredns"
       - "{{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd"
     verbs: ["patch"]
+  - apiGroups: ["source.toolkit.fluxcd.io"]
+    resources: ["helmcharts"]
+    verbs: ["get", "list"]
+  - apiGroups: ["source.toolkit.fluxcd.io"]
+    resources: ["helmcharts"]
+    verbs: ["patch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -109,6 +115,7 @@ spec:
             - "-xc"
             - |
               for r in $(kubectl get helmrelease -n {{ .Release.Namespace }} -l "giantswarm.io/cluster={{ include "resource.default.name" . }}" -o name) ; do
+                  kubectl patch -n {{ .Release.Namespace }} helmchart $(kubectl get -n {{ .Release.Namespace }} "${r}" -o jsonpath='{.status.helmChart}' | cut -d/ -f2) --type=merge -p '{"metadata": {"finalizers": []}}'
                   kubectl patch -n {{ .Release.Namespace }} "${r}" --type=merge -p '{"metadata": {"finalizers": []}}'
               done
           securityContext:
