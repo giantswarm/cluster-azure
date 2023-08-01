@@ -19,7 +19,9 @@ spec:
   chart:
     spec:
       chart: azuredisk-csi-driver-app
-      version: 1.26.2-gs4 # TODO: Should we move this to the values / helper to make sure all versions are configured close to each other to make things easier for updates ? 
+      # used by renovate
+      # repo: giantswarm/azuredisk-csi-driver-app
+      version: 1.27.0
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default
