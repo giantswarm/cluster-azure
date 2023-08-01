@@ -52,7 +52,7 @@ internal:
   kubectlImage:
     name: giantswarm/kubectl
     registry: quay.io
-    tag: 1.23.5 
+    tag: 1.23.5
   kubernetesVersion: 1.24.13
   network:
     subnets: {}

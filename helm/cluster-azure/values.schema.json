@@ -268,9 +268,9 @@
                     }
                 },
                 "enableVpaResources": {
-                    "default": true,
+                    "type": "boolean",
                     "title": "Enable VPA Resources in helmreleases",
-                    "type": "boolean"
+                    "default": true
                 },
                 "identity": {
                     "type": "object",
@@ -330,27 +330,27 @@
                     }
                 },
                 "kubectlImage": {
+                    "type": "object",
+                    "title": "Kubectl Image settings",
                     "properties": {
                         "name": {
-                            "default": "giantswarm/kubectl",
-                            "description": "Name of the image Registry",
+                            "type": "string",
                             "title": "Image name",
-                            "type": "string"
+                            "description": "Name of the image Registry",
+                            "default": "giantswarm/kubectl"
                         },
                         "registry": {
-                            "default": "quay.io",
-                            "description": "Registry for the kubectl image",
+                            "type": "string",
                             "title": "Kubectl Image Registry",
-                            "type": "string"
+                            "description": "Registry for the kubectl image",
+                            "default": "quay.io"
                         },
                         "tag": {
-                            "default": "1.23.5",
+                            "type": "string",
                             "title": "Image tag",
-                            "type": "string"
+                            "default": "1.23.5"
                         }
-                    },
-                    "title": "Kubectl Image settings",
-                    "type": "object"
+                    }
                 },
                 "kubernetesVersion": {
                     "type": "string",
