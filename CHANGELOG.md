@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.29] - 2023-08-03
+
 ### Changed
 
 - :boom: Migrate CNI / CPI / CSI and VPA CRD apps to helmreleases in cluster-azure - requires `default-apps-azure` 0.0.24
@@ -284,7 +286,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.28...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.29...HEAD
+[0.0.29]: https://github.com/giantswarm/cluster-azure/compare/v0.0.28...v0.0.29
 [0.0.28]: https://github.com/giantswarm/cluster-azure/compare/v0.0.27...v0.0.28
 [0.0.27]: https://github.com/giantswarm/cluster-azure/compare/v0.0.26...v0.0.27
 [0.0.26]: https://github.com/giantswarm/cluster-azure/compare/v0.0.25...v0.0.26
