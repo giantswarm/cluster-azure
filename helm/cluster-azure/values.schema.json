@@ -267,6 +267,11 @@
                         }
                     }
                 },
+                "enableVpaResources": {
+                    "type": "boolean",
+                    "title": "Enable VPA Resources in helmreleases",
+                    "default": true
+                },
                 "identity": {
                     "type": "object",
                     "title": "Identity",
@@ -321,6 +326,29 @@
                             "type": "string",
                             "title": "Image version",
                             "default": "3510.2.1"
+                        }
+                    }
+                },
+                "kubectlImage": {
+                    "type": "object",
+                    "title": "Kubectl Image settings",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Image name",
+                            "description": "Name of the image Registry",
+                            "default": "giantswarm/kubectl"
+                        },
+                        "registry": {
+                            "type": "string",
+                            "title": "Kubectl Image Registry",
+                            "description": "Registry for the kubectl image",
+                            "default": "quay.io"
+                        },
+                        "tag": {
+                            "type": "string",
+                            "title": "Image tag",
+                            "default": "1.23.5"
                         }
                     }
                 },

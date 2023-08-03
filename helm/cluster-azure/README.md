@@ -86,6 +86,7 @@ Properties within the `.internal` top-level object
 | `internal.defaults.hardEvictionThresholds` | **Default settings for hard eviction thresholds**|**Type:** `string`<br/>**Default:** `"memory.available\u003c200Mi,nodefs.available\u003c10%,nodefs.inodesFree\u003c3%,imagefs.available\u003c10%,pid.available\u003c20%"`|
 | `internal.defaults.softEvictionGracePeriod` | **Default settings for soft eviction grace period**|**Type:** `string`<br/>**Default:** `"memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m"`|
 | `internal.defaults.softEvictionThresholds` | **Default settings for soft eviction thresholds**|**Type:** `string`<br/>**Default:** `"memory.available\u003c500Mi,nodefs.available\u003c15%,nodefs.inodesFree\u003c5%,imagefs.available\u003c15%,pid.available\u003c30%"`|
+| `internal.enableVpaResources` | **Enable VPA Resources in helmreleases**|**Type:** `boolean`<br/>**Default:** `true`|
 | `internal.identity` | **Identity**|**Type:** `object`<br/>|
 | `internal.identity.attachCapzControllerUserAssignedIdentity` | **Attach CAPZ controller UserAssigned identity**|**Type:** `boolean`<br/>**Default:** `false`|
 | `internal.identity.systemAssignedScope` | **Scope of SystemAssignedIdentity**|**Type:** `string`<br/>**Default:** `"ResourceGroup"`|
@@ -95,6 +96,10 @@ Properties within the `.internal` top-level object
 | `internal.image.gallery` | **Gallery** - Name of the community gallery hosting the image|**Type:** `string`<br/>**Default:** `"gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0"`|
 | `internal.image.name` | **Image Definition** - Name of the image definition in the Gallery|**Type:** `string`<br/>**Default:** `""`|
 | `internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3510.2.1"`|
+| `internal.kubectlImage` | **Kubectl Image settings**|**Type:** `object`<br/>|
+| `internal.kubectlImage.name` | **Image name** - Name of the image Registry|**Type:** `string`<br/>**Default:** `"giantswarm/kubectl"`|
+| `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"quay.io"`|
+| `internal.kubectlImage.tag` | **Image tag**|**Type:** `string`<br/>**Default:** `"1.23.5"`|
 | `internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.24.13"`|
 | `internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
 | `internal.network.subnets` | **VNet spec** - Customize subnets configuration|**Type:** `object`<br/>**Default:** `{}`|
