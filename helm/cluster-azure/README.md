@@ -143,7 +143,7 @@ Properties within the `.nodePools` top-level object
 | `nodePools[*].disableHealthCheck` | **Disable HealthChecks for the MachineDeployment**|**Type:** `boolean`<br/>|
 | `nodePools[*].failureDomain` | **Availability zone**|**Type:** `string`<br/>|
 | `nodePools[*].instanceType` | **VM size**|**Type:** `string`<br/>|
-| `nodePools[*].name` | **Name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>|
+| `nodePools[*].name` | **Name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `nodePools[*].replicas` | **Number of nodes**|**Type:** `integer`<br/>|
 | `nodePools[*].rootVolumeSizeGB` | **Root volume size (GB)**|**Type:** `integer`<br/>|
 
