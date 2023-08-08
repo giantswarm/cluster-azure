@@ -579,7 +579,10 @@
                     "name": {
                         "type": "string",
                         "title": "Name",
-                        "description": "Unique identifier, cannot be changed after creation."
+                        "description": "Unique identifier, cannot be changed after creation.",
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "pattern": "^[-\\w\\._]+$"
                     },
                     "replicas": {
                         "type": "integer",
