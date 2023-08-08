@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add validation of cluster name using Schema Regex
+- Add validation of machineDeployment name using Schema Regex
 
 ## [0.0.29] - 2023-08-03
 
