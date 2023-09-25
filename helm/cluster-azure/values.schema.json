@@ -436,7 +436,7 @@
                             }
                         }
                     }
-                },           
+                },
                 "sandboxContainerImage": {
                     "type": "object",
                     "title": "Kubectl image",
@@ -458,27 +458,27 @@
                         }
                     }
                 },
-				"teleport": {
-					"type": "object",
-					"title": "Teleport",
-					"properties": {
-						"proxyAddr": {
-							"type": "string",
-							"title": "Teleport proxy address",
-							"default": "test.teleport.giantswarm.io:443"
-						},
-						"version": {
-							"type": "string",
-							"title": "Teleport version",
-							"default": "13.1.5"
-						},
-						"enabled": {
-							"type": "boolean",
-							"title": "Enable teleport",
-							"default": false
-						}						
-					}
-				}                
+                "teleport": {
+                    "type": "object",
+                    "title": "Teleport",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable teleport",
+                            "default": false
+                        },
+                        "proxyAddr": {
+                            "type": "string",
+                            "title": "Teleport proxy address",
+                            "default": "test.teleport.giantswarm.io:443"
+                        },
+                        "version": {
+                            "type": "string",
+                            "title": "Teleport version",
+                            "default": "13.1.5"
+                        }
+                    }
+                }
             }
         },
         "managementCluster": {
