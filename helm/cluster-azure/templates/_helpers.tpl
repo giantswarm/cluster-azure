@@ -199,6 +199,7 @@ and is used to join the node to the teleport cluster.
     [Service]
     Type=simple
     Restart=on-failure
+    ExecStartPre=/bin/bash /opt/teleport-installer.sh {{ .Values.internal.teleport.version }}
     ExecStart=/opt/bin/teleport start --roles=node --config=/etc/teleport.yaml --pid-file=/run/teleport.pid
     ExecReload=/bin/kill -HUP $MAINPID
     PIDFile=/run/teleport.pid
