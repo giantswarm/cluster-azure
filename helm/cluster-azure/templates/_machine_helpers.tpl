@@ -33,9 +33,6 @@ ignition:
             contents: |
               [Unit]
               After=oem-cloudinit.service
-        {{- if .Values.internal.teleport.enabled }}
-        {{- include "teleportSystemdUnits" $ | nindent 8 }}
-        {{- end }}
 joinConfiguration:
   nodeRegistration:
     kubeletExtraArgs:
@@ -63,9 +60,6 @@ files:
     permissions: "0644"
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
 {{- include "sshFiles" $ | nindent 2 }}
-{{- if $.Values.internal.teleport.enabled }}
-{{- include "teleportFiles" . | nindent 2 }}
-{{- end }}
 {{- include "commonSysctlConfigurations" $ | nindent 2 }}
 {{- include "auditRules99Default" $ | nindent 2 }}
 {{- include "containerdConfig" $ | nindent 2 }}

@@ -63,10 +63,6 @@ internal:
     name: giantswarm/pause
     registry: quay.io
     tag: "3.9"
-  teleport:
-    proxyAddr: test.teleport.giantswarm.io:443
-    version: 13.1.5
-    enabled: false    
 metadata:
   servicePriority: highest
 nodePools:
