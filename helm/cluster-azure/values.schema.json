@@ -436,7 +436,7 @@
                             }
                         }
                     }
-                },           
+                },
                 "sandboxContainerImage": {
                     "type": "object",
                     "title": "Kubectl image",
