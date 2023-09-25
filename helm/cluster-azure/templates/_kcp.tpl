@@ -272,9 +272,6 @@ spec:
     {{- if (eq .Values.connectivity.network.mode "private") }}
     {{- include "kubeadm.controlPlane.privateNetwork.preCommands" . | nindent 6 }}
     {{- end }}
-    {{- if $.Values.internal.teleport.enabled }}
-    {{- include "teleportPreKubeadmCommands" . | nindent 6 }}
-    {{- end }}
     {{- if (eq .Values.connectivity.network.mode "private") }}
     postKubeadmCommands:
     {{- include "kubeadm.controlPlane.privateNetwork.postCommands" . | nindent 6 }}
