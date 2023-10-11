@@ -93,6 +93,9 @@ spec:
                 contents: |
                   [Unit]
                   After=oem-cloudinit.service
+            {{- if .Values.internal.teleport.enabled }}
+            {{- include "teleportSystemdUnits" $ | nindent 12 }}
+            {{- end }}
           # Workaround for https://github.com/kubernetes-sigs/cluster-api/issues/7679.
           # Filesystems is defined in `kubeadmConfigSpec.diskSetup` because without it the `mounts` section does not generate any mount unit
           storage:
@@ -202,6 +205,9 @@ spec:
     files:
     {{- include "oidcFiles" . | nindent 4 }}
     {{- include "sshFiles" . | nindent 4 }}
+    {{- if $.Values.internal.teleport.enabled }}
+    {{- include "teleportFiles" . | nindent 4 }}
+    {{- end }}
     {{- include "kubeletReservationFiles" $ | nindent 4 }}
     {{- include "commonSysctlConfigurations" $ | nindent 4 }}
     {{- include "auditRules99Default" $ | nindent 4 }}

@@ -457,6 +457,27 @@
                             "default": "3.9"
                         }
                     }
+                },
+                "teleport": {
+                    "type": "object",
+                    "title": "Teleport",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable teleport",
+                            "default": false
+                        },
+                        "proxyAddr": {
+                            "type": "string",
+                            "title": "Teleport proxy address",
+                            "default": "test.teleport.giantswarm.io:443"
+                        },
+                        "version": {
+                            "type": "string",
+                            "title": "Teleport version",
+                            "default": "13.1.5"
+                        }
+                    }
                 }
             }
         },
