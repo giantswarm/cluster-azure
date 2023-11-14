@@ -115,6 +115,10 @@ Properties within the `.internal` top-level object
 | `internal.sandboxContainerImage.name` | **Repository**|**Type:** `string`<br/>**Default:** `"giantswarm/pause"`|
 | `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"quay.io"`|
 | `internal.sandboxContainerImage.tag` | **Tag**|**Type:** `string`<br/>**Default:** `"3.9"`|
+| `internal.teleport` | **Teleport**|**Type:** `object`<br/>|
+| `internal.teleport.enabled` | **Enable teleport**|**Type:** `boolean`<br/>**Default:** `false`|
+| `internal.teleport.proxyAddr` | **Teleport proxy address**|**Type:** `string`<br/>**Default:** `"test.teleport.giantswarm.io:443"`|
+| `internal.teleport.version` | **Teleport version**|**Type:** `string`<br/>**Default:** `"13.1.5"`|
 
 ### Metadata
 Properties within the `.metadata` top-level object
