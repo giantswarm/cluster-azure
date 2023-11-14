@@ -115,6 +115,10 @@ Properties within the `.internal` top-level object
 | `internal.sandboxContainerImage.name` | **Repository**|**Type:** `string`<br/>**Default:** `"giantswarm/pause"`|
 | `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"quay.io"`|
 | `internal.sandboxContainerImage.tag` | **Tag**|**Type:** `string`<br/>**Default:** `"3.9"`|
+| `internal.teleport` | **Teleport**|**Type:** `object`<br/>|
+| `internal.teleport.enabled` | **Enable teleport**|**Type:** `boolean`<br/>**Default:** `false`|
+| `internal.teleport.proxyAddr` | **Teleport proxy address**|**Type:** `string`<br/>**Default:** `"test.teleport.giantswarm.io:443"`|
+| `internal.teleport.version` | **Teleport version**|**Type:** `string`<br/>**Default:** `"13.1.5"`|
 
 ### Metadata
 Properties within the `.metadata` top-level object
@@ -122,7 +126,7 @@ Properties within the `.metadata` top-level object
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `metadata.description` | **Cluster description** - User-friendly description of the cluster's purpose.|**Type:** `string`<br/>|
-| `metadata.labels` | **Labels** - These labels are added to the Kubernetes resourses defining this cluster.|**Type:** `object`<br/>|
+| `metadata.labels` | **Labels** - These labels are added to the Kubernetes resources defining this cluster.|**Type:** `object`<br/>|
 | `metadata.labels.PATTERN` | **Label**|**Type:** `string`<br/>**Key pattern:**<br/>`PATTERN`=`^[a-zA-Z0-9/\._-]+$`<br/>**Value pattern:** `^[a-zA-Z0-9\._-]+$`<br/>|
 | `metadata.name` | **Cluster name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>|
 | `metadata.organization` | **Organization**|**Type:** `string`<br/>|
