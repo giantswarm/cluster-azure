@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add validation of machineDeployment name using Schema Regex
 
+### Fixed
+
+- Fix containerd config that was breaking in newer flatcar versions.
+
 ## [0.0.29] - 2023-08-03
 
 ### Changed
