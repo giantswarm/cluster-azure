@@ -52,3 +52,6 @@ spec:
     snapshot:
       verticalPodAutoscaler:
         enabled: {{ .Values.internal.enableVpaResources }}
+    global:
+      podSecurityStandards:
+        enforced: {{ .Values.global.podSecurityStandards.enforced }}
