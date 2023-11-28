@@ -21,7 +21,7 @@ spec:
       chart: azure-cloud-controller-manager-app
       # used by renovate
       # repo: giantswarm/azure-cloud-controller-manager-app
-      version: 1.24.18-gs4
+      version: 1.24.18-gs5
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default
@@ -73,7 +73,7 @@ spec:
       chart: azure-cloud-node-manager-app
       # used by renovate
       # repo: giantswarm/azure-cloud-node-manager-app
-      version: 1.24.18-gs3
+      version: 1.24.18-gs5
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default
@@ -93,4 +93,6 @@ spec:
     global:
       podSecurityStandards:
         enforced: {{ .Values.global.podSecurityStandards.enforced }}
+    # kyverno installs PolicyException CRs for core components on CAPI clusters
+    deployPolicyExceptions: false
 
