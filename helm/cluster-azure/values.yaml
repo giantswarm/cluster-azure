@@ -64,9 +64,7 @@ internal:
     registry: quay.io
     tag: "3.9"
   teleport:
-    enabled: false
-    proxyAddr: test.teleport.giantswarm.io:443
-    version: 13.1.5
+    enabled: true
 metadata:
   servicePriority: highest
 nodePools:
