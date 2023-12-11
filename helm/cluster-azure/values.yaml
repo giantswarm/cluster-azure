@@ -65,6 +65,8 @@ internal:
     tag: "3.9"
   teleport:
     enabled: true
+    proxyAddr: teleport.giantswarm.io:443
+    version: 14.1.3
 metadata:
   servicePriority: highest
 nodePools:
