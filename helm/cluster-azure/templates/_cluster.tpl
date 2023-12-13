@@ -9,6 +9,9 @@ metadata:
     {{- if .Values.metadata.servicePriority }}
     giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
     {{- end }}
+    {{- if .Values.global.podSecurityStandards.enforced }}
+    policy.giantswarm.io/psp-status: disabled
+    {{- end }}
     {{- include "labels.common" $ | nindent 4 }}
     {{- if .Values.metadata.labels }}
     {{- range $key, $val := .Values.metadata.labels }}
