@@ -33,6 +33,9 @@ controlPlane:
     usernameClaim: ""
   replicas: 3
   rootVolumeSizeGB: 50
+global:
+  podSecurityStandards:
+    enforced: false
 internal:
   defaults:
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%

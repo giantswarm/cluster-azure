@@ -21,7 +21,7 @@ spec:
       chart: azuredisk-csi-driver-app
       # used by renovate
       # repo: giantswarm/azuredisk-csi-driver-app
-      version: 1.27.0
+      version: 1.26.2-gs5
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default
@@ -52,3 +52,6 @@ spec:
     snapshot:
       verticalPodAutoscaler:
         enabled: {{ .Values.internal.enableVpaResources }}
+    global:
+      podSecurityStandards:
+        enforced: {{ .Values.global.podSecurityStandards.enforced }}

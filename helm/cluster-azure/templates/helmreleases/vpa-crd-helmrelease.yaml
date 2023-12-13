@@ -28,3 +28,8 @@ spec:
   install:
     remediation:
       retries: 30
+  values:
+    global:
+      podSecurityStandards:
+        enforced: {{ .Values.global.podSecurityStandards.enforced }}
+

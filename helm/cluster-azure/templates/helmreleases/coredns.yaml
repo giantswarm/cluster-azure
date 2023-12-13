@@ -48,3 +48,7 @@ spec:
           clusterIPRange: {{ .Values.connectivity.network.serviceCidr | quote }}
         DNS:
           IP: {{ include "clusterDNS" $ | quote }}
+    global:
+      podSecurityStandards:
+        enforced: {{ .Values.global.podSecurityStandards.enforced }}
+

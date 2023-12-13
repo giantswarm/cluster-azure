@@ -151,6 +151,13 @@ Properties within the `.nodePools` top-level object
 | `nodePools[*].replicas` | **Number of nodes**|**Type:** `integer`<br/>|
 | `nodePools[*].rootVolumeSizeGB` | **Root volume size (GB)**|**Type:** `integer`<br/>|
 
+### Pod Security Standards
+Properties within the `.global.podSecurityStandards` object
+
+| **Property** | **Description** | **More Details** |
+| :----------- | :-------------- | :--------------- |
+| `global.podSecurityStandards.enforced` | **Enforced Pod Security Standards** - Use PSSs instead of PSPs.|**Type:** `boolean`<br/>**Default:** `false`|
+
 ### Other
 
 | **Property** | **Description** | **More Details** |
