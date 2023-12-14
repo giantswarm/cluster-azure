@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.31] - 2023-12-14
+
 ### Added
 
 - Add `azurefile-csi-driver` app as helmrelease.
@@ -301,7 +303,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.30...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.31...HEAD
+[0.0.31]: https://github.com/giantswarm/cluster-azure/compare/v0.0.30...v0.0.31
 [0.0.30]: https://github.com/giantswarm/cluster-azure/compare/v0.0.29...v0.0.30
 [0.0.29]: https://github.com/giantswarm/cluster-azure/compare/v0.0.28...v0.0.29
 [0.0.28]: https://github.com/giantswarm/cluster-azure/compare/v0.0.27...v0.0.28
