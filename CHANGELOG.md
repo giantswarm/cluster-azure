@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Enable teleport by default.
+- Upgrade Flatcar image to [3510.2.5](https://www.flatcar.org/releases#release-3510.2.5)
+- Upgrade K8S version to `1.24.17`
+
 ## [0.0.31] - 2023-12-14
 
 ### Added
@@ -23,10 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix containerd config that was breaking in newer flatcar versions.
-
-### Changed
-
-- Enable teleport by default.
 
 ## [0.0.29] - 2023-08-03
 
