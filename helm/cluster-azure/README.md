@@ -116,9 +116,9 @@ Properties within the `.internal` top-level object
 | `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"quay.io"`|
 | `internal.sandboxContainerImage.tag` | **Tag**|**Type:** `string`<br/>**Default:** `"3.9"`|
 | `internal.teleport` | **Teleport**|**Type:** `object`<br/>|
-| `internal.teleport.enabled` | **Enable teleport**|**Type:** `boolean`<br/>**Default:** `false`|
-| `internal.teleport.proxyAddr` | **Teleport proxy address**|**Type:** `string`<br/>**Default:** `"test.teleport.giantswarm.io:443"`|
-| `internal.teleport.version` | **Teleport version**|**Type:** `string`<br/>**Default:** `"13.1.5"`|
+| `internal.teleport.enabled` | **Enable teleport**|**Type:** `boolean`<br/>**Default:** `true`|
+| `internal.teleport.proxyAddr` | **Teleport proxy address**|**Type:** `string`<br/>**Default:** `"teleport.giantswarm.io:443"`|
+| `internal.teleport.version` | **Teleport version**|**Type:** `string`<br/>**Default:** `"14.1.3"`|
 
 ### Metadata
 Properties within the `.metadata` top-level object

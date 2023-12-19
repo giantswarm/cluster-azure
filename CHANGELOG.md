@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix containerd config that was breaking in newer flatcar versions.
 
+### Changed
+
+- Enable teleport by default.
+
 ## [0.0.29] - 2023-08-03
 
 ### Changed
