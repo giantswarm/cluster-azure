@@ -52,6 +52,7 @@ rules:
       - "{{ include "resource.default.name" $ }}-azure-cloud-controller-manager"
       - "{{ include "resource.default.name" $ }}-azure-cloud-node-manager"
       - "{{ include "resource.default.name" $ }}-azuredisk-csi-driver"
+      - "{{ include "resource.default.name" $ }}-azurefile-csi-driver"
       - "{{ include "resource.default.name" $ }}-coredns"
       - "{{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd"
     verbs: ["patch"]

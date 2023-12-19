@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+
 - Enable teleport by default.
 - Upgrade Flatcar image to [3510.2.5](https://www.flatcar.org/releases#release-3510.2.5)
 - Upgrade K8S version to `1.24.17`
+- Fix left-over azurefile-csi-driver helmreleases during cleanup.
 
 ## [0.0.31] - 2023-12-14
 
