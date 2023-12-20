@@ -233,7 +233,7 @@
                             "type": "boolean",
                             "title": "Enforced Pod Security Standards",
                             "description": "Use PSSs instead of PSPs.",
-                            "default": false
+                            "default": true
                         }
                     }
                 }
@@ -350,14 +350,14 @@
                         "tag": {
                             "type": "string",
                             "title": "Image tag",
-                            "default": "1.23.5"
+                            "default": "1.25.15"
                         }
                     }
                 },
                 "kubernetesVersion": {
                     "type": "string",
                     "title": "Kubernetes version",
-                    "default": "1.24.17"
+                    "default": "1.25.16"
                 },
                 "network": {
                     "type": "object",

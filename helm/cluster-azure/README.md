@@ -96,8 +96,8 @@ Properties within the `.internal` top-level object
 | `internal.kubectlImage` | **Kubectl Image settings**|**Type:** `object`<br/>|
 | `internal.kubectlImage.name` | **Image name** - Name of the image Registry|**Type:** `string`<br/>**Default:** `"giantswarm/kubectl"`|
 | `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
-| `internal.kubectlImage.tag` | **Image tag**|**Type:** `string`<br/>**Default:** `"1.23.5"`|
-| `internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.24.17"`|
+| `internal.kubectlImage.tag` | **Image tag**|**Type:** `string`<br/>**Default:** `"1.25.15"`|
+| `internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.25.16"`|
 | `internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
 | `internal.network.subnets` | **VNet spec** - Customize subnets configuration|**Type:** `object`<br/>**Default:** `{}`|
 | `internal.network.subnets.controlPlaneSubnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
@@ -154,7 +154,7 @@ Properties within the `.global.podSecurityStandards` object
 
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
-| `global.podSecurityStandards.enforced` | **Enforced Pod Security Standards** - Use PSSs instead of PSPs.|**Type:** `boolean`<br/>**Default:** `false`|
+| `global.podSecurityStandards.enforced` | **Enforced Pod Security Standards** - Use PSSs instead of PSPs.|**Type:** `boolean`<br/>**Default:** `true`|
 
 ### Other
 

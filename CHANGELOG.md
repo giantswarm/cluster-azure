@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use `Standard_D4s_v5` for control plane and worker nodes.
 - Use 2 replicas for workers by default.
+- Upgrade K8S version to `1.25.16`.
+- Upgrade kubectl version to `1.25.15`.
+- Disable PSPs by default.
 
 ## [0.0.35] - 2024-02-07
 
