@@ -13,6 +13,8 @@ osDisk:
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
+securityProfile:
+  encryptionAtHost: {{ .spec.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ .spec.instanceType }}
 {{- if ( include "network.subnets.nodes.name" $ ) }}

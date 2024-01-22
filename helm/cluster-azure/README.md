@@ -64,6 +64,7 @@ Properties within the `.controlPlane` top-level object
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `controlPlane.containerdVolumeSizeGB` | **Containerd volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
+| `controlPlane.encryptionAtHost` | **Encryption at host** - Enable encryption at host for the control plane nodes.|**Type:** `boolean`<br/>**Default:** `false`|
 | `controlPlane.etcdVolumeSizeGB` | **Etcd volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
 | `controlPlane.instanceType` | **Node VM size**|**Type:** `string`<br/>**Default:** `"Standard_D4s_v3"`|
 | `controlPlane.kubeletVolumeSizeGB` | **Kubelet volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
@@ -145,6 +146,7 @@ Properties within the `.nodePools` top-level object
 | `nodePools[*].customNodeTaints[*].key` | **Key**|**Type:** `string`<br/>|
 | `nodePools[*].customNodeTaints[*].value` | **Value**|**Type:** `string`<br/>|
 | `nodePools[*].disableHealthCheck` | **Disable HealthChecks for the MachineDeployment**|**Type:** `boolean`<br/>|
+| `nodePools[*].encryptionAtHost` | **Encryption at host** - Enable encryption at host for the worker nodes.|**Type:** `boolean`<br/>**Default:** `false`|
 | `nodePools[*].failureDomain` | **Availability zone**|**Type:** `string`<br/>|
 | `nodePools[*].instanceType` | **VM size**|**Type:** `string`<br/>|
 | `nodePools[*].name` | **Name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|

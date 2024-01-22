@@ -19,6 +19,8 @@ dataDisks:
 osDisk:
   diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
   osType: Linux
+securityProfile:
+  encryptionAtHost: {{ $.Values.controlPlane.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ $.Values.controlPlane.instanceType }}
 {{- if ( include "network.subnets.controlPlane.name" $ ) }}
