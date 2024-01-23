@@ -116,6 +116,8 @@ spec:
             #    - -E
             #    - lazy_itable_init=1,lazy_journal_init=1
     clusterConfiguration:
+      # Avoid accessibility issues (e.g. on private clusters) and potential future rate limits for the default `registry.k8s.io`
+      imageRepository: gsoci.azurecr.io/giantswarm
       apiServer:
         certSANs:
           - 127.0.0.1
