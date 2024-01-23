@@ -55,7 +55,7 @@ internal:
     version: 3510.2.5
   kubectlImage:
     name: giantswarm/kubectl
-    registry: quay.io
+    registry: gsoci.azurecr.io
     tag: 1.23.5
   kubernetesVersion: 1.24.17
   network:
@@ -65,7 +65,7 @@ internal:
       gatewayMode: none
   sandboxContainerImage:
     name: giantswarm/pause
-    registry: quay.io
+    registry: gsoci.azurecr.io
     tag: "3.9"
   teleport:
     enabled: true

@@ -367,7 +367,7 @@
                             "type": "string",
                             "title": "Kubectl Image Registry",
                             "description": "Registry for the kubectl image",
-                            "default": "quay.io"
+                            "default": "gsoci.azurecr.io"
                         },
                         "tag": {
                             "type": "string",
@@ -463,7 +463,7 @@
                 },
                 "sandboxContainerImage": {
                     "type": "object",
-                    "title": "Kubectl image",
+                    "title": "The image used by sandbox / pause container",
                     "properties": {
                         "name": {
                             "type": "string",
@@ -473,7 +473,7 @@
                         "registry": {
                             "type": "string",
                             "title": "Registry",
-                            "default": "quay.io"
+                            "default": "gsoci.azurecr.io"
                         },
                         "tag": {
                             "type": "string",

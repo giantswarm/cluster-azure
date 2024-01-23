@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Enable Host Encryption for workers and control plane virtual machines.
+- Use `gsoci.azurecr.io` for `kubeadm` container images.
+- Use `gsoci.azurecr.io` for sandbox container image (pause container).
+- Update `coredns` to `1.21.0` to use `gsoci.azurecr.io`.
+- Update `cillium` to `0.19.2` to use `gsoci.azurecr.io`.
+- Update `azure-cloud-controller-manager-app` to `1.24.18-gs6` to use `gsoci.azurecr.io`.
+- Update `azure-cloud-node-manager-app` to `1.24.18-gs6` to use `gsoci.azurecr.io`.
+- Update `azuredisk-csi-driver-app` to `1.26.2-gs6` to use `gsoci.azurecr.io`.
+- Update `azurefile-csi-driver-app` to `1.26.0-gs4` to use `gsoci.azurecr.io`.
 
 ## [0.0.32] - 2023-12-20
 
