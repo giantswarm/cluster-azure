@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2024-01-23
+
 ### Changed
 
 - Enable Host Encryption for workers and control plane virtual machines.
@@ -324,7 +326,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.32...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/giantswarm/cluster-azure/compare/v0.0.32...v0.1.0
 [0.0.32]: https://github.com/giantswarm/cluster-azure/compare/v0.0.31...v0.0.32
 [0.0.31]: https://github.com/giantswarm/cluster-azure/compare/v0.0.30...v0.0.31
 [0.0.30]: https://github.com/giantswarm/cluster-azure/compare/v0.0.29...v0.0.30
