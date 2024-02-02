@@ -12,8 +12,3 @@
 {{- include "control-plane" . }}
 ---
 {{- include "machine-deployments" . }}
----
-{{- if .Values.connectivity.bastion.enabled -}}
-{{- include "bastion-machine-deployment" . }}
----
-{{- end }}

@@ -24,23 +24,6 @@
                     },
                     "default": []
                 },
-                "bastion": {
-                    "type": "object",
-                    "title": "Bastion host",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean",
-                            "title": "Enable bastion host for this cluster",
-                            "default": true
-                        },
-                        "instanceType": {
-                            "type": "string",
-                            "title": "VM size",
-                            "description": "Type of virtual machine to use for the bastion host.",
-                            "default": "Standard_D2s_v5"
-                        }
-                    }
-                },
                 "containerRegistries": {
                     "type": "object",
                     "title": "Container registries",

@@ -127,17 +127,6 @@ When comparing the KubernetesVersion we must use the Target version of the clust
   content: {{ $.Files.Get "files/etc/ssh/sshd_config" | b64enc }}
 {{- end -}}
 
-{{- define "sshFilesBastion" -}}
-- path: /etc/ssh/trusted-user-ca-keys.pem
-  permissions: "0600"
-  encoding: base64
-  content: {{ tpl ($.Files.Get "files/etc/ssh/trusted-user-ca-keys.pem") . | b64enc }}
-- path: /etc/ssh/sshd_config
-  permissions: "0600"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/ssh/sshd_config_bastion" | b64enc }}
-{{- end -}}
-
 {{- define "sshUsers" -}}
 - name: giantswarm
   groups: sudo

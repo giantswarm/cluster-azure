@@ -35,9 +35,6 @@ Properties within the `.connectivity` top-level object
 | :----------- | :-------------- | :--------------- |
 | `connectivity.allowedCIDRs` | **List of CIDRs which have to been allowed to connect to the API Server endpoint**|**Type:** `array`<br/>**Default:** `[]`|
 | `connectivity.allowedCIDRs[*]` |**None**|**Type:** `string`<br/>|
-| `connectivity.bastion` | **Bastion host**|**Type:** `object`<br/>|
-| `connectivity.bastion.enabled` | **Enable bastion host for this cluster**|**Type:** `boolean`<br/>**Default:** `true`|
-| `connectivity.bastion.instanceType` | **VM size** - Type of virtual machine to use for the bastion host.|**Type:** `string`<br/>**Default:** `"Standard_D2s_v5"`|
 | `connectivity.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}]}`|
 | `connectivity.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
 | `connectivity.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
