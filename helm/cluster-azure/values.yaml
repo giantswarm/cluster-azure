@@ -3,9 +3,6 @@
 baseDomain: azuretest.gigantic.io
 connectivity:
   allowedCIDRs: []
-  bastion:
-    enabled: true
-    instanceType: Standard_D2s_v5
   containerRegistries:
     docker.io:
       - endpoint: registry-1.docker.io
@@ -19,7 +16,6 @@ connectivity:
     serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
-  sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
   containerdVolumeSizeGB: 100
   encryptionAtHost: false

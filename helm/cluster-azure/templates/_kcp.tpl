@@ -208,7 +208,6 @@ spec:
         serviceSubnet: {{ .Values.connectivity.network.serviceCidr }}
     files:
     {{- include "oidcFiles" . | nindent 4 }}
-    {{- include "sshFiles" . | nindent 4 }}
     {{- if $.Values.internal.teleport.enabled }}
     {{- include "teleportFiles" . | nindent 4 }}
     {{- end }}
@@ -282,8 +281,6 @@ spec:
     {{- else }}
     postKubeadmCommands: []
     {{ end }}
-    users:
-    {{- include "sshUsers" . | nindent 6 }}
   replicas: {{ .Values.controlPlane.replicas | default "3" }}
   version: {{ .Values.internal.kubernetesVersion }}
 ---
