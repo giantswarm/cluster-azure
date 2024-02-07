@@ -423,24 +423,6 @@ glippy nat-ip 20.4.101.216
 */}}
 
 {{- define "controlPlaneSecurityGroups" -}}
-- name: "allow_ssh_from_gridscale"
-  description: "allow SSH"
-  direction: "Inbound"
-  priority: 150
-  protocol: "*"
-  destination: "*"
-  destinationPorts: "22"
-  source: "185.102.95.187"
-  sourcePorts: "*"
-- name: "allow_ssh_from_vultr"
-  description: "allow SSH"
-  direction: "Inbound"
-  priority: 151
-  protocol: "*"
-  destination: "*"
-  destinationPorts: "22"
-  source: "95.179.153.65"
-  sourcePorts: "*"
 - name: "allow_apiserver_from_gridscale"
   description: "Allow K8s API Server"
   direction: "Inbound"
