@@ -24,23 +24,6 @@
                     },
                     "default": []
                 },
-                "bastion": {
-                    "type": "object",
-                    "title": "Bastion host",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean",
-                            "title": "Enable bastion host for this cluster",
-                            "default": true
-                        },
-                        "instanceType": {
-                            "type": "string",
-                            "title": "VM size",
-                            "description": "Type of virtual machine to use for the bastion host.",
-                            "default": "Standard_D2s_v5"
-                        }
-                    }
-                },
                 "containerRegistries": {
                     "type": "object",
                     "title": "Container registries",
@@ -156,11 +139,6 @@
                             }
                         }
                     }
-                },
-                "sshSSOPublicKey": {
-                    "type": "string",
-                    "title": "SSH Public key for single sign-on",
-                    "default": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"
                 }
             }
         },
@@ -173,6 +151,12 @@
                     "title": "Containerd volume size (GB)",
                     "default": 100,
                     "minimum": 20
+                },
+                "encryptionAtHost": {
+                    "type": "boolean",
+                    "title": "Encryption at host",
+                    "description": "Enable encryption at host for the control plane nodes.",
+                    "default": false
                 },
                 "etcdVolumeSizeGB": {
                     "type": "integer",
@@ -361,7 +345,7 @@
                             "type": "string",
                             "title": "Kubectl Image Registry",
                             "description": "Registry for the kubectl image",
-                            "default": "quay.io"
+                            "default": "gsoci.azurecr.io"
                         },
                         "tag": {
                             "type": "string",
@@ -457,7 +441,7 @@
                 },
                 "sandboxContainerImage": {
                     "type": "object",
-                    "title": "Kubectl image",
+                    "title": "The image used by sandbox / pause container",
                     "properties": {
                         "name": {
                             "type": "string",
@@ -467,7 +451,7 @@
                         "registry": {
                             "type": "string",
                             "title": "Registry",
-                            "default": "quay.io"
+                            "default": "gsoci.azurecr.io"
                         },
                         "tag": {
                             "type": "string",
@@ -602,6 +586,12 @@
                         "type": "boolean",
                         "title": "Disable HealthChecks for the MachineDeployment"
                     },
+                    "encryptionAtHost": {
+                        "type": "boolean",
+                        "title": "Encryption at host",
+                        "description": "Enable encryption at host for the worker nodes.",
+                        "default": false
+                    },
                     "failureDomain": {
                         "type": "string",
                         "title": "Availability zone",
@@ -640,6 +630,7 @@
                     "customNodeLabels": [],
                     "customNodeTaints": [],
                     "disableHealthCheck": false,
+                    "encryptionAtHost": false,
                     "instanceType": "Standard_D2s_v3",
                     "name": "md00",
                     "replicas": 3,

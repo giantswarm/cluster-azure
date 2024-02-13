@@ -116,34 +116,6 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 {{- end }}
 {{- end -}}
 
-{{- define "sshFiles" -}}
-- path: /etc/ssh/trusted-user-ca-keys.pem
-  permissions: "0600"
-  encoding: base64
-  content: {{ tpl ($.Files.Get "files/etc/ssh/trusted-user-ca-keys.pem") . | b64enc }}
-- path: /etc/ssh/sshd_config
-  permissions: "0600"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/ssh/sshd_config" | b64enc }}
-{{- end -}}
-
-{{- define "sshFilesBastion" -}}
-- path: /etc/ssh/trusted-user-ca-keys.pem
-  permissions: "0600"
-  encoding: base64
-  content: {{ tpl ($.Files.Get "files/etc/ssh/trusted-user-ca-keys.pem") . | b64enc }}
-- path: /etc/ssh/sshd_config
-  permissions: "0600"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/ssh/sshd_config_bastion" | b64enc }}
-{{- end -}}
-
-{{- define "sshUsers" -}}
-- name: giantswarm
-  groups: sudo
-  sudo: ALL=(ALL) NOPASSWD:ALL
-{{- end -}}
-
 {{- define "oidcFiles" -}}
 {{- if ne .Values.controlPlane.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
@@ -451,24 +423,6 @@ glippy nat-ip 20.4.101.216
 */}}
 
 {{- define "controlPlaneSecurityGroups" -}}
-- name: "allow_ssh_from_gridscale"
-  description: "allow SSH"
-  direction: "Inbound"
-  priority: 150
-  protocol: "*"
-  destination: "*"
-  destinationPorts: "22"
-  source: "185.102.95.187"
-  sourcePorts: "*"
-- name: "allow_ssh_from_vultr"
-  description: "allow SSH"
-  direction: "Inbound"
-  priority: 151
-  protocol: "*"
-  destination: "*"
-  destinationPorts: "22"
-  source: "95.179.153.65"
-  sourcePorts: "*"
 - name: "allow_apiserver_from_gridscale"
   description: "Allow K8s API Server"
   direction: "Inbound"

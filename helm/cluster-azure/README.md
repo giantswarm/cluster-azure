@@ -35,9 +35,6 @@ Properties within the `.connectivity` top-level object
 | :----------- | :-------------- | :--------------- |
 | `connectivity.allowedCIDRs` | **List of CIDRs which have to been allowed to connect to the API Server endpoint**|**Type:** `array`<br/>**Default:** `[]`|
 | `connectivity.allowedCIDRs[*]` |**None**|**Type:** `string`<br/>|
-| `connectivity.bastion` | **Bastion host**|**Type:** `object`<br/>|
-| `connectivity.bastion.enabled` | **Enable bastion host for this cluster**|**Type:** `boolean`<br/>**Default:** `true`|
-| `connectivity.bastion.instanceType` | **VM size** - Type of virtual machine to use for the bastion host.|**Type:** `string`<br/>**Default:** `"Standard_D2s_v5"`|
 | `connectivity.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}]}`|
 | `connectivity.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
 | `connectivity.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
@@ -56,7 +53,6 @@ Properties within the `.connectivity` top-level object
 | `connectivity.network.serviceCidr` | **Service subnet** - IPv4 address range for services, in CIDR notation.|**Type:** `string`<br/>**Default:** `"172.31.0.0/16"`|
 | `connectivity.network.workers` | **Workers**|**Type:** `object`<br/>|
 | `connectivity.network.workers.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.16.0/20"`|
-| `connectivity.sshSSOPublicKey` | **SSH Public key for single sign-on**|**Type:** `string`<br/>**Default:** `"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io"`|
 
 ### Control plane
 Properties within the `.controlPlane` top-level object
@@ -64,6 +60,7 @@ Properties within the `.controlPlane` top-level object
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `controlPlane.containerdVolumeSizeGB` | **Containerd volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
+| `controlPlane.encryptionAtHost` | **Encryption at host** - Enable encryption at host for the control plane nodes.|**Type:** `boolean`<br/>**Default:** `false`|
 | `controlPlane.etcdVolumeSizeGB` | **Etcd volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
 | `controlPlane.instanceType` | **Node VM size**|**Type:** `string`<br/>**Default:** `"Standard_D4s_v3"`|
 | `controlPlane.kubeletVolumeSizeGB` | **Kubelet volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
@@ -98,7 +95,7 @@ Properties within the `.internal` top-level object
 | `internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3510.2.5"`|
 | `internal.kubectlImage` | **Kubectl Image settings**|**Type:** `object`<br/>|
 | `internal.kubectlImage.name` | **Image name** - Name of the image Registry|**Type:** `string`<br/>**Default:** `"giantswarm/kubectl"`|
-| `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"quay.io"`|
+| `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
 | `internal.kubectlImage.tag` | **Image tag**|**Type:** `string`<br/>**Default:** `"1.23.5"`|
 | `internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.24.17"`|
 | `internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
@@ -111,9 +108,9 @@ Properties within the `.internal` top-level object
 | `internal.network.vnet.resourceGroup` | **Resource group name** - Resource group where the existing VNet is deployed.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
 | `internal.network.vpn` | **VPN configuration** - Internal VPN configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
 | `internal.network.vpn.gatewayMode` | **VPN gateway mode**|**Type:** `string`<br/>**Default:** `"none"`|
-| `internal.sandboxContainerImage` | **Kubectl image**|**Type:** `object`<br/>|
+| `internal.sandboxContainerImage` | **The image used by sandbox / pause container**|**Type:** `object`<br/>|
 | `internal.sandboxContainerImage.name` | **Repository**|**Type:** `string`<br/>**Default:** `"giantswarm/pause"`|
-| `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"quay.io"`|
+| `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
 | `internal.sandboxContainerImage.tag` | **Tag**|**Type:** `string`<br/>**Default:** `"3.9"`|
 | `internal.teleport` | **Teleport**|**Type:** `object`<br/>|
 | `internal.teleport.enabled` | **Enable teleport**|**Type:** `boolean`<br/>**Default:** `true`|
@@ -145,6 +142,7 @@ Properties within the `.nodePools` top-level object
 | `nodePools[*].customNodeTaints[*].key` | **Key**|**Type:** `string`<br/>|
 | `nodePools[*].customNodeTaints[*].value` | **Value**|**Type:** `string`<br/>|
 | `nodePools[*].disableHealthCheck` | **Disable HealthChecks for the MachineDeployment**|**Type:** `boolean`<br/>|
+| `nodePools[*].encryptionAtHost` | **Encryption at host** - Enable encryption at host for the worker nodes.|**Type:** `boolean`<br/>**Default:** `false`|
 | `nodePools[*].failureDomain` | **Availability zone**|**Type:** `string`<br/>|
 | `nodePools[*].instanceType` | **VM size**|**Type:** `string`<br/>|
 | `nodePools[*].name` | **Name** - Unique identifier, cannot be changed after creation.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|

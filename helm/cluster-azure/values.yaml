@@ -3,9 +3,6 @@
 baseDomain: azuretest.gigantic.io
 connectivity:
   allowedCIDRs: []
-  bastion:
-    enabled: true
-    instanceType: Standard_D2s_v5
   containerRegistries:
     docker.io:
       - endpoint: registry-1.docker.io
@@ -19,9 +16,9 @@ connectivity:
     serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
-  sshSSOPublicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM4cvZ01fLmO9cJbWUj7sfF+NhECgy+Cl0bazSrZX7sU vault-ca@vault.operations.giantswarm.io
 controlPlane:
   containerdVolumeSizeGB: 100
+  encryptionAtHost: false
   etcdVolumeSizeGB: 100
   instanceType: Standard_D4s_v3
   kubeletVolumeSizeGB: 100
@@ -54,7 +51,7 @@ internal:
     version: 3510.2.5
   kubectlImage:
     name: giantswarm/kubectl
-    registry: quay.io
+    registry: gsoci.azurecr.io
     tag: 1.23.5
   kubernetesVersion: 1.24.17
   network:
@@ -64,7 +61,7 @@ internal:
       gatewayMode: none
   sandboxContainerImage:
     name: giantswarm/pause
-    registry: quay.io
+    registry: gsoci.azurecr.io
     tag: "3.9"
   teleport:
     enabled: true
@@ -76,6 +73,7 @@ nodePools:
   - customNodeLabels: []
     customNodeTaints: []
     disableHealthCheck: false
+    encryptionAtHost: false
     instanceType: Standard_D2s_v3
     name: md00
     replicas: 3

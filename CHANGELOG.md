@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.35] - 2024-02-07
+
+
+### Removed
+
+- SSH inbound SG rule from VPN
+
+## [0.0.34] - 2024-02-05
+
+### Removed
+
+- Bastion and ssh configuration on nodes.
+
+## [0.0.33] - 2024-01-23
+
+### Changed
+
+- Enable Host Encryption for workers and control plane virtual machines.
+- Use `gsoci.azurecr.io` for `kubeadm` container images.
+- Use `gsoci.azurecr.io` for sandbox container image (pause container).
+- Update `coredns` to `1.21.0` to use `gsoci.azurecr.io`.
+- Update `cillium` to `0.19.2` to use `gsoci.azurecr.io`.
+- Update `azure-cloud-controller-manager-app` to `1.24.18-gs6` to use `gsoci.azurecr.io`.
+- Update `azure-cloud-node-manager-app` to `1.24.18-gs6` to use `gsoci.azurecr.io`.
+- Update `azuredisk-csi-driver-app` to `1.26.2-gs6` to use `gsoci.azurecr.io`.
+- Update `azurefile-csi-driver-app` to `1.26.0-gs4` to use `gsoci.azurecr.io`.
+
 ## [0.0.32] - 2023-12-20
 
 ### Changed
@@ -312,7 +339,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.32...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.0.35...HEAD
+[0.0.35]: https://github.com/giantswarm/cluster-azure/compare/v0.0.34...v0.0.35
+[0.0.34]: https://github.com/giantswarm/cluster-azure/compare/v0.0.33...v0.0.34
+[0.0.33]: https://github.com/giantswarm/cluster-azure/compare/v0.0.32...v0.0.33
 [0.0.32]: https://github.com/giantswarm/cluster-azure/compare/v0.0.31...v0.0.32
 [0.0.31]: https://github.com/giantswarm/cluster-azure/compare/v0.0.30...v0.0.31
 [0.0.30]: https://github.com/giantswarm/cluster-azure/compare/v0.0.29...v0.0.30
@@ -347,4 +377,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.0.2]: https://github.com/giantswarm/cluster-azure/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/giantswarm/cluster-azure/compare/v0.0.1...v0.0.1
 [0.0.1]: https://github.com/giantswarm/cluster-azure/releases/tag/v0.0.1
-

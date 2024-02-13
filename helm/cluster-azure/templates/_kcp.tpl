@@ -19,6 +19,8 @@ dataDisks:
 osDisk:
   diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
   osType: Linux
+securityProfile:
+  encryptionAtHost: {{ $.Values.controlPlane.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ $.Values.controlPlane.instanceType }}
 {{- if ( include "network.subnets.controlPlane.name" $ ) }}
@@ -114,6 +116,8 @@ spec:
             #    - -E
             #    - lazy_itable_init=1,lazy_journal_init=1
     clusterConfiguration:
+      # Avoid accessibility issues (e.g. on private clusters) and potential future rate limits for the default `registry.k8s.io`
+      imageRepository: gsoci.azurecr.io/giantswarm
       apiServer:
         certSANs:
           - 127.0.0.1
@@ -204,7 +208,6 @@ spec:
         serviceSubnet: {{ .Values.connectivity.network.serviceCidr }}
     files:
     {{- include "oidcFiles" . | nindent 4 }}
-    {{- include "sshFiles" . | nindent 4 }}
     {{- if $.Values.internal.teleport.enabled }}
     {{- include "teleportFiles" . | nindent 4 }}
     {{- end }}
@@ -278,8 +281,6 @@ spec:
     {{- else }}
     postKubeadmCommands: []
     {{ end }}
-    users:
-    {{- include "sshUsers" . | nindent 6 }}
   replicas: {{ .Values.controlPlane.replicas | default "3" }}
   version: {{ .Values.internal.kubernetesVersion }}
 ---

@@ -13,6 +13,8 @@ osDisk:
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
+securityProfile:
+  encryptionAtHost: {{ .spec.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ .spec.instanceType }}
 {{- if ( include "network.subnets.nodes.name" $ ) }}
@@ -62,7 +64,6 @@ files:
     path: /etc/kubernetes/azure.json
     permissions: "0644"
 {{- include "kubeletReservationFiles" $ | nindent 2 }}
-{{- include "sshFiles" $ | nindent 2 }}
 {{- if $.Values.internal.teleport.enabled }}
 {{- include "teleportFiles" . | nindent 2 }}
 {{- end }}
@@ -75,8 +76,6 @@ preKubeadmCommands:
 {{- include "override-hostname-in-kubeadm-configuration" . | nindent 2 }}
 {{- include "override-pause-image-with-quay" . | nindent 2 }}
 postKubeadmCommands: []
-users:
-{{- include "sshUsers" . | nindent 2 }}
 {{- end }}
 
 {{/*
