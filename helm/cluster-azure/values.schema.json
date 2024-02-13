@@ -633,7 +633,7 @@
                     "encryptionAtHost": false,
                     "instanceType": "Standard_D4s_v5",
                     "name": "md00",
-                    "replicas": 3,
+                    "replicas": 2,
                     "rootVolumeSizeGB": 50
                 }
             ]
