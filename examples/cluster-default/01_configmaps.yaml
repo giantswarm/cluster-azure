@@ -13,8 +13,8 @@ data:
 
     nodePools:
     - name: md00
-      instanceType: Standard_D2s_v5
-      replicas: 3
+      instanceType: Standard_D4s_v5
+      replicas: 2
       rootVolumeSizeGB: 50
 
 kind: ConfigMap

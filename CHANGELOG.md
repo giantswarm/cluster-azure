@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.0.35] - 2024-02-07
+### Changed
 
+- Use `Standard_D4s_v5` for control plane and worker nodes.
+- Use 2 replicas for workers by default.
+
+## [0.0.35] - 2024-02-07
 
 ### Removed
 
