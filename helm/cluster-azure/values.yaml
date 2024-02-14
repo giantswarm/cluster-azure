@@ -32,7 +32,7 @@ controlPlane:
   rootVolumeSizeGB: 50
 global:
   podSecurityStandards:
-    enforced: false
+    enforced: true
 internal:
   defaults:
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
@@ -52,8 +52,8 @@ internal:
   kubectlImage:
     name: giantswarm/kubectl
     registry: gsoci.azurecr.io
-    tag: 1.23.5
-  kubernetesVersion: 1.24.17
+    tag: 1.25.15
+  kubernetesVersion: 1.25.16
   network:
     subnets: {}
     vnet: {}
