@@ -62,7 +62,7 @@ Properties within the `.controlPlane` top-level object
 | `controlPlane.containerdVolumeSizeGB` | **Containerd volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
 | `controlPlane.encryptionAtHost` | **Encryption at host** - Enable encryption at host for the control plane nodes.|**Type:** `boolean`<br/>**Default:** `false`|
 | `controlPlane.etcdVolumeSizeGB` | **Etcd volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
-| `controlPlane.instanceType` | **Node VM size**|**Type:** `string`<br/>**Default:** `"Standard_D4s_v3"`|
+| `controlPlane.instanceType` | **Node VM size**|**Type:** `string`<br/>**Default:** `"Standard_D4s_v5"`|
 | `controlPlane.kubeletVolumeSizeGB` | **Kubelet volume size (GB)**|**Type:** `integer`<br/>**Default:** `100`|
 | `controlPlane.oidc` | **OIDC authentication**|**Type:** `object`<br/>|
 | `controlPlane.oidc.caPem` | **Certificate authority** - Identity provider's CA certificate in PEM format.|**Type:** `string`<br/>**Default:** `""`|
