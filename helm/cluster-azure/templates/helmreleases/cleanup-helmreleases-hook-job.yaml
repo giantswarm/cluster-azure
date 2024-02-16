@@ -108,6 +108,9 @@ spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: post-delete-job
           image: "{{ .Values.internal.kubectlImage.registry }}/{{ .Values.internal.kubectlImage.name }}:{{ .Values.internal.kubectlImage.tag }}"
@@ -120,6 +123,12 @@ spec:
                   kubectl patch -n {{ .Release.Namespace }} "${r}" --type=merge -p '{"metadata": {"finalizers": []}}'
               done
           securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            seccompProfile:
+              type: RuntimeDefault
             readOnlyRootFilesystem: true
           resources:
             requests:
