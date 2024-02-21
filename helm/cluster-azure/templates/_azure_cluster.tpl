@@ -19,6 +19,7 @@ spec:
         role: control-plane
         cidrBlocks:
         - {{ .Values.connectivity.network.controlPlane.cidr }}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
         securityGroup:
           name: {{ include "resource.default.name" $ }}-controlplane-nsg
           securityRules:
@@ -48,6 +49,7 @@ spec:
         natGateway:
           name: {{ include "network.subnets.nodes.natGatewayName" $ }}
         role: node
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.connectivity.network.workers.privateEndpoints) | nindent 8 -}}
         cidrBlocks:
         - {{ .Values.connectivity.network.workers.cidr }}
     vnet:
