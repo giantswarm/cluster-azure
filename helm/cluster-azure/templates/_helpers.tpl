@@ -330,9 +330,11 @@ node-natgateway
 {{- if (gt (len $) 0) -}}
 privateEndpoints:
 {{ range $idx, $epDefinition := $ -}}
-{{- $name := $epDefinition.name | default (printf "%s-pe%d" $idx) -}}
+{{- $name := $epDefinition.name -}}
+{{- $location := $epDefinition.location -}}
 {{- $links := $epDefinition.privateLinkServiceConnections -}}
 - name: {{ $name }}
+  location: {{ $location }}
   privateLinkServiceConnections:
   {{- range $link := $links }}
   - privateLinkServiceID: {{ $link }}
