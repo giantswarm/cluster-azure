@@ -329,9 +329,9 @@ node-natgateway
 {{- define "network.subnet.privateEndpoints" -}}
 {{- if (gt (len $) 0) -}}
 privateEndpoints:
-{{ range $idx, $epDefinition := $ -}}
+{{ range $idx, $epDefinition := $.endpoints -}}
 {{- $name := $epDefinition.name -}}
-{{- $location := $epDefinition.location -}}
+{{- $location := $.location -}}
 {{- $links := $epDefinition.privateLinkServiceConnections -}}
 - name: {{ $name }}
   location: {{ $location }}

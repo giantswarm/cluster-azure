@@ -105,15 +105,9 @@
                                         "title": "Private endpoint",
                                         "required": [
                                             "name",
-                                            "location",
                                             "privateLinkServiceConnections"
                                         ],
                                         "properties": {
-                                            "location": {
-                                                "type": "string",
-                                                "title": "Location specifies the region to create the private endpoint",
-                                                "default": ""
-                                            },
                                             "name": {
                                                 "type": "string",
                                                 "title": "Name of the private endpoint (must be unique in the resource group)",
@@ -183,15 +177,9 @@
                                         "title": "Private endpoint",
                                         "required": [
                                             "name",
-                                            "location",
                                             "privateLinkServiceConnections"
                                         ],
                                         "properties": {
-                                            "location": {
-                                                "type": "string",
-                                                "title": "Location specifies the region to create the private endpoint",
-                                                "default": ""
-                                            },
                                             "name": {
                                                 "type": "string",
                                                 "title": "Name of the private endpoint (must be unique in the resource group)",

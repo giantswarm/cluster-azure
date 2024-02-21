@@ -49,7 +49,6 @@ Properties within the `.connectivity` top-level object
 | `connectivity.network.controlPlane.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.0.0/20"`|
 | `connectivity.network.controlPlane.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
 | `connectivity.network.controlPlane.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].location` | **Location specifies the region to create the private endpoint**|**Type:** `string`<br/>**Default:** `""`|
 | `connectivity.network.controlPlane.privateEndpoints[*].name` | **Name of the private endpoint (must be unique in the resource group)**|**Type:** `string`<br/>**Default:** `""`|
 | `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections` | **Private link service IDs**|**Type:** `array`<br/>**Default:** `[]`|
 | `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*]` | **Private link service ID**|**Type:** `string`<br/>**Example:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/Microsoft.Network/privateLinkServices/.+$`<br/>|
@@ -61,7 +60,6 @@ Properties within the `.connectivity` top-level object
 | `connectivity.network.workers.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.16.0/20"`|
 | `connectivity.network.workers.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
 | `connectivity.network.workers.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].location` | **Location specifies the region to create the private endpoint**|**Type:** `string`<br/>**Default:** `""`|
 | `connectivity.network.workers.privateEndpoints[*].name` | **Name of the private endpoint (must be unique in the resource group)**|**Type:** `string`<br/>**Default:** `""`|
 | `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections` | **Private link service IDs**|**Type:** `array`<br/>**Default:** `[]`|
 | `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*]` | **Private link service ID**|**Type:** `string`<br/>**Example:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/Microsoft.Network/privateLinkServices/.+$`<br/>|
