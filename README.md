@@ -11,9 +11,9 @@ See our [full list of configuration options](helm/cluster-azure/README.md).
 **tldr**:  
 We only maintain `values.schema.json` and automatically generate `values.yaml` from it.
 ```
-make schema-normalize
-make schmema-validate
-make values-generate
+make normalize-schema
+make validate-schema
+make generate-values
 ```
 
 **Details**:
