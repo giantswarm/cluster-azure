@@ -326,6 +326,21 @@ node-natgateway
 {{- end -}}
 {{- end -}}
 
+{{- define "network.subnet.privateEndpoints" -}}
+{{- if (gt (len $) 0) -}}
+privateEndpoints:
+{{ range $idx, $epDefinition := $ -}}
+{{- $name := $epDefinition.name | default (printf "%s-pe%d" $idx) -}}
+{{- $links := $epDefinition.privateLinkServiceConnections -}}
+- name: {{ $name }}
+  privateLinkServiceConnections:
+  {{- range $link := $links }}
+  - privateLinkServiceID: {{ $link }}
+  {{- end }}
+{{ end -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "network.vnet.resourceGroup" -}}
 {{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
 {{ $.Values.internal.network.vnet.resourceGroup }}

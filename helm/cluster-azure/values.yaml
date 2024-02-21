@@ -10,12 +10,14 @@ connectivity:
   network:
     controlPlane:
       cidr: 10.0.0.0/20
+      privateEndpoints: []
     hostCidr: 10.0.0.0/16
     mode: public
     podCidr: 192.168.0.0/16
     serviceCidr: 172.31.0.0/16
     workers:
       cidr: 10.0.16.0/20
+      privateEndpoints: []
 controlPlane:
   containerdVolumeSizeGB: 100
   encryptionAtHost: false

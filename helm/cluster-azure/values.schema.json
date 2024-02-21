@@ -96,6 +96,39 @@
                                     "type": "string",
                                     "title": "Subnet",
                                     "default": "10.0.0.0/20"
+                                },
+                                "privateEndpoints": {
+                                    "type": "array",
+                                    "title": "Private endpoints",
+                                    "items": {
+                                        "type": "object",
+                                        "title": "Private endpoint",
+                                        "required": [
+                                            "name",
+                                            "privateLinkServiceConnections"
+                                        ],
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "title": "Name of the private endpoint (must be unique in the resource group)",
+                                                "default": ""
+                                            },
+                                            "privateLinkServiceConnections": {
+                                                "type": "array",
+                                                "title": "Private link service IDs",
+                                                "items": {
+                                                    "type": "string",
+                                                    "title": "Private link service ID",
+                                                    "examples": [
+                                                        "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1"
+                                                    ],
+                                                    "pattern": "^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/Microsoft.Network/privateLinkServices/.+$"
+                                                },
+                                                "default": []
+                                            }
+                                        }
+                                    },
+                                    "default": []
                                 }
                             }
                         },
@@ -135,6 +168,39 @@
                                     "type": "string",
                                     "title": "Subnet",
                                     "default": "10.0.16.0/20"
+                                },
+                                "privateEndpoints": {
+                                    "type": "array",
+                                    "title": "Private endpoints",
+                                    "items": {
+                                        "type": "object",
+                                        "title": "Private endpoint",
+                                        "required": [
+                                            "name",
+                                            "privateLinkServiceConnections"
+                                        ],
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "title": "Name of the private endpoint (must be unique in the resource group)",
+                                                "default": ""
+                                            },
+                                            "privateLinkServiceConnections": {
+                                                "type": "array",
+                                                "title": "Private link service IDs",
+                                                "items": {
+                                                    "type": "string",
+                                                    "title": "Private link service ID",
+                                                    "examples": [
+                                                        "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1"
+                                                    ],
+                                                    "pattern": "^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/Microsoft.Network/privateLinkServices/.+$"
+                                                },
+                                                "default": []
+                                            }
+                                        }
+                                    },
+                                    "default": []
                                 }
                             }
                         }
