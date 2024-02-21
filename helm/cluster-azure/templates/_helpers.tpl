@@ -327,7 +327,7 @@ node-natgateway
 {{- end -}}
 
 {{- define "network.subnet.privateEndpoints" -}}
-{{- if (gt (len $) 0) -}}
+{{- if (gt (len $.endpoints) 0) -}}
 privateEndpoints:
 {{ range $idx, $epDefinition := $.endpoints -}}
 {{- $name := $epDefinition.name -}}
