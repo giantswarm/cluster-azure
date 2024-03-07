@@ -108,21 +108,88 @@
                                             "privateLinkServiceConnections"
                                         ],
                                         "properties": {
+                                            "applicationSecurityGroups": {
+                                                "type": "array",
+                                                "title": "Application security groups",
+                                                "description": "ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.",
+                                                "items": {
+                                                    "type": "string",
+                                                    "title": "Application security group"
+                                                },
+                                                "default": []
+                                            },
+                                            "customNetworkInterfaceName": {
+                                                "type": "string",
+                                                "title": "Custom network interface name",
+                                                "description": "CustomNetworkInterfaceName specifies the network interface name associated with the private endpoint.",
+                                                "default": ""
+                                            },
+                                            "manualApproval": {
+                                                "type": "boolean",
+                                                "title": "Manual approval",
+                                                "description": "ManualApproval specifies if the connection approval needs to be done manually or not. Set it true when the network admin does not have access to approve connections to the remote resource.",
+                                                "default": false
+                                            },
                                             "name": {
                                                 "type": "string",
                                                 "title": "Name of the private endpoint (must be unique in the resource group)",
                                                 "default": ""
                                             },
+                                            "privateIPAddresses": {
+                                                "type": "array",
+                                                "title": "Private IP addresses",
+                                                "description": "PrivateIPAddresses specifies the IP addresses for the network interface associated with the private endpoint. They have to be part of the subnet where the private endpoint is linked.",
+                                                "items": {
+                                                    "type": "string",
+                                                    "title": "Private IP address"
+                                                },
+                                                "default": []
+                                            },
                                             "privateLinkServiceConnections": {
                                                 "type": "array",
                                                 "title": "Private link service IDs",
                                                 "items": {
-                                                    "type": "string",
-                                                    "title": "Private link service ID",
-                                                    "examples": [
-                                                        "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1"
+                                                    "type": "object",
+                                                    "title": "Private link service definition",
+                                                    "required": [
+                                                        "privateLinkServiceID"
                                                     ],
-                                                    "pattern": "^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/Microsoft.Network/privateLinkServices/.+$"
+                                                    "properties": {
+                                                        "groupIDs": {
+                                                            "type": "array",
+                                                            "title": "Group IDs",
+                                                            "description": "GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.",
+                                                            "items": {
+                                                                "type": "string",
+                                                                "title": "Group ID",
+                                                                "examples": [
+                                                                    "blob"
+                                                                ]
+                                                            },
+                                                            "default": []
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "title": "Name",
+                                                            "description": "Name specifies the name of the private link service.",
+                                                            "default": ""
+                                                        },
+                                                        "privateLinkServiceID": {
+                                                            "type": "string",
+                                                            "title": "The private link service ID",
+                                                            "examples": [
+                                                                "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1",
+                                                                "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"
+                                                            ],
+                                                            "pattern": "^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$"
+                                                        },
+                                                        "requestMessage": {
+                                                            "type": "string",
+                                                            "title": "Request message",
+                                                            "description": "RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.",
+                                                            "default": ""
+                                                        }
+                                                    }
                                                 },
                                                 "default": []
                                             }
@@ -180,21 +247,88 @@
                                             "privateLinkServiceConnections"
                                         ],
                                         "properties": {
+                                            "applicationSecurityGroups": {
+                                                "type": "array",
+                                                "title": "Application security groups",
+                                                "description": "ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.",
+                                                "items": {
+                                                    "type": "string",
+                                                    "title": "Application security group"
+                                                },
+                                                "default": []
+                                            },
+                                            "customNetworkInterfaceName": {
+                                                "type": "string",
+                                                "title": "Custom network interface name",
+                                                "description": "CustomNetworkInterfaceName specifies the network interface name associated with the private endpoint.",
+                                                "default": ""
+                                            },
+                                            "manualApproval": {
+                                                "type": "boolean",
+                                                "title": "Manual approval",
+                                                "description": "ManualApproval specifies if the connection approval needs to be done manually or not. Set it true when the network admin does not have access to approve connections to the remote resource.",
+                                                "default": false
+                                            },
                                             "name": {
                                                 "type": "string",
                                                 "title": "Name of the private endpoint (must be unique in the resource group)",
                                                 "default": ""
                                             },
+                                            "privateIPAddresses": {
+                                                "type": "array",
+                                                "title": "Private IP addresses",
+                                                "description": "PrivateIPAddresses specifies the IP addresses for the network interface associated with the private endpoint. They have to be part of the subnet where the private endpoint is linked.",
+                                                "items": {
+                                                    "type": "string",
+                                                    "title": "Private IP address"
+                                                },
+                                                "default": []
+                                            },
                                             "privateLinkServiceConnections": {
                                                 "type": "array",
                                                 "title": "Private link service IDs",
                                                 "items": {
-                                                    "type": "string",
-                                                    "title": "Private link service ID",
-                                                    "examples": [
-                                                        "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1"
+                                                    "type": "object",
+                                                    "title": "Private link service definition",
+                                                    "required": [
+                                                        "privateLinkServiceID"
                                                     ],
-                                                    "pattern": "^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/Microsoft.Network/privateLinkServices/.+$"
+                                                    "properties": {
+                                                        "groupIDs": {
+                                                            "type": "array",
+                                                            "title": "Group IDs",
+                                                            "description": "GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.",
+                                                            "items": {
+                                                                "type": "string",
+                                                                "title": "Group ID",
+                                                                "examples": [
+                                                                    "blob"
+                                                                ]
+                                                            },
+                                                            "default": []
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "title": "Name",
+                                                            "description": "Name specifies the name of the private link service.",
+                                                            "default": ""
+                                                        },
+                                                        "privateLinkServiceID": {
+                                                            "type": "string",
+                                                            "title": "The private link service ID",
+                                                            "examples": [
+                                                                "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1",
+                                                                "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"
+                                                            ],
+                                                            "pattern": "^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$"
+                                                        },
+                                                        "requestMessage": {
+                                                            "type": "string",
+                                                            "title": "Request message",
+                                                            "description": "RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.",
+                                                            "default": ""
+                                                        }
+                                                    }
                                                 },
                                                 "default": []
                                             }

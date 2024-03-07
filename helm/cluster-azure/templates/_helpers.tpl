@@ -337,9 +337,33 @@ privateEndpoints:
   location: {{ $location }}
   privateLinkServiceConnections:
   {{- range $link := $links }}
-  - privateLinkServiceID: {{ $link }}
+  - {{ if $link.name -}}
+    name: {{ $link.name }}
+    {{ end -}}
+    privateLinkServiceID: {{ $link.privateLinkServiceID }}
+    {{- if (and ($link.groupIDs) (gt (len $link.groupIDs) 0)) }}
+    groupIDs:
+    {{- $link.groupIDs |toYaml |nindent 4 -}}
+    {{ end -}}
+    {{- if $link.requestMessage -}}
+    requestMessage: {{ $link.requestMessage |quote }}
+    {{ end -}}
   {{- end }}
-{{ end -}}
+  {{- if $epDefinition.customNetworkInterfaceName -}}
+  customNetworkInterfaceName: {{ $epDefinition.customNetworkInterfaceName }}
+  {{ end -}}
+  {{- if (and ($epDefinition.privateIPAddresses) (gt (len $epDefinition.privateIPAddresses) 0)) -}}
+  privateIPAddresses:
+  {{- $epDefinition.privateIPAddresses | toYaml |nindent 2}}
+  {{ end -}}
+  {{- if (and ($epDefinition.applicationSecurityGroups) (gt (len $epDefinition.applicationSecurityGroups) 0)) -}}
+  applicationSecurityGroups:
+  {{- $epDefinition.applicationSecurityGroups | toYaml |nindent 2}}
+  {{ end -}}
+  {{- if $epDefinition.manualApproval -}}
+  manualApproval: {{ $epDefinition.manualApproval }}
+  {{- end -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 

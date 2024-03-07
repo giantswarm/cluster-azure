@@ -49,9 +49,9 @@ spec:
         natGateway:
           name: {{ include "network.subnets.nodes.natGatewayName" $ }}
         role: node
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.connectivity.network.workers.privateEndpoints) | nindent 8 -}}
         cidrBlocks:
         - {{ .Values.connectivity.network.workers.cidr }}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.connectivity.network.workers.privateEndpoints) | nindent 8 }}
     vnet:
       {{- if (include "network.vnet.resourceGroup" $) }}
       resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
