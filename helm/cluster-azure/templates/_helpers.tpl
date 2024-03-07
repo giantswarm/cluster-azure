@@ -339,11 +339,11 @@ privateEndpoints:
   {{- range $link := $links }}
   - {{ if $link.name -}}
     name: {{ $link.name }}
-    {{- end }}
+    {{ end -}}
     privateLinkServiceID: {{ $link.privateLinkServiceID }}
     {{- if (and ($link.groupIds) (gt (len $link.groupIds) 0)) }}
     groupIds:
-    {{- $link.groupIds |toYaml |nindent 4}}
+    {{- $link.groupIds |toYaml |nindent 4 -}}
     {{ end -}}
     {{- if $link.requestMessage -}}
     requestMessage: {{ $link.requestMessage |quote }}
