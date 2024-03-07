@@ -155,7 +155,7 @@
                                                         "privateLinkServiceID"
                                                     ],
                                                     "properties": {
-                                                        "groupIds": {
+                                                        "groupIDs": {
                                                             "type": "array",
                                                             "title": "Group IDs",
                                                             "description": "GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.",
@@ -294,7 +294,7 @@
                                                         "privateLinkServiceID"
                                                     ],
                                                     "properties": {
-                                                        "groupIds": {
+                                                        "groupIDs": {
                                                             "type": "array",
                                                             "title": "Group IDs",
                                                             "description": "GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.",
