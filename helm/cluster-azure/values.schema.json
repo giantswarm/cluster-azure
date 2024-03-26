@@ -850,27 +850,23 @@
             ],
             "properties": {
                 "additionalResourceTags": {
-                    "type": "array",
-                    "title": "Additional tags to be added to the resource group and to all resources in it",
-                    "items": {
-                        "type": "object",
-                        "title": "Tag definition",
-                        "required": [
-                            "name",
-                            "value"
-                        ],
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "title": "Tag name"
-                            },
-                            "value": {
-                                "type": "string",
-                                "title": "Tag Value"
-                            }
-                        }
+                    "type": "object",
+                    "title": "Additional resource tags",
+                    "description": "Additional tags to be added to the resource group and to all resources in it.",
+                    "additionalProperties": {
+                        "type": "string",
+                        "title": "Tag value",
+                        "description": "Value of the tag",
+                        "maxLength": 256
                     },
-                    "default": []
+                    "default": {},
+                    "propertyNames": {
+                        "type": "string",
+                        "title": "Tag name",
+                        "description": "Name of the tag",
+                        "maxLength": 128,
+                        "pattern": "^[^<>%&?/\\\\]*$"
+                    }
                 },
                 "azureClusterIdentity": {
                     "type": "object",

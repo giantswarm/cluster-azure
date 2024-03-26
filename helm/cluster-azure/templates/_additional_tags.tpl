@@ -1,9 +1,7 @@
 {{- define "additional-tags" -}}
-{{- $tags := .tags | default list }}
-{{- if gt (len $tags) 0 }}
+{{- $tags := .tags | default dict }}
+{{- if $tags }}
 additionalTags:
-  {{- range $tag := $tags }}
-  {{ $tag.name }}: {{ $tag.value | quote -}}
-  {{- end -}}
+  {{- toYaml $tags | nindent 2 }}
 {{- end -}}
 {{- end -}}

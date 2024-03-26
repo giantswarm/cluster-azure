@@ -17,10 +17,8 @@ Properties within the `.providerSpecific` top-level object
 
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
-| `providerSpecific.additionalResourceTags` | **Additional tags to be added to the resource group and to all resources in it**|**Type:** `array`<br/>**Default:** `[]`|
-| `providerSpecific.additionalResourceTags[*]` | **Tag definition**|**Type:** `object`<br/>|
-| `providerSpecific.additionalResourceTags[*].name` | **Tag name**|**Type:** `string`<br/>|
-| `providerSpecific.additionalResourceTags[*].value` | **Tag Value**|**Type:** `string`<br/>|
+| `providerSpecific.additionalResourceTags` | **Additional resource tags** - Additional tags to be added to the resource group and to all resources in it|**Type:** `object`<br/>**Default:** `{}`|
+| `providerSpecific.additionalResourceTags.*` | **Tag value** - Value of the tag|**Type:** `string`<br/>|
 | `providerSpecific.azureClusterIdentity` | **Identity** - AzureClusterIdentity resource to use for this cluster.|**Type:** `object`<br/>|
 | `providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-identity"`|
 | `providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
