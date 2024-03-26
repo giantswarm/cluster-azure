@@ -7,6 +7,7 @@ metadata:
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
+  {{- include "additional-tags" (dict "tags" .Values.providerSpecific.additionalResourceTags) | indent 2}}
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity

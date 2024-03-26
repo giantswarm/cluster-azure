@@ -849,6 +849,25 @@
                 "subscriptionId"
             ],
             "properties": {
+                "additionalResourceTags": {
+                    "type": "object",
+                    "title": "Additional resource tags",
+                    "description": "Additional tags to be added to the resource group and to all resources in it.",
+                    "additionalProperties": {
+                        "type": "string",
+                        "title": "Tag value",
+                        "description": "Value of the tag",
+                        "maxLength": 256
+                    },
+                    "default": {},
+                    "propertyNames": {
+                        "type": "string",
+                        "title": "Tag name",
+                        "description": "Name of the tag",
+                        "maxLength": 128,
+                        "pattern": "^[^<>%&?/\\\\]*$"
+                    }
+                },
                 "azureClusterIdentity": {
                     "type": "object",
                     "title": "Identity",

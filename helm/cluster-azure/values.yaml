@@ -81,6 +81,7 @@ nodePools:
     replicas: 2
     rootVolumeSizeGB: 50
 providerSpecific:
+  additionalResourceTags: {}
   azureClusterIdentity:
     name: cluster-identity
     namespace: org-giantswarm
