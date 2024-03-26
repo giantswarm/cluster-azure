@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add default tag `giantswarm.io/cluster` to all resources.
+- Add default tag `giantswarm-cluster` to all resources.
 
 ## [0.4.0] - 2024-03-26
 
