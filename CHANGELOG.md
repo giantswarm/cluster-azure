@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update teleport node labels - add `ins=` label and remove `cluster=` label condition check, such that MC nodes have this label.
+
 ## [0.5.0] - 2024-03-26
 
 ### Added
