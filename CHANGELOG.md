@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Change image lookup format for base OS image. `internal.image.variant` is set to "1" for this kubernetes version. This is a **breaking change** that requires manual steps. For the next kubernetes versions, `image.variant` should not be set.
+- Change image lookup format for base OS image. `internal.image.variant` is set to "1" for this kubernetes version. This is a **breaking change** that requires manual steps. For the next kubernetes versions, `internal.image.variant` should not be set.
 
 ## [0.6.0] - 2024-04-03
 
