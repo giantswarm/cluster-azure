@@ -524,10 +524,15 @@
                             "description": "Name of the image definition in the Gallery",
                             "default": ""
                         },
+                        "variant": {
+                            "type": "string",
+                            "title": "Image variant",
+                            "default": "1"
+                        },
                         "version": {
                             "type": "string",
                             "title": "Image version",
-                            "default": "3510.2.5"
+                            "default": "3815.2.0"
                         }
                     }
                 },

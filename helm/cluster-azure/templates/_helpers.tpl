@@ -46,12 +46,18 @@ room for such suffix.
 {{- end -}}
 
 {{/*
-The default name for our images in the Community Gallery is  "capi-flatcar-stable-<KUBERNETES_VERSION>-gen2-gs",
+The default name for our images in the Community Gallery is  "capi-flatcar-stable-<KUBERNETES_VERSION>-gen2-<IMAGE_VARIANT>-gs",
 use it when no value is passed in
 */}}
 {{- define "flatcarImageName" -}}
 {{- if empty .Values.internal.image.name -}}
-{{ printf "capi-flatcar-stable-%s-gen2-gs" .Values.internal.kubernetesVersion }}
+{{- $suffix := .Values.internal.image.variant }}
+{{- if $suffix }}
+  {{- $suffix = printf "%s-gs" $suffix }}
+{{- else }}
+  {{- $suffix = "gs" }}
+{{- end }}
+{{ printf "capi-flatcar-stable-%s-gen2-%s" .Values.internal.kubernetesVersion $suffix }}
 {{- else -}}
 {{ .Values.internal.image.name }}
 {{- end -}}
