@@ -57,7 +57,7 @@ use it when no value is passed in
 {{- else }}
   {{- $suffix = "gs" }}
 {{- end }}
-{{ printf "capi-flatcar-stable-%s-gen2-%s" .Values.internal.kubernetesVersion $suffix }}
+{{- printf "capi-flatcar-stable-%s-gen2-%s" .Values.internal.kubernetesVersion $suffix }}
 {{- else -}}
 {{ .Values.internal.image.name }}
 {{- end -}}
