@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### **Breaking change**
+
+- Move Helm values property `.Values.metadata` to `.Values.global.metadata`.
+
 ## [0.6.0] - 2024-04-03
 
 ### Changed

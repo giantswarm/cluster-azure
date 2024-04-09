@@ -1,7 +1,8 @@
-metadata:
-  name: test-wc-restricted
-  organization: test
-  servicePriority: lowest
+global:
+  metadata:
+    name: test-wc-restricted
+    organization: test
+    servicePriority: lowest
 
 connectivity:
   allowedCIDRs:

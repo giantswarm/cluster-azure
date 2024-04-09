@@ -1,7 +1,8 @@
-metadata:
-  name: test-mc
-  organization: test
-  servicePriority: lowest
+global:
+  metadata:
+    name: test-mc
+    organization: test
+    servicePriority: lowest
 
 providerSpecific:
   location: "westeurope"

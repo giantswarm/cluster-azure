@@ -1,9 +1,10 @@
-metadata:
-  name: test-mc
-  organization: test
-  servicePriority: lowest
-  labels:
-    cluster.giantswarm.io/test: value1
+global:
+  metadata:
+    name: test-mc
+    organization: test
+    servicePriority: lowest
+    labels:
+      cluster.giantswarm.io/test: value1
 
 providerSpecific:
   location: "westeurope"

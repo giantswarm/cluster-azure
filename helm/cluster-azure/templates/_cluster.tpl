@@ -3,18 +3,18 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
   labels:
     cluster-apps-operator.giantswarm.io/watching: ""
-    {{- if .Values.metadata.servicePriority }}
-    giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
+    {{- if .Values.global.metadata.servicePriority }}
+    giantswarm.io/service-priority: {{ .Values.global.metadata.servicePriority }}
     {{- end }}
     {{- if .Values.global.podSecurityStandards.enforced }}
     policy.giantswarm.io/psp-status: disabled
     {{- end }}
     {{- include "labels.common" $ | nindent 4 }}
-    {{- if .Values.metadata.labels }}
-    {{- range $key, $val := .Values.metadata.labels }}
+    {{- if .Values.global.metadata.labels }}
+    {{- range $key, $val := .Values.global.metadata.labels }}
     {{ $key }}: {{ $val | quote }}
     {{- end }}
     {{- end }}

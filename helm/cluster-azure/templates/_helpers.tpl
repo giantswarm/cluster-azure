@@ -32,7 +32,7 @@ app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
-giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.metadata.organization | quote }}
+giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.global.metadata.organization | quote }}
 {{- end -}}
 
 {{/*
@@ -42,7 +42,7 @@ Given that Kubernetes allows 63 characters for resource names, the stem is trunc
 room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
-{{- .Values.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
+{{- .Values.global.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
 {{/*
@@ -420,7 +420,7 @@ privateEndpoints:
   - The VPN gateway mode is set to "remote" (which means that the cluster uses a remote VPN gateway thought the VNet
     peering)
 */ -}}
-{{- if and (ne $.Values.metadata.name $.Values.managementCluster) (eq .Values.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
+{{- if and (ne $.Values.global.metadata.name $.Values.managementCluster) (eq .Values.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 

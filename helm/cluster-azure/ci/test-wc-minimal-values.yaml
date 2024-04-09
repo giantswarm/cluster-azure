@@ -1,7 +1,8 @@
-metadata:
-  name: test-wc-minimal
-  organization: test
-  servicePriority: lowest
+global:
+  metadata:
+    name: test-wc-minimal
+    organization: test
+    servicePriority: lowest
 
 providerSpecific:
   location: "westeurope"

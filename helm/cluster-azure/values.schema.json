@@ -423,8 +423,60 @@
         },
         "global": {
             "type": "object",
-            "title": "Global parameters",
+            "title": "Global",
+            "description": "Properties that are available to all charts and subcharts.",
+            "required": [
+                "metadata"
+            ],
+            "additionalProperties": true,
             "properties": {
+                "metadata": {
+                    "type": "object",
+                    "title": "Metadata",
+                    "properties": {
+                        "description": {
+                            "type": "string",
+                            "title": "Cluster description",
+                            "description": "User-friendly description of the cluster's purpose."
+                        },
+                        "labels": {
+                            "type": "object",
+                            "title": "Labels",
+                            "description": "These labels are added to the Kubernetes resources defining this cluster.",
+                            "additionalProperties": false,
+                            "patternProperties": {
+                                "^[a-zA-Z0-9/\\._-]+$": {
+                                    "type": "string",
+                                    "title": "Label",
+                                    "maxLength": 63,
+                                    "minLength": 0,
+                                    "pattern": "^[a-zA-Z0-9\\._-]+$"
+                                }
+                            }
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "Cluster name",
+                            "description": "Unique identifier, cannot be changed after creation."
+                        },
+                        "organization": {
+                            "type": "string",
+                            "title": "Organization"
+                        },
+                        "servicePriority": {
+                            "type": "string",
+                            "title": "Service priority",
+                            "description": "The relative importance of this cluster.",
+                            "$comment": "Defined in https://github.com/giantswarm/rfc/tree/main/classify-cluster-priority",
+                            "enum": [
+                                "highest",
+                                "medium",
+                                "lowest"
+                            ],
+                            "default": "highest"
+                        }
+                    }
+                },
                 "podSecurityStandards": {
                     "type": "object",
                     "title": "Pod Security Standards",
@@ -686,53 +738,6 @@
         "managementCluster": {
             "type": "string",
             "title": "The capi MC managing this cluster"
-        },
-        "metadata": {
-            "type": "object",
-            "title": "Metadata",
-            "properties": {
-                "description": {
-                    "type": "string",
-                    "title": "Cluster description",
-                    "description": "User-friendly description of the cluster's purpose."
-                },
-                "labels": {
-                    "type": "object",
-                    "title": "Labels",
-                    "description": "These labels are added to the Kubernetes resources defining this cluster.",
-                    "additionalProperties": false,
-                    "patternProperties": {
-                        "^[a-zA-Z0-9/\\._-]+$": {
-                            "type": "string",
-                            "title": "Label",
-                            "maxLength": 63,
-                            "minLength": 0,
-                            "pattern": "^[a-zA-Z0-9\\._-]+$"
-                        }
-                    }
-                },
-                "name": {
-                    "type": "string",
-                    "title": "Cluster name",
-                    "description": "Unique identifier, cannot be changed after creation."
-                },
-                "organization": {
-                    "type": "string",
-                    "title": "Organization"
-                },
-                "servicePriority": {
-                    "type": "string",
-                    "title": "Service priority",
-                    "description": "The relative importance of this cluster.",
-                    "$comment": "Defined in https://github.com/giantswarm/rfc/tree/main/classify-cluster-priority",
-                    "enum": [
-                        "highest",
-                        "medium",
-                        "lowest"
-                    ],
-                    "default": "highest"
-                }
-            }
         },
         "nodePools": {
             "type": "array",

@@ -1,10 +1,11 @@
 apiVersion: v1
 data:
   values: |
-    metadata:
-      name: "cluster01"
-      description: "cluster01 test cluster"
-      organization: "multi-project"
+    global:
+      metadata:
+        name: "cluster01"
+        description: "cluster01 test cluster"
+        organization: "multi-project"
 
     providerSpecific:
       location: "westeurope"

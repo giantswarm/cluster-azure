@@ -33,6 +33,8 @@ controlPlane:
   replicas: 3
   rootVolumeSizeGB: 50
 global:
+  metadata:
+    servicePriority: highest
   podSecurityStandards:
     enforced: true
 internal:
@@ -69,8 +71,6 @@ internal:
     enabled: true
     proxyAddr: teleport.giantswarm.io:443
     version: 14.1.3
-metadata:
-  servicePriority: highest
 nodePools:
   - customNodeLabels: []
     customNodeTaints: []
