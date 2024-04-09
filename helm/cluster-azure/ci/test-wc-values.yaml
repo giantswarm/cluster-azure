@@ -15,6 +15,12 @@ global:
       serviceCidr: 172.31.0.0/16
       workers:
         cidr: 10.0.16.0/25
+  controlPlane:
+    oidc:
+      clientId: dex-k8s-authenticator
+      issuerUrl: https://dex.cluster.azuretest.gigantic.io
+      groupsClaim: groups
+      usernameClaim: email
 
 providerSpecific:
   location: "westeurope"
@@ -25,12 +31,6 @@ nodePools:
     instanceType: Standard_D4s_v5
     replicas: 4
     rootVolumeSizeGB: 50
-controlPlane:
-  oidc:
-    clientId: dex-k8s-authenticator
-    issuerUrl: https://dex.cluster.azuretest.gigantic.io
-    groupsClaim: groups
-    usernameClaim: email
 
 internal:
   kubernetesVersion: 1.25.10
