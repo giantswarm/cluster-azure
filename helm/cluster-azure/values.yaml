@@ -35,6 +35,15 @@ global:
     rootVolumeSizeGB: 50
   metadata:
     servicePriority: highest
+  nodePools:
+    - customNodeLabels: []
+      customNodeTaints: []
+      disableHealthCheck: false
+      encryptionAtHost: false
+      instanceType: Standard_D4s_v5
+      name: md00
+      replicas: 2
+      rootVolumeSizeGB: 50
   podSecurityStandards:
     enforced: true
 internal:
@@ -71,15 +80,6 @@ internal:
     enabled: true
     proxyAddr: teleport.giantswarm.io:443
     version: 14.1.3
-nodePools:
-  - customNodeLabels: []
-    customNodeTaints: []
-    disableHealthCheck: false
-    encryptionAtHost: false
-    instanceType: Standard_D4s_v5
-    name: md00
-    replicas: 2
-    rootVolumeSizeGB: 50
 providerSpecific:
   additionalResourceTags: {}
   azureClusterIdentity:

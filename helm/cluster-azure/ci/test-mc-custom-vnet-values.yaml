@@ -19,16 +19,16 @@ global:
       issuerUrl: https://dex.cluster.azuretest.gigantic.io
       groupsClaim: groups
       usernameClaim: email
+  nodePools:
+    - name: md00
+      instanceType: Standard_D4s_v5
+      replicas: 4
+      rootVolumeSizeGB: 50
 
 providerSpecific:
   location: "westeurope"
   subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
-nodePools:
-  - name: md00
-    instanceType: Standard_D4s_v5
-    replicas: 4
-    rootVolumeSizeGB: 50
 internal:
   identity:
     type: UserAssigned

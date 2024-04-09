@@ -6,17 +6,17 @@ data:
         name: "cluster01"
         description: "cluster01 test cluster"
         organization: "multi-project"
+      nodePools:
+      - name: md00
+        instanceType: Standard_D4s_v5
+        replicas: 2
+        rootVolumeSizeGB: 50
 
     providerSpecific:
       location: "westeurope"
       #This is the GHOST subscription
       subscriptionId: 6b1f6e4a-6d0e-4aa4-9a5a-fbaca65a23b3
 
-    nodePools:
-    - name: md00
-      instanceType: Standard_D4s_v5
-      replicas: 2
-      rootVolumeSizeGB: 50
 
 kind: ConfigMap
 metadata:
