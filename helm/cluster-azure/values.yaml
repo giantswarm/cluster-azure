@@ -46,6 +46,14 @@ global:
       rootVolumeSizeGB: 50
   podSecurityStandards:
     enforced: true
+  providerSpecific:
+    additionalResourceTags: {}
+    azureClusterIdentity:
+      name: cluster-identity
+      namespace: org-giantswarm
+    location: westeurope
+    network:
+      peerings: []
 internal:
   defaults:
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%
@@ -80,11 +88,3 @@ internal:
     enabled: true
     proxyAddr: teleport.giantswarm.io:443
     version: 14.1.3
-providerSpecific:
-  additionalResourceTags: {}
-  azureClusterIdentity:
-    name: cluster-identity
-    namespace: org-giantswarm
-  location: westeurope
-  network:
-    peerings: []

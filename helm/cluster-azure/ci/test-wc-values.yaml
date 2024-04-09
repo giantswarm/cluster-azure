@@ -26,10 +26,9 @@ global:
       instanceType: Standard_D4s_v5
       replicas: 4
       rootVolumeSizeGB: 50
-
-providerSpecific:
-  location: "westeurope"
-  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
+  providerSpecific:
+    location: "westeurope"
+    subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
 internal:
   kubernetesVersion: 1.25.10

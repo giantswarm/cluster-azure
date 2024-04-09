@@ -11,9 +11,9 @@ spec:
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
-    name: {{ .Values.providerSpecific.azureClusterIdentity.name }}
-    namespace: {{ .Values.providerSpecific.azureClusterIdentity.namespace }}
-  location: {{ .Values.providerSpecific.location }}
+    name: {{ .Values.global.providerSpecific.azureClusterIdentity.name }}
+    namespace: {{ .Values.global.providerSpecific.azureClusterIdentity.namespace }}
+  location: {{ .Values.global.providerSpecific.location }}
   networkSpec:
     subnets:
       - name: {{ include "network.subnets.controlPlane.name" $ }}
@@ -79,12 +79,12 @@ spec:
         lbFrontendIPConfigNames:
         - {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         allowedSubscriptions:
-        - {{ .Values.providerSpecific.subscriptionId }}
+        - {{ .Values.global.providerSpecific.subscriptionId }}
         autoApprovedSubscriptions:
-        - {{ .Values.providerSpecific.subscriptionId }}
+        - {{ .Values.global.providerSpecific.subscriptionId }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
-  subscriptionID: {{ .Values.providerSpecific.subscriptionId }}
+  subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
 {{ end }}
