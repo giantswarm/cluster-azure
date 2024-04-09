@@ -1,4 +1,3 @@
-baseDomain: azuretest.gigantic.io
 managementCluster: MCCLUSTER
 provider: capz
 
@@ -11,3 +10,5 @@ global:
     servicePriority: lowest
     labels:
       test.io/testing: test-label
+  connectivity:
+    baseDomain: azuretest.gigantic.io
