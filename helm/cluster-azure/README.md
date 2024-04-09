@@ -31,62 +31,62 @@ Properties within the `.providerSpecific` top-level object
 | `providerSpecific.subscriptionId` | **Subscription ID** - ID of the Azure subscription this cluster will run in.|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 
 ### Connectivity
-Properties within the `.connectivity` top-level object
+Properties within the `.global.connectivity` object
 
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
-| `connectivity.allowedCIDRs` | **List of CIDRs which have to been allowed to connect to the API Server endpoint**|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.allowedCIDRs[*]` |**None**|**Type:** `string`<br/>|
-| `connectivity.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}]}`|
-| `connectivity.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
-| `connectivity.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
-| `connectivity.containerRegistries.*[*].credentials` | **Credentials**|**Type:** `object`<br/>|
-| `connectivity.containerRegistries.*[*].credentials.auth` | **Auth** - Base64-encoded string from the concatenation of the username, a colon, and the password.|**Type:** `string`<br/>|
-| `connectivity.containerRegistries.*[*].credentials.identitytoken` | **Identity token** - Used to authenticate the user and obtain an access token for the registry.|**Type:** `string`<br/>|
-| `connectivity.containerRegistries.*[*].credentials.password` | **Password** - Used to authenticate for the registry with username/password.|**Type:** `string`<br/>|
-| `connectivity.containerRegistries.*[*].credentials.username` | **Username** - Used to authenticate for the registry with username/password.|**Type:** `string`<br/>|
-| `connectivity.containerRegistries.*[*].endpoint` | **Endpoint** - Endpoint for the container registry.|**Type:** `string`<br/>|
-| `connectivity.network` | **Network**|**Type:** `object`<br/>|
-| `connectivity.network.controlPlane` | **Control plane**|**Type:** `object`<br/>|
-| `connectivity.network.controlPlane.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.0.0/20"`|
-| `connectivity.network.controlPlane.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.controlPlane.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].applicationSecurityGroups` | **Application security groups** - ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.controlPlane.privateEndpoints[*].applicationSecurityGroups[*]` | **Application security group**|**Type:** `string`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].customNetworkInterfaceName` | **Custom network interface name** - CustomNetworkInterfaceName specifies the network interface name associated with the private endpoint.|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.controlPlane.privateEndpoints[*].manualApproval` | **Manual approval** - ManualApproval specifies if the connection approval needs to be done manually or not. Set it true when the network admin does not have access to approve connections to the remote resource.|**Type:** `boolean`<br/>**Default:** `false`|
-| `connectivity.network.controlPlane.privateEndpoints[*].name` | **Name of the private endpoint (must be unique in the resource group)**|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateIPAddresses` | **Private IP addresses** - PrivateIPAddresses specifies the IP addresses for the network interface associated with the private endpoint. They have to be part of the subnet where the private endpoint is linked.|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateIPAddresses[*]` | **Private IP address**|**Type:** `string`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections` | **Private link service IDs**|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*]` | **Private link service definition**|**Type:** `object`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs` | **Group IDs** - GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs[*]` | **Group ID**|**Type:** `string`<br/>**Example:** `"blob"`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
-| `connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.hostCidr` | **Node subnet** - IPv4 address range for nodes, in CIDR notation.|**Type:** `string`<br/>**Default:** `"10.0.0.0/16"`|
-| `connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Default:** `"public"`|
-| `connectivity.network.podCidr` | **Pod subnet** - IPv4 address range for pods, in CIDR notation.|**Type:** `string`<br/>**Default:** `"192.168.0.0/16"`|
-| `connectivity.network.serviceCidr` | **Service subnet** - IPv4 address range for services, in CIDR notation.|**Type:** `string`<br/>**Default:** `"172.31.0.0/16"`|
-| `connectivity.network.workers` | **Workers**|**Type:** `object`<br/>|
-| `connectivity.network.workers.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.16.0/20"`|
-| `connectivity.network.workers.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.workers.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].applicationSecurityGroups` | **Application security groups** - ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.workers.privateEndpoints[*].applicationSecurityGroups[*]` | **Application security group**|**Type:** `string`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].customNetworkInterfaceName` | **Custom network interface name** - CustomNetworkInterfaceName specifies the network interface name associated with the private endpoint.|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.workers.privateEndpoints[*].manualApproval` | **Manual approval** - ManualApproval specifies if the connection approval needs to be done manually or not. Set it true when the network admin does not have access to approve connections to the remote resource.|**Type:** `boolean`<br/>**Default:** `false`|
-| `connectivity.network.workers.privateEndpoints[*].name` | **Name of the private endpoint (must be unique in the resource group)**|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.workers.privateEndpoints[*].privateIPAddresses` | **Private IP addresses** - PrivateIPAddresses specifies the IP addresses for the network interface associated with the private endpoint. They have to be part of the subnet where the private endpoint is linked.|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.workers.privateEndpoints[*].privateIPAddresses[*]` | **Private IP address**|**Type:** `string`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections` | **Private link service IDs**|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*]` | **Private link service definition**|**Type:** `object`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs` | **Group IDs** - GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.|**Type:** `array`<br/>**Default:** `[]`|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs[*]` | **Group ID**|**Type:** `string`<br/>**Example:** `"blob"`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
-| `connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.allowedCIDRs` | **List of CIDRs which have to been allowed to connect to the API Server endpoint**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.allowedCIDRs[*]` |**None**|**Type:** `string`<br/>|
+| `global.connectivity.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}]}`|
+| `global.connectivity.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
+| `global.connectivity.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
+| `global.connectivity.containerRegistries.*[*].credentials` | **Credentials**|**Type:** `object`<br/>|
+| `global.connectivity.containerRegistries.*[*].credentials.auth` | **Auth** - Base64-encoded string from the concatenation of the username, a colon, and the password.|**Type:** `string`<br/>|
+| `global.connectivity.containerRegistries.*[*].credentials.identitytoken` | **Identity token** - Used to authenticate the user and obtain an access token for the registry.|**Type:** `string`<br/>|
+| `global.connectivity.containerRegistries.*[*].credentials.password` | **Password** - Used to authenticate for the registry with username/password.|**Type:** `string`<br/>|
+| `global.connectivity.containerRegistries.*[*].credentials.username` | **Username** - Used to authenticate for the registry with username/password.|**Type:** `string`<br/>|
+| `global.connectivity.containerRegistries.*[*].endpoint` | **Endpoint** - Endpoint for the container registry.|**Type:** `string`<br/>|
+| `global.connectivity.network` | **Network**|**Type:** `object`<br/>|
+| `global.connectivity.network.controlPlane` | **Control plane**|**Type:** `object`<br/>|
+| `global.connectivity.network.controlPlane.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.0.0/20"`|
+| `global.connectivity.network.controlPlane.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].applicationSecurityGroups` | **Application security groups** - ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].applicationSecurityGroups[*]` | **Application security group**|**Type:** `string`<br/>|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].customNetworkInterfaceName` | **Custom network interface name** - CustomNetworkInterfaceName specifies the network interface name associated with the private endpoint.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].manualApproval` | **Manual approval** - ManualApproval specifies if the connection approval needs to be done manually or not. Set it true when the network admin does not have access to approve connections to the remote resource.|**Type:** `boolean`<br/>**Default:** `false`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].name` | **Name of the private endpoint (must be unique in the resource group)**|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateIPAddresses` | **Private IP addresses** - PrivateIPAddresses specifies the IP addresses for the network interface associated with the private endpoint. They have to be part of the subnet where the private endpoint is linked.|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateIPAddresses[*]` | **Private IP address**|**Type:** `string`<br/>|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections` | **Private link service IDs**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*]` | **Private link service definition**|**Type:** `object`<br/>|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs` | **Group IDs** - GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs[*]` | **Group ID**|**Type:** `string`<br/>**Example:** `"blob"`<br/>|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
+| `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.hostCidr` | **Node subnet** - IPv4 address range for nodes, in CIDR notation.|**Type:** `string`<br/>**Default:** `"10.0.0.0/16"`|
+| `global.connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Default:** `"public"`|
+| `global.connectivity.network.podCidr` | **Pod subnet** - IPv4 address range for pods, in CIDR notation.|**Type:** `string`<br/>**Default:** `"192.168.0.0/16"`|
+| `global.connectivity.network.serviceCidr` | **Service subnet** - IPv4 address range for services, in CIDR notation.|**Type:** `string`<br/>**Default:** `"172.31.0.0/16"`|
+| `global.connectivity.network.workers` | **Workers**|**Type:** `object`<br/>|
+| `global.connectivity.network.workers.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.16.0/20"`|
+| `global.connectivity.network.workers.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.workers.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
+| `global.connectivity.network.workers.privateEndpoints[*].applicationSecurityGroups` | **Application security groups** - ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.workers.privateEndpoints[*].applicationSecurityGroups[*]` | **Application security group**|**Type:** `string`<br/>|
+| `global.connectivity.network.workers.privateEndpoints[*].customNetworkInterfaceName` | **Custom network interface name** - CustomNetworkInterfaceName specifies the network interface name associated with the private endpoint.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.workers.privateEndpoints[*].manualApproval` | **Manual approval** - ManualApproval specifies if the connection approval needs to be done manually or not. Set it true when the network admin does not have access to approve connections to the remote resource.|**Type:** `boolean`<br/>**Default:** `false`|
+| `global.connectivity.network.workers.privateEndpoints[*].name` | **Name of the private endpoint (must be unique in the resource group)**|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.workers.privateEndpoints[*].privateIPAddresses` | **Private IP addresses** - PrivateIPAddresses specifies the IP addresses for the network interface associated with the private endpoint. They have to be part of the subnet where the private endpoint is linked.|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.workers.privateEndpoints[*].privateIPAddresses[*]` | **Private IP address**|**Type:** `string`<br/>|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections` | **Private link service IDs**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*]` | **Private link service definition**|**Type:** `object`<br/>|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs` | **Group IDs** - GroupIDs specifies the ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to.|**Type:** `array`<br/>**Default:** `[]`|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].groupIDs[*]` | **Group ID**|**Type:** `string`<br/>**Example:** `"blob"`<br/>|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
+| `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
 
 ### Control plane
 Properties within the `.controlPlane` top-level object
