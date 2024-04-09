@@ -37,6 +37,7 @@ Properties within the `.global.connectivity` object
 | :----------- | :-------------- | :--------------- |
 | `global.connectivity.allowedCIDRs` | **List of CIDRs which have to been allowed to connect to the API Server endpoint**|**Type:** `array`<br/>**Default:** `[]`|
 | `global.connectivity.allowedCIDRs[*]` |**None**|**Type:** `string`<br/>|
+| `global.connectivity.baseDomain` | **Base DNS domain**|**Type:** `string`<br/>**Default:** `"azuretest.gigantic.io"`|
 | `global.connectivity.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}]}`|
 | `global.connectivity.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
 | `global.connectivity.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
@@ -194,7 +195,6 @@ Properties within the `.global.podSecurityStandards` object
 
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
-| `baseDomain` | **Base DNS domain**|**Type:** `string`<br/>**Default:** `"azuretest.gigantic.io"`|
 | `cluster-shared` | **Library chart**|**Type:** `object`<br/>|
 | `managementCluster` | **The capi MC managing this cluster**|**Type:** `string`<br/>|
 | `provider` | **Cluster API provider name**|**Type:** `string`<br/>|

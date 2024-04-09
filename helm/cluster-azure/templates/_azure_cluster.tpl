@@ -64,7 +64,7 @@ spec:
       peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
       {{- end }}
     {{- if (eq .Values.global.connectivity.network.mode "private") }}
-    privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
+    privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
     apiServerLB:
       name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal

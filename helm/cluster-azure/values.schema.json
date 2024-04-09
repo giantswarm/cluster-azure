@@ -3,11 +3,6 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
-        "baseDomain": {
-            "type": "string",
-            "title": "Base DNS domain",
-            "default": "azuretest.gigantic.io"
-        },
         "cluster-shared": {
             "type": "object",
             "title": "Library chart"
@@ -111,6 +106,11 @@
                                 "type": "string"
                             },
                             "default": []
+                        },
+                        "baseDomain": {
+                            "type": "string",
+                            "title": "Base DNS domain",
+                            "default": "azuretest.gigantic.io"
                         },
                         "containerRegistries": {
                             "type": "object",
