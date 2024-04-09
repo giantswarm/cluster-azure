@@ -3,11 +3,10 @@ global:
     name: test-wc-restricted
     organization: test
     servicePriority: lowest
-
-connectivity:
-  allowedCIDRs:
-    - "1.1.1.1"
-    - "8.8.8.8"
+  connectivity:
+    allowedCIDRs:
+      - "1.1.1.1"
+      - "8.8.8.8"
 
 providerSpecific:
   location: "westeurope"

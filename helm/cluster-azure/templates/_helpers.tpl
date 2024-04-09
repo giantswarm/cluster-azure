@@ -420,7 +420,7 @@ privateEndpoints:
   - The VPN gateway mode is set to "remote" (which means that the cluster uses a remote VPN gateway thought the VNet
     peering)
 */ -}}
-{{- if and (ne $.Values.global.metadata.name $.Values.managementCluster) (eq .Values.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
+{{- if and (ne $.Values.global.metadata.name $.Values.managementCluster) (eq .Values.global.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 
@@ -521,10 +521,10 @@ glippy nat-ip 20.4.101.216
     replaced with .10.
 */}}
 {{- define "clusterDNS" -}}
-    {{- $serviceCidrBlock := .Values.connectivity.network.serviceCidr  -}}
+    {{- $serviceCidrBlock := .Values.global.connectivity.network.serviceCidr  -}}
     {{- $mask := int (mustRegexReplaceAll `^.*/(\d+)$` $serviceCidrBlock "${1}") -}}
     {{- if gt $mask 24 -}}
-        {{- fail (printf ".Values.connectivity.network.serviceCidr=%q mask must be <= 24" $serviceCidrBlock) -}}
+        {{- fail (printf ".Values.global.connectivity.network.serviceCidr=%q mask must be <= 24" $serviceCidrBlock) -}}
     {{- end -}}
     {{- mustRegexReplaceAll `^(\d+\.\d+\.\d+).*$` $serviceCidrBlock "${1}.10" -}}
 {{- end -}}
