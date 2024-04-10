@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move Helm values property `.Values.baseDomain` to `.Values.global.connectivity.baseDomain`.
 - Move Helm values property `.Values.controlPlane` to `.Values.global.controlPlane`.
 
+### Removed
+
+- Drop duplicated workflow "compare_rendering.yaml" file.
+
 ## [0.6.0] - 2024-04-03
 
 ### Changed
