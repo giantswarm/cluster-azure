@@ -20,7 +20,7 @@ spec:
         role: control-plane
         cidrBlocks:
         - {{ .Values.global.connectivity.network.controlPlane.cidr }}
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
         securityGroup:
           name: {{ include "resource.default.name" $ }}-controlplane-nsg
           securityRules:
@@ -52,7 +52,7 @@ spec:
         role: node
         cidrBlocks:
         - {{ .Values.global.connectivity.network.workers.cidr }}
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
     vnet:
       {{- if (include "network.vnet.resourceGroup" $) }}
       resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
