@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+### Removed
 
-- Compare rendering between old and new helm values.
+- Drop duplicated workflow "compare_rendering.yaml" file.
 
 ## [0.6.0] - 2024-04-03
 
