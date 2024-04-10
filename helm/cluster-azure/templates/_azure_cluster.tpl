@@ -11,9 +11,9 @@ spec:
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
-    name: {{ .Values.providerSpecific.azureClusterIdentity.name }}
-    namespace: {{ .Values.providerSpecific.azureClusterIdentity.namespace }}
-  location: {{ .Values.providerSpecific.location }}
+    name: {{ .Values.global.providerSpecific.azureClusterIdentity.name }}
+    namespace: {{ .Values.global.providerSpecific.azureClusterIdentity.namespace }}
+  location: {{ .Values.global.providerSpecific.location }}
   networkSpec:
     subnets:
       - name: {{ include "network.subnets.controlPlane.name" $ }}
