@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move Helm values property `.Values.metadata` to `.Values.global.metadata`.
 - Move Helm values property `.Values.global.connectivity` to `.Values.global.connectivity`.
 
+### Removed
+
+- Drop duplicated workflow "compare_rendering.yaml" file.
+
 ## [0.6.0] - 2024-04-03
 
 ### Changed
