@@ -11,4 +11,3 @@ global:
     baseDomain: azuretest.gigantic.io
   providerSpecific:
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
-
