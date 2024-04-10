@@ -12,3 +12,4 @@ global:
       test.io/testing: test-label
   connectivity:
     baseDomain: azuretest.gigantic.io
+
