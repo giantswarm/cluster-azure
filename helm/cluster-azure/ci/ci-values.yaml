@@ -1,3 +1,4 @@
+managementCluster: MCCLUSTER
 provider: capz
 
 global:

@@ -385,8 +385,8 @@ privateEndpoints:
 {{- end -}}
 
 {{- define "providerSpecific.peeringFromWCToMC" -}}
-- resourceGroup: {{ $.Values.global.managementCluster }}
-  remoteVnetName: {{ $.Values.global.managementCluster }}-vnet
+- resourceGroup: {{ $.Values.managementCluster }}
+  remoteVnetName: {{ $.Values.managementCluster }}-vnet
   forwardPeeringProperties:
     allowForwardedTraffic: true
     allowGatewayTransit: false
@@ -420,7 +420,7 @@ privateEndpoints:
   - The VPN gateway mode is set to "remote" (which means that the cluster uses a remote VPN gateway thought the VNet
     peering)
 */ -}}
-{{- if and (ne $.Values.global.metadata.name $.Values.global.managementCluster) (eq .Values.global.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
+{{- if and (ne $.Values.global.metadata.name $.Values.managementCluster) (eq .Values.global.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 
