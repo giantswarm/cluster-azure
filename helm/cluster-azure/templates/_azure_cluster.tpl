@@ -11,16 +11,16 @@ spec:
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
-    name: {{ .Values.global.providerSpecific.azureClusterIdentity.name }}
-    namespace: {{ .Values.global.providerSpecific.azureClusterIdentity.namespace }}
-  location: {{ .Values.global.providerSpecific.location }}
+    name: {{ .Values.providerSpecific.azureClusterIdentity.name }}
+    namespace: {{ .Values.providerSpecific.azureClusterIdentity.namespace }}
+  location: {{ .Values.providerSpecific.location }}
   networkSpec:
     subnets:
       - name: {{ include "network.subnets.controlPlane.name" $ }}
         role: control-plane
         cidrBlocks:
         - {{ .Values.global.connectivity.network.controlPlane.cidr }}
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
         securityGroup:
           name: {{ include "resource.default.name" $ }}-controlplane-nsg
           securityRules:
@@ -52,7 +52,7 @@ spec:
         role: node
         cidrBlocks:
         - {{ .Values.global.connectivity.network.workers.cidr }}
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
     vnet:
       {{- if (include "network.vnet.resourceGroup" $) }}
       resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
