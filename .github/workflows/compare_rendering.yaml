@@ -88,7 +88,7 @@ jobs:
         run: |
           # TODO split files by "API"_"KIND"_"NAMESPACE|clusterwide"_"NAME"
           helm dependency build old/helm/cluster-azure
-          helm template -n org-multi-project -f helm/cluster-azure/ci/ci-values.yaml -f ${{ matrix.values }} old/helm/cluster-azure > /tmp/${{ matrix.values }}/render-old.yaml
+          helm template -n org-multi-project -f old/helm/cluster-azure/ci/ci-values.yaml -f ${{ matrix.values }} old/helm/cluster-azure > /tmp/${{ matrix.values }}/render-old.yaml
       - name: get the diffs
         uses: mathiasvr/command-output@v1
         id: diff
