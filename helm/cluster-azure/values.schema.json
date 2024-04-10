@@ -435,6 +435,10 @@
                         }
                     }
                 },
+                "managementCluster": {
+                    "type": "string",
+                    "title": "The capi MC managing this cluster"
+                },
                 "metadata": {
                     "type": "object",
                     "title": "Metadata",

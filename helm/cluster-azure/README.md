@@ -184,6 +184,12 @@ Properties within the `.global.nodePools` object
 | `global.nodePools[*].replicas` | **Number of nodes**|**Type:** `integer`<br/>|
 | `global.nodePools[*].rootVolumeSizeGB` | **Root volume size (GB)**|**Type:** `integer`<br/>|
 
+### Other global
+
+| **Property** | **Description** | **More Details** |
+| :----------- | :-------------- | :--------------- |
+| `global.managementCluster` | **The capi MC managing this cluster**|**Type:** `string`<br/>|
+
 ### Pod Security Standards
 Properties within the `.global.podSecurityStandards` object
 
