@@ -99,7 +99,7 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
 {{- define "vmUaIdentityPrefix" -}}
-/subscriptions/{{ .Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+/subscriptions/{{ .Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
 {{/*Render list of custom Taints from passed values*/}}
@@ -265,13 +265,13 @@ this function requires an object like this to be passed in
 identity: {{ $identity.type }}
 {{- if eq $identity.type "SystemAssigned" }}
 systemAssignedIdentityRole:
-  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
-  definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
+  scope: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
+  definitionID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
 {{- else }}
 userAssignedIdentities:
   {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .type "controlPlane")) (ternary "capz" "" ($identity.attachCapzControllerUserAssignedIdentity)) }}
   {{- range compact $defaultIdentities }}
-  - providerID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
+  - providerID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
   {{- end -}}
   {{- if and ($identity.userAssignedIdentities) (not (empty $identity.userAssignedIdentities)) }}
     {{- range $identity.userAssignedIdentities}}
@@ -407,8 +407,8 @@ privateEndpoints:
 {{- /*
   Include explicitly configured VNet peerings
 */}}
-{{- if .Values.providerSpecific.network.peerings }}
-{{ .Values.providerSpecific.network.peerings | toYaml }}
+{{- if .Values.global.providerSpecific.network.peerings }}
+{{ .Values.global.providerSpecific.network.peerings | toYaml }}
 {{- end }}
 
 {{- /*

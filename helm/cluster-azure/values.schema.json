@@ -435,6 +435,10 @@
                         }
                     }
                 },
+                "managementCluster": {
+                    "type": "string",
+                    "title": "The capi MC managing this cluster"
+                },
                 "metadata": {
                     "type": "object",
                     "title": "Metadata",
@@ -595,6 +599,113 @@
                             "title": "Enforced Pod Security Standards",
                             "description": "Use PSSs instead of PSPs.",
                             "default": true
+                        }
+                    }
+                },
+                "providerSpecific": {
+                    "type": "object",
+                    "title": "Azure settings",
+                    "required": [
+                        "subscriptionId"
+                    ],
+                    "properties": {
+                        "additionalResourceTags": {
+                            "type": "object",
+                            "title": "Additional resource tags",
+                            "description": "Additional tags to be added to the resource group and to all resources in it.",
+                            "additionalProperties": {
+                                "type": "string",
+                                "title": "Tag value",
+                                "description": "Value of the tag",
+                                "maxLength": 256
+                            },
+                            "default": {},
+                            "propertyNames": {
+                                "type": "string",
+                                "title": "Tag name",
+                                "description": "Name of the tag",
+                                "maxLength": 128,
+                                "pattern": "^[^<>%&?/\\\\]*$"
+                            }
+                        },
+                        "azureClusterIdentity": {
+                            "type": "object",
+                            "title": "Identity",
+                            "description": "AzureClusterIdentity resource to use for this cluster.",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "Name",
+                                    "default": "cluster-identity"
+                                },
+                                "namespace": {
+                                    "type": "string",
+                                    "title": "Namespace",
+                                    "default": "org-giantswarm"
+                                }
+                            }
+                        },
+                        "location": {
+                            "type": "string",
+                            "title": "Location",
+                            "$comment": "Valid options from https://github.com/giantswarm/capi-image-builder/blob/v1.6.10/helm/capi-image-builder/values.yaml#L48-L52",
+                            "enum": [
+                                "eastus",
+                                "germanywestcentral",
+                                "northeurope",
+                                "westeurope",
+                                "westus2"
+                            ],
+                            "default": "westeurope"
+                        },
+                        "network": {
+                            "type": "object",
+                            "title": "Azure network settings",
+                            "description": "Azure VNet peering and other Azure-specific network settings.",
+                            "additionalProperties": false,
+                            "properties": {
+                                "peerings": {
+                                    "type": "array",
+                                    "title": "VNet peerings",
+                                    "description": "Specifying VNets (their resource groups and names) to which the peering is established.",
+                                    "items": {
+                                        "type": "object",
+                                        "title": "VNet peering",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "remoteVnetName": {
+                                                "type": "string",
+                                                "title": "VNet name",
+                                                "description": "Name of the remote VNet to which the peering is established.",
+                                                "maxLength": 64,
+                                                "minLength": 2,
+                                                "pattern": "^[-\\w\\._]+$"
+                                            },
+                                            "resourceGroup": {
+                                                "type": "string",
+                                                "title": "Resource group name",
+                                                "description": "Resource group for the remote VNet to which the peering is established.",
+                                                "maxLength": 90,
+                                                "minLength": 1,
+                                                "pattern": "^[-\\w\\._\\(\\)]+$"
+                                            }
+                                        },
+                                        "uniqueItems": true
+                                    },
+                                    "default": []
+                                }
+                            }
+                        },
+                        "subscriptionId": {
+                            "type": "string",
+                            "title": "Subscription ID",
+                            "description": "ID of the Azure subscription this cluster will run in.",
+                            "examples": [
+                                "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
+                            ],
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
                         }
                     }
                 }
@@ -851,113 +962,6 @@
         "provider": {
             "type": "string",
             "title": "Cluster API provider name"
-        },
-        "providerSpecific": {
-            "type": "object",
-            "title": "Azure settings",
-            "required": [
-                "subscriptionId"
-            ],
-            "properties": {
-                "additionalResourceTags": {
-                    "type": "object",
-                    "title": "Additional resource tags",
-                    "description": "Additional tags to be added to the resource group and to all resources in it.",
-                    "additionalProperties": {
-                        "type": "string",
-                        "title": "Tag value",
-                        "description": "Value of the tag",
-                        "maxLength": 256
-                    },
-                    "default": {},
-                    "propertyNames": {
-                        "type": "string",
-                        "title": "Tag name",
-                        "description": "Name of the tag",
-                        "maxLength": 128,
-                        "pattern": "^[^<>%&?/\\\\]*$"
-                    }
-                },
-                "azureClusterIdentity": {
-                    "type": "object",
-                    "title": "Identity",
-                    "description": "AzureClusterIdentity resource to use for this cluster.",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "title": "Name",
-                            "default": "cluster-identity"
-                        },
-                        "namespace": {
-                            "type": "string",
-                            "title": "Namespace",
-                            "default": "org-giantswarm"
-                        }
-                    }
-                },
-                "location": {
-                    "type": "string",
-                    "title": "Location",
-                    "$comment": "Valid options from https://github.com/giantswarm/capi-image-builder/blob/v1.6.10/helm/capi-image-builder/values.yaml#L48-L52",
-                    "enum": [
-                        "eastus",
-                        "germanywestcentral",
-                        "northeurope",
-                        "westeurope",
-                        "westus2"
-                    ],
-                    "default": "westeurope"
-                },
-                "network": {
-                    "type": "object",
-                    "title": "Azure network settings",
-                    "description": "Azure VNet peering and other Azure-specific network settings.",
-                    "additionalProperties": false,
-                    "properties": {
-                        "peerings": {
-                            "type": "array",
-                            "title": "VNet peerings",
-                            "description": "Specifying VNets (their resource groups and names) to which the peering is established.",
-                            "items": {
-                                "type": "object",
-                                "title": "VNet peering",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "remoteVnetName": {
-                                        "type": "string",
-                                        "title": "VNet name",
-                                        "description": "Name of the remote VNet to which the peering is established.",
-                                        "maxLength": 64,
-                                        "minLength": 2,
-                                        "pattern": "^[-\\w\\._]+$"
-                                    },
-                                    "resourceGroup": {
-                                        "type": "string",
-                                        "title": "Resource group name",
-                                        "description": "Resource group for the remote VNet to which the peering is established.",
-                                        "maxLength": 90,
-                                        "minLength": 1,
-                                        "pattern": "^[-\\w\\._\\(\\)]+$"
-                                    }
-                                },
-                                "uniqueItems": true
-                            },
-                            "default": []
-                        }
-                    }
-                },
-                "subscriptionId": {
-                    "type": "string",
-                    "title": "Subscription ID",
-                    "description": "ID of the Azure subscription this cluster will run in.",
-                    "examples": [
-                        "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
-                    ],
-                    "maxLength": 36,
-                    "minLength": 36,
-                    "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
-                }
-            }
         }
     }
 }
