@@ -12,85 +12,6 @@
             "type": "object",
             "title": "Library chart"
         },
-        "controlPlane": {
-            "type": "object",
-            "title": "Control plane",
-            "properties": {
-                "containerdVolumeSizeGB": {
-                    "type": "integer",
-                    "title": "Containerd volume size (GB)",
-                    "default": 100,
-                    "minimum": 20
-                },
-                "encryptionAtHost": {
-                    "type": "boolean",
-                    "title": "Encryption at host",
-                    "description": "Enable encryption at host for the control plane nodes.",
-                    "default": false
-                },
-                "etcdVolumeSizeGB": {
-                    "type": "integer",
-                    "title": "Etcd volume size (GB)",
-                    "default": 100,
-                    "minimum": 20
-                },
-                "instanceType": {
-                    "type": "string",
-                    "title": "Node VM size",
-                    "default": "Standard_D4s_v5"
-                },
-                "kubeletVolumeSizeGB": {
-                    "type": "integer",
-                    "title": "Kubelet volume size (GB)",
-                    "default": 100,
-                    "minimum": 20
-                },
-                "oidc": {
-                    "type": "object",
-                    "title": "OIDC authentication",
-                    "properties": {
-                        "caPem": {
-                            "type": "string",
-                            "title": "Certificate authority",
-                            "description": "Identity provider's CA certificate in PEM format.",
-                            "default": ""
-                        },
-                        "clientId": {
-                            "type": "string",
-                            "title": "Client ID",
-                            "default": ""
-                        },
-                        "groupsClaim": {
-                            "type": "string",
-                            "title": "Groups claim",
-                            "default": ""
-                        },
-                        "issuerUrl": {
-                            "type": "string",
-                            "title": "Issuer URL",
-                            "default": ""
-                        },
-                        "usernameClaim": {
-                            "type": "string",
-                            "title": "Username claim",
-                            "default": ""
-                        }
-                    }
-                },
-                "replicas": {
-                    "type": "integer",
-                    "title": "Number of nodes",
-                    "default": 3,
-                    "exclusiveMinimum": 0
-                },
-                "rootVolumeSizeGB": {
-                    "type": "integer",
-                    "title": "Root volume size (GB)",
-                    "default": 50,
-                    "minimum": 20
-                }
-            }
-        },
         "global": {
             "type": "object",
             "title": "Global",
@@ -432,6 +353,85 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                },
+                "controlPlane": {
+                    "type": "object",
+                    "title": "Control plane",
+                    "properties": {
+                        "containerdVolumeSizeGB": {
+                            "type": "integer",
+                            "title": "Containerd volume size (GB)",
+                            "default": 100,
+                            "minimum": 20
+                        },
+                        "encryptionAtHost": {
+                            "type": "boolean",
+                            "title": "Encryption at host",
+                            "description": "Enable encryption at host for the control plane nodes.",
+                            "default": false
+                        },
+                        "etcdVolumeSizeGB": {
+                            "type": "integer",
+                            "title": "Etcd volume size (GB)",
+                            "default": 100,
+                            "minimum": 20
+                        },
+                        "instanceType": {
+                            "type": "string",
+                            "title": "Node VM size",
+                            "default": "Standard_D4s_v5"
+                        },
+                        "kubeletVolumeSizeGB": {
+                            "type": "integer",
+                            "title": "Kubelet volume size (GB)",
+                            "default": 100,
+                            "minimum": 20
+                        },
+                        "oidc": {
+                            "type": "object",
+                            "title": "OIDC authentication",
+                            "properties": {
+                                "caPem": {
+                                    "type": "string",
+                                    "title": "Certificate authority",
+                                    "description": "Identity provider's CA certificate in PEM format.",
+                                    "default": ""
+                                },
+                                "clientId": {
+                                    "type": "string",
+                                    "title": "Client ID",
+                                    "default": ""
+                                },
+                                "groupsClaim": {
+                                    "type": "string",
+                                    "title": "Groups claim",
+                                    "default": ""
+                                },
+                                "issuerUrl": {
+                                    "type": "string",
+                                    "title": "Issuer URL",
+                                    "default": ""
+                                },
+                                "usernameClaim": {
+                                    "type": "string",
+                                    "title": "Username claim",
+                                    "default": ""
+                                }
+                            }
+                        },
+                        "replicas": {
+                            "type": "integer",
+                            "title": "Number of nodes",
+                            "default": 3,
+                            "exclusiveMinimum": 0
+                        },
+                        "rootVolumeSizeGB": {
+                            "type": "integer",
+                            "title": "Root volume size (GB)",
+                            "default": 50,
+                            "minimum": 20
                         }
                     }
                 },

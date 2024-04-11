@@ -117,7 +117,7 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 {{- end -}}
 
 {{- define "oidcFiles" -}}
-{{- if ne .Values.controlPlane.oidc.caPem "" }}
+{{- if ne .Values.global.controlPlane.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
   permissions: "0600"
   encoding: base64
