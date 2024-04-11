@@ -32,7 +32,7 @@ app: {{ include "name" . | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 cluster.x-k8s.io/cluster-name: {{ include "resource.default.name" . | quote }}
 giantswarm.io/cluster: {{ include "resource.default.name" . | quote }}
-giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.metadata.organization | quote }}
+giantswarm.io/organization: {{ required "You must provide an existing organization" .Values.global.metadata.organization | quote }}
 {{- end -}}
 
 {{/*
@@ -42,7 +42,7 @@ Given that Kubernetes allows 63 characters for resource names, the stem is trunc
 room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
-{{- .Values.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
+{{- .Values.global.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
 {{/*
@@ -99,7 +99,7 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 
 {{/*Helper to define per cluster User Assigned Identity prefix*/}}
 {{- define "vmUaIdentityPrefix" -}}
-/subscriptions/{{ .Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
+/subscriptions/{{ .Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
 {{/*Render list of custom Taints from passed values*/}}
@@ -117,7 +117,7 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 {{- end -}}
 
 {{- define "oidcFiles" -}}
-{{- if ne .Values.controlPlane.oidc.caPem "" }}
+{{- if ne .Values.global.controlPlane.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
   permissions: "0600"
   encoding: base64
@@ -202,7 +202,7 @@ Modify /etc/hosts in order to route API server requests to the local API server 
 See more details here https://github.com/giantswarm/roadmap/issues/2223.
 */}}
 {{- define "kubeadm.controlPlane.privateNetwork.preCommands" -}}
-- if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}
+- if [ ! -z "$(grep "^kubeadm init*" "/etc/kubeadm.sh")" ]; then echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}
   apiserver' >> /etc/hosts; fi
 {{- end -}}
 
@@ -212,7 +212,7 @@ See more details here https://github.com/giantswarm/roadmap/issues/2223.
 */}}
 {{- define "kubeadm.controlPlane.privateNetwork.postCommands" -}}
 - if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
-  echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}' >> /etc/hosts;
+  echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}' >> /etc/hosts;
   fi
 {{- end -}}
 
@@ -265,13 +265,13 @@ this function requires an object like this to be passed in
 identity: {{ $identity.type }}
 {{- if eq $identity.type "SystemAssigned" }}
 systemAssignedIdentityRole:
-  scope: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
-  definitionID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
+  scope: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
+  definitionID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
 {{- else }}
 userAssignedIdentities:
   {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .type "controlPlane")) (ternary "capz" "" ($identity.attachCapzControllerUserAssignedIdentity)) }}
   {{- range compact $defaultIdentities }}
-  - providerID: /subscriptions/{{ $.Values.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
+  - providerID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
   {{- end -}}
   {{- if and ($identity.userAssignedIdentities) (not (empty $identity.userAssignedIdentities)) }}
     {{- range $identity.userAssignedIdentities}}
@@ -407,8 +407,8 @@ privateEndpoints:
 {{- /*
   Include explicitly configured VNet peerings
 */}}
-{{- if .Values.providerSpecific.network.peerings }}
-{{ .Values.providerSpecific.network.peerings | toYaml }}
+{{- if .Values.global.providerSpecific.network.peerings }}
+{{ .Values.global.providerSpecific.network.peerings | toYaml }}
 {{- end }}
 
 {{- /*
@@ -420,7 +420,7 @@ privateEndpoints:
   - The VPN gateway mode is set to "remote" (which means that the cluster uses a remote VPN gateway thought the VNet
     peering)
 */ -}}
-{{- if and (ne $.Values.metadata.name $.Values.managementCluster) (eq .Values.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
+{{- if and (ne $.Values.global.metadata.name $.Values.managementCluster) (eq .Values.global.connectivity.network.mode "private") (eq .Values.internal.network.vpn.gatewayMode "remote") }}
 {{ include "providerSpecific.peeringFromWCToMC" $ }}
 {{- end }}
 
@@ -521,10 +521,10 @@ glippy nat-ip 20.4.101.216
     replaced with .10.
 */}}
 {{- define "clusterDNS" -}}
-    {{- $serviceCidrBlock := .Values.connectivity.network.serviceCidr  -}}
+    {{- $serviceCidrBlock := .Values.global.connectivity.network.serviceCidr  -}}
     {{- $mask := int (mustRegexReplaceAll `^.*/(\d+)$` $serviceCidrBlock "${1}") -}}
     {{- if gt $mask 24 -}}
-        {{- fail (printf ".Values.connectivity.network.serviceCidr=%q mask must be <= 24" $serviceCidrBlock) -}}
+        {{- fail (printf ".Values.global.connectivity.network.serviceCidr=%q mask must be <= 24" $serviceCidrBlock) -}}
     {{- end -}}
     {{- mustRegexReplaceAll `^(\d+\.\d+\.\d+).*$` $serviceCidrBlock "${1}.10" -}}
 {{- end -}}

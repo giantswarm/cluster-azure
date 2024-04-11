@@ -11,21 +11,21 @@ spec:
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
-    name: {{ .Values.providerSpecific.azureClusterIdentity.name }}
-    namespace: {{ .Values.providerSpecific.azureClusterIdentity.namespace }}
-  location: {{ .Values.providerSpecific.location }}
+    name: {{ .Values.global.providerSpecific.azureClusterIdentity.name }}
+    namespace: {{ .Values.global.providerSpecific.azureClusterIdentity.namespace }}
+  location: {{ .Values.global.providerSpecific.location }}
   networkSpec:
     subnets:
       - name: {{ include "network.subnets.controlPlane.name" $ }}
         role: control-plane
         cidrBlocks:
-        - {{ .Values.connectivity.network.controlPlane.cidr }}
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
+        - {{ .Values.global.connectivity.network.controlPlane.cidr }}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
         securityGroup:
           name: {{ include "resource.default.name" $ }}-controlplane-nsg
           securityRules:
-        {{- if (gt (len .Values.connectivity.allowedCIDRs) 0) }}
-        {{- include "controlPlaneSecurityGroups" .Values.connectivity.allowedCIDRs | nindent 12 }}
+        {{- if (gt (len .Values.global.connectivity.allowedCIDRs) 0) }}
+        {{- include "controlPlaneSecurityGroups" .Values.global.connectivity.allowedCIDRs | nindent 12 }}
         {{- else }}
            - name: "allow_ssh_from_all"
              description: "allow SSH"
@@ -51,26 +51,26 @@ spec:
           name: {{ include "network.subnets.nodes.natGatewayName" $ }}
         role: node
         cidrBlocks:
-        - {{ .Values.connectivity.network.workers.cidr }}
-        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.providerSpecific.location "endpoints" .Values.connectivity.network.workers.privateEndpoints) | nindent 8 }}
+        - {{ .Values.global.connectivity.network.workers.cidr }}
+        {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
     vnet:
       {{- if (include "network.vnet.resourceGroup" $) }}
       resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
       {{- end }}
       name: {{ include "network.vnet.name" $ }}
       cidrBlocks:
-      - {{ .Values.connectivity.network.hostCidr }}
+      - {{ .Values.global.connectivity.network.hostCidr }}
       {{- if (include "providerSpecific.vnetPeerings" $) }}
       peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
       {{- end }}
-    {{- if (eq .Values.connectivity.network.mode "private") }}
-    privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
+    {{- if (eq .Values.global.connectivity.network.mode "private") }}
+    privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
     apiServerLB:
       name: {{ include "resource.default.name" $ }}-api-internal-lb
       type: Internal
       frontendIPs:
       - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
-        privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.connectivity.network.controlPlane.cidr | trim -}}"
+        privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
       privateLinks:
       - name: {{ include "resource.default.name" $ }}-api-privatelink
         natIpConfigurations:
@@ -79,12 +79,12 @@ spec:
         lbFrontendIPConfigNames:
         - {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         allowedSubscriptions:
-        - {{ .Values.providerSpecific.subscriptionId }}
+        - {{ .Values.global.providerSpecific.subscriptionId }}
         autoApprovedSubscriptions:
-        - {{ .Values.providerSpecific.subscriptionId }}
+        - {{ .Values.global.providerSpecific.subscriptionId }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
-  subscriptionID: {{ .Values.providerSpecific.subscriptionId }}
+  subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
 {{ end }}
