@@ -3,7 +3,6 @@ global:
     name: test-wc-minimal
     organization: test
     servicePriority: lowest
-
-providerSpecific:
-  location: "westeurope"
-  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
+  providerSpecific:
+    location: "westeurope"
+    subscriptionId: 12345678-abcd-1234-abcd-1234567abcde

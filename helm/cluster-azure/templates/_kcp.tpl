@@ -7,22 +7,22 @@ image:
     name: {{ include "flatcarImageName" $ }}
     version: {{ $.Values.internal.image.version }}
 dataDisks:
-  - diskSizeGB: {{ $.Values.controlPlane.etcdVolumeSizeGB }}
+  - diskSizeGB: {{ $.Values.global.controlPlane.etcdVolumeSizeGB }}
     lun: 0
     nameSuffix: etcddisk
-  - diskSizeGB: {{ $.Values.controlPlane.containerdVolumeSizeGB }}
+  - diskSizeGB: {{ $.Values.global.controlPlane.containerdVolumeSizeGB }}
     lun: 1
     nameSuffix: containerddisk
-  - diskSizeGB: {{ $.Values.controlPlane.kubeletVolumeSizeGB }}
+  - diskSizeGB: {{ $.Values.global.controlPlane.kubeletVolumeSizeGB }}
     lun: 2
     nameSuffix: kubeletdisk
 osDisk:
-  diskSizeGB: {{ $.Values.controlPlane.rootVolumeSizeGB }}
+  diskSizeGB: {{ $.Values.global.controlPlane.rootVolumeSizeGB }}
   osType: Linux
 securityProfile:
-  encryptionAtHost: {{ $.Values.controlPlane.encryptionAtHost }}
+  encryptionAtHost: {{ $.Values.global.controlPlane.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
-vmSize: {{ $.Values.controlPlane.instanceType }}
+vmSize: {{ $.Values.global.controlPlane.instanceType }}
 {{- if ( include "network.subnets.controlPlane.name" $ ) }}
 subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
@@ -122,16 +122,16 @@ spec:
         certSANs:
           - 127.0.0.1
           - localhost
-          - "api.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
-          - "apiserver.{{ include "resource.default.name" $ }}.{{ .Values.baseDomain }}"
+          - "api.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
+          - "apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
         extraArgs:
-          {{- if .Values.controlPlane.serviceAccountIssuer }}
-          service-account-issuer: {{ .Values.controlPlane.serviceAccountIssuer }}
+          {{- if .Values.global.controlPlane.serviceAccountIssuer }}
+          service-account-issuer: {{ .Values.global.controlPlane.serviceAccountIssuer }}
           {{- end }}
           cloud-provider: external
           cloud-config: /etc/kubernetes/azure.json
-          {{- if .Values.controlPlane.oidc.issuerUrl }}
-          {{- with .Values.controlPlane.oidc }}
+          {{- if .Values.global.controlPlane.oidc.issuerUrl }}
+          {{- with .Values.global.controlPlane.oidc }}
           oidc-issuer-url: {{ .issuerUrl }}
           oidc-client-id: {{ .clientId }}
           oidc-username-claim: {{ .usernameClaim }}
@@ -154,7 +154,7 @@ spec:
           runtime-config: api/all=true,scheduling.k8s.io/v1alpha1=true
           service-account-lookup: "true"
           tls-cipher-suites: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256
-          service-cluster-ip-range: {{ .Values.connectivity.network.serviceCidr }}
+          service-cluster-ip-range: {{ .Values.global.connectivity.network.serviceCidr }}
         extraVolumes:
         - name: auditlog
           hostPath: /var/log/apiserver
@@ -205,7 +205,7 @@ spec:
             listen-metrics-urls: "http://0.0.0.0:2381"
             quota-backend-bytes: "8589934592"
       networking:
-        serviceSubnet: {{ .Values.connectivity.network.serviceCidr }}
+        serviceSubnet: {{ .Values.global.connectivity.network.serviceCidr }}
     files:
     {{- include "oidcFiles" . | nindent 4 }}
     {{- if $.Values.internal.teleport.enabled }}
@@ -247,9 +247,9 @@ spec:
           eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
           protect-kernel-defaults: "true"
         name: '@@HOSTNAME@@'
-        {{- if .Values.controlPlane.customNodeTaints }}
+        {{- if .Values.global.controlPlane.customNodeTaints }}
         taints:
-        {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
+        {{- include "customNodeTaints" .Values.global.controlPlane.customNodeTaints | indent 10 }}
         {{- end }}
     joinConfiguration:
       nodeRegistration:
@@ -263,25 +263,25 @@ spec:
           eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
           protect-kernel-defaults: "true"
         name: '@@HOSTNAME@@'
-        {{- if .Values.controlPlane.customNodeTaints }}
+        {{- if .Values.global.controlPlane.customNodeTaints }}
         taints:
-        {{- include "customNodeTaints" .Values.controlPlane.customNodeTaints | indent 10 }}
+        {{- include "customNodeTaints" .Values.global.controlPlane.customNodeTaints | indent 10 }}
         {{- end }}
     preKubeadmCommands:
     {{- include "prepare-varLibKubelet-Dir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
     {{- include "override-hostname-in-kubeadm-configuration" . | nindent 6 }}
     {{- include "override-pause-image-with-quay" . | nindent 6 }}
-    {{- if (eq .Values.connectivity.network.mode "private") }}
+    {{- if (eq .Values.global.connectivity.network.mode "private") }}
     {{- include "kubeadm.controlPlane.privateNetwork.preCommands" . | nindent 6 }}
     {{- end }}
-    {{- if (eq .Values.connectivity.network.mode "private") }}
+    {{- if (eq .Values.global.connectivity.network.mode "private") }}
     postKubeadmCommands:
     {{- include "kubeadm.controlPlane.privateNetwork.postCommands" . | nindent 6 }}
     {{- else }}
     postKubeadmCommands: []
     {{ end }}
-  replicas: {{ .Values.controlPlane.replicas | default "3" }}
+  replicas: {{ .Values.global.controlPlane.replicas | default "3" }}
   version: {{ .Values.internal.kubernetesVersion }}
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1

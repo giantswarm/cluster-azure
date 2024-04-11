@@ -24,10 +24,10 @@ spec:
   clusterNetwork:
     services:
       cidrBlocks:
-       - {{ .Values.connectivity.network.serviceCidr }}
+       - {{ .Values.global.connectivity.network.serviceCidr }}
     pods:
       cidrBlocks:
-      - {{ .Values.connectivity.network.podCidr }}
+      - {{ .Values.global.connectivity.network.podCidr }}
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
