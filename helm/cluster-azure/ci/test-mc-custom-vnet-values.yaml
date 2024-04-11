@@ -28,7 +28,6 @@ global:
     location: "westeurope"
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
-
 internal:
   identity:
     type: UserAssigned
