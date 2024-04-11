@@ -435,6 +435,10 @@
                         }
                     }
                 },
+                "managementCluster": {
+                    "type": "string",
+                    "title": "The capi MC managing this cluster"
+                },
                 "metadata": {
                     "type": "object",
                     "title": "Metadata",
@@ -482,6 +486,110 @@
                         }
                     }
                 },
+                "nodePools": {
+                    "type": "array",
+                    "title": "Node pools",
+                    "items": {
+                        "type": "object",
+                        "title": "Node pool",
+                        "properties": {
+                            "customNodeLabels": {
+                                "type": "array",
+                                "title": "Custom node labels",
+                                "items": {
+                                    "type": "string",
+                                    "title": "Label"
+                                }
+                            },
+                            "customNodeTaints": {
+                                "type": "array",
+                                "title": "Custom node taints",
+                                "items": {
+                                    "type": "object",
+                                    "title": "Node taint",
+                                    "required": [
+                                        "effect",
+                                        "key",
+                                        "value"
+                                    ],
+                                    "properties": {
+                                        "effect": {
+                                            "type": "string",
+                                            "title": "Effect",
+                                            "enum": [
+                                                "NoSchedule",
+                                                "PreferNoSchedule",
+                                                "NoExecute"
+                                            ]
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "title": "Key"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "title": "Value"
+                                        }
+                                    }
+                                },
+                                "descriptions": "Taints that will be set on all nodes in the node pool, to avoid the scheduling of certain workloads."
+                            },
+                            "disableHealthCheck": {
+                                "type": "boolean",
+                                "title": "Disable HealthChecks for the MachineDeployment"
+                            },
+                            "encryptionAtHost": {
+                                "type": "boolean",
+                                "title": "Encryption at host",
+                                "description": "Enable encryption at host for the worker nodes.",
+                                "default": false
+                            },
+                            "failureDomain": {
+                                "type": "string",
+                                "title": "Availability zone",
+                                "enum": [
+                                    "1",
+                                    "2",
+                                    "3"
+                                ]
+                            },
+                            "instanceType": {
+                                "type": "string",
+                                "title": "VM size"
+                            },
+                            "name": {
+                                "type": "string",
+                                "title": "Name",
+                                "description": "Unique identifier, cannot be changed after creation.",
+                                "maxLength": 10,
+                                "minLength": 3,
+                                "pattern": "^[-\\w\\._]+$"
+                            },
+                            "replicas": {
+                                "type": "integer",
+                                "title": "Number of nodes",
+                                "minimum": 0
+                            },
+                            "rootVolumeSizeGB": {
+                                "type": "integer",
+                                "title": "Root volume size (GB)",
+                                "exclusiveMinimum": 0
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "customNodeLabels": [],
+                            "customNodeTaints": [],
+                            "disableHealthCheck": false,
+                            "encryptionAtHost": false,
+                            "instanceType": "Standard_D4s_v5",
+                            "name": "md00",
+                            "replicas": 2,
+                            "rootVolumeSizeGB": 50
+                        }
+                    ]
+                },
                 "podSecurityStandards": {
                     "type": "object",
                     "title": "Pod Security Standards",
@@ -491,6 +599,113 @@
                             "title": "Enforced Pod Security Standards",
                             "description": "Use PSSs instead of PSPs.",
                             "default": true
+                        }
+                    }
+                },
+                "providerSpecific": {
+                    "type": "object",
+                    "title": "Azure settings",
+                    "required": [
+                        "subscriptionId"
+                    ],
+                    "properties": {
+                        "additionalResourceTags": {
+                            "type": "object",
+                            "title": "Additional resource tags",
+                            "description": "Additional tags to be added to the resource group and to all resources in it.",
+                            "additionalProperties": {
+                                "type": "string",
+                                "title": "Tag value",
+                                "description": "Value of the tag",
+                                "maxLength": 256
+                            },
+                            "default": {},
+                            "propertyNames": {
+                                "type": "string",
+                                "title": "Tag name",
+                                "description": "Name of the tag",
+                                "maxLength": 128,
+                                "pattern": "^[^<>%&?/\\\\]*$"
+                            }
+                        },
+                        "azureClusterIdentity": {
+                            "type": "object",
+                            "title": "Identity",
+                            "description": "AzureClusterIdentity resource to use for this cluster.",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "Name",
+                                    "default": "cluster-identity"
+                                },
+                                "namespace": {
+                                    "type": "string",
+                                    "title": "Namespace",
+                                    "default": "org-giantswarm"
+                                }
+                            }
+                        },
+                        "location": {
+                            "type": "string",
+                            "title": "Location",
+                            "$comment": "Valid options from https://github.com/giantswarm/capi-image-builder/blob/v1.6.10/helm/capi-image-builder/values.yaml#L48-L52",
+                            "enum": [
+                                "eastus",
+                                "germanywestcentral",
+                                "northeurope",
+                                "westeurope",
+                                "westus2"
+                            ],
+                            "default": "westeurope"
+                        },
+                        "network": {
+                            "type": "object",
+                            "title": "Azure network settings",
+                            "description": "Azure VNet peering and other Azure-specific network settings.",
+                            "additionalProperties": false,
+                            "properties": {
+                                "peerings": {
+                                    "type": "array",
+                                    "title": "VNet peerings",
+                                    "description": "Specifying VNets (their resource groups and names) to which the peering is established.",
+                                    "items": {
+                                        "type": "object",
+                                        "title": "VNet peering",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "remoteVnetName": {
+                                                "type": "string",
+                                                "title": "VNet name",
+                                                "description": "Name of the remote VNet to which the peering is established.",
+                                                "maxLength": 64,
+                                                "minLength": 2,
+                                                "pattern": "^[-\\w\\._]+$"
+                                            },
+                                            "resourceGroup": {
+                                                "type": "string",
+                                                "title": "Resource group name",
+                                                "description": "Resource group for the remote VNet to which the peering is established.",
+                                                "maxLength": 90,
+                                                "minLength": 1,
+                                                "pattern": "^[-\\w\\._\\(\\)]+$"
+                                            }
+                                        },
+                                        "uniqueItems": true
+                                    },
+                                    "default": []
+                                }
+                            }
+                        },
+                        "subscriptionId": {
+                            "type": "string",
+                            "title": "Subscription ID",
+                            "description": "ID of the Azure subscription this cluster will run in.",
+                            "examples": [
+                                "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
+                            ],
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
                         }
                     }
                 }
@@ -744,220 +959,9 @@
             "type": "string",
             "title": "The capi MC managing this cluster"
         },
-        "nodePools": {
-            "type": "array",
-            "title": "Node pools",
-            "items": {
-                "type": "object",
-                "title": "Node pool",
-                "properties": {
-                    "customNodeLabels": {
-                        "type": "array",
-                        "title": "Custom node labels",
-                        "items": {
-                            "type": "string",
-                            "title": "Label"
-                        }
-                    },
-                    "customNodeTaints": {
-                        "type": "array",
-                        "title": "Custom node taints",
-                        "items": {
-                            "type": "object",
-                            "title": "Node taint",
-                            "required": [
-                                "effect",
-                                "key",
-                                "value"
-                            ],
-                            "properties": {
-                                "effect": {
-                                    "type": "string",
-                                    "title": "Effect",
-                                    "enum": [
-                                        "NoSchedule",
-                                        "PreferNoSchedule",
-                                        "NoExecute"
-                                    ]
-                                },
-                                "key": {
-                                    "type": "string",
-                                    "title": "Key"
-                                },
-                                "value": {
-                                    "type": "string",
-                                    "title": "Value"
-                                }
-                            }
-                        },
-                        "descriptions": "Taints that will be set on all nodes in the node pool, to avoid the scheduling of certain workloads."
-                    },
-                    "disableHealthCheck": {
-                        "type": "boolean",
-                        "title": "Disable HealthChecks for the MachineDeployment"
-                    },
-                    "encryptionAtHost": {
-                        "type": "boolean",
-                        "title": "Encryption at host",
-                        "description": "Enable encryption at host for the worker nodes.",
-                        "default": false
-                    },
-                    "failureDomain": {
-                        "type": "string",
-                        "title": "Availability zone",
-                        "enum": [
-                            "1",
-                            "2",
-                            "3"
-                        ]
-                    },
-                    "instanceType": {
-                        "type": "string",
-                        "title": "VM size"
-                    },
-                    "name": {
-                        "type": "string",
-                        "title": "Name",
-                        "description": "Unique identifier, cannot be changed after creation.",
-                        "maxLength": 10,
-                        "minLength": 3,
-                        "pattern": "^[-\\w\\._]+$"
-                    },
-                    "replicas": {
-                        "type": "integer",
-                        "title": "Number of nodes",
-                        "minimum": 0
-                    },
-                    "rootVolumeSizeGB": {
-                        "type": "integer",
-                        "title": "Root volume size (GB)",
-                        "exclusiveMinimum": 0
-                    }
-                }
-            },
-            "default": [
-                {
-                    "customNodeLabels": [],
-                    "customNodeTaints": [],
-                    "disableHealthCheck": false,
-                    "encryptionAtHost": false,
-                    "instanceType": "Standard_D4s_v5",
-                    "name": "md00",
-                    "replicas": 2,
-                    "rootVolumeSizeGB": 50
-                }
-            ]
-        },
         "provider": {
             "type": "string",
             "title": "Cluster API provider name"
-        },
-        "providerSpecific": {
-            "type": "object",
-            "title": "Azure settings",
-            "required": [
-                "subscriptionId"
-            ],
-            "properties": {
-                "additionalResourceTags": {
-                    "type": "object",
-                    "title": "Additional resource tags",
-                    "description": "Additional tags to be added to the resource group and to all resources in it.",
-                    "additionalProperties": {
-                        "type": "string",
-                        "title": "Tag value",
-                        "description": "Value of the tag",
-                        "maxLength": 256
-                    },
-                    "default": {},
-                    "propertyNames": {
-                        "type": "string",
-                        "title": "Tag name",
-                        "description": "Name of the tag",
-                        "maxLength": 128,
-                        "pattern": "^[^<>%&?/\\\\]*$"
-                    }
-                },
-                "azureClusterIdentity": {
-                    "type": "object",
-                    "title": "Identity",
-                    "description": "AzureClusterIdentity resource to use for this cluster.",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "title": "Name",
-                            "default": "cluster-identity"
-                        },
-                        "namespace": {
-                            "type": "string",
-                            "title": "Namespace",
-                            "default": "org-giantswarm"
-                        }
-                    }
-                },
-                "location": {
-                    "type": "string",
-                    "title": "Location",
-                    "$comment": "Valid options from https://github.com/giantswarm/capi-image-builder/blob/v1.6.10/helm/capi-image-builder/values.yaml#L48-L52",
-                    "enum": [
-                        "eastus",
-                        "germanywestcentral",
-                        "northeurope",
-                        "westeurope",
-                        "westus2"
-                    ],
-                    "default": "westeurope"
-                },
-                "network": {
-                    "type": "object",
-                    "title": "Azure network settings",
-                    "description": "Azure VNet peering and other Azure-specific network settings.",
-                    "additionalProperties": false,
-                    "properties": {
-                        "peerings": {
-                            "type": "array",
-                            "title": "VNet peerings",
-                            "description": "Specifying VNets (their resource groups and names) to which the peering is established.",
-                            "items": {
-                                "type": "object",
-                                "title": "VNet peering",
-                                "additionalProperties": false,
-                                "properties": {
-                                    "remoteVnetName": {
-                                        "type": "string",
-                                        "title": "VNet name",
-                                        "description": "Name of the remote VNet to which the peering is established.",
-                                        "maxLength": 64,
-                                        "minLength": 2,
-                                        "pattern": "^[-\\w\\._]+$"
-                                    },
-                                    "resourceGroup": {
-                                        "type": "string",
-                                        "title": "Resource group name",
-                                        "description": "Resource group for the remote VNet to which the peering is established.",
-                                        "maxLength": 90,
-                                        "minLength": 1,
-                                        "pattern": "^[-\\w\\._\\(\\)]+$"
-                                    }
-                                },
-                                "uniqueItems": true
-                            },
-                            "default": []
-                        }
-                    }
-                },
-                "subscriptionId": {
-                    "type": "string",
-                    "title": "Subscription ID",
-                    "description": "ID of the Azure subscription this cluster will run in.",
-                    "examples": [
-                        "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
-                    ],
-                    "maxLength": 36,
-                    "minLength": 36,
-                    "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
-                }
-            }
         }
     }
 }

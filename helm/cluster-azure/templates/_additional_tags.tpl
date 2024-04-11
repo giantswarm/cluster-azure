@@ -1,5 +1,5 @@
 {{- define "additional-tags" -}}
-{{- $tags := .Values.providerSpecific.additionalResourceTags | default dict }}
+{{- $tags := .Values.global.providerSpecific.additionalResourceTags | default dict }}
 additionalTags:
   giantswarm-cluster: {{ include "resource.default.name" . }}
   {{- if $tags }}
