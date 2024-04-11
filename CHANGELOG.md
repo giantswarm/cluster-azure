@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move Helm values property `.Values.nodePools` to `.Values.global.nodePools`.
 - Move Helm values property `.Values.providerSpecific` to `.Values.global.providerSpecific`.
 - Move Helm values property `.Values.managementCluster` to `.Values.global.managementCluster`.
-- 
+
 ### Removed
 
 - Drop duplicated workflow "compare_rendering.yaml" file.
