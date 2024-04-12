@@ -1,0 +1,7 @@
+{{/* Azure-specific network-policies Helm values*/}}
+{{/* https://github.com/giantswarm/network-policies-app/blob/main/helm/network-policies/values.yaml*/}}
+{{- define "azureNetworkPoliciesHelmValues" }}
+allowEgressToDNS:
+  enabled: true
+{{- end }}
+

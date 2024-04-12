@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Enable network-policies-app from `cluster` chart with DNS policies enabled. This makes `kube-system` and `giantswarm` namespaces to be `deny` by default.
+
+### Changed
+
+- Disable and remove permissive policies from cilium-app.
+- Import HelmRepositories from `cluster` chart and delete the HelmRepositories from this chart. This adds the `cluster-catalog`.
+
 ### Fixed
 
 - Add missing hack for manipulating /etc/hosts for private clusters.

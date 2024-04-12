@@ -49,7 +49,8 @@ spec:
       relay:
         enabled: true
     defaultPolicies:
-      enabled: true
+      remove: true
+      enabled: false
       tolerations:
         - effect: NoSchedule
           operator: Exists
