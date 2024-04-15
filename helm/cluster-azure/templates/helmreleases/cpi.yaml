@@ -4,11 +4,11 @@ metadata:
   name: {{ include "resource.default.name" $ }}-azure-cloud-controller-manager
   namespace: {{ .Release.Namespace }}
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
   labels:
     cluster-apps-operator.giantswarm.io/watching: ""
-    {{- if .Values.metadata.servicePriority }}
-    giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
+    {{- if .Values.global.metadata.servicePriority }}
+    giantswarm.io/service-priority: {{ .Values.global.metadata.servicePriority }}
     {{- end }}
     {{- include "labels.common" . | nindent 4 }}
 spec:
@@ -42,7 +42,7 @@ spec:
       enabled: {{ .Values.internal.enableVpaResources }}
     cluster:
       calico:
-        CIDR: {{ .Values.connectivity.network.podCidr | quote }}
+        CIDR: {{ .Values.global.connectivity.network.podCidr | quote }}
     controller:
       azureCredentialFile: "/etc/kubernetes/azure.json"
       kubeconfigFromHost: false
@@ -56,11 +56,11 @@ metadata:
   name: {{ include "resource.default.name" $ }}-azure-cloud-node-manager
   namespace: {{ .Release.Namespace }}
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
   labels:
     cluster-apps-operator.giantswarm.io/watching: ""
-    {{- if .Values.metadata.servicePriority }}
-    giantswarm.io/service-priority: {{ .Values.metadata.servicePriority }}
+    {{- if .Values.global.metadata.servicePriority }}
+    giantswarm.io/service-priority: {{ .Values.global.metadata.servicePriority }}
     {{- end }}
     {{- include "labels.common" . | nindent 4 }}
 spec:

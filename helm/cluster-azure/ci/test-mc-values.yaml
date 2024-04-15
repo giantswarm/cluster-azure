@@ -1,35 +1,35 @@
-metadata:
-  name: test-mc
-  organization: test
-  servicePriority: lowest
-  labels:
-    cluster.giantswarm.io/test: value1
+global:
+  metadata:
+    name: test-mc
+    organization: test
+    servicePriority: lowest
+    labels:
+      cluster.giantswarm.io/test: value1
+  connectivity:
+    network:
+      controlPlane:
+        cidr: 10.0.16.128/26
+      hostCidr: 10.0.16.0/24
+      mode: public
+      podCidr: 192.168.0.0/16
+      serviceCidr: 172.31.0.0/16
+      workers:
+        cidr: 10.0.16.0/25
+  controlPlane:
+    oidc:
+      clientId: dex-k8s-authenticator
+      issuerUrl: https://dex.cluster.azuretest.gigantic.io
+      groupsClaim: groups
+      usernameClaim: email
+  nodePools:
+    - name: md00
+      instanceType: Standard_D4s_v5
+      replicas: 4
+      rootVolumeSizeGB: 50
+  providerSpecific:
+    location: "westeurope"
+    subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
-providerSpecific:
-  location: "westeurope"
-  subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
-
-connectivity:
-  network:
-    controlPlane:
-      cidr: 10.0.16.128/26
-    hostCidr: 10.0.16.0/24
-    mode: public
-    podCidr: 192.168.0.0/16
-    serviceCidr: 172.31.0.0/16
-    workers:
-      cidr: 10.0.16.0/25
-nodePools:
-  - name: md00
-    instanceType: Standard_D4s_v5
-    replicas: 4
-    rootVolumeSizeGB: 50
-controlPlane:
-  oidc:
-    clientId: dex-k8s-authenticator
-    issuerUrl: https://dex.cluster.azuretest.gigantic.io
-    groupsClaim: groups
-    usernameClaim: email
 internal:
   identity:
     type: UserAssigned

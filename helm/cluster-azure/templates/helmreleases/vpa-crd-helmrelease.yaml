@@ -5,7 +5,7 @@ metadata:
   name: {{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd
   namespace: {{ $.Release.Namespace }}
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.metadata.description }}"
+    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
   labels:
     {{- include "labels.common" . | nindent 4 }}
 spec:
