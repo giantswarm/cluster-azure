@@ -21,6 +21,85 @@
             ],
             "additionalProperties": true,
             "properties": {
+                "components": {
+                    "type": "object",
+                    "title": "Components",
+                    "description": "Advanced configuration of components that are running on all nodes.",
+                    "additionalProperties": false,
+                    "properties": {
+                        "containerd": {
+                            "type": "object",
+                            "title": "Containerd",
+                            "description": "Configuration of containerd.",
+                            "required": [
+                                "containerRegistries"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                                "containerRegistries": {
+                                    "type": "object",
+                                    "title": "Container registries",
+                                    "description": "Endpoints and credentials configuration for container registries.",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "title": "Registries",
+                                        "description": "Container registries and mirrors",
+                                        "items": {
+                                            "type": "object",
+                                            "title": "Registry",
+                                            "required": [
+                                                "endpoint"
+                                            ],
+                                            "properties": {
+                                                "credentials": {
+                                                    "type": "object",
+                                                    "title": "Credentials",
+                                                    "properties": {
+                                                        "auth": {
+                                                            "type": "string",
+                                                            "title": "Auth",
+                                                            "description": "Base64-encoded string from the concatenation of the username, a colon, and the password."
+                                                        },
+                                                        "identitytoken": {
+                                                            "type": "string",
+                                                            "title": "Identity token",
+                                                            "description": "Used to authenticate the user and obtain an access token for the registry."
+                                                        },
+                                                        "password": {
+                                                            "type": "string",
+                                                            "title": "Password",
+                                                            "description": "Used to authenticate for the registry with username/password."
+                                                        },
+                                                        "username": {
+                                                            "type": "string",
+                                                            "title": "Username",
+                                                            "description": "Used to authenticate for the registry with username/password."
+                                                        }
+                                                    }
+                                                },
+                                                "endpoint": {
+                                                    "type": "string",
+                                                    "title": "Endpoint",
+                                                    "description": "Endpoint for the container registry."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "default": {
+                                        "docker.io": [
+                                            {
+                                                "endpoint": "registry-1.docker.io"
+                                            },
+                                            {
+                                                "endpoint": "giantswarm.azurecr.io"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "connectivity": {
                     "type": "object",
                     "title": "Connectivity",
@@ -37,66 +116,6 @@
                             "type": "string",
                             "title": "Base DNS domain",
                             "default": "azuretest.gigantic.io"
-                        },
-                        "containerRegistries": {
-                            "type": "object",
-                            "title": "Container registries",
-                            "description": "Endpoints and credentials configuration for container registries.",
-                            "additionalProperties": {
-                                "type": "array",
-                                "title": "Registries",
-                                "description": "Container registries and mirrors",
-                                "items": {
-                                    "type": "object",
-                                    "title": "Registry",
-                                    "required": [
-                                        "endpoint"
-                                    ],
-                                    "properties": {
-                                        "credentials": {
-                                            "type": "object",
-                                            "title": "Credentials",
-                                            "properties": {
-                                                "auth": {
-                                                    "type": "string",
-                                                    "title": "Auth",
-                                                    "description": "Base64-encoded string from the concatenation of the username, a colon, and the password."
-                                                },
-                                                "identitytoken": {
-                                                    "type": "string",
-                                                    "title": "Identity token",
-                                                    "description": "Used to authenticate the user and obtain an access token for the registry."
-                                                },
-                                                "password": {
-                                                    "type": "string",
-                                                    "title": "Password",
-                                                    "description": "Used to authenticate for the registry with username/password."
-                                                },
-                                                "username": {
-                                                    "type": "string",
-                                                    "title": "Username",
-                                                    "description": "Used to authenticate for the registry with username/password."
-                                                }
-                                            }
-                                        },
-                                        "endpoint": {
-                                            "type": "string",
-                                            "title": "Endpoint",
-                                            "description": "Endpoint for the container registry."
-                                        }
-                                    }
-                                }
-                            },
-                            "default": {
-                                "docker.io": [
-                                    {
-                                        "endpoint": "registry-1.docker.io"
-                                    },
-                                    {
-                                        "endpoint": "giantswarm.azurecr.io"
-                                    }
-                                ]
-                            }
                         },
                         "network": {
                             "type": "object",
