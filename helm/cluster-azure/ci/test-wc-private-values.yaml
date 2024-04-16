@@ -15,7 +15,6 @@ global:
       services: 
         cidrBlocks:
         - 172.31.0.0/16
-
       workers:
         cidr: 10.0.16.0/25
   controlPlane:
