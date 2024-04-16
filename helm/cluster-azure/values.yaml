@@ -2,6 +2,12 @@
 
 baseDomain: azuretest.gigantic.io
 global:
+  components:
+    containerd:
+      containerRegistries:
+        docker.io:
+          - endpoint: registry-1.docker.io
+          - endpoint: giantswarm.azurecr.io
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io

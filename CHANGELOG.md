@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move Helm values property `.Values.providerSpecific` to `.Values.global.providerSpecific`.
 - Move Helm values property `.Values.managementCluster` to `.Values.global.managementCluster`.
 
+### Added
+
+- Add Helm values property `.Values.global.components`.
+
 ### Changed
 
 - Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
