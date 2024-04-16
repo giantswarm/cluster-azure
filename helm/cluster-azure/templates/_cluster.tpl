@@ -24,7 +24,7 @@ spec:
   clusterNetwork:
     services:
       cidrBlocks:
-       - {{ .Values.global.connectivity.network.serviceCidr }}
+      {{- toYaml $.Values.global.connectivity.network.services.cidrBlocks | nindent 8 }}
     pods:
       cidrBlocks:
       {{- toYaml $.Values.global.connectivity.network.pods.cidrBlocks | nindent 8 }}
