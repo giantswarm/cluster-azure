@@ -248,17 +248,51 @@
                                     ],
                                     "default": "public"
                                 },
-                                "podCidr": {
-                                    "type": "string",
-                                    "title": "Pod subnet",
-                                    "description": "IPv4 address range for pods, in CIDR notation.",
-                                    "default": "192.168.0.0/16"
+                                "pods": {
+                                    "type": "object",
+                                    "title": "Pods",
+                                    "properties": {
+                                        "cidrBlocks": {
+                                            "type": "array",
+                                            "title": "Pod subnets",
+                                            "items": {
+                                                "type": "string",
+                                                "title": "Pod subnet",
+                                                "description": "IPv4 address range for pods, in CIDR notation.",
+                                                "examples": [
+                                                    "192.168.0.0/16"
+                                                ]
+                                            },
+                                            "default": [
+                                                "192.168.0.0/16"
+                                            ],
+                                            "maxItems": 1,
+                                            "minItems": 1
+                                        }
+                                    }
                                 },
-                                "serviceCidr": {
-                                    "type": "string",
-                                    "title": "Service subnet",
-                                    "description": "IPv4 address range for services, in CIDR notation.",
-                                    "default": "172.31.0.0/16"
+                                "services": {
+                                    "type": "object",
+                                    "title": "Services",
+                                    "properties": {
+                                        "cidrBlocks": {
+                                            "type": "array",
+                                            "title": "K8s Service subnets",
+                                            "items": {
+                                                "type": "string",
+                                                "title": "Service subnet",
+                                                "description": "IPv4 address range for kubernetes services, in CIDR notation.",
+                                                "examples": [
+                                                    "172.31.0.0/16"
+                                                ]
+                                            },
+                                            "default": [
+                                                "172.31.0.0/16"
+                                            ],
+                                            "maxItems": 1,
+                                            "minItems": 1
+                                        }
+                                    }
                                 },
                                 "workers": {
                                     "type": "object",
