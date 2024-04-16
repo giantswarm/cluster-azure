@@ -91,6 +91,39 @@
             "title": "Base DNS domain",
             "default": "azuretest.gigantic.io"
         },
+        "cluster": {
+            "type": "object",
+            "title": "Cluster",
+            "description": "Helm values for the provider-independent cluster chart",
+            "default": {
+                "providerIntegration": {
+                    "controlPlane": {
+                        "resources": {
+                            "infrastructureMachineTemplate": {
+                                "group": "infrastructure.cluster.x-k8s.io",
+                                "kind": "AzureMachine",
+                                "version": "v1beta1"
+                            },
+                            "infrastructureMachineTemplateSpecTemplateName": "controlplane-azuremachinetemplate-spec"
+                        }
+                    },
+                    "provider": "azure",
+                    "resourcesApi": {
+                        "bastionResourceEnabled": false,
+                        "clusterResourceEnabled": true,
+                        "controlPlaneResourceEnabled": false,
+                        "infrastructureCluster": {
+                            "group": "infrastructure.cluster.x-k8s.io",
+                            "kind": "AzureCluster",
+                            "version": "v1beta1"
+                        },
+                        "machineHealthCheckResourceEnabled": false,
+                        "machinePoolResourcesEnabled": false,
+                        "nodePoolKind": "MachinePool"
+                    }
+                }
+            }
+        },
         "cluster-shared": {
             "type": "object",
             "title": "Library chart"

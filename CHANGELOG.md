@@ -24,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+
+- Add `cluster` chart as subchart.
+- Render Cluster resource from the `cluster` chart.
+- Delete Cluster resource template.
 - Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
 
 ### Removed

@@ -15,6 +15,9 @@ restrictions:
     - azure
     - capz
 dependencies:
+- name: cluster
+  version: "0.18.0"
+  repository: "https://giantswarm.github.io/cluster-catalog"
 - name: cluster-shared
   version: "0.7.0"
   repository: "https://giantswarm.github.io/cluster-catalog"
