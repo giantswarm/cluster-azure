@@ -11,10 +11,6 @@ global:
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io
-    containerRegistries:
-      docker.io:
-        - endpoint: registry-1.docker.io
-        - endpoint: giantswarm.azurecr.io
     network:
       controlPlane:
         cidr: 10.0.0.0/20
