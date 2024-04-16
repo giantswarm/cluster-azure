@@ -205,7 +205,7 @@ spec:
             listen-metrics-urls: "http://0.0.0.0:2381"
             quota-backend-bytes: "8589934592"
       networking:
-        serviceSubnet: {{ .Values.global.connectivity.network.serviceCidr }}
+        serviceSubnet: {{ join "," $.Values.global.connectivity.network.services.cidrBlocks | quote }}
     files:
     {{- include "oidcFiles" . | nindent 4 }}
     {{- if $.Values.internal.teleport.enabled }}

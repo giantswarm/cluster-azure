@@ -42,7 +42,8 @@ spec:
       enabled: {{ .Values.internal.enableVpaResources }}
     cluster:
       calico:
-        CIDR: {{ .Values.global.connectivity.network.podCidr | quote }}
+        CIDR: {{ first .Values.global.connectivity.network.pods.cidrBlocks | quote }}
+      kubernetes:
     controller:
       azureCredentialFile: "/etc/kubernetes/azure.json"
       kubeconfigFromHost: false
