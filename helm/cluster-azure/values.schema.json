@@ -626,7 +626,7 @@
                     "type": "object",
                     "title": "Node pools",
                     "description": "Node pools of the cluster. If not specified, this defaults to the value of `cluster.providerIntegration.workers.defaultNodePools`.",
-                    "additionalProperties": false,
+                    "additionalProperties": true,
                     "patternProperties": {
                         "^[a-z0-9][-a-z0-9]{3,18}[a-z0-9]$": {
                             "$ref": "#/$defs/machinePool"
