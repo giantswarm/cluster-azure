@@ -16,7 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move Helm values property `.Values.nodePools` to `.Values.global.nodePools`.
 - Move Helm values property `.Values.providerSpecific` to `.Values.global.providerSpecific`.
 - Move Helm values property `.Values.managementCluster` to `.Values.global.managementCluster`.
+- Move Helm values property `.Values.global.connectivity.containerRegistries` to `.Values.global.containerd`.
+- Add Helm values property `.Values.global.components`.
+- Move Helm values property `.Values.global.connectivity.network.podCidr` to `.Values.global.global.connectivity.network.pods.cidrBlocks`.
+- Move Helm values property `.Values.global.connectivity.network.serviceCidr` to `.Values.global.global.connectivity.network.services.cidrBlocks`.
+- Change Helm values property `.Values.global.nodePools` from Array to Object.
 - Change image lookup format for base OS image. `internal.image.variant` is set to "1" for this kubernetes version. This is a **breaking change** that requires manual steps. For the next kubernetes versions, `internal.image.variant` should not be set.
+
+### Changed
+
+- Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
 
 ### Removed
 
