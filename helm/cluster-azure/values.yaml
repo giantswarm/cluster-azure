@@ -5,12 +5,12 @@ cluster:
   providerIntegration:
     resourcesApi:
       bastionResourceEnabled: false
-      ciliumHelmReleaseResourceEnabled: true
-      cleanupHelmReleaseResourcesEnabled: true
+      ciliumHelmReleaseResourceEnabled: false
+      cleanupHelmReleaseResourcesEnabled: false
       clusterResourceEnabled: true
-      controlPlaneResourceEnabled: true
-      coreDnsHelmReleaseResourceEnabled: true
-      helmRepositoryResourcesEnabled: true
+      controlPlaneResourceEnabled: false
+      coreDnsHelmReleaseResourceEnabled: false
+      helmRepositoryResourcesEnabled: false
       infrastructureCluster:
         group: infrastructure.cluster.x-k8s.io
         kind: AzureCluster
@@ -19,10 +19,10 @@ cluster:
         group: infrastructure.cluster.x-k8s.io
         kind: AzureMachinePool
         version: v1beta1
-      machineHealthCheckResourceEnabled: true
-      machinePoolResourcesEnabled: true
-      networkPoliciesHelmReleaseResourceEnabled: true
-      nodePoolKind: MachinePool
+      machineHealthCheckResourceEnabled: false
+      machinePoolResourcesEnabled: false
+      networkPoliciesHelmReleaseResourceEnabled: false
+      nodePoolKind: MachineDeployment
       verticalPodAutoscalerCrdHelmReleaseResourceEnabled: true
     workers:
       defaultNodePools:
