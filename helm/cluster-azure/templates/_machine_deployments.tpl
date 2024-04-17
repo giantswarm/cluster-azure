@@ -1,5 +1,5 @@
 {{- define "machine-deployments" -}}
-{{- range $nodePool := .Values.global.nodePools }}
+{{- range $nodePoolName, $nodePool := .Values.global.nodePools }}
 {{ $nodePoolConfig := dict "spec" ( merge $nodePool ( dict  "type" "machineDeployment" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $nodePoolConfig) "global" $) ) }}
 {{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $nodePoolConfig) "identity" (include "renderIdentityConfiguration" $nodePoolConfig) ) "global" $) ) }}
@@ -7,11 +7,11 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
   annotations:
-    machine-deployment.giantswarm.io/name: {{ include "resource.default.name" $ }}-{{ .name }}
+    machine-deployment.giantswarm.io/name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
   labels:
-    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ .name }}
+    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}
+  name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}

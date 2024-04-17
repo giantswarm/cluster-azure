@@ -521,10 +521,10 @@ glippy nat-ip 20.4.101.216
     replaced with .10.
 */}}
 {{- define "clusterDNS" -}}
-    {{- $serviceCidrBlock := .Values.global.connectivity.network.serviceCidr  -}}
+    {{- $serviceCidrBlock := .Values.global.connectivity.network.services.cidrBlocks | first -}}
     {{- $mask := int (mustRegexReplaceAll `^.*/(\d+)$` $serviceCidrBlock "${1}") -}}
     {{- if gt $mask 24 -}}
-        {{- fail (printf ".Values.global.connectivity.network.serviceCidr=%q mask must be <= 24" $serviceCidrBlock) -}}
+        {{- fail (printf ".Values.global.connectivity.network.services.cidrBlocks=%q mask must be <= 24" $serviceCidrBlock) -}}
     {{- end -}}
     {{- mustRegexReplaceAll `^(\d+\.\d+\.\d+).*$` $serviceCidrBlock "${1}.10" -}}
 {{- end -}}

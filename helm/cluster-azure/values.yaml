@@ -17,8 +17,12 @@ global:
         privateEndpoints: []
       hostCidr: 10.0.0.0/16
       mode: public
-      podCidr: 192.168.0.0/16
-      serviceCidr: 172.31.0.0/16
+      pods:
+        cidrBlocks:
+          - 192.168.0.0/16
+      services:
+        cidrBlocks:
+          - 172.31.0.0/16
       workers:
         cidr: 10.0.16.0/20
         privateEndpoints: []
@@ -38,15 +42,6 @@ global:
     rootVolumeSizeGB: 50
   metadata:
     servicePriority: highest
-  nodePools:
-    - customNodeLabels: []
-      customNodeTaints: []
-      disableHealthCheck: false
-      encryptionAtHost: false
-      instanceType: Standard_D4s_v5
-      name: md00
-      replicas: 2
-      rootVolumeSizeGB: 50
   podSecurityStandards:
     enforced: true
   providerSpecific:
