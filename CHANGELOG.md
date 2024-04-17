@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Helm values property `.Values.global.components`.
 - Move Helm values property `.Values.global.connectivity.network.podCidr` to `.Values.global.global.connectivity.network.pods.cidrBlocks`.
 - Move Helm values property `.Values.global.connectivity.network.serviceCidr` to `.Values.global.global.connectivity.network.services.cidrBlocks`.
+- Change Helm values property `.Values.global.nodePools` from Array to Object.
 
 ### Changed
 

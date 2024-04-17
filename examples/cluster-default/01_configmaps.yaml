@@ -7,10 +7,10 @@ data:
         description: "cluster01 test cluster"
         organization: "multi-project"
       nodePools:
-      - name: md00
-        instanceType: Standard_D4s_v5
-        replicas: 2
-        rootVolumeSizeGB: 50
+        md00:
+          instanceType: Standard_D4s_v5
+          replicas: 2
+          rootVolumeSizeGB: 50
       providerSpecific:
         location: "westeurope"
         #This is the GHOST subscription

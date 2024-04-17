@@ -1,5 +1,88 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$defs": {
+        "machinePool": {
+            "type": "object",
+            "title": "Node pool",
+            "properties": {
+                "customNodeLabels": {
+                    "type": "array",
+                    "title": "Custom node labels",
+                    "items": {
+                        "type": "string",
+                        "title": "Label"
+                    }
+                },
+                "customNodeTaints": {
+                    "type": "array",
+                    "title": "Custom node taints",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "effect",
+                            "key",
+                            "value"
+                        ],
+                        "properties": {
+                            "effect": {
+                                "type": "string",
+                                "title": "Effect",
+                                "enum": [
+                                    "NoSchedule",
+                                    "PreferNoSchedule",
+                                    "NoExecute"
+                                ]
+                            },
+                            "key": {
+                                "type": "string",
+                                "title": "Key"
+                            },
+                            "value": {
+                                "type": "string",
+                                "title": "Value"
+                            }
+                        }
+                    }
+                },
+                "disableHealthCheck": {
+                    "type": "boolean",
+                    "title": "Disable HealthChecks for the MachineDeployment"
+                },
+                "encryptionAtHost": {
+                    "type": "boolean",
+                    "title": "Encryption at host",
+                    "description": "Enable encryption at host for the worker nodes.",
+                    "default": false
+                },
+                "failureDomain": {
+                    "type": "string",
+                    "title": "Availability zone",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3"
+                    ]
+                },
+                "instanceType": {
+                    "type": "string",
+                    "title": "VM size",
+                    "default": "Standard_D4s_v5"
+                },
+                "replicas": {
+                    "type": "integer",
+                    "title": "Number of nodes",
+                    "default": 2,
+                    "minimum": 0
+                },
+                "rootVolumeSizeGB": {
+                    "type": "integer",
+                    "title": "Root volume size (GB)",
+                    "default": 50,
+                    "exclusiveMinimum": 0
+                }
+            }
+        }
+    },
     "type": "object",
     "additionalProperties": false,
     "properties": {
@@ -540,108 +623,15 @@
                     }
                 },
                 "nodePools": {
-                    "type": "array",
+                    "type": "object",
                     "title": "Node pools",
-                    "items": {
-                        "type": "object",
-                        "title": "Node pool",
-                        "properties": {
-                            "customNodeLabels": {
-                                "type": "array",
-                                "title": "Custom node labels",
-                                "items": {
-                                    "type": "string",
-                                    "title": "Label"
-                                }
-                            },
-                            "customNodeTaints": {
-                                "type": "array",
-                                "title": "Custom node taints",
-                                "items": {
-                                    "type": "object",
-                                    "title": "Node taint",
-                                    "required": [
-                                        "effect",
-                                        "key",
-                                        "value"
-                                    ],
-                                    "properties": {
-                                        "effect": {
-                                            "type": "string",
-                                            "title": "Effect",
-                                            "enum": [
-                                                "NoSchedule",
-                                                "PreferNoSchedule",
-                                                "NoExecute"
-                                            ]
-                                        },
-                                        "key": {
-                                            "type": "string",
-                                            "title": "Key"
-                                        },
-                                        "value": {
-                                            "type": "string",
-                                            "title": "Value"
-                                        }
-                                    }
-                                },
-                                "descriptions": "Taints that will be set on all nodes in the node pool, to avoid the scheduling of certain workloads."
-                            },
-                            "disableHealthCheck": {
-                                "type": "boolean",
-                                "title": "Disable HealthChecks for the MachineDeployment"
-                            },
-                            "encryptionAtHost": {
-                                "type": "boolean",
-                                "title": "Encryption at host",
-                                "description": "Enable encryption at host for the worker nodes.",
-                                "default": false
-                            },
-                            "failureDomain": {
-                                "type": "string",
-                                "title": "Availability zone",
-                                "enum": [
-                                    "1",
-                                    "2",
-                                    "3"
-                                ]
-                            },
-                            "instanceType": {
-                                "type": "string",
-                                "title": "VM size"
-                            },
-                            "name": {
-                                "type": "string",
-                                "title": "Name",
-                                "description": "Unique identifier, cannot be changed after creation.",
-                                "maxLength": 10,
-                                "minLength": 3,
-                                "pattern": "^[-\\w\\._]+$"
-                            },
-                            "replicas": {
-                                "type": "integer",
-                                "title": "Number of nodes",
-                                "minimum": 0
-                            },
-                            "rootVolumeSizeGB": {
-                                "type": "integer",
-                                "title": "Root volume size (GB)",
-                                "exclusiveMinimum": 0
-                            }
+                    "description": "Node pools of the cluster. If not specified, this defaults to the value of `cluster.providerIntegration.workers.defaultNodePools`.",
+                    "additionalProperties": true,
+                    "patternProperties": {
+                        "^[a-z0-9][-a-z0-9]{3,18}[a-z0-9]$": {
+                            "$ref": "#/$defs/machinePool"
                         }
-                    },
-                    "default": [
-                        {
-                            "customNodeLabels": [],
-                            "customNodeTaints": [],
-                            "disableHealthCheck": false,
-                            "encryptionAtHost": false,
-                            "instanceType": "Standard_D4s_v5",
-                            "name": "md00",
-                            "replicas": 2,
-                            "rootVolumeSizeGB": 50
-                        }
-                    ]
+                    }
                 },
                 "podSecurityStandards": {
                     "type": "object",

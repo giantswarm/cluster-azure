@@ -26,7 +26,7 @@ global:
       groupsClaim: groups
       usernameClaim: email
   nodePools:
-    - name: md00
+    md00:
       instanceType: Standard_D4s_v5
       replicas: 4
       rootVolumeSizeGB: 50
