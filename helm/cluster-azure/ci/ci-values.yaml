@@ -6,13 +6,13 @@ global:
     name: test-wc
     organization: test
     servicePriority: lowest
+    labels:
+      test.io/testing: test-label
   nodePools:
     md0:
       instanceType: Standard_D4s_v5
       replicas: 2
       rootVolumeSizeGB: 50
-    labels:
-      test.io/testing: test-label
   connectivity:
     baseDomain: azuretest.gigantic.io
   providerSpecific:
