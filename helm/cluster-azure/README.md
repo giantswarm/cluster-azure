@@ -201,7 +201,6 @@ Node pools of the cluster. If not specified, this defaults to the value of `clus
 
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
-| `global.cluster` | **Cluster** - Helm values for the provider-independent cluster chart|**Type:** `object`<br/>**Default:** `{"providerIntegration":{"resourcesApi":{"bastionResourceEnabled":false,"ciliumHelmReleaseResourceEnabled":true,"cleanupHelmReleaseResourcesEnabled":true,"clusterResourceEnabled":true,"controlPlaneResourceEnabled":true,"coreDnsHelmReleaseResourceEnabled":true,"helmRepositoryResourcesEnabled":true,"infrastructureCluster":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureCluster","version":"v1beta1"},"infrastructureMachinePool":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureMachinePool","version":"v1beta1"},"machineHealthCheckResourceEnabled":true,"machinePoolResourcesEnabled":true,"networkPoliciesHelmReleaseResourceEnabled":true,"nodePoolKind":"MachinePool","verticalPodAutoscalerCrdHelmReleaseResourceEnabled":true},"workers":{"defaultNodePools":{"def00":{"customNodeLabels":["label=default"],"instanceType":"Standard_D4s_v5","replicas":2,"rootVolumeSizeGB":50}}}}}`|
 | `global.managementCluster` | **The capi MC managing this cluster**|**Type:** `string`<br/>|
 
 ### Pod Security Standards
@@ -216,6 +215,7 @@ Properties within the `.global.podSecurityStandards` object
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `baseDomain` | **Base DNS domain**|**Type:** `string`<br/>**Default:** `"azuretest.gigantic.io"`|
+| `cluster` | **Cluster** - Helm values for the provider-independent cluster chart.|**Type:** `object`<br/>**Default:** `{"providerIntegration":{"resourcesApi":{"bastionResourceEnabled":false,"ciliumHelmReleaseResourceEnabled":true,"cleanupHelmReleaseResourcesEnabled":true,"clusterResourceEnabled":true,"controlPlaneResourceEnabled":true,"coreDnsHelmReleaseResourceEnabled":true,"helmRepositoryResourcesEnabled":true,"infrastructureCluster":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureCluster","version":"v1beta1"},"infrastructureMachinePool":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureMachinePool","version":"v1beta1"},"machineHealthCheckResourceEnabled":true,"machinePoolResourcesEnabled":true,"networkPoliciesHelmReleaseResourceEnabled":true,"nodePoolKind":"MachinePool","verticalPodAutoscalerCrdHelmReleaseResourceEnabled":true},"workers":{"defaultNodePools":{"def00":{"customNodeLabels":["label=default"],"instanceType":"Standard_D4s_v5","replicas":2,"rootVolumeSizeGB":50}}}}}`|
 | `cluster-shared` | **Library chart**|**Type:** `object`<br/>|
 | `managementCluster` | **The capi MC managing this cluster**|**Type:** `string`<br/>|
 | `provider` | **Cluster API provider name**|**Type:** `string`<br/>|
