@@ -3,8 +3,14 @@ provider: capz
 
 global:
   metadata:
+    name: test-wc
     organization: test
     servicePriority: lowest
+  nodePools:
+    md0:
+      instanceType: Standard_D4s_v5
+      replicas: 2
+      rootVolumeSizeGB: 50
     labels:
       test.io/testing: test-label
   connectivity:
