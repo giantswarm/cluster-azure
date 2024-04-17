@@ -97,6 +97,17 @@
             "description": "Helm values for the provider-independent cluster chart.",
             "default": {
                 "providerIntegration": {
+                    "controlPlane": {
+                        "resources": {
+                            "infrastructureMachineTemplate": {
+                                "group": "infrastructure.cluster.x-k8s.io",
+                                "kind": "AzureMachineTemplate",
+                                "version": "v1beta1"
+                            },
+                            "infrastructureMachineTemplateSpecTemplateName": "controlplane-azuremachinetemplate-spec"
+                        }
+                    },
+                    "provider": "azure",
                     "resourcesApi": {
                         "bastionResourceEnabled": false,
                         "ciliumHelmReleaseResourceEnabled": false,

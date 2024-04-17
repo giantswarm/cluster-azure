@@ -3,6 +3,14 @@
 baseDomain: azuretest.gigantic.io
 cluster:
   providerIntegration:
+    controlPlane:
+      resources:
+        infrastructureMachineTemplate:
+          group: infrastructure.cluster.x-k8s.io
+          kind: AzureMachineTemplate
+          version: v1beta1
+        infrastructureMachineTemplateSpecTemplateName: controlplane-azuremachinetemplate-spec
+    provider: azure
     resourcesApi:
       bastionResourceEnabled: false
       ciliumHelmReleaseResourceEnabled: false
@@ -23,7 +31,7 @@ cluster:
       machinePoolResourcesEnabled: false
       networkPoliciesHelmReleaseResourceEnabled: false
       nodePoolKind: MachineDeployment
-      verticalPodAutoscalerCrdHelmReleaseResourceEnabled: true
+      verticalPodAutoscalerCrdHelmReleaseResourceEnabled: false
     workers:
       defaultNodePools:
         def00:
