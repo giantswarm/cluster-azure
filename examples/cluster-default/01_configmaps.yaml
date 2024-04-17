@@ -7,7 +7,7 @@ data:
         description: "cluster01 test cluster"
         organization: "multi-project"
       nodePools:
-        md00:
+        md0000:
           instanceType: Standard_D4s_v5
           replicas: 2
           rootVolumeSizeGB: 50

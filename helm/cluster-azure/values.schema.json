@@ -134,7 +134,7 @@
                     },
                     "workers": {
                         "defaultNodePools": {
-                            "md00": {
+                            "md0000": {
                                 "customNodeLabels": [
                                     "label=default"
                                 ],
