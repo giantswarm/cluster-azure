@@ -1,5 +1,5 @@
 {{- define "machine-deployments" -}}
-{{- range $nodePoolName, $nodePool := .Values.global.nodePools }}
+{{- range $nodePoolName, $nodePool := .Values.global.nodePools | default .Values.cluster.providerIntegration.workers.defaultNodePools }}
 {{ $nodePoolConfig := dict "spec" ( merge $nodePool ( dict  "type" "machineDeployment" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $nodePoolConfig) "global" $) ) }}
 {{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $nodePoolConfig) "identity" (include "renderIdentityConfiguration" $nodePoolConfig) ) "global" $) ) }}
