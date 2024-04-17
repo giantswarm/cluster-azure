@@ -27,12 +27,12 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $kubeAdmConfigTemplateHash.hash }}
+          name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}-{{ $kubeAdmConfigTemplateHash.hash }}
       clusterName: {{ include "resource.default.name" $ }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachineTemplate
-        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $azureMachineTemplateHash.hash }}
+        name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}-{{ $azureMachineTemplateHash.hash }}
       version: {{ $.Values.internal.kubernetesVersion }}
       {{- if hasKey $nodePool "failureDomain" }}
       failureDomain: "{{ $nodePool.failureDomain }}"
