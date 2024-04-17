@@ -34,7 +34,7 @@ cluster:
       verticalPodAutoscalerCrdHelmReleaseResourceEnabled: false
     workers:
       defaultNodePools:
-        md0000:
+        md00:
           customNodeLabels:
             - label=default
           instanceType: Standard_D4s_v5
