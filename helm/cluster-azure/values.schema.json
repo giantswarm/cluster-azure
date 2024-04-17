@@ -119,7 +119,7 @@
                         "machinePoolResourcesEnabled": false,
                         "networkPoliciesHelmReleaseResourceEnabled": false,
                         "nodePoolKind": "MachineDeployment",
-                        "verticalPodAutoscalerCrdHelmReleaseResourceEnabled": true
+                        "verticalPodAutoscalerCrdHelmReleaseResourceEnabled": false
                     },
                     "workers": {
                         "defaultNodePools": {
