@@ -25,7 +25,7 @@ cluster:
         version: v1beta1
       infrastructureMachinePool:
         group: infrastructure.cluster.x-k8s.io
-        kind: AzureMachinePool
+        kind: AzureMachineDeployment
         version: v1beta1
       machineHealthCheckResourceEnabled: false
       machinePoolResourcesEnabled: false
