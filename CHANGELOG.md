@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
+- Bump flatcar to `3815.2.0`.
 
 ### Removed
 
