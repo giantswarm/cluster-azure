@@ -842,7 +842,7 @@
                         "version": {
                             "type": "string",
                             "title": "Image version",
-                            "default": "3510.2.5"
+                            "default": "3815.2.0"
                         }
                     }
                 },
