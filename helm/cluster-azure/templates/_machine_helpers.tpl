@@ -49,7 +49,7 @@ joinConfiguration:
       eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
       eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
       protect-kernel-defaults: "true"
-      node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .spec.type "machinePool")}}={{ include "resource.default.name" $ }}-{{ .spec.name }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
+      node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .spec.type "machinePool")}}={{ include "resource.default.name" $ }}-{{ $nodePoolName }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
     name: '@@HOSTNAME@@'
     {{- if .spec.customNodeTaints }}
     taints:
@@ -59,7 +59,7 @@ files:
   - contentFrom:
       secret:
         key: worker-node-azure.json
-        name: {{ include "resource.default.name" $ }}-{{ .spec.name }}{{ ternary (printf "-%s" .hash) "" (hasKey . "hash") }}-azure-json
+        name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}{{ ternary (printf "-%s" .hash) "" (hasKey . "hash") }}-azure-json
     owner: root:root
     path: /etc/kubernetes/azure.json
     permissions: "0644"
