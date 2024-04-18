@@ -126,7 +126,7 @@ Properties within the `.internal` top-level object
 | `internal.image` | **Node Image**|**Type:** `object`<br/>|
 | `internal.image.gallery` | **Gallery** - Name of the community gallery hosting the image|**Type:** `string`<br/>**Default:** `"gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0"`|
 | `internal.image.name` | **Image Definition** - Name of the image definition in the Gallery|**Type:** `string`<br/>**Default:** `""`|
-| `internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3510.2.5"`|
+| `internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3815.2.0"`|
 | `internal.kubectlImage` | **Kubectl Image settings**|**Type:** `object`<br/>|
 | `internal.kubectlImage.name` | **Image name** - Name of the image Registry|**Type:** `string`<br/>**Default:** `"giantswarm/kubectl"`|
 | `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
