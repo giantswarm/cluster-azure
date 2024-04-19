@@ -65,7 +65,7 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
-    spec: {{- include "machine-kubeadmconfig-spec" (merge $nodePoolConfig $azureMachineTemplateHash ) | nindent 6 }}
+    spec: {{- include "machine-kubeadmconfig-spec" (merge (dict "name" $nodePoolName ) $nodePoolConfig $azureMachineTemplateHash ) | nindent 6 }}
 ---
 {{- if not .disableHealthChecks }}
 apiVersion: cluster.x-k8s.io/v1beta1
