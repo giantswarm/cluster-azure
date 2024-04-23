@@ -3,8 +3,6 @@
 {{- include "psps" . }}
 {{- end }}
 ---
-{{- include "cluster" . }}
----
 {{- include "azure-cluster" . }}
 ---
 {{- include "containerd-config-secret" . }}
