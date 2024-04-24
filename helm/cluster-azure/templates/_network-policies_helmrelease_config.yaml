@@ -4,4 +4,3 @@
 allowEgressToDNS:
   enabled: true
 {{- end }}
-
