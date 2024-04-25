@@ -1,6 +1,50 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$defs": {
+        "app": {
+            "type": "object",
+            "title": "App",
+            "description": "Configuration of an default app that is part of the cluster.",
+            "additionalProperties": false,
+            "properties": {
+                "extraConfigs": {
+                    "type": "array",
+                    "title": "Extra config maps or secrets",
+                    "description": "Extra config maps or secrets that will be used to customize to the app. The desired values must be under configmap or secret key 'values'. The values are merged in the order given, with the later values overwriting earlier, and then inline values overwriting those. Resources must be in the same namespace as the cluster.",
+                    "items": {
+                        "type": "object",
+                        "title": "Config map or secret",
+                        "properties": {
+                            "kind": {
+                                "type": "string",
+                                "title": "Kind",
+                                "description": "Specifies whether the resource is a config map or a secret.",
+                                "enum": [
+                                    "ConfigMap",
+                                    "Secret"
+                                ]
+                            },
+                            "name": {
+                                "type": "string",
+                                "title": "Name",
+                                "description": "Name of the config map or secret. The object must exist in the same namespace as the cluster App."
+                            },
+                            "optional": {
+                                "type": "boolean",
+                                "title": "Optional",
+                                "description": "Optional marks this ValuesReference as optional. When set, a not found error for the values reference is ignored, but any ValuesKey, TargetPath or transient error will still result in a reconciliation failure."
+                            }
+                        }
+                    }
+                },
+                "values": {
+                    "type": "object",
+                    "title": "Values",
+                    "description": "Values to be passed to the app. Values will have higher priority than values from configmaps.",
+                    "additionalProperties": true
+                }
+            }
+        },
         "machinePool": {
             "type": "object",
             "title": "Node pool",
@@ -224,7 +268,7 @@
                         "clusterResourceEnabled": true,
                         "controlPlaneResourceEnabled": true,
                         "coreDnsHelmReleaseResourceEnabled": false,
-                        "helmRepositoryResourcesEnabled": false,
+                        "helmRepositoryResourcesEnabled": true,
                         "infrastructureCluster": {
                             "group": "infrastructure.cluster.x-k8s.io",
                             "kind": "AzureCluster",
@@ -237,7 +281,7 @@
                         },
                         "machineHealthCheckResourceEnabled": false,
                         "machinePoolResourcesEnabled": false,
-                        "networkPoliciesHelmReleaseResourceEnabled": false,
+                        "networkPoliciesHelmReleaseResourceEnabled": true,
                         "nodePoolKind": "MachineDeployment",
                         "verticalPodAutoscalerCrdHelmReleaseResourceEnabled": false
                     },
@@ -269,6 +313,20 @@
             ],
             "additionalProperties": true,
             "properties": {
+                "apps": {
+                    "type": "object",
+                    "title": "Apps",
+                    "description": "Configuration of apps that are part of the cluster.",
+                    "additionalProperties": false,
+                    "properties": {
+                        "networkPolicies": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "NetworkPolicies",
+                            "description": "Configuration of network-policies-app. For all available values see https://github.com/giantswarm/network-policies-app."
+                        },
+                    }
+                },
                 "components": {
                     "type": "object",
                     "title": "Components",
