@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.8.0] - 2024-04-25
 
+### Changed
+
+- Bump flatcar to `3815.2.0`.
+
 ## [0.7.0] - 2024-04-23
 
 ### **Breaking change**
@@ -118,12 +122,10 @@ rm catalog.yaml
 
 ### Changed
 
-
 - Add `cluster` chart as subchart.
 - Render Cluster resource from the `cluster` chart.
 - Delete Cluster resource template.
 - Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
-- Bump flatcar to `3815.2.0`.
 
 ### Removed
 
