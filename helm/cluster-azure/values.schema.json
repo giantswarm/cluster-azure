@@ -150,6 +150,11 @@
                     }
                 },
                 "providerIntegration": {
+                    "apps": {
+                        "networkPolicies": {
+                            "configTemplateName": "azureNetworkPoliciesHelmValues"
+                        }
+                    },
                     "controlPlane": {
                         "kubeadmConfig": {
                             "clusterConfiguration": {
@@ -324,7 +329,7 @@
                             "type": "object",
                             "title": "NetworkPolicies",
                             "description": "Configuration of network-policies-app. For all available values see https://github.com/giantswarm/network-policies-app."
-                        },
+                        }
                     }
                 },
                 "components": {
