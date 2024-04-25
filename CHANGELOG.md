@@ -121,6 +121,7 @@ rm catalog.yaml
 - Render Cluster resource from the `cluster` chart.
 - Delete Cluster resource template.
 - Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
+- Bump flatcar to `3815.2.0`.
 
 ### Removed
 
