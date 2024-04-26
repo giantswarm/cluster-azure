@@ -50,10 +50,10 @@ The default name for our images in the Community Gallery is  "capi-flatcar-stabl
 use it when no value is passed in
 */}}
 {{- define "flatcarImageName" -}}
-{{- if empty .Values.internal.image.name -}}
-{{ printf "capi-flatcar-stable-%s-gen2-gs" .Values.internal.kubernetesVersion }}
+{{- if empty $.osImage.name -}}
+{{ printf "capi-flatcar-%s-%s-gen2-gs" $.osImage.channel $.kubernetesVersion }}
 {{- else -}}
-{{ .Values.internal.image.name }}
+{{ $.osImage.name }}
 {{- end -}}
 {{- end -}}
 
@@ -261,22 +261,20 @@ this function requires an object like this to be passed in
 
 */}}
 {{- define "renderIdentityConfiguration" -}}
-{{- $identity := .Values.internal.identity -}}
-identity: {{ $identity.type }}
-{{- if eq $identity.type "SystemAssigned" }}
+{{- $identity := .Values.global.providerSpecific.identity -}}
+{{- if ne .Values.global.metadata.name .Values.global.managementCluster }}
+{{/* Using system assigned identities on the WC */}}
+identity: SystemAssigned
 systemAssignedIdentityRole:
   scope: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
   definitionID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
 {{- else }}
+{{/* Using user assigned identities on the MC */}}
+identity: UserAssigned
 userAssignedIdentities:
-  {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .type "controlPlane")) (ternary "capz" "" ($identity.attachCapzControllerUserAssignedIdentity)) }}
+  {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .type "controlPlane")) "capz" }}
   {{- range compact $defaultIdentities }}
   - providerID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
-  {{- end -}}
-  {{- if and ($identity.userAssignedIdentities) (not (empty $identity.userAssignedIdentities)) }}
-    {{- range $identity.userAssignedIdentities}}
-  - providerID: {{ . }}
-    {{- end -}}
   {{- end -}}
 {{- end }}
 {{- end -}}
@@ -303,24 +301,24 @@ It expects one argument which is the control plane subnet network range in forma
 {{- end -}}
 
 {{- define "network.subnets.controlPlane.name" -}}
-{{- if hasKey $.Values.internal.network.subnets "controlPlaneSubnetName" -}}
-{{ $.Values.internal.network.subnets.controlPlaneSubnetName }}
+{{- if hasKey $.Values.global.connectivity.network.controlPlane "subnetName" -}}
+{{ $.Values.global.connectivity.network.controlPlane.subnetName }}
 {{- else -}}
 control-plane-subnet
 {{- end -}}
 {{- end -}}
 
 {{- define "network.subnets.nodes.name" -}}
-{{- if hasKey $.Values.internal.network.subnets "nodesSubnetName" -}}
-{{ $.Values.internal.network.subnets.nodesSubnetName }}
+{{- if hasKey $.Values.global.connectivity.network.workers "subnetName" -}}
+{{ $.Values.global.connectivity.network.workers.subnetName }}
 {{- else -}}
 node-subnet
 {{- end -}}
 {{- end -}}
 
 {{- define "network.subnets.nodes.natGatewayName" -}}
-{{- if hasKey $.Values.internal.network.subnets "nodeSubnetNatGatewayName" -}}
-{{ $.Values.internal.network.subnets.nodeSubnetNatGatewayName }}
+{{- if hasKey $.Values.global.connectivity.network.workers "natGatewayName" -}}
+{{ $.Values.global.connectivity.network.workers.natGatewayName }}
 {{- else -}}
 node-natgateway
 {{- end -}}

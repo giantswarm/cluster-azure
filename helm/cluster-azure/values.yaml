@@ -10,6 +10,10 @@ cluster:
           kind: AzureMachineTemplate
           version: v1beta1
         infrastructureMachineTemplateSpecTemplateName: controlplane-azuremachinetemplate-spec
+    osImage:
+      channel: stable
+      variant: ""
+      version: 3815.2.0
     provider: azure
     resourcesApi:
       bastionResourceEnabled: false
@@ -88,6 +92,8 @@ global:
     azureClusterIdentity:
       name: cluster-identity
       namespace: org-giantswarm
+    identity:
+      systemAssignedScope: ResourceGroup
     location: westeurope
     network:
       peerings: []
@@ -98,22 +104,12 @@ internal:
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
   enableVpaResources: true
-  identity:
-    attachCapzControllerUserAssignedIdentity: false
-    systemAssignedScope: ResourceGroup
-    type: SystemAssigned
-    userAssignedCustomIdentities: []
-  image:
-    gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
-    name: ""
-    version: 3815.2.0
   kubectlImage:
     name: giantswarm/kubectl
     registry: gsoci.azurecr.io
     tag: 1.25.15
   kubernetesVersion: 1.25.16
   network:
-    subnets: {}
     vnet: {}
     vpn:
       gatewayMode: none

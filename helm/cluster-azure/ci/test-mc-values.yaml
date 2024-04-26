@@ -1,4 +1,5 @@
 global:
+  managementCluster: test-mc
   metadata:
     name: test-mc
     organization: test
@@ -33,8 +34,3 @@ global:
   providerSpecific:
     location: "westeurope"
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
-
-internal:
-  identity:
-    type: UserAssigned
-    attachCapzControllerUserAssignedIdentity: true

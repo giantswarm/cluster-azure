@@ -3,9 +3,9 @@
 {{- include "renderIdentityConfiguration" $identity }}
 image:
   computeGallery:
-    gallery: {{  $.Values.internal.image.gallery }}
+    gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
     name: {{ include "flatcarImageName" $ }}
-    version: {{ $.Values.internal.image.version }}
+    version: {{ $.osImage.version }}
 dataDisks:
   - diskSizeGB: {{ $.Values.global.controlPlane.etcdVolumeSizeGB }}
     lun: 0
@@ -29,6 +29,8 @@ subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
 
 {{- define "control-plane" }}
+{{- $_ := set $ "osImage" $.Values.cluster.providerIntegration.osImage -}}
+{{- $_ = set $ "kubernetesVersion" $.Values.cluster.providerIntegration.kubernetesVersion -}}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:

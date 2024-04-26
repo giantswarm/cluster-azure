@@ -107,6 +107,11 @@
                             "infrastructureMachineTemplateSpecTemplateName": "controlplane-azuremachinetemplate-spec"
                         }
                     },
+                    "osImage": {
+                        "channel": "stable",
+                        "variant": "",
+                        "version": "3815.2.0"
+                    },
                     "provider": "azure",
                     "resourcesApi": {
                         "bastionResourceEnabled": false,
@@ -368,6 +373,14 @@
                                                 }
                                             },
                                             "default": []
+                                        },
+                                        "subnetName": {
+                                            "type": "string",
+                                            "title": "ControlPlane subnet name",
+                                            "description": "Name of the control plane subnet.",
+                                            "maxLength": 64,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
                                         }
                                     }
                                 },
@@ -441,6 +454,14 @@
                                             "type": "string",
                                             "title": "Subnet",
                                             "default": "10.0.16.0/20"
+                                        },
+                                        "natGatewayName": {
+                                            "type": "string",
+                                            "title": "Nodes subnet nat-gateway name",
+                                            "description": "Name of the nat gateway on the nodes subnet.",
+                                            "maxLength": 64,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
                                         },
                                         "privateEndpoints": {
                                             "type": "array",
@@ -541,6 +562,14 @@
                                                 }
                                             },
                                             "default": []
+                                        },
+                                        "subnetName": {
+                                            "type": "string",
+                                            "title": "Nodes subnet name",
+                                            "description": "Name of the nodes subnet.",
+                                            "maxLength": 64,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
                                         }
                                     }
                                 }
@@ -744,6 +773,21 @@
                                 }
                             }
                         },
+                        "identity": {
+                            "type": "object",
+                            "title": "Identity",
+                            "properties": {
+                                "systemAssignedScope": {
+                                    "type": "string",
+                                    "title": "Scope of SystemAssignedIdentity",
+                                    "enum": [
+                                        "Subscription",
+                                        "ResourceGroup"
+                                    ],
+                                    "default": "ResourceGroup"
+                                }
+                            }
+                        },
                         "location": {
                             "type": "string",
                             "title": "Location",
@@ -845,63 +889,6 @@
                     "title": "Enable VPA Resources in helmreleases",
                     "default": true
                 },
-                "identity": {
-                    "type": "object",
-                    "title": "Identity",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "title": "Type of Identity",
-                            "enum": [
-                                "SystemAssigned",
-                                "UserAssigned"
-                            ],
-                            "default": "SystemAssigned"
-                        },
-                        "attachCapzControllerUserAssignedIdentity": {
-                            "type": "boolean",
-                            "title": "Attach CAPZ controller UserAssigned identity",
-                            "default": false
-                        },
-                        "systemAssignedScope": {
-                            "type": "string",
-                            "title": "Scope of SystemAssignedIdentity",
-                            "enum": [
-                                "Subscription",
-                                "ResourceGroup"
-                            ],
-                            "default": "ResourceGroup"
-                        },
-                        "userAssignedCustomIdentities": {
-                            "type": "array",
-                            "title": "List of custom UserAssigned Identities to attach to all nodes",
-                            "default": []
-                        }
-                    }
-                },
-                "image": {
-                    "type": "object",
-                    "title": "Node Image",
-                    "properties": {
-                        "gallery": {
-                            "type": "string",
-                            "title": "Gallery",
-                            "description": "Name of the community gallery hosting the image",
-                            "default": "gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0"
-                        },
-                        "name": {
-                            "type": "string",
-                            "title": "Image Definition",
-                            "description": "Name of the image definition in the Gallery",
-                            "default": ""
-                        },
-                        "version": {
-                            "type": "string",
-                            "title": "Image version",
-                            "default": "3815.2.0"
-                        }
-                    }
-                },
                 "kubectlImage": {
                     "type": "object",
                     "title": "Kubectl Image settings",
@@ -935,38 +922,6 @@
                     "title": "Network configuration",
                     "description": "Internal network configuration that is susceptible to more frequent change",
                     "properties": {
-                        "subnets": {
-                            "type": "object",
-                            "title": "VNet spec",
-                            "description": "Customize subnets configuration",
-                            "properties": {
-                                "controlPlaneSubnetName": {
-                                    "type": "string",
-                                    "title": "ControlPlane subnet name",
-                                    "description": "Name of the control plane subnet.",
-                                    "maxLength": 64,
-                                    "minLength": 2,
-                                    "pattern": "^[-\\w\\._]+$"
-                                },
-                                "nodeSubnetNatGatewayName": {
-                                    "type": "string",
-                                    "title": "Nodes subnet nat-gateway name",
-                                    "description": "Name of the nat gateway on the nodes subnet.",
-                                    "maxLength": 64,
-                                    "minLength": 2,
-                                    "pattern": "^[-\\w\\._]+$"
-                                },
-                                "nodesSubnetName": {
-                                    "type": "string",
-                                    "title": "Nodes subnet name",
-                                    "description": "Name of the nodes subnet.",
-                                    "maxLength": 64,
-                                    "minLength": 2,
-                                    "pattern": "^[-\\w\\._]+$"
-                                }
-                            },
-                            "default": {}
-                        },
                         "vnet": {
                             "type": "object",
                             "title": "VNet spec",

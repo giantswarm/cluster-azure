@@ -1,4 +1,5 @@
 global:
+  managementCluster: test-mc
   metadata:
     name: test-mc
     organization: test
@@ -7,6 +8,7 @@ global:
     network:
       controlPlane:
         cidr: 10.0.16.128/26
+        subnetName: cluster-cp-subnet
       hostCidr: 10.0.16.0/24
       mode: public
       pods:
@@ -17,6 +19,8 @@ global:
         - 172.31.0.0/16
       workers:
         cidr: 10.0.16.0/25
+        subnetName: cluster-node-subnet
+        natGatewayName: cluster-node-natgateway
   controlPlane:
     oidc:
       clientId: dex-k8s-authenticator
@@ -33,14 +37,7 @@ global:
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
 
 internal:
-  identity:
-    type: UserAssigned
-    attachCapzControllerUserAssignedIdentity: true
   network:
     vnet:
       resourceGroup: vnet-test-rg
       name: vnet-test
-    subnets:
-      controlPlaneSubnetName: cluster-cp-subnet
-      nodesSubnetName: cluster-node-subnet
-      nodeSubnetNatGatewayName: cluster-node-natgateway
