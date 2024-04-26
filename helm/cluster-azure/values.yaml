@@ -16,7 +16,7 @@ cluster:
       ciliumHelmReleaseResourceEnabled: false
       cleanupHelmReleaseResourcesEnabled: false
       clusterResourceEnabled: true
-      controlPlaneResourceEnabled: false
+      controlPlaneResourceEnabled: true
       coreDnsHelmReleaseResourceEnabled: false
       helmRepositoryResourcesEnabled: false
       infrastructureCluster:
