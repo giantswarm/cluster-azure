@@ -44,5 +44,5 @@ spec:
     metadata:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
-    spec: {{ include "controlplane-azuremachinetemplate-spec" $ | nindent 6 }}
+    spec: {{- include "controlplane-azuremachinetemplate-spec" $ | nindent 6 }}
 {{- end -}}
