@@ -29,8 +29,8 @@ subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
 
 {{- define "control-plane" }}
-{{- $_ := set $ "osImage" $.Values.cluster.providerIntegration.osImage -}}
-{{- $_ := set $ "kubernetesVersion" $.Values.cluster.providerIntegration.kubernetesVersion -}}
+{{- $_ := set $ "osImage" $.Values.cluster.providerIntegration.osImage }}
+{{- $_ = set $ "kubernetesVersion" $.Values.cluster.providerIntegration.kubernetesVersion }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:
