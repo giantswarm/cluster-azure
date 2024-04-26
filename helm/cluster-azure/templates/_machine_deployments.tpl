@@ -1,5 +1,5 @@
 {{- define "machine-deployments" -}}
-{{- range $nodePoolName, $nodePool := .Values.global.nodePools }}
+{{- range $nodePoolName, $nodePool := .Values.global.nodePools | default .Values.cluster.providerIntegration.workers.defaultNodePools }}
 {{ $nodePoolConfig := dict "spec" ( merge $nodePool ( dict  "type" "machineDeployment" ) ) "Values" $.Values "Release" $.Release "Files" $.Files "Template" $.Template }}
 {{ $kubeAdmConfigTemplateHash := dict "hash" ( include "hash" (dict "data" (include "machine-kubeadmconfig-spec" $nodePoolConfig) "global" $) ) }}
 {{ $azureMachineTemplateHash := dict "hash" ( include "hash" (dict "data" ( dict "spec" (include "machine-spec" $nodePoolConfig) "identity" (include "renderIdentityConfiguration" $nodePoolConfig) ) "global" $) ) }}
@@ -27,12 +27,12 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $kubeAdmConfigTemplateHash.hash }}
+          name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}-{{ $kubeAdmConfigTemplateHash.hash }}
       clusterName: {{ include "resource.default.name" $ }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: AzureMachineTemplate
-        name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $azureMachineTemplateHash.hash }}
+        name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}-{{ $azureMachineTemplateHash.hash }}
       version: {{ $.Values.internal.kubernetesVersion }}
       {{- if hasKey $nodePool "failureDomain" }}
       failureDomain: "{{ $nodePool.failureDomain }}"
@@ -42,9 +42,9 @@ apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:
   labels:
-    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ .name }}
+    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $azureMachineTemplateHash.hash }}
+  name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}-{{ $azureMachineTemplateHash.hash }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
@@ -59,24 +59,24 @@ apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
   labels:
-    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ .name }}
+    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}-{{ $kubeAdmConfigTemplateHash.hash }}
+  name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}-{{ $kubeAdmConfigTemplateHash.hash }}
   namespace: {{ $.Release.Namespace }}
 spec:
   template:
-    spec: {{- include "machine-kubeadmconfig-spec" (merge $nodePoolConfig $azureMachineTemplateHash ) | nindent 6 }}
+    spec: {{- include "machine-kubeadmconfig-spec" (merge (dict "name" $nodePoolName ) $nodePoolConfig $azureMachineTemplateHash ) | nindent 6 }}
 ---
 {{- if not .disableHealthChecks }}
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineHealthCheck
 metadata:
   annotations:
-    machine-deployment.giantswarm.io/name: {{ include "resource.default.name" $ }}-{{ .name }}
+    machine-deployment.giantswarm.io/name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
   labels:
-    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ .name }}
+    giantswarm.io/machine-deployment: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
     {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-{{ .name }}
+  name: {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
   namespace: {{ $.Release.Namespace }}
 spec:
   clusterName: {{ include "resource.default.name" $ }}
@@ -88,7 +88,7 @@ spec:
   # selector is used to determine which Machines should be health checked
   selector:
     matchLabels:
-      "cluster.x-k8s.io/deployment-name": {{ include "resource.default.name" $ }}-{{ .name }}
+      "cluster.x-k8s.io/deployment-name": {{ include "resource.default.name" $ }}-{{ $nodePoolName }}
   # Conditions to check on Nodes for matched Machines, if any condition is matched for the duration of its timeout, the Machine is considered unhealthy
   unhealthyConditions:
   - type: Ready

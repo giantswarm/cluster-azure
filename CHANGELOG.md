@@ -7,7 +7,105 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2024-04-25
+
+### Changed
+
+- Bump flatcar to `3815.2.0`.
+
+## [0.7.0] - 2024-04-23
+
 ### **Breaking change**
+
+<details>
+<summary>How to migrate to v0.7.0</summary>
+
+Please ensure you did install [yq](https://mikefarah.gitbook.io/yq/) first.
+
+To migrate values from cluster-azure `v0.7.0`, we provide below a bash script which writes an `app.yaml` file which you need to apply.
+This will move the existing user config values into `global` and it also increases the `version` field of `cluster-azure` app to `v0.7.0`.
+
+* Login to the management cluster and run the script (e.g: `./migrate.sh organization my-cluster`)
+* Verify the `app.yaml` file and apply it to the management cluster (e.g: `kubectl apply -f app.yaml`)
+
+```bash
+#!/bin/bash
+
+# Check if two arguments are provided
+if [ $# -ne 2 ]
+  then
+    echo "Incorrect number of arguments supplied. Please provide the organization name and the cluster name."
+    exit 1
+fi
+
+# Use the first argument as the organization name and the second as the cluster name
+org=$1
+cluster=$2
+
+# Fetch the ConfigMap YAML
+kubectl get cm -n org-$org ${cluster}-userconfig -o yaml > ${cluster}_cm.yaml
+
+# Extract the ConfigMap values into a temporary file
+yq eval '.data.values' ${cluster}_cm.yaml > tmp_cm_values.yaml
+
+##### OPTIONAL START
+
+# Fetch AppCatalog YAML
+kubectl get helmreleases.helm.toolkit.fluxcd.io -n flux-giantswarm appcatalog-cluster -o yaml > catalog.yaml
+
+# Extract the AppCatalog values into a temporary file
+yq eval '.spec.values.appCatalog.config.configMap.values' catalog.yaml >> tmp_cm_values.yaml
+
+###### OPTIONAL END
+
+# Modify the values in tmp_cm_values.yaml as needed
+yq eval --inplace 'with(select(.metadata != null);    .global.metadata = .metadata) |
+  with(select(.connectivity != null);                 .global.connectivity = .connectivity) |
+  with(select(.controlPlane != null);                 .global.controlPlane = .controlPlane) |
+  with(select(.nodePools != null);                    .global.nodePools = .nodePools) |
+  with(select(.managementCluster != null);            .global.managementCluster = .managementCluster ) |
+
+  with(select(.providerSpecific != null);                   .global.providerSpecific = .providerSpecific) |
+
+  with(select(.baseDomain != null);                   .global.connectivity.baseDomain = .baseDomain) |
+  with(select(.managementCluster != null);                 .global.managementCluster = .managementCluster) |
+
+  del(.metadata) |
+  del(.connectivity) |
+  del(.controlPlane) |
+  del(.nodePools) |
+  del(.managementCluster) |
+  del(.baseDomain) |
+  del(.provider) |
+  del(.providerSpecific)' tmp_cm_values.yaml
+
+
+# Merge the modified values back into the ConfigMap YAML
+yq eval-all 'select(fileIndex==0).data.values = select(fileIndex==1) | select(fileIndex==0)' ${cluster}_cm.yaml tmp_cm_values.yaml > app.yaml
+
+## Multi-line
+sed -i '' 's/values:/values: \|/g' app.yaml
+
+# Fetch the App YAML
+kubectl get app -n org-$org $cluster -o yaml > ${cluster}_app.yaml
+
+## Update the version of the App YAML
+yq eval --inplace 'with(select(.spec.version != null); .spec.version = "0.50.0")' ${cluster}_app.yaml
+
+# Merge the App YAML and ConfigMap YAML
+echo "---" >> app.yaml
+
+cat ${cluster}_app.yaml >> app.yaml
+
+# Clean up
+rm ${cluster}_cm.yaml
+rm tmp_cm_values.yaml
+rm ${cluster}_app.yaml
+rm catalog.yaml
+```
+
+</details>
+
 
 - Move Helm values property `.Values.metadata` to `.Values.global.metadata`.
 - Move Helm values property `.Values.global.connectivity` to `.Values.global.connectivity`.
@@ -25,6 +123,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Add `cluster` chart as subchart.
+- Render Cluster resource from the `cluster` chart.
+- Delete Cluster resource template.
 - Bump `azurefile-csi-driver-app` to `1.26.0-gs5`.
 
 ### Removed
@@ -405,7 +506,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/giantswarm/cluster-azure/compare/v0.7.0...v0.8.0
+[0.7.0]: https://github.com/giantswarm/cluster-azure/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/giantswarm/cluster-azure/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/giantswarm/cluster-azure/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/giantswarm/cluster-azure/compare/v0.3.0...v0.4.0
