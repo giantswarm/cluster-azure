@@ -28,7 +28,7 @@ subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
 {{- end }}
 
----
+{{- define "control-plane" }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:
