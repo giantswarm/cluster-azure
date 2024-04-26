@@ -28,7 +28,7 @@ subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
 {{- end }}
 
-{{- define "control-plane" }}
+{{- define "control-plane" -}}
 {{- $_ := set $ "osImage" $.Values.cluster.providerIntegration.osImage -}}
 {{- $_ = set $ "kubernetesVersion" $.Values.cluster.providerIntegration.kubernetesVersion -}}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
