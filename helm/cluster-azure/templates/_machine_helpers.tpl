@@ -5,9 +5,9 @@ Helpers to reuse when defining specs for MachinePools and MachineDeployments
 {{- define "machine-spec" -}}
 image:
   computeGallery:
-    gallery: {{  $.Values.internal.image.gallery }}
+    gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
     name: {{ include "flatcarImageName" $ }}
-    version: {{ $.Values.internal.image.version }}
+    version: {{ $.osImage.version }}
 osDisk:
   diskSizeGB: {{ .spec.rootVolumeSizeGB | default 300 }}
   managedDisk:
