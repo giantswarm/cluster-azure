@@ -656,6 +656,18 @@
                         }
                     }
                 },
+                "internal": {
+                    "type": "object",
+                    "title": "Internal",
+                    "description": "For Giant Swarm internal use only, not stable, or not supported by UIs.",
+                    "properties": {
+                        "hashSalt": {
+                            "type": "string",
+                            "title": "Hash salt",
+                            "description": "If specified, this token is used as a salt to the hash suffix of some resource names. Can be used to force-recreate some resources."
+                        }
+                    }
+                },
                 "managementCluster": {
                     "type": "string",
                     "title": "The capi MC managing this cluster"

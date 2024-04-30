@@ -83,6 +83,7 @@ global:
       usernameClaim: ""
     replicas: 3
     rootVolumeSizeGB: 50
+  internal: {}
   metadata:
     servicePriority: highest
   podSecurityStandards:

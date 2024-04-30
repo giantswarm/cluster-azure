@@ -125,6 +125,14 @@ Properties within the `.global.controlPlane` object
 | `global.controlPlane.replicas` | **Number of nodes**|**Type:** `integer`<br/>**Default:** `3`|
 | `global.controlPlane.rootVolumeSizeGB` | **Root volume size (GB)**|**Type:** `integer`<br/>**Default:** `50`|
 
+### Internal
+Properties within the `.global.internal` object
+For Giant Swarm internal use only, not stable, or not supported by UIs.
+
+| **Property** | **Description** | **More Details** |
+| :----------- | :-------------- | :--------------- |
+| `global.internal.hashSalt` | **Hash salt** - If specified, this token is used as a salt to the hash suffix of some resource names. Can be used to force-recreate some resources.|**Type:** `string`<br/>|
+
 ### Internal settings
 Properties within the `.internal` top-level object
 

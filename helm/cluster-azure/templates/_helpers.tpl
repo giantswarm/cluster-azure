@@ -239,7 +239,9 @@ Where `data` is the data to has on and `global` is the top level scope.
 */}}
 {{- define "hash" -}}
 {{- $data := mustToJson .data | toString  }}
-{{- (printf "%s%s" $data) | quote | sha1sum | trunc 8 }}
+{{- $salt := "" }}
+{{- if .global.Values.internal.hashSalt }}{{ $salt = .global.Values.internal.hashSalt}}{{end}}
+{{- (printf "%s%s" $data $salt) | quote | sha1sum | trunc 8 }}
 {{- end -}}
 
 {{/*
@@ -260,10 +262,10 @@ this function requires an object like this to be passed in
 {{ $identity := dict "type" "controlPlane" "Values" $.Values "Release" $.Release }}
 
 */}}
-{{- define "renderIdentityConfiguration" -}}
-{{- $identity := .Values.global.providerSpecific.identity -}}
+{{- define "renderIdentityConfiguration" }}
+{{- $identity := .Values.global.providerSpecific.identity }}
 {{- if ne .Values.global.metadata.name .Values.global.managementCluster }}
-{{/* Using system assigned identities on the WC */}}
+{{- /* Using system assigned identities on the WC */ -}}
 identity: SystemAssigned
 systemAssignedIdentityRole:
   scope: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}{{ ternary ( printf "/resourceGroups/%s" ( include "resource.default.name" $ ) ) "" (eq $identity.systemAssignedScope "ResourceGroup") }}
@@ -275,9 +277,9 @@ userAssignedIdentities:
   {{- $defaultIdentities := list (ternary "cp" "nodes" (eq .type "controlPlane")) "capz" }}
   {{- range compact $defaultIdentities }}
   - providerID: /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" $ }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" $ }}-{{ . }}
-  {{- end -}}
+  {{- end }}
 {{- end }}
-{{- end -}}
+{{- end }}
 
 {{- define "containerdConfig" -}}
 - path: /etc/containerd/config.toml
