@@ -895,6 +895,11 @@
                             "description": "Name of the image definition in the Gallery",
                             "default": ""
                         },
+                        "variant": {
+                            "type": "string",
+                            "title": "Image variant",
+                            "default": "1"
+                        },
                         "version": {
                             "type": "string",
                             "title": "Image version",

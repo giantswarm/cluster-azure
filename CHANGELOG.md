@@ -119,6 +119,7 @@ rm catalog.yaml
 - Move Helm values property `.Values.global.connectivity.network.podCidr` to `.Values.global.global.connectivity.network.pods.cidrBlocks`.
 - Move Helm values property `.Values.global.connectivity.network.serviceCidr` to `.Values.global.global.connectivity.network.services.cidrBlocks`.
 - Change Helm values property `.Values.global.nodePools` from Array to Object.
+- Change image lookup format for base OS image. `internal.image.variant` is set to "1" for this kubernetes version. This is a **breaking change** that requires manual steps. For the next kubernetes versions, `internal.image.variant` should not be set.
 
 ### Changed
 
