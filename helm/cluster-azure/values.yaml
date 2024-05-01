@@ -4,6 +4,10 @@ baseDomain: azuretest.gigantic.io
 cluster:
   providerIntegration:
     controlPlane:
+      kubeadmConfig:
+        clusterConfiguration:
+          apiServer:
+            cloudConfig: /etc/kubernetes/azure.json
       resources:
         infrastructureMachineTemplate:
           group: infrastructure.cluster.x-k8s.io
