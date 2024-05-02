@@ -138,6 +138,25 @@
                                     }
                                 ]
                             },
+                            "ignition": {
+                                "containerLinuxConfig": {
+                                    "additionalConfig": {
+                                        "storage": {
+                                            "disks": [
+                                                {
+                                                    "device": "/dev/disk/azure/scsi1/lun0",
+                                                    "partitions": [
+                                                        {
+                                                            "number": 1
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+
+                                        }
+                                    }
+                                }
+                            },
                             "mounts": [
                                 [
                                     "etcd_disk",

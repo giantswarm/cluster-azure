@@ -31,6 +31,14 @@ cluster:
               filesystem: ext4
               label: kubelet_disk
               overwrite: false
+        ignition:
+          containerLinuxConfig:
+            additionalConfig:
+              storage:
+                disks:
+                  - device: /dev/disk/azure/scsi1/lun0
+                    partitions:
+                      - number: 1
         mounts:
           - - etcd_disk
             - /var/lib/etcd
