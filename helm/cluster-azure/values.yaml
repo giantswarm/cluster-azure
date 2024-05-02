@@ -41,7 +41,7 @@ cluster:
                       - number: 1
         mounts:
           - - etcd_disk
-            - /var/lib/etcd
+            - /var/lib/etcddisk
           - - containerd_disk
             - /var/lib/containerd
           - - kubelet_disk

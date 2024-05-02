@@ -159,7 +159,7 @@
                             "mounts": [
                                 [
                                     "etcd_disk",
-                                    "/var/lib/etcd"
+                                    "/var/lib/etcddisk"
                                 ],
                                 [
                                     "containerd_disk",
