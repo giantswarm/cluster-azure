@@ -8,6 +8,36 @@ cluster:
         clusterConfiguration:
           apiServer:
             cloudConfig: /etc/kubernetes/azure.json
+        diskSetup:
+          filesystems:
+            - device: /dev/disk/azure/scsi1/lun0
+              extraOpts:
+                - -E
+                - lazy_itable_init=1,lazy_journal_init=1
+              filesystem: ext4
+              label: etcd_disk
+              overwrite: false
+            - device: /dev/disk/azure/scsi1/lun1
+              extraOpts:
+                - -E
+                - lazy_itable_init=1,lazy_journal_init=1
+              filesystem: ext4
+              label: containerd_disk
+              overwrite: false
+            - device: /dev/disk/azure/scsi1/lun2
+              extraOpts:
+                - -E
+                - lazy_itable_init=1,lazy_journal_init=1
+              filesystem: ext4
+              label: kubelet_disk
+              overwrite: false
+        mounts:
+          - - etcd_disk
+            - /var/lib/etcd
+          - - containerd_disk
+            - /var/lib/containerd
+          - - kubelet_disk
+            - /var/lib/kubelet
       resources:
         infrastructureMachineTemplate:
           group: infrastructure.cluster.x-k8s.io
