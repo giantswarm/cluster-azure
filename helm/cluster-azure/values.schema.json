@@ -96,6 +96,15 @@
             "title": "Cluster",
             "description": "Helm values for the provider-independent cluster chart.",
             "default": {
+                "internal": {
+                    "advancedConfiguration": {
+                        "controlPlane": {
+                            "etcd": {
+                                "dataDir": "/var/lib/etcddisk/etcd"
+                            }
+                        }
+                    }
+                },
                 "providerIntegration": {
                     "controlPlane": {
                         "kubeadmConfig": {

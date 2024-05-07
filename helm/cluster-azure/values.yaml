@@ -2,6 +2,11 @@
 
 baseDomain: azuretest.gigantic.io
 cluster:
+  internal:
+    advancedConfiguration:
+      controlPlane:
+        etcd:
+          dataDir: /var/lib/etcddisk/etcd
   providerIntegration:
     controlPlane:
       kubeadmConfig:
