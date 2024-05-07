@@ -16,7 +16,7 @@ restrictions:
     - capz
 dependencies:
 - name: cluster
-  version: "0.19.0"
+  version: "0.20.0"
   repository: "https://giantswarm.github.io/cluster-catalog"
 - name: cluster-shared
   version: "0.7.0"

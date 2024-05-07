@@ -98,6 +98,84 @@
             "default": {
                 "providerIntegration": {
                     "controlPlane": {
+                        "kubeadmConfig": {
+                            "clusterConfiguration": {
+                                "apiServer": {
+                                    "cloudConfig": "/etc/kubernetes/azure.json"
+                                }
+                            },
+                            "diskSetup": {
+                                "filesystems": [
+                                    {
+                                        "device": "/dev/disk/azure/scsi1/lun0",
+                                        "extraOpts": [
+                                            "-E",
+                                            "lazy_itable_init=1,lazy_journal_init=1"
+                                        ],
+                                        "filesystem": "ext4",
+                                        "label": "etcd_disk",
+                                        "overwrite": false
+                                    },
+                                    {
+                                        "device": "/dev/disk/azure/scsi1/lun1",
+                                        "extraOpts": [
+                                            "-E",
+                                            "lazy_itable_init=1,lazy_journal_init=1"
+                                        ],
+                                        "filesystem": "ext4",
+                                        "label": "containerd_disk",
+                                        "overwrite": false
+                                    },
+                                    {
+                                        "device": "/dev/disk/azure/scsi1/lun2",
+                                        "extraOpts": [
+                                            "-E",
+                                            "lazy_itable_init=1,lazy_journal_init=1"
+                                        ],
+                                        "filesystem": "ext4",
+                                        "label": "kubelet_disk",
+                                        "overwrite": false
+                                    }
+                                ]
+                            },
+                            "ignition": {
+                                "containerLinuxConfig": {
+                                    "additionalConfig": {
+                                        "storage": {
+                                            "disks": [
+                                                {
+                                                    "device": "/dev/disk/azure/scsi1/lun0",
+                                                    "partitions": [
+                                                        {
+                                                            "number": 1
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "mounts": [
+                                [
+                                    "etcd_disk",
+                                    "/var/lib/etcddisk"
+                                ],
+                                [
+                                    "containerd_disk",
+                                    "/var/lib/containerd"
+                                ],
+                                [
+                                    "kubelet_disk",
+                                    "/var/lib/kubelet"
+                                ]
+                            ],
+                            "preKubeadmCommands": [
+                                "/bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)",
+                                "sed -i \"s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g\" /etc/kubeadm.yml",
+                                "sed -i -e 's/registry.k8s.io\\/pause/quay.io\\/giantswarm\\/pause/' /etc/sysconfig/kubelet"
+                            ]
+                        },
                         "resources": {
                             "infrastructureMachineTemplate": {
                                 "group": "infrastructure.cluster.x-k8s.io",
