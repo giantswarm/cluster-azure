@@ -1,5 +1,0 @@
-{
-    "circleci.persistedProjectSelection": [
-        "gh/giantswarm/cluster-azure"
-    ]
-}
