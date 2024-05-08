@@ -71,6 +71,7 @@ files:
 {{- include "auditRules99Default" $ | nindent 2 }}
 {{- include "containerdConfig" $ | nindent 2 }}
 preKubeadmCommands:
+{{- include "restardContainerdService" . | nindent 2 }}
 {{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
 {{- include "override-hostname-in-kubeadm-configuration" . | nindent 2 }}

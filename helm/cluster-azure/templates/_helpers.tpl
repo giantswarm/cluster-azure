@@ -197,6 +197,10 @@ and is used to join the node to the teleport cluster.
 - /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
+{{- define "restardContainerdService" -}}
+- systemctl restart containerd
+{{- end -}}
+
 {{/*
 Modify /etc/hosts in order to route API server requests to the local API server replica.
 See more details here https://github.com/giantswarm/roadmap/issues/2223.

@@ -268,6 +268,7 @@ spec:
         {{- include "customNodeTaints" .Values.global.controlPlane.customNodeTaints | indent 10 }}
         {{- end }}
     preKubeadmCommands:
+    {{- include "restardContainerdService" . | nindent 6 }}
     {{- include "prepare-varLibKubelet-Dir" . | nindent 6 }}
     {{- include "kubeletReservationPreCommands" . | nindent 6 }}
     {{- include "override-hostname-in-kubeadm-configuration" . | nindent 6 }}
