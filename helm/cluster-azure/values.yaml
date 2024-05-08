@@ -2,21 +2,76 @@
 
 baseDomain: azuretest.gigantic.io
 cluster:
+  internal:
+    advancedConfiguration:
+      controlPlane:
+        etcd:
+          dataDir: /var/lib/etcddisk/etcd
   providerIntegration:
     controlPlane:
+      kubeadmConfig:
+        clusterConfiguration:
+          apiServer:
+            cloudConfig: /etc/kubernetes/azure.json
+        diskSetup:
+          filesystems:
+            - device: /dev/disk/azure/scsi1/lun0
+              extraOpts:
+                - -E
+                - lazy_itable_init=1,lazy_journal_init=1
+              filesystem: ext4
+              label: etcd_disk
+              overwrite: false
+            - device: /dev/disk/azure/scsi1/lun1
+              extraOpts:
+                - -E
+                - lazy_itable_init=1,lazy_journal_init=1
+              filesystem: ext4
+              label: containerd_disk
+              overwrite: false
+            - device: /dev/disk/azure/scsi1/lun2
+              extraOpts:
+                - -E
+                - lazy_itable_init=1,lazy_journal_init=1
+              filesystem: ext4
+              label: kubelet_disk
+              overwrite: false
+        ignition:
+          containerLinuxConfig:
+            additionalConfig:
+              storage:
+                disks:
+                  - device: /dev/disk/azure/scsi1/lun0
+                    partitions:
+                      - number: 1
+        mounts:
+          - - etcd_disk
+            - /var/lib/etcddisk
+          - - containerd_disk
+            - /var/lib/containerd
+          - - kubelet_disk
+            - /var/lib/kubelet
+        preKubeadmCommands:
+          - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
+          - sed -i "s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
+          - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
       resources:
         infrastructureMachineTemplate:
           group: infrastructure.cluster.x-k8s.io
           kind: AzureMachineTemplate
           version: v1beta1
         infrastructureMachineTemplateSpecTemplateName: controlplane-azuremachinetemplate-spec
+    osImage:
+      channel: stable
+      variant: ""
+      version: 3815.2.0
     provider: azure
     resourcesApi:
       bastionResourceEnabled: false
       ciliumHelmReleaseResourceEnabled: false
       cleanupHelmReleaseResourcesEnabled: false
       clusterResourceEnabled: true
-      controlPlaneResourceEnabled: false
+      controlPlaneResourceEnabled: true
       coreDnsHelmReleaseResourceEnabled: false
       helmRepositoryResourcesEnabled: false
       infrastructureCluster:
@@ -79,6 +134,7 @@ global:
       usernameClaim: ""
     replicas: 3
     rootVolumeSizeGB: 50
+  internal: {}
   metadata:
     servicePriority: highest
   podSecurityStandards:
@@ -88,6 +144,8 @@ global:
     azureClusterIdentity:
       name: cluster-identity
       namespace: org-giantswarm
+    identity:
+      systemAssignedScope: ResourceGroup
     location: westeurope
     network:
       peerings: []
@@ -98,22 +156,12 @@ internal:
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
   enableVpaResources: true
-  identity:
-    attachCapzControllerUserAssignedIdentity: false
-    systemAssignedScope: ResourceGroup
-    type: SystemAssigned
-    userAssignedCustomIdentities: []
-  image:
-    gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
-    name: ""
-    version: 3815.2.0
   kubectlImage:
     name: giantswarm/kubectl
     registry: gsoci.azurecr.io
     tag: 1.25.15
   kubernetesVersion: 1.25.16
   network:
-    subnets: {}
     vnet: {}
     vpn:
       gatewayMode: none

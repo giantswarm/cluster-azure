@@ -22,6 +22,8 @@ Properties within the `.global.providerSpecific` object
 | `global.providerSpecific.azureClusterIdentity` | **Identity** - AzureClusterIdentity resource to use for this cluster.|**Type:** `object`<br/>|
 | `global.providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-identity"`|
 | `global.providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
+| `global.providerSpecific.identity` | **Identity**|**Type:** `object`<br/>|
+| `global.providerSpecific.identity.systemAssignedScope` | **Scope of SystemAssignedIdentity**|**Type:** `string`<br/>**Default:** `"ResourceGroup"`|
 | `global.providerSpecific.location` | **Location**|**Type:** `string`<br/>**Default:** `"westeurope"`|
 | `global.providerSpecific.network` | **Azure network settings** - Azure VNet peering and other Azure-specific network settings.|**Type:** `object`<br/>|
 | `global.providerSpecific.network.peerings` | **VNet peerings** - Specifying VNets (their resource groups and names) to which the peering is established.|**Type:** `array`<br/>**Default:** `[]`|
@@ -74,6 +76,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
 | `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
 | `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.controlPlane.subnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.hostCidr` | **Node subnet** - IPv4 address range for nodes, in CIDR notation.|**Type:** `string`<br/>**Default:** `"10.0.0.0/16"`|
 | `global.connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Default:** `"public"`|
 | `global.connectivity.network.pods` | **Pods**|**Type:** `object`<br/>|
@@ -84,6 +87,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.services.cidrBlocks[*]` | **Service subnet** - IPv4 address range for kubernetes services, in CIDR notation.|**Type:** `string`<br/>**Example:** `"172.31.0.0/16"`<br/>|
 | `global.connectivity.network.workers` | **Workers**|**Type:** `object`<br/>|
 | `global.connectivity.network.workers.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.16.0/20"`|
+| `global.connectivity.network.workers.natGatewayName` | **Nodes subnet nat-gateway name** - Name of the nat gateway on the nodes subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.workers.privateEndpoints` | **Private endpoints**|**Type:** `array`<br/>**Default:** `[]`|
 | `global.connectivity.network.workers.privateEndpoints[*]` | **Private endpoint**|**Type:** `object`<br/>|
 | `global.connectivity.network.workers.privateEndpoints[*].applicationSecurityGroups` | **Application security groups** - ApplicationSecurityGroups specifies the Application security group in which the private endpoint IP configuration is included.|**Type:** `array`<br/>**Default:** `[]`|
@@ -100,6 +104,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
 | `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
 | `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.workers.subnetName` | **Nodes subnet name** - Name of the nodes subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 
 ### Control plane
 Properties within the `.global.controlPlane` object
@@ -120,6 +125,14 @@ Properties within the `.global.controlPlane` object
 | `global.controlPlane.replicas` | **Number of nodes**|**Type:** `integer`<br/>**Default:** `3`|
 | `global.controlPlane.rootVolumeSizeGB` | **Root volume size (GB)**|**Type:** `integer`<br/>**Default:** `50`|
 
+### Internal
+Properties within the `.global.internal` object
+For Giant Swarm internal use only, not stable, or not supported by UIs.
+
+| **Property** | **Description** | **More Details** |
+| :----------- | :-------------- | :--------------- |
+| `global.internal.hashSalt` | **Hash salt** - If specified, this token is used as a salt to the hash suffix of some resource names. Can be used to force-recreate some resources.|**Type:** `string`<br/>|
+
 ### Internal settings
 Properties within the `.internal` top-level object
 
@@ -131,25 +144,12 @@ Properties within the `.internal` top-level object
 | `internal.defaults.softEvictionGracePeriod` | **Default settings for soft eviction grace period**|**Type:** `string`<br/>**Default:** `"memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m"`|
 | `internal.defaults.softEvictionThresholds` | **Default settings for soft eviction thresholds**|**Type:** `string`<br/>**Default:** `"memory.available\u003c500Mi,nodefs.available\u003c15%,nodefs.inodesFree\u003c5%,imagefs.available\u003c15%,pid.available\u003c30%"`|
 | `internal.enableVpaResources` | **Enable VPA Resources in helmreleases**|**Type:** `boolean`<br/>**Default:** `true`|
-| `internal.identity` | **Identity**|**Type:** `object`<br/>|
-| `internal.identity.attachCapzControllerUserAssignedIdentity` | **Attach CAPZ controller UserAssigned identity**|**Type:** `boolean`<br/>**Default:** `false`|
-| `internal.identity.systemAssignedScope` | **Scope of SystemAssignedIdentity**|**Type:** `string`<br/>**Default:** `"ResourceGroup"`|
-| `internal.identity.type` | **Type of Identity**|**Type:** `string`<br/>**Default:** `"SystemAssigned"`|
-| `internal.identity.userAssignedCustomIdentities` | **List of custom UserAssigned Identities to attach to all nodes**|**Type:** `array`<br/>**Default:** `[]`|
-| `internal.image` | **Node Image**|**Type:** `object`<br/>|
-| `internal.image.gallery` | **Gallery** - Name of the community gallery hosting the image|**Type:** `string`<br/>**Default:** `"gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0"`|
-| `internal.image.name` | **Image Definition** - Name of the image definition in the Gallery|**Type:** `string`<br/>**Default:** `""`|
-| `internal.image.version` | **Image version**|**Type:** `string`<br/>**Default:** `"3815.2.0"`|
 | `internal.kubectlImage` | **Kubectl Image settings**|**Type:** `object`<br/>|
 | `internal.kubectlImage.name` | **Image name** - Name of the image Registry|**Type:** `string`<br/>**Default:** `"giantswarm/kubectl"`|
 | `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
 | `internal.kubectlImage.tag` | **Image tag**|**Type:** `string`<br/>**Default:** `"1.25.15"`|
 | `internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.25.16"`|
 | `internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
-| `internal.network.subnets` | **VNet spec** - Customize subnets configuration|**Type:** `object`<br/>**Default:** `{}`|
-| `internal.network.subnets.controlPlaneSubnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
-| `internal.network.subnets.nodeSubnetNatGatewayName` | **Nodes subnet nat-gateway name** - Name of the nat gateway on the nodes subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
-| `internal.network.subnets.nodesSubnetName` | **Nodes subnet name** - Name of the nodes subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `internal.network.vnet` | **VNet spec** - Existing VNet configuration. This is susceptible to more frequent change or removal.|**Type:** `object`<br/>**Default:** `{}`|
 | `internal.network.vnet.name` | **VNet name** - Name of the existing VNet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `internal.network.vnet.resourceGroup` | **Resource group name** - Resource group where the existing VNet is deployed.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
@@ -215,7 +215,7 @@ Properties within the `.global.podSecurityStandards` object
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `baseDomain` | **Base DNS domain**|**Type:** `string`<br/>**Default:** `"azuretest.gigantic.io"`|
-| `cluster` | **Cluster** - Helm values for the provider-independent cluster chart.|**Type:** `object`<br/>**Default:** `{"providerIntegration":{"controlPlane":{"resources":{"infrastructureMachineTemplate":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureMachineTemplate","version":"v1beta1"},"infrastructureMachineTemplateSpecTemplateName":"controlplane-azuremachinetemplate-spec"}},"provider":"azure","resourcesApi":{"bastionResourceEnabled":false,"ciliumHelmReleaseResourceEnabled":false,"cleanupHelmReleaseResourcesEnabled":false,"clusterResourceEnabled":true,"controlPlaneResourceEnabled":false,"coreDnsHelmReleaseResourceEnabled":false,"helmRepositoryResourcesEnabled":false,"infrastructureCluster":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureCluster","version":"v1beta1"},"infrastructureMachinePool":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureMachineDeployment","version":"v1beta1"},"machineHealthCheckResourceEnabled":false,"machinePoolResourcesEnabled":false,"networkPoliciesHelmReleaseResourceEnabled":false,"nodePoolKind":"MachineDeployment","verticalPodAutoscalerCrdHelmReleaseResourceEnabled":false},"workers":{"defaultNodePools":{"def00":{"customNodeLabels":["label=default"],"instanceType":"Standard_D4s_v5","replicas":2,"rootVolumeSizeGB":50}}}}}`|
+| `cluster` | **Cluster** - Helm values for the provider-independent cluster chart.|**Type:** `object`<br/>**Default:** `{"internal":{"advancedConfiguration":{"controlPlane":{"etcd":{"dataDir":"/var/lib/etcddisk/etcd"}}}},"providerIntegration":{"controlPlane":{"kubeadmConfig":{"clusterConfiguration":{"apiServer":{"cloudConfig":"/etc/kubernetes/azure.json"}},"diskSetup":{"filesystems":[{"device":"/dev/disk/azure/scsi1/lun0","extraOpts":["-E","lazy_itable_init=1,lazy_journal_init=1"],"filesystem":"ext4","label":"etcd_disk","overwrite":false},{"device":"/dev/disk/azure/scsi1/lun1","extraOpts":["-E","lazy_itable_init=1,lazy_journal_init=1"],"filesystem":"ext4","label":"containerd_disk","overwrite":false},{"device":"/dev/disk/azure/scsi1/lun2","extraOpts":["-E","lazy_itable_init=1,lazy_journal_init=1"],"filesystem":"ext4","label":"kubelet_disk","overwrite":false}]},"ignition":{"containerLinuxConfig":{"additionalConfig":{"storage":{"disks":[{"device":"/dev/disk/azure/scsi1/lun0","partitions":[{"number":1}]}]}}}},"mounts":[["etcd_disk","/var/lib/etcddisk"],["containerd_disk","/var/lib/containerd"],["kubelet_disk","/var/lib/kubelet"]],"preKubeadmCommands":["/bin/test ! -d /var/lib/kubelet \u0026\u0026 (/bin/mkdir -p /var/lib/kubelet \u0026\u0026 /bin/chmod 0750 /var/lib/kubelet)","sed -i \"s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g\" /etc/kubeadm.yml","sed -i -e 's/registry.k8s.io\\/pause/quay.io\\/giantswarm\\/pause/' /etc/sysconfig/kubelet"]},"resources":{"infrastructureMachineTemplate":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureMachineTemplate","version":"v1beta1"},"infrastructureMachineTemplateSpecTemplateName":"controlplane-azuremachinetemplate-spec"}},"osImage":{"channel":"stable","variant":"","version":"3815.2.0"},"provider":"azure","resourcesApi":{"bastionResourceEnabled":false,"ciliumHelmReleaseResourceEnabled":false,"cleanupHelmReleaseResourcesEnabled":false,"clusterResourceEnabled":true,"controlPlaneResourceEnabled":true,"coreDnsHelmReleaseResourceEnabled":false,"helmRepositoryResourcesEnabled":false,"infrastructureCluster":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureCluster","version":"v1beta1"},"infrastructureMachinePool":{"group":"infrastructure.cluster.x-k8s.io","kind":"AzureMachineDeployment","version":"v1beta1"},"machineHealthCheckResourceEnabled":false,"machinePoolResourcesEnabled":false,"networkPoliciesHelmReleaseResourceEnabled":false,"nodePoolKind":"MachineDeployment","verticalPodAutoscalerCrdHelmReleaseResourceEnabled":false},"workers":{"defaultNodePools":{"def00":{"customNodeLabels":["label=default"],"instanceType":"Standard_D4s_v5","replicas":2,"rootVolumeSizeGB":50}}}}}`|
 | `cluster-shared` | **Library chart**|**Type:** `object`<br/>|
 | `managementCluster` | **The capi MC managing this cluster**|**Type:** `string`<br/>|
 | `provider` | **Cluster API provider name**|**Type:** `string`<br/>|
