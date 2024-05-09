@@ -75,6 +75,7 @@ preKubeadmCommands:
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
 {{- include "override-hostname-in-kubeadm-configuration" . | nindent 2 }}
 {{- include "override-pause-image-with-quay" . | nindent 2 }}
+  - systemctl restart containerd
 postKubeadmCommands: []
 {{- end }}
 
