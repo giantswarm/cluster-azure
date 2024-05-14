@@ -98,7 +98,7 @@ cluster:
         group: infrastructure.cluster.x-k8s.io
         kind: AzureMachineTemplate
         version: v1beta1
-      machineHealthCheckResourceEnabled: false
+      machineHealthCheckResourceEnabled: true
       machinePoolResourcesEnabled: true
       networkPoliciesHelmReleaseResourceEnabled: true
       nodePoolKind: MachineDeployment
