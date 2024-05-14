@@ -13,14 +13,6 @@ cluster:
         clusterConfiguration:
           apiServer:
             cloudConfig: /etc/kubernetes/azure.json
-        files:
-          - contentFrom:
-              secret:
-                key: update_etc_hosts.sh
-                name: provider-specific-files
-                prependClusterNameAsPrefix: true
-            path: /opt/update_etc_hosts.sh
-            permissions: "0755"
         diskSetup:
           filesystems:
             - device: /dev/disk/azure/scsi1/lun0
@@ -44,6 +36,14 @@ cluster:
               filesystem: ext4
               label: kubelet_disk
               overwrite: false
+        files:
+          - contentFrom:
+              secret:
+                key: update_etc_hosts.sh
+                name: provider-specific-files
+                prependClusterNameAsPrefix: true
+            path: /opt/update_etc_hosts.sh
+            permissions: "0755"
         ignition:
           containerLinuxConfig:
             additionalConfig:
@@ -59,13 +59,13 @@ cluster:
             - /var/lib/containerd
           - - kubelet_disk
             - /var/lib/kubelet
+        postKubeadmCommands:
+          - /opt/update_etc_hosts.sh postKubeadm
         preKubeadmCommands:
           - /opt/update_etc_hosts.sh preKubeadm
           - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
           - sed -i "s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
           - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
-        postKubeadmCommands:
-          - /opt/update_etc_hosts.sh postKubeadm
       resources:
         infrastructureMachineTemplate:
           group: infrastructure.cluster.x-k8s.io
