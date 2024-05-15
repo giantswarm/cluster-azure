@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Add missing hack for manipulating /etc/hosts for private clusters.
+-
+### Changed
+
+- Use MachineDeployment resource from `cluster` chart.
 
 ## [0.9.0] - 2024-05-08
 

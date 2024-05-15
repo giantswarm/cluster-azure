@@ -281,11 +281,11 @@
                         },
                         "infrastructureMachinePool": {
                             "group": "infrastructure.cluster.x-k8s.io",
-                            "kind": "AzureMachineDeployment",
+                            "kind": "AzureMachineTemplate",
                             "version": "v1beta1"
                         },
                         "machineHealthCheckResourceEnabled": false,
-                        "machinePoolResourcesEnabled": false,
+                        "machinePoolResourcesEnabled": true,
                         "networkPoliciesHelmReleaseResourceEnabled": true,
                         "nodePoolKind": "MachineDeployment",
                         "verticalPodAutoscalerCrdHelmReleaseResourceEnabled": false
@@ -300,6 +300,9 @@
                                 "replicas": 2,
                                 "rootVolumeSizeGB": 50
                             }
+                        },
+                        "resources": {
+                            "infrastructureMachineTemplateSpecTemplateName": "machinedeployment-azuremachinetemplate-spec"
                         }
                     }
                 }

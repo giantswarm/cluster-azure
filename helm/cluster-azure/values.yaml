@@ -94,10 +94,10 @@ cluster:
         version: v1beta1
       infrastructureMachinePool:
         group: infrastructure.cluster.x-k8s.io
-        kind: AzureMachineDeployment
+        kind: AzureMachineTemplate
         version: v1beta1
       machineHealthCheckResourceEnabled: false
-      machinePoolResourcesEnabled: false
+      machinePoolResourcesEnabled: true
       networkPoliciesHelmReleaseResourceEnabled: true
       nodePoolKind: MachineDeployment
       verticalPodAutoscalerCrdHelmReleaseResourceEnabled: false
@@ -109,6 +109,8 @@ cluster:
           instanceType: Standard_D4s_v5
           replicas: 2
           rootVolumeSizeGB: 50
+      resources:
+        infrastructureMachineTemplateSpecTemplateName: machinedeployment-azuremachinetemplate-spec
 global:
   apps:
     networkPolicies: {}

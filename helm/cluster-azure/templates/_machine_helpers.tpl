@@ -2,21 +2,22 @@
 Helpers to reuse when defining specs for MachinePools and MachineDeployments
 */}}
 
-{{- define "machine-spec" -}}
+{{- define "machinedeployment-azuremachinetemplate-spec" -}}
+{{- include "renderIdentityConfiguration" $ }}
 image:
   computeGallery:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
     name: {{ include "flatcarImageName" $ }}
     version: {{ $.osImage.version }}
 osDisk:
-  diskSizeGB: {{ .spec.rootVolumeSizeGB | default 300 }}
+  diskSizeGB: {{ .nodePool.rootVolumeSizeGB | default 300 }}
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 securityProfile:
-  encryptionAtHost: {{ .spec.encryptionAtHost }}
+  encryptionAtHost: {{ .nodePool.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
-vmSize: {{ .spec.instanceType }}
+vmSize: {{ .nodePool.instanceType }}
 {{- if ( include "network.subnets.nodes.name" $ ) }}
 subnetName: {{ include "network.subnets.nodes.name" $ }}
 {{- end }}
