@@ -8,6 +8,9 @@ cluster:
         etcd:
           dataDir: /var/lib/etcddisk/etcd
   providerIntegration:
+    apps:
+      networkPolicies:
+        configTemplateName: azureNetworkPoliciesHelmValues
     controlPlane:
       kubeadmConfig:
         clusterConfiguration:
@@ -84,7 +87,7 @@ cluster:
       clusterResourceEnabled: true
       controlPlaneResourceEnabled: true
       coreDnsHelmReleaseResourceEnabled: false
-      helmRepositoryResourcesEnabled: false
+      helmRepositoryResourcesEnabled: true
       infrastructureCluster:
         group: infrastructure.cluster.x-k8s.io
         kind: AzureCluster
@@ -95,7 +98,7 @@ cluster:
         version: v1beta1
       machineHealthCheckResourceEnabled: false
       machinePoolResourcesEnabled: false
-      networkPoliciesHelmReleaseResourceEnabled: false
+      networkPoliciesHelmReleaseResourceEnabled: true
       nodePoolKind: MachineDeployment
       verticalPodAutoscalerCrdHelmReleaseResourceEnabled: false
     workers:
@@ -107,6 +110,8 @@ cluster:
           replicas: 2
           rootVolumeSizeGB: 50
 global:
+  apps:
+    networkPolicies: {}
   components:
     containerd:
       containerRegistries:
