@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2024-05-16
+
 ### Added
 
 - Enable network-policies-app from `cluster` chart with DNS policies enabled. This makes `kube-system` and `giantswarm` namespaces to be `deny` by default.
@@ -525,7 +527,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/giantswarm/cluster-azure/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/giantswarm/cluster-azure/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/giantswarm/cluster-azure/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/giantswarm/cluster-azure/compare/v0.6.0...v0.7.0
