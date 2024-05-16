@@ -10,14 +10,14 @@ image:
     name: {{ include "flatcarImageName" $ }}
     version: {{ $.osImage.version }}
 osDisk:
-  diskSizeGB: {{ .nodePool.rootVolumeSizeGB | default 300 }}
+  diskSizeGB: {{ .nodePool.rootVolumeSizeGB | default 50 }}
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 securityProfile:
   encryptionAtHost: {{ .nodePool.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
-vmSize: {{ .nodePool.instanceType }}
+vmSize: {{ .nodePool.instanceType | default "Standard_D4s_v5" }}
 {{- if ( include "network.subnets.nodes.name" $ ) }}
 subnetName: {{ include "network.subnets.nodes.name" $ }}
 {{- end }}
