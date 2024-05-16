@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bump `cluster` chart from `0.21.0` to `0.26.0`.
+- Bump `source.toolkit.fluxcd.io` version from `v1beta2` to `v1`.
 
 ### Fixed
 
