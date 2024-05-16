@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bump `cluster` chart from `0.21.0` to `0.26.0`.
+
 ### Fixed
 
 - Add missing hack for manipulating /etc/hosts for private clusters.
