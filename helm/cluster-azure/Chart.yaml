@@ -16,7 +16,7 @@ restrictions:
     - capz
 dependencies:
 - name: cluster
-  version: "0.26.0-b72f10d4c47f7b82e482365a37d6083a61dc6758"
+  version: "0.26.0-10e8c02e76951bb0ecd18b43767fac33a1831141"
   repository: "https://giantswarm.github.io/cluster-test-catalog"
 - name: cluster-shared
   version: "0.7.0"
