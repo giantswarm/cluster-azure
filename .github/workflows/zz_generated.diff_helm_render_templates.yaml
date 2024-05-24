@@ -89,7 +89,7 @@ jobs:
         run: |
           helm dependency build old/helm/${{ github.event.repository.name }}
 
-          for test_file_path in helm/${{ github.event.repository.name }}/ci/test-*-values.yaml; do
+          for test_file_path in old/helm/${{ github.event.repository.name }}/ci/test-*-values.yaml; do
             echo
             echo "Rendering Helm template for ${test_file_path} on old code"
 
