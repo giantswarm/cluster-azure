@@ -259,7 +259,7 @@
                             "infrastructureMachineTemplateSpecTemplateName": "controlplane-azuremachinetemplate-spec"
                         }
                     },
-                    "environments": {
+                    "environmentVariables": {
                         "hostName": "HOSTNAME",
                         "ipv4": "COREOS_AZURE_IPV4_DYNAMIC"
                     },

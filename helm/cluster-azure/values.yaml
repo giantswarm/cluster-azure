@@ -74,7 +74,7 @@ cluster:
           kind: AzureMachineTemplate
           version: v1beta1
         infrastructureMachineTemplateSpecTemplateName: controlplane-azuremachinetemplate-spec
-    environments:
+    environmentVariables:
       hostName: HOSTNAME
       ipv4: COREOS_AZURE_IPV4_DYNAMIC
     osImage:
