@@ -10,13 +10,9 @@ version: 0.0.0-dev # [[ .Version ]] if you're using architect instead of app-bui
 annotations:
   application.giantswarm.io/team: "phoenix"
   application.giantswarm.io/app-type: "cluster"
-restrictions:
-  compatibleProviders:
-    - azure
-    - capz
 dependencies:
 - name: cluster
-  version: "0.26.0-8b2c88be2135dd0d7ae5a7fd35c67e36b8a83000"
+  version: "0.26.0-02fae800e2187b15dd5d19b2d6da6b970e291570"
   repository: "https://giantswarm.github.io/cluster-test-catalog"
 - name: cluster-shared
   version: "0.7.0"

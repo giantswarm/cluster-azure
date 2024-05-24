@@ -67,8 +67,6 @@ cluster:
         preKubeadmCommands:
           - /opt/update_etc_hosts.sh preKubeadm
           - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
-          - sed -i "s/HOSTNAME/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
-          - sed -i "s/IPV4_LOCAL/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .network.interface[0].ipv4.ipAddress[0].privateIpAddress)/g" /etc/kubeadm.yml
           - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
       resources:
         infrastructureMachineTemplate:
@@ -76,6 +74,9 @@ cluster:
           kind: AzureMachineTemplate
           version: v1beta1
         infrastructureMachineTemplateSpecTemplateName: controlplane-azuremachinetemplate-spec
+    environments:
+      hostName: HOSTNAME
+      ipv4: COREOS_AZURE_IPV4_DYNAMIC
     osImage:
       channel: stable
       variant: ""
@@ -113,8 +114,6 @@ cluster:
       kubeadmConfig:
         preKubeadmCommands:
           - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
-          - sed -i "s/HOSTNAME/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
-          - sed -i "s/IPV4_LOCAL/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .network.interface[0].ipv4.ipAddress[0].privateIpAddress)/g" /etc/kubeadm.yml
           - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
       resources:
         infrastructureMachineTemplateSpecTemplateName: machinedeployment-azuremachinetemplate-spec
