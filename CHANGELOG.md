@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use MachineDeployment resource from `cluster` chart.
+- Update cluster chart to v0.27.0. More details in [cluster chart v0.27.0 release notes](https://github.com/giantswarm/cluster/releases/tag/v0.27.0).
+
 ## [0.10.0] - 2024-05-16
 
 ### Added

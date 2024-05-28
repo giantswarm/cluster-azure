@@ -247,7 +247,6 @@
                             "preKubeadmCommands": [
                                 "/opt/update_etc_hosts.sh preKubeadm",
                                 "/bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)",
-                                "sed -i \"s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g\" /etc/kubeadm.yml",
                                 "sed -i -e 's/registry.k8s.io\\/pause/quay.io\\/giantswarm\\/pause/' /etc/sysconfig/kubelet"
                             ]
                         },
@@ -259,6 +258,10 @@
                             },
                             "infrastructureMachineTemplateSpecTemplateName": "controlplane-azuremachinetemplate-spec"
                         }
+                    },
+                    "environmentVariables": {
+                        "hostName": "HOSTNAME",
+                        "ipv4": "COREOS_AZURE_IPV4_DYNAMIC"
                     },
                     "osImage": {
                         "channel": "stable",
@@ -281,11 +284,11 @@
                         },
                         "infrastructureMachinePool": {
                             "group": "infrastructure.cluster.x-k8s.io",
-                            "kind": "AzureMachineDeployment",
+                            "kind": "AzureMachineTemplate",
                             "version": "v1beta1"
                         },
                         "machineHealthCheckResourceEnabled": false,
-                        "machinePoolResourcesEnabled": false,
+                        "machinePoolResourcesEnabled": true,
                         "networkPoliciesHelmReleaseResourceEnabled": true,
                         "nodePoolKind": "MachineDeployment",
                         "verticalPodAutoscalerCrdHelmReleaseResourceEnabled": false
@@ -300,6 +303,15 @@
                                 "replicas": 2,
                                 "rootVolumeSizeGB": 50
                             }
+                        },
+                        "kubeadmConfig": {
+                            "preKubeadmCommands": [
+                                "/bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)",
+                                "sed -i -e 's/registry.k8s.io\\/pause/quay.io\\/giantswarm\\/pause/' /etc/sysconfig/kubelet"
+                            ]
+                        },
+                        "resources": {
+                            "infrastructureMachineTemplateSpecTemplateName": "machinedeployment-azuremachinetemplate-spec"
                         }
                     }
                 }
