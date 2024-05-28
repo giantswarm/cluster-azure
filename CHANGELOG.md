@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0] - 2024-05-28
+
 ### Changed
 
 - Use MachineDeployment resource from `cluster` chart.
@@ -532,7 +534,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.10.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/giantswarm/cluster-azure/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/giantswarm/cluster-azure/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/giantswarm/cluster-azure/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/giantswarm/cluster-azure/compare/v0.7.0...v0.8.0
