@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update `cluster` chart version to fix `unable to select an IP from default routes` problem during node startup.
+
 ## [0.11.0] - 2024-05-28
 
 ### Changed
