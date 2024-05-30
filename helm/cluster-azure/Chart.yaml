@@ -15,5 +15,5 @@ dependencies:
   version: "0.28.0-3558bf25683047e52942accdd5b95530a99cc3da"
   repository: "https://giantswarm.github.io/cluster-test-catalog"
 - name: cluster-shared
-  version: "0.7.0"
+  version: "0.7.1"
   repository: "https://giantswarm.github.io/cluster-catalog"
