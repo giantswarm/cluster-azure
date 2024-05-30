@@ -113,8 +113,8 @@ cluster:
             enabled: true
             maxUnhealthy: 40%
             nodeStartupTimeout: 10m
-            unhealthyNotReadyTimeout: 10m
-            unhealthyUnknownTimeout: 10m
+            unhealthyNotReadyTimeout: 300s
+            unhealthyUnknownTimeout: 300s
           replicas: 2
           rootVolumeSizeGB: 50
       kubeadmConfig:

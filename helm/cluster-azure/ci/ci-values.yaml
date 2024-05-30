@@ -17,8 +17,8 @@ global:
         enabled: true
         maxUnhealthy: 40%
         nodeStartupTimeout: 10m
-        unhealthyNotReadyTimeout: 10m
-        unhealthyUnknownTimeout: 10m
+        unhealthyNotReadyTimeout: 300s
+        unhealthyUnknownTimeout: 300s
   conn ectivity:
     baseDomain: azuretest.gigantic.io
   providerSpecific:
