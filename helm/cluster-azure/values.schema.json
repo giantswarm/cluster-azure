@@ -88,10 +88,6 @@
                         }
                     }
                 },
-                "disableHealthCheck": {
-                    "type": "boolean",
-                    "title": "Disable HealthChecks for the MachineDeployment"
-                },
                 "encryptionAtHost": {
                     "type": "boolean",
                     "title": "Encryption at host",
@@ -301,7 +297,14 @@
                                 ],
                                 "instanceType": "Standard_D4s_v5",
                                 "replicas": 2,
-                                "rootVolumeSizeGB": 50
+                                "rootVolumeSizeGB": 50,
+                                "machineHealthCheck": {
+                                    "enabled": true,
+                                    "maxUnhealthy": "40%",
+                                    "nodeStartupTimeout": "10m",
+                                    "unhealthyNotReadyTimeout": "10m",
+                                    "unhealthyUnknownTimeout": "10m"
+                                }
                             }
                         },
                         "kubeadmConfig": {

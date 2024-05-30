@@ -109,6 +109,12 @@ cluster:
           customNodeLabels:
             - label=default
           instanceType: Standard_D4s_v5
+          machineHealthCheck:
+            enabled: true
+            maxUnhealthy: 40%
+            nodeStartupTimeout: 10m
+            unhealthyNotReadyTimeout: 10m
+            unhealthyUnknownTimeout: 10m
           replicas: 2
           rootVolumeSizeGB: 50
       kubeadmConfig:
