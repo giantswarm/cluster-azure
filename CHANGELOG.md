@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use MachineHealth resource from `cluster` chart.
+
 ## [0.12.0] - 2024-05-30
 
 ## [0.11.0] - 2024-05-28
