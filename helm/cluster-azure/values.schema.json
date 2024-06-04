@@ -88,10 +88,6 @@
                         }
                     }
                 },
-                "disableHealthCheck": {
-                    "type": "boolean",
-                    "title": "Disable HealthChecks for the MachineDeployment"
-                },
                 "encryptionAtHost": {
                     "type": "boolean",
                     "title": "Encryption at host",
@@ -287,7 +283,7 @@
                             "kind": "AzureMachineTemplate",
                             "version": "v1beta1"
                         },
-                        "machineHealthCheckResourceEnabled": false,
+                        "machineHealthCheckResourceEnabled": true,
                         "machinePoolResourcesEnabled": true,
                         "networkPoliciesHelmReleaseResourceEnabled": true,
                         "nodePoolKind": "MachineDeployment",
@@ -300,6 +296,13 @@
                                     "label=default"
                                 ],
                                 "instanceType": "Standard_D4s_v5",
+                                "machineHealthCheck": {
+                                    "enabled": true,
+                                    "maxUnhealthy": "40%",
+                                    "nodeStartupTimeout": "10m",
+                                    "unhealthyNotReadyTimeout": "300s",
+                                    "unhealthyUnknownTimeout": "300s"
+                                },
                                 "replicas": 2,
                                 "rootVolumeSizeGB": 50
                             }

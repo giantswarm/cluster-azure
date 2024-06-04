@@ -98,7 +98,7 @@ cluster:
         group: infrastructure.cluster.x-k8s.io
         kind: AzureMachineTemplate
         version: v1beta1
-      machineHealthCheckResourceEnabled: false
+      machineHealthCheckResourceEnabled: true
       machinePoolResourcesEnabled: true
       networkPoliciesHelmReleaseResourceEnabled: true
       nodePoolKind: MachineDeployment
@@ -109,6 +109,12 @@ cluster:
           customNodeLabels:
             - label=default
           instanceType: Standard_D4s_v5
+          machineHealthCheck:
+            enabled: true
+            maxUnhealthy: 40%
+            nodeStartupTimeout: 10m
+            unhealthyNotReadyTimeout: 300s
+            unhealthyUnknownTimeout: 300s
           replicas: 2
           rootVolumeSizeGB: 50
       kubeadmConfig:

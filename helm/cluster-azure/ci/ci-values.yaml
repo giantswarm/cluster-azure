@@ -13,6 +13,12 @@ global:
       instanceType: Standard_D4s_v5
       replicas: 2
       rootVolumeSizeGB: 50
+      machineHealthCheck:
+        enabled: true
+        maxUnhealthy: 40%
+        nodeStartupTimeout: 10m
+        unhealthyNotReadyTimeout: 300s
+        unhealthyUnknownTimeout: 300s
   connectivity:
     baseDomain: azuretest.gigantic.io
   providerSpecific:
