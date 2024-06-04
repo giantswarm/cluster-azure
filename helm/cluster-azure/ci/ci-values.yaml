@@ -19,7 +19,7 @@ global:
         nodeStartupTimeout: 10m
         unhealthyNotReadyTimeout: 300s
         unhealthyUnknownTimeout: 300s
-  conn ectivity:
+  connectivity:
     baseDomain: azuretest.gigantic.io
   providerSpecific:
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
