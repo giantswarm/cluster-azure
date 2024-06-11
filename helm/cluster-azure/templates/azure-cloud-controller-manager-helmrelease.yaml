@@ -50,9 +50,6 @@ spec:
   install:
     remediation:
       retries: 30
-  # Default values
-  # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
-  values:
   {{- $azureCloudControllerManagerHelmValues := (include "defaultAzureCloudControllerManagerHelmValues" .) | fromYaml -}}
   {{- $customAzureCloudControllerManagerHelmValues := $.Values.global.apps.azureCloudControllerManager.values -}}
   {{- if $customAzureCloudControllerManagerHelmValues }}
