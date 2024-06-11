@@ -2,6 +2,7 @@
 {{/* https://github.com/giantswarm/coredns-app/blob/main/helm/coredns-app/values.yaml*/}}
 {{- define "azureCorednsHelmValues" }}
 cluster:
+<<<<<<< HEAD
   calico:
     CIDR: {{ first .Values.global.connectivity.network.pods.cidrBlocks | quote }}
   kubernetes:
@@ -13,5 +14,18 @@ cluster:
       IP: {{ include "clusterDNS" $ | quote }}
 global:
   podSecurityStandards:
+=======
+    calico:
+    CIDR: {{ first .Values.global.connectivity.network.pods.cidrBlocks | quote }}
+    kubernetes:
+    API:
+        # We are currently setting 10.96.0.0/12 due to a bug - https://github.com/giantswarm/giantswarm/issues/26664
+        # With this change we will be using the right value 
+        clusterIPRange: {{ first .Values.global.connectivity.network.services.cidrBlocks | quote }}
+    DNS:
+        IP: {{ include "clusterDNS" $ | quote }}
+global:
+    podSecurityStandards:
+>>>>>>> cc754fe (use default apps from cluster chart)
     enforced: {{ .Values.global.podSecurityStandards.enforced }}
 {{- end }}

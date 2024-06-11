@@ -2,11 +2,16 @@
 {{/* https://github.com/giantswarm/cilium-app/blob/main/helm/cilium/values.yaml*/}}
 {{- define "azureCiliumHelmValues" }}
 ipam:
+<<<<<<< HEAD
   mode: kubernetes
+=======
+    mode: kubernetes
+>>>>>>> cc754fe (use default apps from cluster chart)
 k8sServiceHost: apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}
 k8sServicePort: '6443'
 kubeProxyReplacement: strict
 hubble:
+<<<<<<< HEAD
   relay:
     enabled: true
 defaultPolicies:
@@ -21,5 +26,21 @@ defaultPolicies:
       operator: Exists
 global:
   podSecurityStandards:
+=======
+    relay:
+    enabled: true
+defaultPolicies:
+    remove: true
+    enabled: false
+    tolerations:
+    - effect: NoSchedule
+        operator: Exists
+    - effect: NoExecute
+        operator: Exists
+    - key: CriticalAddonsOnly
+        operator: Exists
+global:
+    podSecurityStandards:
+>>>>>>> cc754fe (use default apps from cluster chart)
     enforced: {{ .Values.global.podSecurityStandards.enforced }}
 {{- end }}

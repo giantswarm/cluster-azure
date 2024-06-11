@@ -200,7 +200,10 @@
                             "enable": true
                         },
                         "certManager": {
+<<<<<<< HEAD
                             "configTemplateName": "azureCertManagerHelmValues",
+=======
+>>>>>>> cc754fe (use default apps from cluster chart)
                             "enable": true
                         },
                         "chartOperatorExtensions": {
@@ -224,7 +227,10 @@
                             "enable": true
                         },
                         "externalDns": {
+<<<<<<< HEAD
                             "configTemplateName": "azureExternalDnsHelmValues",
+=======
+>>>>>>> cc754fe (use default apps from cluster chart)
                             "enable": true
                         },
                         "k8sAuditMetrics": {
