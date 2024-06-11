@@ -20,6 +20,52 @@
                                 "title": "Kind",
                                 "description": "Specifies whether the resource is a config map or a secret.",
                                 "enum": [
+                                    "configMap",
+                                    "secret"
+                                ]
+                            },
+                            "name": {
+                                "type": "string",
+                                "title": "Name",
+                                "description": "Name of the config map or secret. The object must exist in the same namespace as the cluster App."
+                            },
+                            "priority": {
+                                "type": "integer",
+                                "title": "Priority",
+                                "default": 25,
+                                "max": 150,
+                                "min": 1
+                            }
+                        }
+                    }
+                },
+                "values": {
+                    "type": "object",
+                    "title": "Values",
+                    "description": "Values to be passed to the app. Values will have higher priority than values from configmaps.",
+                    "additionalProperties": true
+                }
+            }
+        },
+        "helmRelease": {
+            "type": "object",
+            "title": "App",
+            "description": "Configuration of a default app that is part of the cluster and is deployed as a HelmRelease resource.",
+            "additionalProperties": false,
+            "properties": {
+                "extraConfigs": {
+                    "type": "array",
+                    "title": "Extra config maps or secrets",
+                    "description": "Extra config maps or secrets that will be used to customize to the app. The desired values must be under configmap or secret key 'values'. The values are merged in the order given, with the later values overwriting earlier, and then inline values overwriting those. Resources must be in the same namespace as the cluster.",
+                    "items": {
+                        "type": "object",
+                        "title": "Config map or secret",
+                        "properties": {
+                            "kind": {
+                                "type": "string",
+                                "title": "Kind",
+                                "description": "Specifies whether the resource is a config map or a secret.",
+                                "enum": [
                                     "ConfigMap",
                                     "Secret"
                                 ]
@@ -147,8 +193,75 @@
                 },
                 "providerIntegration": {
                     "apps": {
+                        "capiNodeLabeler": {
+                            "enable": true
+                        },
+                        "certExporter": {
+                            "enable": true
+                        },
+                        "certManager": {
+                            "enable": true
+                        },
+                        "chartOperatorExtensions": {
+                            "enable": true
+                        },
+                        "cilium": {
+                            "configTemplateName": "azureCiliumHelmValues",
+                            "enable": true
+                        },
+                        "ciliumServiceMonitors": {
+                            "enable": true
+                        },
+                        "clusterAutoscaler": {
+                            "enable": true
+                        },
+                        "coreDns": {
+                            "configTemplateName": "azureCorednsHelmValues",
+                            "enable": true
+                        },
+                        "etcdKubernetesResourcesCountExporter": {
+                            "enable": true
+                        },
+                        "externalDns": {
+                            "enable": true
+                        },
+                        "k8sAuditMetrics": {
+                            "enable": true
+                        },
+                        "k8sDnsNodeCache": {
+                            "enable": true
+                        },
+                        "metricsServer": {
+                            "enable": true
+                        },
+                        "netExporter": {
+                            "enable": true
+                        },
                         "networkPolicies": {
-                            "configTemplateName": "azureNetworkPoliciesHelmValues"
+                            "configTemplateName": "azureNetworkPoliciesHelmValues",
+                            "enable": true
+                        },
+                        "nodeExporter": {
+                            "enable": true
+                        },
+                        "observabilityBundle": {
+                            "enable": true
+                        },
+                        "prometheusBlackboxExporter": {
+                            "enable": true
+                        },
+                        "securityBundle": {
+                            "configTemplateName": "azureSecurityBundleHelmValues",
+                            "enable": true
+                        },
+                        "teleportKubeAgent": {
+                            "enable": true
+                        },
+                        "verticalPodAutoscaler": {
+                            "enable": true
+                        },
+                        "verticalPodAutoscalerCrd": {
+                            "enable": true
                         }
                     },
                     "controlPlane": {
@@ -267,8 +380,7 @@
                     "provider": "azure",
                     "resourcesApi": {
                         "bastionResourceEnabled": false,
-                        "ciliumHelmReleaseResourceEnabled": false,
-                        "cleanupHelmReleaseResourcesEnabled": false,
+                        "cleanupHelmReleaseResourcesEnabled": true,
                         "clusterResourceEnabled": true,
                         "controlPlaneResourceEnabled": true,
                         "coreDnsHelmReleaseResourceEnabled": false,
@@ -285,9 +397,7 @@
                         },
                         "machineHealthCheckResourceEnabled": true,
                         "machinePoolResourcesEnabled": true,
-                        "networkPoliciesHelmReleaseResourceEnabled": true,
-                        "nodePoolKind": "MachineDeployment",
-                        "verticalPodAutoscalerCrdHelmReleaseResourceEnabled": false
+                        "nodePoolKind": "MachineDeployment"
                     },
                     "workers": {
                         "defaultNodePools": {
