@@ -168,7 +168,32 @@ cluster:
         infrastructureMachineTemplateSpecTemplateName: machinedeployment-azuremachinetemplate-spec
 global:
   apps:
+    azureCloudControllerManager: {}
+    azureCloudNodeManager: {}
+    azureDiskCsiDriver: {}
+    azureFileCsiDriver: {}
+    capiNodeLabeler: {}
+    certExporter: {}
+    certManager: {}
+    chartOperatorExtensions: {}
+    cilium: {}
+    ciliumServiceMonitors: {}
+    clusterAutoscaler: {}
+    coreDns: {}
+    etcdKubernetesResourcesCountExporter: {}
+    externalDns: {}
+    k8sAuditMetrics: {}
+    k8sDnsNodeCache: {}
+    metricsServer: {}
+    netExporter: {}
     networkPolicies: {}
+    nodeExporter: {}
+    observabilityBundle: {}
+    prometheusBlackboxExporter: {}
+    securityBundle: {}
+    teleportKubeAgent: {}
+    verticalPodAutoscaler: {}
+    verticalPodAutoscalerCrd: {}
   components:
     containerd:
       containerRegistries:
