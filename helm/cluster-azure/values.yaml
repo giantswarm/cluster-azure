@@ -3,6 +3,11 @@
 baseDomain: azuretest.gigantic.io
 cluster:
   internal:
+    ephemeralConfiguration:
+      apps:
+        cilium:
+          versionOverride: 0.24.0-651c15f48577b533601268090166dda685f4ad22
+          catalogOverride: default-test
     advancedConfiguration:
       controlPlane:
         etcd:
