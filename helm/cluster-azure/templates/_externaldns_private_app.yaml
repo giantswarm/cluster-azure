@@ -66,4 +66,4 @@ spec:
       namespace: {{ .Release.Namespace }}
     context:
       name: {{ include "resource.default.name" . }}-admin@{{ include "resource.default.name" . }}
-{{ - end }}
+{{- end }}
