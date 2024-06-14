@@ -1,7 +1,6 @@
 {{/* Azure-specific cilium Helm values*/}}
 {{/* https://github.com/giantswarm/cert-manager-app/blob/main/helm/cert-manager/values.yaml*/}}
 {{- define "azureCertManagerHelmValues" }}
-{{- if $.Values.global.providerSpecific}}
 # cert-manager's DNS01 solver by default tries to reach authoritative nameservers directly, using
 # their public IPs. Since those are not reachable from private clusters, we instead rely on the
 # recursive nameserver
@@ -13,7 +12,7 @@
 dns01RecursiveNameserversOnly: true
 ciliumNetworkPolicy:
   enabled: true
-{{- if .Values.global.connectivity.network.mode == "private" }}
+{{- if eq .Values.global.connectivity.network.mode "private" }}
 dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 giantSwarmClusterIssuer:
   acme:
@@ -26,6 +25,5 @@ giantSwarmClusterIssuer:
     resourceGroupName: {{ include "resource.default.name" $ }}
     subscriptionID: {{ .Values.global.providerSpecific.subscriptionID }}
     identityClientID: {{ .Values.global.providerSpecific.identityClientID }}
-{{- end }}
 {{- end }}
 {{- end }}

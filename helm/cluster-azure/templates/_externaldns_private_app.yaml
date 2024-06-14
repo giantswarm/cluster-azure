@@ -1,5 +1,5 @@
 {{/* Azure-specific external-dns app for private clusters */}}
-{{- if .Values.global.connectivity.network.mode == "private" }}
+{{- if eq .Values.global.connectivity.network.mode "private" }}
 {{- define "azureExternalDnsHelmValues" }}
 provider: azure-private-dns
 clusterID: {{ include "resource.default.name" $ }}
