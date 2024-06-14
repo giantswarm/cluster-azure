@@ -1,5 +1,4 @@
 {{/* Azure-specific external-dns app for private clusters */}}
-{{- if eq .Values.global.connectivity.network.mode "private" }}
 {{- define "azureExternalDnsHelmValues" }}
 provider: azure-private-dns
 clusterID: {{ include "resource.default.name" $ }}
@@ -20,6 +19,7 @@ extraVolumeMounts:
     mountPath: /etc/kubernetes
     readOnly: true
 {{- end -}}
+{{- if eq .Values.global.connectivity.network.mode "private" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

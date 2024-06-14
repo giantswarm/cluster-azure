@@ -213,7 +213,7 @@ Properties within the `.global.providerSpecific` object
 | `global.providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
 | `global.providerSpecific.identity` | **Identity**|**Type:** `object`<br/>|
 | `global.providerSpecific.identity.systemAssignedScope` | **Scope of SystemAssignedIdentity**|**Type:** `string`<br/>**Default:** `"ResourceGroup"`|
-| `global.providerSpecific.identityClientID` | **Identity Client ID** - Identity Client ID - only necessary for management clusters|**Type:** `string`<br/>|
+| `global.providerSpecific.identityClientID` | **Identity Client ID** - Identity Client ID - only necessary for management clusters.|**Type:** `string`<br/>|
 | `global.providerSpecific.location` | **Location**|**Type:** `string`<br/>**Default:** `"westeurope"`|
 | `global.providerSpecific.network` | **Azure network settings** - Azure VNet peering and other Azure-specific network settings.|**Type:** `object`<br/>|
 | `global.providerSpecific.network.peerings` | **VNet peerings** - Specifying VNets (their resource groups and names) to which the peering is established.|**Type:** `array`<br/>**Default:** `[]`|
