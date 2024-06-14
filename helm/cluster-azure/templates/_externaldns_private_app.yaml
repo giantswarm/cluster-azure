@@ -1,5 +1,5 @@
 {{/* Azure-specific external-dns app for private clusters */}}
-{{- define "azureExternalDnsHelmValues" }}
+{{- define "azureExternalDnsPrivateHelmValues" }}
 provider: azure-private-dns
 clusterID: {{ include "resource.default.name" $ }}
 crd:
@@ -29,7 +29,7 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
 data:
   values: |
-    {{- $azureExternalDnsHelmValues | toYaml | nindent 4 }}
+    {{- $azureExternalDnsPrivateHelmValues | toYaml | nindent 4 }}
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App
