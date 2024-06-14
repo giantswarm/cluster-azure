@@ -200,6 +200,7 @@
                             "enable": true
                         },
                         "certManager": {
+                            "configTemplateName": "azureCertManagerHelmValues",
                             "enable": true
                         },
                         "chartOperatorExtensions": {
@@ -223,6 +224,7 @@
                             "enable": true
                         },
                         "externalDns": {
+                            "configTemplateName": "azureExternalDnsHelmValues",
                             "enable": true
                         },
                         "k8sAuditMetrics": {
@@ -1241,6 +1243,11 @@
                                     "default": "ResourceGroup"
                                 }
                             }
+                        },
+                        "identityClientID": {
+                            "type": "string",
+                            "title": "Identity Client ID",
+                            "description": "Identity Client ID - only necessary for management clusters"
                         },
                         "location": {
                             "type": "string",

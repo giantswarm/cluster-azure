@@ -1,0 +1,72 @@
+{{/* Azure-specific external-dns app for private clusters */}}
+{{- if .Values.global.connectivity.network.mode == "private" }}
+{{- define "azureExternalDnsHelmValues" }}
+provider: azure-private-dns
+clusterID: {{ include "resource.default.name" $ }}
+crd:
+  install: false
+domainFilters:
+  - "{{ .Values.global.connectivity.baseDomain }}"
+txtOwnerId: giantswarm-io-external-dns
+txtPrefix: {{ include "resource.default.name" $ }}
+sources:
+  - service
+extraVolumes:
+  - name: azure-config-file
+    hostPath:
+      path: /etc/kubernetes
+extraVolumeMounts:
+  - name: azure-config-file
+    mountPath: /etc/kubernetes
+    readOnly: true
+{{- end -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "resource.default.name" . }}-external-dns-private-user-values
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+data:
+  values: |
+    {{- $azureExternalDnsHelmValues | toYaml | nindent 4 }}
+---
+apiVersion: application.giantswarm.io/v1alpha1
+kind: App
+metadata:
+  name: {{ include "resource.default.name" . }}-external-dns-private
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+    giantswarm.io/managed-by: {{ .Chart.Name }}
+spec:
+  catalog: default
+  name: external-dns
+  # repo: giantswarm/external-dns-app
+  version: 1.16.0
+  namespace: kube-system
+  config:
+    configMap:
+      name: {{ include "resource.default.name" . }}-cluster-values
+      namespace: {{ .Release.Namespace }}
+  userConfig:
+    configMap:
+      name: {{ include "resource.default.name" . }}-external-dns-private-user-values
+      namespace: {{ .Release.Namespace }}
+  {{- if .Values.global.apps.externalDnsPrivate.extraConfigs }}
+  extraConfigs:
+  {{- range .Values.global.apps.externalDnsPrivate.extraConfigs }}
+  - kind: {{ .kind }}
+    name: {{ .name }}
+    namespace: {{ .namespace | default $.Release.Namespace }}
+    priority: {{ .priority }}
+  {{- end }}
+  {{- end }}
+  kubeConfig:
+    inCluster: false
+    secret:
+      name: {{ include "resource.default.name" . }}-kubeconfig
+      namespace: {{ .Release.Namespace }}
+    context:
+      name: {{ include "resource.default.name" . }}-admin@{{ include "resource.default.name" . }}
+{{ - end }}

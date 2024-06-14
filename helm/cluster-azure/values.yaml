@@ -14,6 +14,7 @@ cluster:
       certExporter:
         enable: true
       certManager:
+        configTemplateName: azureCertManagerHelmValues
         enable: true
       chartOperatorExtensions:
         enable: true
@@ -30,6 +31,7 @@ cluster:
       etcdKubernetesResourcesCountExporter:
         enable: true
       externalDns:
+        configTemplateName: azureExternalDnsHelmValues
         enable: true
       k8sAuditMetrics:
         enable: true
