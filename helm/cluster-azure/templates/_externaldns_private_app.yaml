@@ -1,24 +1,4 @@
 {{/* Azure-specific external-dns app for private clusters */}}
-{{- define "azureExternalDnsPrivateHelmValues" }}
-provider: azure-private-dns
-clusterID: {{ include "resource.default.name" $ }}
-crd:
-  install: false
-domainFilters:
-  - "{{ .Values.global.connectivity.baseDomain }}"
-txtOwnerId: giantswarm-io-external-dns
-txtPrefix: {{ include "resource.default.name" $ }}
-sources:
-  - service
-extraVolumes:
-  - name: azure-config-file
-    hostPath:
-      path: /etc/kubernetes
-extraVolumeMounts:
-  - name: azure-config-file
-    mountPath: /etc/kubernetes
-    readOnly: true
-{{- end -}}
 {{- if eq .Values.global.connectivity.network.mode "private" }}
 apiVersion: v1
 kind: ConfigMap
@@ -29,7 +9,24 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
 data:
   values: |
-    {{- $azureExternalDnsPrivateHelmValues | toYaml | nindent 4 }}
+    provider: azure-private-dns
+    clusterID: {{ include "resource.default.name" $ }}
+    crd:
+      install: false
+    domainFilters:
+      - "{{ .Values.global.connectivity.baseDomain }}"
+    txtOwnerId: giantswarm-io-external-dns
+    txtPrefix: {{ include "resource.default.name" $ }}
+    sources:
+      - service
+    extraVolumes:
+      - name: azure-config-file
+        hostPath:
+          path: /etc/kubernetes
+    extraVolumeMounts:
+      - name: azure-config-file
+        mountPath: /etc/kubernetes
+        readOnly: true
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App
