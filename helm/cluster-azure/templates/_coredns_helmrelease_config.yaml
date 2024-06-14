@@ -13,5 +13,5 @@ cluster:
       IP: {{ include "clusterDNS" $ | quote }}
 global:
   podSecurityStandards:
-  enforced: {{ .Values.global.podSecurityStandards.enforced }}
+    enforced: {{ .Values.global.podSecurityStandards.enforced }}
 {{- end }}
