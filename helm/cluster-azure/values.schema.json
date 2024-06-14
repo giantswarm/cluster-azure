@@ -1247,7 +1247,7 @@
                         "identityClientID": {
                             "type": "string",
                             "title": "Identity Client ID",
-                            "description": "Identity Client ID - only necessary for management clusters"
+                            "description": "Identity Client ID - only necessary for management clusters."
                         },
                         "location": {
                             "type": "string",
