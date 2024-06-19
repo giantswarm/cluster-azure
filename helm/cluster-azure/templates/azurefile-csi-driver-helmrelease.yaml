@@ -3,11 +3,7 @@
 {{- define "defaultAzureFileCsiDriverHelmValues" }}
 provider: capz
 global:
-<<<<<<< HEAD
   podSecurityStandards:
-=======
-    podSecurityStandards:
->>>>>>> cc754fe (use default apps from cluster chart)
     enforced: {{ .Values.global.podSecurityStandards.enforced }}
 {{- end }}
 apiVersion: helm.toolkit.fluxcd.io/v2beta1

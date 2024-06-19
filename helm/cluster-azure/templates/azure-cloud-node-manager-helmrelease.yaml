@@ -46,12 +46,9 @@ spec:
   install:
     remediation:
       retries: 30
-<<<<<<< HEAD
-=======
   # Default values
   # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
   values:
->>>>>>> cc754fe (use default apps from cluster chart)
   {{- $azureCloudNodeManagerHelmValues := (include "defaultAzureCloudNodeManagerHelmValues" .) | fromYaml -}}
   {{- $customAzureCloudNodeManagerHelmValues := $.Values.global.apps.azureCloudNodeManager.values -}}
   {{- if $customAzureCloudNodeManagerHelmValues }}
