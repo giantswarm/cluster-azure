@@ -421,6 +421,39 @@
                                             }
                                         ]
                                     }
+                                },
+                                "localRegistryCache": {
+                                    "type": "object",
+                                    "title": "Local registry caches configuration",
+                                    "description": "Enable local cache via http://127.0.0.1:<PORT>.",
+                                    "required": [
+                                        "enabled",
+                                        "port"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean",
+                                            "title": "Enable local registry caches",
+                                            "description": "Flag to enable local registry cache.",
+                                            "default": false
+                                        },
+                                        "mirroredRegistries": {
+                                            "type": "array",
+                                            "title": "Registries to cache locally",
+                                            "description": "A list of registries that should be cached.",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "default": []
+                                        },
+                                        "port": {
+                                            "type": "integer",
+                                            "title": "Local port for the registry cache",
+                                            "description": "Port for the local registry cache under: http://127.0.0.1:<PORT>.",
+                                            "default": 32767
+                                        }
+                                    }
                                 }
                             }
                         }
