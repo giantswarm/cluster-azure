@@ -48,7 +48,6 @@ spec:
       retries: 30
   # Default values
   # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
-  values:
   {{- $azureCloudNodeManagerHelmValues := (include "defaultAzureCloudNodeManagerHelmValues" .) | fromYaml -}}
   {{- $customAzureCloudNodeManagerHelmValues := $.Values.global.apps.azureCloudNodeManager.values -}}
   {{- if $customAzureCloudNodeManagerHelmValues }}
