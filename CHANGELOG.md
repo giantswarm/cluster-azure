@@ -7,12 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Update cluster chart to v0.32.0. More details in [cluster chart v0.32.0 release notes](https://github.com/giantswarm/cluster/releases/tag/v0.32.0).
-
-### Changed
-
+- Update `cluster` chart to v0.32.0. More details in [cluster chart v0.32.0 release notes](https://github.com/giantswarm/cluster/releases/tag/v0.32.0).
 - Use MachineHealth resource from `cluster` chart.
 
 ## [0.12.0] - 2024-05-30
