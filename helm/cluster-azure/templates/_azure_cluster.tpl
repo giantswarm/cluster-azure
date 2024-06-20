@@ -4,6 +4,7 @@ kind: AzureCluster
 metadata:
   labels:
     {{- include "labels.common" $ | nindent 4 }}
+    {{- include "preventDeletionLabel" $ | nindent 4 -}}
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
