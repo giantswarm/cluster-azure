@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2024-06-19
+
 ### Changed
 
+- Update `cluster` chart to v0.32.0. More details in [cluster chart v0.32.0 release notes](https://github.com/giantswarm/cluster/releases/tag/v0.32.0).
 - Use MachineHealth resource from `cluster` chart.
 
 ## [0.12.0] - 2024-05-30
@@ -540,7 +543,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.12.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/giantswarm/cluster-azure/compare/v0.12.0...v0.13.0
 [0.12.0]: https://github.com/giantswarm/cluster-azure/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/giantswarm/cluster-azure/compare/v0.10.0...v0.11.0
 [0.10.0]: https://github.com/giantswarm/cluster-azure/compare/v0.9.0...v0.10.0
