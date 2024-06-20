@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move apps from `default-apps-azure` to `cluster-azure`.
 
 <details>
-<summary>How to migrate to v0.14.0</summary>
+<summary>How to migrate to cluster-azure v0.14.0</summary>
 
 * Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0). 
 * In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`. 
