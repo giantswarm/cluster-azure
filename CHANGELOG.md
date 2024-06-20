@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Delete `<cluster name>-default-apps` App. 
 * Update `<cluster name>` to the latest version of `cluster-azure` (v0.14.0).
 
+</details>
+
 ## [0.13.0] - 2024-06-19
 
 ### Changed
