@@ -1,4 +1,4 @@
-{{/* Azure-specific cilium Helm values*/}}
+{{/* Azure-specific cert-manager Helm values*/}}
 {{/* https://github.com/giantswarm/cert-manager-app/blob/main/helm/cert-manager/values.yaml*/}}
 {{- define "azureCertManagerHelmValues" }}
 # cert-manager's DNS01 solver by default tries to reach authoritative nameservers directly, using
