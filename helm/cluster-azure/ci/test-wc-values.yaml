@@ -2,6 +2,7 @@ global:
   metadata:
     name: test-wc
     organization: test
+    preventDeletion: false
     servicePriority: lowest
     labels:
       cluster.giantswarm.io/test: value1

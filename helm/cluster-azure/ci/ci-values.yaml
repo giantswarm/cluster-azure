@@ -5,6 +5,7 @@ global:
   metadata:
     name: test-wc
     organization: test
+    preventDeletion: false
     servicePriority: lowest
     labels:
       test.io/testing: test-label
