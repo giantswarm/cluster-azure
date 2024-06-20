@@ -24,7 +24,7 @@ cluster:
       ciliumServiceMonitors:
         enable: true
       clusterAutoscaler:
-        enable: true
+        enable: false
       coreDns:
         configTemplateName: azureCorednsHelmValues
         enable: true

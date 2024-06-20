@@ -214,7 +214,7 @@
                             "enable": true
                         },
                         "clusterAutoscaler": {
-                            "enable": true
+                            "enable": false
                         },
                         "coreDns": {
                             "configTemplateName": "azureCorednsHelmValues",
