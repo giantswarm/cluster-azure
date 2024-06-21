@@ -3,6 +3,7 @@ global:
   metadata:
     name: test-mc
     organization: test
+    preventDeletion: false
     servicePriority: lowest
   connectivity:
     network:

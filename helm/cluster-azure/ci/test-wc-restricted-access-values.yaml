@@ -2,6 +2,7 @@ global:
   metadata:
     name: test-wc-restricted
     organization: test
+    preventDeletion: false
     servicePriority: lowest
   connectivity:
     allowedCIDRs:

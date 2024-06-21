@@ -45,6 +45,12 @@ room for such suffix.
 {{- .Values.global.metadata.name | default (.Release.Name | replace "." "-" | trunc 47 | trimSuffix "-") -}}
 {{- end -}}
 
+{{- define "preventDeletionLabel" -}}
+{{- if $.Values.global.metadata.preventDeletion -}}
+giantswarm.io/prevent-deletion: "true"
+{{ end -}}
+{{- end -}}
+
 {{/*
 The default name for our images in the Community Gallery is  "capi-flatcar-stable-<KUBERNETES_VERSION>-gen2-gs",
 use it when no value is passed in

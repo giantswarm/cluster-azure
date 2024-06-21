@@ -2,6 +2,7 @@ global:
   metadata:
     name: test-wc-private
     organization: test
+    preventDeletion: false
     servicePriority: lowest
   connectivity:
     network:
