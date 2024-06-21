@@ -14,7 +14,7 @@ data:
     crd:
       install: false
     domainFilters:
-      - "{{ .Values.global.connectivity.baseDomain }}"
+      - "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
     txtOwnerId: giantswarm-io-external-dns
     txtPrefix: {{ include "resource.default.name" $ }}
     sources:
@@ -38,9 +38,9 @@ metadata:
     giantswarm.io/managed-by: {{ .Chart.Name }}
 spec:
   catalog: default
-  name: external-dns
+  name: external-dns-app
   # repo: giantswarm/external-dns-app
-  version: 1.16.0
+  version: 3.1.0
   namespace: kube-system
   config:
     configMap:

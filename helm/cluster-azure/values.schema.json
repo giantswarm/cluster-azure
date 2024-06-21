@@ -535,6 +535,12 @@
                             "title": "external-dns",
                             "description": "Configuration of external-dns. For all available values see https://github.com/giantswarm/external-dns-app."
                         },
+                        "externalDnsPrivate": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "external-dns-private",
+                            "description": "Configuration of external-dns private. For all available values see https://github.com/giantswarm/external-dns-app."
+                        },
                         "k8sAuditMetrics": {
                             "$ref": "#/$defs/app",
                             "type": "object",
