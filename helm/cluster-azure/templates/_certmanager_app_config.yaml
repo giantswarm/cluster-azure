@@ -16,14 +16,14 @@ ciliumNetworkPolicy:
 dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 giantSwarmClusterIssuer:
   acme:
-  http01:
-     enabled: false
-  dns01:
-    azureDNS:
-    enabled: true
-    zoneName: "{{ .Values.baseDomain }}"
-    resourceGroupName: {{ include "resource.default.name" $ }}
-    subscriptionID: {{ .Values.global.providerSpecific.subscriptionID }}
-    identityClientID: {{ .Values.global.providerSpecific.identityClientID }}
+    http01:
+       enabled: false
+    dns01:
+      azureDNS:
+        enabled: true
+        zoneName: "{{ .Values.global.connectivity.baseDomain }}"
+        resourceGroupName: {{ include "resource.default.name" $ }}
+        subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
+        identityClientID: {{ .Values.global.providerSpecific.identityClientID }}
 {{- end }}
 {{- end }}
