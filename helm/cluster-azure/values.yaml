@@ -184,6 +184,7 @@ global:
     coreDns: {}
     etcdKubernetesResourcesCountExporter: {}
     externalDns: {}
+    externalDnsPrivate: {}
     k8sAuditMetrics: {}
     k8sDnsNodeCache: {}
     metricsServer: {}
