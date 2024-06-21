@@ -21,7 +21,7 @@ giantSwarmClusterIssuer:
     dns01:
       azureDNS:
         enabled: true
-        zoneName: "{{ .Values.global.connectivity.baseDomain }}"
+        zoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
         resourceGroupName: {{ include "resource.default.name" $ }}
         subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
         identityClientID: {{ .Values.global.providerSpecific.identityClientID }}
