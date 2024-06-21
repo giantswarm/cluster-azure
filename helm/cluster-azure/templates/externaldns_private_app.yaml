@@ -38,9 +38,9 @@ metadata:
     giantswarm.io/managed-by: {{ .Chart.Name }}
 spec:
   catalog: default
-  name: external-dns
+  name: external-dns-app
   # repo: giantswarm/external-dns-app
-  version: 1.16.0
+  version: 3.1.0
   namespace: kube-system
   config:
     configMap:
