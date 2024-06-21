@@ -11,6 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `global.metadata.preventDeletion` to add the [deletion prevention label](https://docs.giantswarm.io/advanced/deletion-prevention/) to cluster resources
 
+## [0.14.0] - 2024-06-21
+
+### **Breaking change**
+
+- Move apps from `default-apps-azure` to `cluster-azure`.
+
+<details>
+<summary>How to migrate to cluster-azure v0.14.0</summary>
+
+* Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0). 
+* In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`. 
+* Delete `<cluster name>-default-apps` App. 
+* Update `<cluster name>` to the latest version of `cluster-azure` (v0.14.0).
+
+</details>
+
 ## [0.13.0] - 2024-06-19
 
 ### Changed
@@ -547,7 +563,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.13.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.14.0...HEAD
+[0.14.0]: https://github.com/giantswarm/cluster-azure/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/giantswarm/cluster-azure/compare/v0.12.0...v0.13.0
 [0.12.0]: https://github.com/giantswarm/cluster-azure/compare/v0.11.0...v0.12.0
 [0.11.0]: https://github.com/giantswarm/cluster-azure/compare/v0.10.0...v0.11.0
