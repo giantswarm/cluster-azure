@@ -23,7 +23,7 @@ giantSwarmClusterIssuer:
       enabled: true
       zoneName: "{{ .Values.global.connectivity.baseDomain }}"
       resourceGroupName: {{ include "resource.default.name" $ }}
-      subscriptionID: {{ .Values.global.providerSpecific.subscriptionID }}
+      subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
       identityClientID: {{ .Values.global.providerSpecific.identityClientID }}
 {{- end }}
 {{- end }}
