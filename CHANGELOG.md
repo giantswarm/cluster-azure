@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Update `azurefile-csi-driver-app` to `1.30.2-gs1`
+
 ## [0.14.1] - 2024-06-21
 
 ### Added
