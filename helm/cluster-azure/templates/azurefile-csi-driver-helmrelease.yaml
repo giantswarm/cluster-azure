@@ -29,7 +29,7 @@ spec:
       chart: azurefile-csi-driver-app
       # used by renovate
       # repo: giantswarm/azurefile-csi-driver-app
-      version: 1.26.0-gs5
+      version: 1.30.2-gs1
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default

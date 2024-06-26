@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use `.Values.global.managementCluster` for teleport node labels.
 
+## [0.14.2] - 2024-06-25
+
+### Changed
+
+* Update `azurefile-csi-driver-app` to `1.30.2-gs1`
+
 ## [0.14.1] - 2024-06-21
 
 ### Added
@@ -575,7 +581,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.14.1...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.14.2...HEAD
+[0.14.2]: https://github.com/giantswarm/cluster-azure/compare/v0.14.1...v0.14.2
 [0.14.1]: https://github.com/giantswarm/cluster-azure/compare/v0.14.0...v0.14.1
 [0.14.0]: https://github.com/giantswarm/cluster-azure/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/giantswarm/cluster-azure/compare/v0.12.0...v0.13.0
