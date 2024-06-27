@@ -34,6 +34,14 @@ global:
   providerSpecific:
     location: "westeurope"
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
+  release:
+    version: v25.0.0
+
+cluster:
+   internal:
+     ephemeralConfiguration:
+       offlineTesting:
+         renderWithoutReleaseResource: true
 
 internal:
   kubernetesVersion: 1.25.10
