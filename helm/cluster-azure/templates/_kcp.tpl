@@ -31,9 +31,6 @@ subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
 
 {{- define "control-plane" }}
-{{- $osImageVersion := include "cluster.component.flatcar.version" $ }}
-{{- $osImageVariant := include "cluster.component.flatcar.variant" $ }}
-{{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:

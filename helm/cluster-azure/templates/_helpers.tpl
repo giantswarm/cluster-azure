@@ -57,6 +57,7 @@ The default name for our images in the Community Gallery is  "capi-flatcar-stabl
 use it when no value is passed in
 */}}
 {{- define "flatcarImageName" -}}
+{{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
 {{ printf "capi-flatcar-stable-%s-gen2-gs" $kubernetesVersion }}
 {{- end -}}
 
