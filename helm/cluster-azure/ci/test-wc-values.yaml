@@ -38,10 +38,10 @@ global:
     version: v25.0.0
 
 cluster:
-   internal:
-     ephemeralConfiguration:
-       offlineTesting:
-         renderWithoutReleaseResource: true
+  internal:
+    ephemeralConfiguration:
+      offlineTesting:
+        renderWithoutReleaseResource: true
 
 internal:
   kubernetesVersion: 1.25.10
