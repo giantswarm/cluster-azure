@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### **Breaking change**
+
+- Support for Release CR's.
+
 ### Changed
 
 - Use `.Values.global.managementCluster` for teleport node labels.

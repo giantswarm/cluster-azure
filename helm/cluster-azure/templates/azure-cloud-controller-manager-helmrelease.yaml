@@ -34,9 +34,9 @@ spec:
   chart:
     spec:
       chart: azure-cloud-controller-manager-app
-      # used by renovate
-      # repo: giantswarm/azure-cloud-controller-manager-app
-      version: 1.24.18-gs6
+      {{- $_ := set $ "appName" "azure-cloud-controller-manager" }}
+      {{- $appVersion := include "cluster.app.version" $ }}
+      version: {{ $appVersion }}
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default

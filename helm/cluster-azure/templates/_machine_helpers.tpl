@@ -4,11 +4,13 @@ Helpers to reuse when defining specs for MachinePools and MachineDeployments
 
 {{- define "machinedeployment-azuremachinetemplate-spec" -}}
 {{- include "renderIdentityConfiguration" $ }}
+{{- $osImageVersion := include "cluster.component.flatcar.version" $ }}
+{{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
 image:
   computeGallery:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
-    name: {{ include "flatcarImageName" $ }}
-    version: {{ $.osImage.version }}
+    name: {{ include "flatcarImageName" $kubernetesVersion }}
+    version: {{ $osImageVersion }}
 osDisk:
   diskSizeGB: {{ .nodePool.rootVolumeSizeGB | default 50 }}
   managedDisk:
