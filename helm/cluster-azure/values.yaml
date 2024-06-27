@@ -148,7 +148,6 @@ cluster:
       machineHealthCheckResourceEnabled: true
       machinePoolResourcesEnabled: true
       nodePoolKind: MachineDeployment
-    useReleases: true
     workers:
       defaultNodePools:
         def00:
@@ -256,7 +255,6 @@ global:
     location: westeurope
     network:
       peerings: []
-  release: {}
 internal:
   defaults:
     evictionMinimumReclaim: imagefs.available=5%,memory.available=100Mi,nodefs.available=5%

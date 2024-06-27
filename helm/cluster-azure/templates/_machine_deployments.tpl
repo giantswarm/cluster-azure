@@ -1,9 +1,8 @@
 {{- define "machine-deployments" -}}
 {{- range $nodePoolName, $nodePool := .Values.global.nodePools | default .Values.cluster.providerIntegration.workers.defaultNodePools }}
 {{- $_ := set $ "nodePool" (dict "name" $nodePoolName "config" $nodePool) }}
-{{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
-{{- $osImageVersion := include "cluster.component.flatcar.version" $ }}
-{{- $osImageVariant := include "cluster.component.flatcar.variant" $ }}
+{{- $_ := set $ "osImage" $.Values.cluster.providerIntegration.osImage }}
+{{- $_ = set $ "kubernetesVersion" $.Values.cluster.providerIntegration.kubernetesVersion }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureMachineTemplate
 metadata:

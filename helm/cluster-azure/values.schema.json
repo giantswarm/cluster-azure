@@ -401,7 +401,6 @@
                         "machinePoolResourcesEnabled": true,
                         "nodePoolKind": "MachineDeployment"
                     },
-                    "useReleases": true,
                     "workers": {
                         "defaultNodePools": {
                             "def00": {
@@ -442,8 +441,7 @@
             "title": "Global",
             "description": "Properties that are available to all charts and subcharts.",
             "required": [
-                "metadata",
-                "release"
+                "metadata"
             ],
             "additionalProperties": true,
             "properties": {
@@ -1356,20 +1354,6 @@
                             "maxLength": 36,
                             "minLength": 36,
                             "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
-                        }
-                    }
-                },
-                "release": {
-                    "type": "object",
-                    "title": "Release",
-                    "description": "Information about the workload cluster release.",
-                    "required": [
-                        "version"
-                    ],
-                    "properties": {
-                        "version": {
-                            "type": "string",
-                            "title": "Version"
                         }
                     }
                 }

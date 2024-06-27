@@ -30,9 +30,9 @@ spec:
   chart:
     spec:
       chart: azure-cloud-node-manager-app
-      {{- $_ := set $ "appName" "azure-cloud-node-manager" }}
-      {{- $appVersion := include "cluster.app.version" $ }}
-      version: {{ $appVersion }}
+      # used by renovate
+      # repo: giantswarm/azure-cloud-node-manager-app
+      version: 1.24.18-gs6
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default

@@ -22,7 +22,6 @@ Common labels
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
-release.giantswarm.io/version: {{ .Values.global.release.version | trimPrefix "v" | quote }}
 {{- end -}}
 
 {{/*
@@ -57,7 +56,11 @@ The default name for our images in the Community Gallery is  "capi-flatcar-stabl
 use it when no value is passed in
 */}}
 {{- define "flatcarImageName" -}}
-{{ printf "capi-flatcar-stable-%s-gen2-gs" $.kubernetesVersion }}
+{{- if empty $.osImage.name -}}
+{{ printf "capi-flatcar-%s-%s-gen2-gs" $.osImage.channel $.kubernetesVersion }}
+{{- else -}}
+{{ $.osImage.name }}
+{{- end -}}
 {{- end -}}
 
 {{/*

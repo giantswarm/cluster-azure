@@ -38,9 +38,9 @@ spec:
   chart:
     spec:
       chart: azuredisk-csi-driver-app
-      {{- $_ := set $ "appName" "azuredisk-csi-driver" }}
-      {{- $appVersion := include "cluster.app.version" $ }}
-      version: {{ $appVersion }}
+      # used by renovate
+      # repo: giantswarm/azuredisk-csi-driver-app
+      version: 1.26.2-gs6
       sourceRef:
         kind: HelmRepository
         name: {{ include "resource.default.name" $ }}-default

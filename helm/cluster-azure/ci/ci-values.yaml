@@ -25,11 +25,3 @@ global:
   providerSpecific:
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
   managementCluster: MCCLUSTER
-  release:
-    version: v25.0.0
-
-cluster:
-   internal:
-     ephemeralConfiguration:
-       offlineTesting:
-         renderWithoutReleaseResource: true
