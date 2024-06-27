@@ -1,12 +1,12 @@
 {{- define "controlplane-azuremachinetemplate-spec" -}}
 {{ $identity := dict "type" "controlPlane" "Values" $.Values "Release" $.Release }}
 {{- include "renderIdentityConfiguration" $identity }}
-{{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
 {{- $osImageVersion := include "cluster.component.flatcar.version" $ }}
+{{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
 image:
   computeGallery:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
-    name: {{ include "flatcarImageName" $ }}
+    name: {{ include "flatcarImageName" $kubernetesVersion }}
     version: {{ $osImageVersion }}
 dataDisks:
   - diskSizeGB: {{ $.Values.global.controlPlane.etcdVolumeSizeGB }}
