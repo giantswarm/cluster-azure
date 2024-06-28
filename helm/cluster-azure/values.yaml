@@ -33,6 +33,8 @@ cluster:
       externalDns:
         configTemplateName: azureExternalDnsHelmValues
         enable: true
+      giantswarmClusterSuite:
+        enable: true
       k8sAuditMetrics:
         enable: true
       k8sDnsNodeCache:
@@ -185,6 +187,7 @@ global:
     etcdKubernetesResourcesCountExporter: {}
     externalDns: {}
     externalDnsPrivate: {}
+    giantswarmClusterSuite: {}
     k8sAuditMetrics: {}
     k8sDnsNodeCache: {}
     metricsServer: {}
