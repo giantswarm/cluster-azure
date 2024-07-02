@@ -227,6 +227,9 @@
                             "configTemplateName": "azureExternalDnsHelmValues",
                             "enable": true
                         },
+                        "giantswarmClusterSuite": {
+                            "enable": true
+                        },
                         "k8sAuditMetrics": {
                             "enable": true
                         },
@@ -540,6 +543,12 @@
                             "type": "object",
                             "title": "external-dns-private",
                             "description": "Configuration of external-dns private. For all available values see https://github.com/giantswarm/external-dns-app."
+                        },
+                        "giantswarmClusterSuite": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "giantswarm-cluster-suite",
+                            "description": "Configuration of giantswarm-cluster-suite. For all available values see https://github.com/giantswarm/giantswarm-cluster-suite."
                         },
                         "k8sAuditMetrics": {
                             "$ref": "#/$defs/app",
