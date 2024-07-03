@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### **Breaking change**
+### :warn: **Breaking change** :warn:
 
 - Support for Release CR's.
 
