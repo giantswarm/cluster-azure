@@ -11,10 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support for Release CR's.
 
+<details>
 <summary>How to migrate to cluster-azure</summary>
 
 * In ConfigMap `<cluster name>-userconfig` set `.Values.gloabl.release` to the release version, e.g. `25.0.0`. 
-* In App `<cluster name>` set the `version` to a empty string.
+* In App `<cluster name>` set the `version` to an empty string.
+</details>
 
 ### Fixed
 
