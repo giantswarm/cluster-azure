@@ -6,7 +6,7 @@
 image:
   computeGallery:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
-    name: {{ printf "flatcar-stable-%s-v%s" $flatcarVersion $kubernetesVersion }}
+    name: {{ printf "flatcar-stable-%s-kube-v%s-gs" $flatcarVersion $kubernetesVersion }}
     version: {{ $flatcarVersion }}
 dataDisks:
   - diskSizeGB: {{ $.Values.global.controlPlane.etcdVolumeSizeGB }}
