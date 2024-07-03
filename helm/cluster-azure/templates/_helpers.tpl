@@ -53,14 +53,6 @@ giantswarm.io/prevent-deletion: "true"
 {{- end -}}
 
 {{/*
-The default name for our images in the Community Gallery is  "capi-flatcar-stable-<KUBERNETES_VERSION>-gen2-gs",
-use it when no value is passed in
-*/}}
-{{- define "flatcarImageName" -}}
-{{ printf "capi-flatcar-stable-%s-gen2-gs" . }}
-{{- end -}}
-
-{{/*
 List of admission plugins to enable based on apiVersion
 
 When comparing the KubernetesVersion we must use the Target version of the cluster we are about to insteall
