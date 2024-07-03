@@ -12,14 +12,14 @@ image:
     name: {{ include "flatcarImageName" $kubernetesVersion }}
     version: {{ $osImageVersion }}
 osDisk:
-  diskSizeGB: {{ .nodePool.rootVolumeSizeGB | default 50 }}
+  diskSizeGB: {{ .nodePool.config.rootVolumeSizeGB | default 50 }}
   managedDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 securityProfile:
-  encryptionAtHost: {{ .nodePool.encryptionAtHost }}
+  encryptionAtHost: {{ .nodePool.config.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
-vmSize: {{ .nodePool.instanceType | default "Standard_D4s_v5" }}
+vmSize: {{ .nodePool.config.instanceType | default "Standard_D4s_v5" }}
 {{- if ( include "network.subnets.nodes.name" $ ) }}
 subnetName: {{ include "network.subnets.nodes.name" $ }}
 {{- end }}

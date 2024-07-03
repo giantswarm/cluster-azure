@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support for Release CR's.
 
+### Fixed
+
+- Use correct context at `MachineDeployment` helper.
+
 ### Changed
 
 - Use `.Values.global.managementCluster` for teleport node labels.
