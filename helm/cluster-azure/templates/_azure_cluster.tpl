@@ -81,8 +81,14 @@ spec:
         - {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         allowedSubscriptions:
         - {{ .Values.global.providerSpecific.subscriptionId }}
+        {{- range .Values.global.providerSpecific.allowedSubscriptions }}
+        - {{ . }}
+        {{- end }}
         autoApprovedSubscriptions:
         - {{ .Values.global.providerSpecific.subscriptionId }}
+        {{- range .Values.global.providerSpecific.allowedSubscriptions }}
+        - {{ . }}
+        {{- end }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
     {{end}}

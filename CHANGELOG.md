@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add `allowedSubscriptions` parameter for multi-subscription use case.
+
 ### Fixed
 
 - Use correct context at `MachineDeployment` helper.
