@@ -247,6 +247,7 @@ global:
     enforced: true
   providerSpecific:
     additionalResourceTags: {}
+    allowedSubscriptions: []
     azureClusterIdentity:
       name: cluster-identity
       namespace: org-giantswarm

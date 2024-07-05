@@ -215,6 +215,8 @@ Properties within the `.global.providerSpecific` object
 | :----------- | :-------------- | :--------------- |
 | `global.providerSpecific.additionalResourceTags` | **Additional resource tags** - Additional tags to be added to the resource group and to all resources in it.|**Type:** `object`<br/>**Default:** `{}`|
 | `global.providerSpecific.additionalResourceTags.*` | **Tag value** - Value of the tag|**Type:** `string`<br/>|
+| `global.providerSpecific.allowedSubscriptions` | **List of Azure Subscription IDs that are allowed to work on this cluster**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.providerSpecific.allowedSubscriptions[*]` | **Azure Subscription ID**|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 | `global.providerSpecific.azureClusterIdentity` | **Identity** - AzureClusterIdentity resource to use for this cluster.|**Type:** `object`<br/>|
 | `global.providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-identity"`|
 | `global.providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
@@ -227,7 +229,7 @@ Properties within the `.global.providerSpecific` object
 | `global.providerSpecific.network.peerings[*]` | **VNet peering**|**Type:** `object`<br/>|
 | `global.providerSpecific.network.peerings[*].remoteVnetName` | **VNet name** - Name of the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.providerSpecific.network.peerings[*].resourceGroup` | **Resource group name** - Resource group for the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
-| `global.providerSpecific.subscriptionId` | **Subscription ID** - ID of the Azure subscription this cluster will run in.|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
+| `global.providerSpecific.subscriptionId` | **Azure Subscription ID**|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 
 ### Components
 Properties within the `.global.components` object
