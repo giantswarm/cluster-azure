@@ -316,6 +316,14 @@ control-plane-subnet
 {{- end -}}
 {{- end -}}
 
+{{- define "network.subnets.controlPlane.routeTableName" -}}
+{{- if hasKey $.Values.global.connectivity.network.controlPlane "routeTableName" -}}
+{{ $.Values.global.connectivity.network.controlPlane.routeTableName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-node-routetable
+{{- end -}}
+{{- end -}}
+
 {{- define "network.subnets.nodes.name" -}}
 {{- if hasKey $.Values.global.connectivity.network.workers "subnetName" -}}
 {{ $.Values.global.connectivity.network.workers.subnetName }}
@@ -329,6 +337,14 @@ node-subnet
 {{ $.Values.global.connectivity.network.workers.natGatewayName }}
 {{- else -}}
 {{ include "resource.default.name" $ }}-node-natgateway
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.nodes.routeTableName" -}}
+{{- if hasKey $.Values.global.connectivity.network.workers "routeTableName" -}}
+{{ $.Values.global.connectivity.network.workers.routeTableName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-node-routetable
 {{- end -}}
 {{- end -}}
 
