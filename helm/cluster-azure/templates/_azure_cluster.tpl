@@ -19,6 +19,8 @@ spec:
     subnets:
       - name: {{ include "network.subnets.controlPlane.name" $ }}
         role: control-plane
+        routeTable:
+          name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
         cidrBlocks:
         - {{ .Values.global.connectivity.network.controlPlane.cidr }}
         {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
@@ -51,6 +53,8 @@ spec:
         natGateway:
           name: {{ include "network.subnets.nodes.natGatewayName" $ }}
         role: node
+        routeTable:
+          name: {{ include "network.subnets.nodes.routeTableName" $ }}
         cidrBlocks:
         - {{ .Values.global.connectivity.network.workers.cidr }}
         {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}

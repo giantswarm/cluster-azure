@@ -867,6 +867,14 @@
                                             },
                                             "default": []
                                         },
+                                        "routeTableName": {
+                                            "type": "string",
+                                            "title": "ControlPlane route table name",
+                                            "description": "Name of the control plane route table.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
+                                        },
                                         "subnetName": {
                                             "type": "string",
                                             "title": "ControlPlane subnet name",
@@ -1055,6 +1063,14 @@
                                                 }
                                             },
                                             "default": []
+                                        },
+                                        "routeTableName": {
+                                            "type": "string",
+                                            "title": "Nodes route table name",
+                                            "description": "Name of the nodes route table.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
                                         },
                                         "subnetName": {
                                             "type": "string",
