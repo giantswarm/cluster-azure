@@ -328,7 +328,7 @@ node-subnet
 {{- if hasKey $.Values.global.connectivity.network.workers "natGatewayName" -}}
 {{ $.Values.global.connectivity.network.workers.natGatewayName }}
 {{- else -}}
-node-natgateway
+{{ include "resource.default.name" $ }}-node-natgateway
 {{- end -}}
 {{- end -}}
 

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### **Breaking change**
+
+- Append cluster name to `natgateway` resource to differentiate CR names for `azure-service-operator`.
+
 ## [0.15.0] - 2024-07-08
 
 ### Changed
