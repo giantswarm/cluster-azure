@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Append cluster name to `natgateway` resource to differentiate CR names for `azure-service-operator`.
 - Set `routeTable` for control plane nodes by default.
 
+## [0.15.0] - 2024-07-08
+
 ### Changed
 
 - Add `allowedSubscriptions` parameter for multi-subscription use case.
@@ -594,7 +596,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.14.2...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v0.15.0...HEAD
+[0.15.0]: https://github.com/giantswarm/cluster-azure/compare/v0.14.2...v0.15.0
 [0.14.2]: https://github.com/giantswarm/cluster-azure/compare/v0.14.1...v0.14.2
 [0.14.1]: https://github.com/giantswarm/cluster-azure/compare/v0.14.0...v0.14.1
 [0.14.0]: https://github.com/giantswarm/cluster-azure/compare/v0.13.0...v0.14.0
