@@ -167,6 +167,16 @@
                     "exclusiveMinimum": 0
                 }
             }
+        },
+        "subscriptionId": {
+            "type": "string",
+            "title": "Azure Subscription ID",
+            "examples": [
+                "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
+            ],
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
         }
     },
     "type": "object",
@@ -859,6 +869,14 @@
                                             },
                                             "default": []
                                         },
+                                        "routeTableName": {
+                                            "type": "string",
+                                            "title": "ControlPlane route table name",
+                                            "description": "Name of the control plane route table.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
+                                        },
                                         "subnetName": {
                                             "type": "string",
                                             "title": "ControlPlane subnet name",
@@ -1047,6 +1065,14 @@
                                                 }
                                             },
                                             "default": []
+                                        },
+                                        "routeTableName": {
+                                            "type": "string",
+                                            "title": "Nodes route table name",
+                                            "description": "Name of the nodes route table.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
                                         },
                                         "subnetName": {
                                             "type": "string",
@@ -1258,6 +1284,15 @@
                                 "pattern": "^[^<>%&?/\\\\]*$"
                             }
                         },
+                        "allowedSubscriptions": {
+                            "type": "array",
+                            "title": "List of Azure Subscription IDs that are allowed to work on this cluster",
+                            "items": {
+                                "$ref": "#/$defs/subscriptionId",
+                                "type": "string"
+                            },
+                            "default": []
+                        },
                         "azureClusterIdentity": {
                             "type": "object",
                             "title": "Identity",
@@ -1347,15 +1382,10 @@
                             }
                         },
                         "subscriptionId": {
+                            "$ref": "#/$defs/subscriptionId",
                             "type": "string",
                             "title": "Subscription ID",
-                            "description": "ID of the Azure subscription this cluster will run in.",
-                            "examples": [
-                                "291bba3f-e0a5-47bc-a099-3bdcb2a50a05"
-                            ],
-                            "maxLength": 36,
-                            "minLength": 36,
-                            "pattern": "^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$"
+                            "description": "ID of the Azure subscription this cluster will run in."
                         }
                     }
                 },

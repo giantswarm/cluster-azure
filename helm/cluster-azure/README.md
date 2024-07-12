@@ -215,6 +215,8 @@ Properties within the `.global.providerSpecific` object
 | :----------- | :-------------- | :--------------- |
 | `global.providerSpecific.additionalResourceTags` | **Additional resource tags** - Additional tags to be added to the resource group and to all resources in it.|**Type:** `object`<br/>**Default:** `{}`|
 | `global.providerSpecific.additionalResourceTags.*` | **Tag value** - Value of the tag|**Type:** `string`<br/>|
+| `global.providerSpecific.allowedSubscriptions` | **List of Azure Subscription IDs that are allowed to work on this cluster**|**Type:** `array`<br/>**Default:** `[]`|
+| `global.providerSpecific.allowedSubscriptions[*]` | **Azure Subscription ID**|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 | `global.providerSpecific.azureClusterIdentity` | **Identity** - AzureClusterIdentity resource to use for this cluster.|**Type:** `object`<br/>|
 | `global.providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-identity"`|
 | `global.providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
@@ -227,7 +229,7 @@ Properties within the `.global.providerSpecific` object
 | `global.providerSpecific.network.peerings[*]` | **VNet peering**|**Type:** `object`<br/>|
 | `global.providerSpecific.network.peerings[*].remoteVnetName` | **VNet name** - Name of the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.providerSpecific.network.peerings[*].resourceGroup` | **Resource group name** - Resource group for the remote VNet to which the peering is established.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._\(\)]+$`<br/>|
-| `global.providerSpecific.subscriptionId` | **Subscription ID** - ID of the Azure subscription this cluster will run in.|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
+| `global.providerSpecific.subscriptionId` | **Azure Subscription ID**|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 
 ### Components
 Properties within the `.global.components` object
@@ -278,6 +280,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
 | `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
 | `global.connectivity.network.controlPlane.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.controlPlane.routeTableName` | **ControlPlane route table name** - Name of the control plane route table.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.controlPlane.subnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.hostCidr` | **Node subnet** - IPv4 address range for nodes, in CIDR notation.|**Type:** `string`<br/>**Default:** `"10.0.0.0/16"`|
 | `global.connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Default:** `"public"`|
@@ -306,6 +309,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].name` | **Name** - Name specifies the name of the private link service.|**Type:** `string`<br/>**Default:** `""`|
 | `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].privateLinkServiceID` | **The private link service ID**|**Type:** `string`<br/>**Examples:** `"/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1", "/subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg2/providers/Microsoft.Storage/storageAccounts/bucket1"`<br/>**Value pattern:** `^/subscriptions/[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]/resourceGroups/[^/]+/providers/[^/]+/[^/]+/.+$`<br/>|
 | `global.connectivity.network.workers.privateEndpoints[*].privateLinkServiceConnections[*].requestMessage` | **Request message** - RequestMessage specifies a message passed to the owner of the remote resource with the private endpoint connection request.|**Type:** `string`<br/>**Default:** `""`|
+| `global.connectivity.network.workers.routeTableName` | **Nodes route table name** - Name of the nodes route table.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.workers.subnetName` | **Nodes subnet name** - Name of the nodes subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 
 ### Control plane
