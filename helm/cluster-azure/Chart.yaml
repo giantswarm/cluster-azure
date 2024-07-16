@@ -12,8 +12,8 @@ annotations:
   application.giantswarm.io/app-type: "cluster"
 dependencies:
 - name: cluster
-  version: "0.32.0"
-  repository: "https://giantswarm.github.io/cluster-catalog"
+  version: "0.35.0-13d15a5bcd0772dedd8d09eb2b2a917a119c3949"
+  repository: https://giantswarm.github.io/cluster-test-catalog
 - name: cluster-shared
   version: "0.7.1"
   repository: "https://giantswarm.github.io/cluster-catalog"

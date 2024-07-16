@@ -203,10 +203,16 @@ global:
         docker.io:
           - endpoint: registry-1.docker.io
           - endpoint: giantswarm.azurecr.io
+        gsoci.azurecr.io:
+          - endpoint: gsoci.azurecr.io
       localRegistryCache:
         enabled: false
         mirroredRegistries: []
         port: 32767
+      managementClusterRegistryCache:
+        enabled: true
+        mirroredRegistries:
+          - gsoci.azurecr.io
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io
