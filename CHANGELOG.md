@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed 
+
+- Respect `global.apps.externalDnsPrivate` to overwrite configuration of `external-dns-private` app.
+
 ## [0.16.0] - 2024-07-10
 
 ### **Breaking change**
