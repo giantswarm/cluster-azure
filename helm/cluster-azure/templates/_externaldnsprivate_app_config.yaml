@@ -1,0 +1,22 @@
+{{/* Azure-specific external-dns-private Helm values*/}}
+{{/* https://github.com/giantswarm/external-dns-app/blob/main/helm/external-dns-app/values.yaml*/}}
+{{- define "azureExternalDnsPrivateHelmValues" }}
+provider: azure-private-dns
+clusterID: {{ include "resource.default.name" $ }}
+crd:
+  install: false
+domainFilters:
+  - "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
+txtOwnerId: giantswarm-io-external-dns
+txtPrefix: {{ include "resource.default.name" $ }}
+sources:
+  - service
+extraVolumes:
+  - name: azure-config-file
+    hostPath:
+      path: /etc/kubernetes
+extraVolumeMounts:
+  - name: azure-config-file
+    mountPath: /etc/kubernetes
+    readOnly: true
+{{- end }}
