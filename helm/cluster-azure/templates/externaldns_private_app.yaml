@@ -32,8 +32,9 @@ metadata:
 spec:
   catalog: default
   name: external-dns-app
-  # repo: giantswarm/external-dns-app
-  version: 3.1.0
+  {{- $_ := set $ "appName" "external-dns" }}
+  {{- $appVersion := include "cluster.app.version" $ }}
+  version: {{ $appVersion }}
   namespace: kube-system
   config:
     configMap:
