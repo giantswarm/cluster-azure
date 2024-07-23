@@ -8,25 +8,18 @@ metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
 data:
+    {{- $appHelmValues := (include "azureExternalDnsPrivateHelmValues" $)| fromYaml -}}
+    {{- $userConfig := dict }}
+    {{- $userConfigRaw := get $.Values.global.apps "externalDnsPrivate" }}
+    {{- if $userConfigRaw }}
+    {{- $userConfig = $userConfigRaw | toYaml | toString | fromYaml }}
+    {{- end }}
+    {{- if $userConfig.values }}
+    {{- $appHelmValues = mergeOverwrite $appHelmValues (deepCopy $userConfig.values) -}}
+    {{- end }}
   values: |
-    provider: azure-private-dns
-    clusterID: {{ include "resource.default.name" $ }}
-    crd:
-      install: false
-    domainFilters:
-      - "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
-    txtOwnerId: giantswarm-io-external-dns
-    txtPrefix: {{ include "resource.default.name" $ }}
-    sources:
-      - service
-    extraVolumes:
-      - name: azure-config-file
-        hostPath:
-          path: /etc/kubernetes
-    extraVolumeMounts:
-      - name: azure-config-file
-        mountPath: /etc/kubernetes
-        readOnly: true
+    {{- $appHelmValues | toYaml | nindent 4 }}
+
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App
