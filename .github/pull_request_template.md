@@ -1,19 +1,21 @@
+### What this PR does / why we need it
 
-### Please check if PR meets these requirements
 
-- [ ] Results of the diffs have been examined and no unintended changes are being introduced.
 
-### Helper
+### Checklist
 
-* to disable the GH Action generating manifests diffs for installations, between target and source branches, comment the `/no_diffs_printing` on the PR.
+- [ ] Updated CHANGELOG.md.
 
-### Trigger e2e tests
+### Trigger E2E tests
 
 <!--
-If for some reason you want to skip the e2e tests, remove the following lines.
+If you want to skip the E2E tests, remove the following line and add the `skip/ci` label to skip the check.
 
-Note: Tests are not automatically executed when creating a draft PR
-If you do want to trigger the tests while still in draft then please add a comment with the trigger.
+Note: Tests are not automatically executed when creating a draft PR. If you do want to trigger the tests while still in draft then please add a comment with the trigger.
 -->
 
 /run cluster-test-suites
+
+<!-- If you want to disable Helm template rendering diffs as GitHub comment, uncomment this (command must be on its own line): -->
+
+<!-- /no_diffs_printing -->
