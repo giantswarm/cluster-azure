@@ -1,5 +1,5 @@
 {{/* Default Helm values for the app */}}
-{{/* See schema for the appropriate app version here https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/master/helm/aws-cloud-controller-manager-app/values.schema.json */}}
+{{/* See schema for the appropriate app version here https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.schema.json */}}
 {{- define "defaultAzureCloudControllerManagerHelmValues" }}
 verticalPodAutoscaler:
   enabled: {{ .Values.internal.enableVpaResources }}
