@@ -4,13 +4,17 @@ Helpers to reuse when defining specs for MachinePools and MachineDeployments
 
 {{- define "machinedeployment-azuremachinetemplate-spec" -}}
 {{- include "renderIdentityConfiguration" $ }}
-{{- $flatcarVersion := include "cluster.component.flatcar.version" $ }}
+{{- /* Get image name components. */}}
+{{- $osName := include "cluster.os.name" $ }}
+{{- $osReleaseChannel := include "cluster.os.releaseChannel" $ }}
+{{- $osVersion := include "cluster.os.version" $ }}
 {{- $kubernetesVersion := include "cluster.component.kubernetes.version" $ }}
+{{- $osToolingVersion := include "cluster.os.tooling.version" $ }}
 image:
   computeGallery:
     gallery: gsCapzFlatcar-41c2d140-ac44-4d8b-b7e1-7b2f1ddbe4d0
-    name: {{ printf "flatcar-stable-%s-kube-v%s-gs" $flatcarVersion $kubernetesVersion }}
-    version: {{ $flatcarVersion }}
+    name: {{ $osName }}-{{ $osReleaseChannel }}-{{ $osVersion }}-kube-{{ $kubernetesVersion }}-tooling-{{ $osToolingVersion }}-gs
+    version: "{{ $osVersion }}"
 osDisk:
   diskSizeGB: {{ .nodePool.config.rootVolumeSizeGB | default 50 }}
   managedDisk:

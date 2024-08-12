@@ -259,6 +259,9 @@
                         "observabilityBundle": {
                             "enable": true
                         },
+                        "observabilityPolicies": {
+                            "enable": true
+                        },
                         "prometheusBlackboxExporter": {
                             "enable": true
                         },
@@ -594,6 +597,12 @@
                             "type": "object",
                             "title": "observability-bundle",
                             "description": "Configuration of observability-bundle. For all available values see https://github.com/giantswarm/observability-bundle."
+                        },
+                        "observabilityPolicies": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "observability-policies",
+                            "description": "Configuration of observability-policies. For all available values see https://github.com/giantswarm/observability-policies-app."
                         },
                         "prometheusBlackboxExporter": {
                             "$ref": "#/$defs/app",

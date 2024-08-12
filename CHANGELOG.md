@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+> [!IMPORTANT]
+>
+> Releases that include this `cluster-azure` version have to define `os-tooling` in the their `.spec.components`.
+>
+> See image changes below for more details and Azure (CAPZ) release v27.0.0 for a Release resource example.
+
+### Changed
+
+- Chart: Update `cluster` to v1.1.0. ([#325](https://github.com/giantswarm/cluster-azure/pull/325))
+  - Machine Template: Adapt new image format.
+  - Apps: Enable `observability-policies`.
+
 ## [0.18.0] - 2024-07-25
 
 ### Changed
