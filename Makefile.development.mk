@@ -15,7 +15,15 @@ APPLICATION="helm/cluster-azure"
 template: ## Output the rendered Helm template
 	$(eval CHART_DIR := "helm/cluster-azure")
 	$(eval HELM_RELEASE_NAME := $(shell yq .global.metadata.name ${CHART_DIR}/${CI_FILE}))
-	@helm template ${HELM_RELEASE_NAME} ${CHART_DIR} --values ${CHART_DIR}/${CI_FILE} --debug
+	$(eval ORG_NAME := org-$(shell yq .global.metadata.organization ${CHART_DIR}/${CI_FILE}))
+	@helm template -n ${ORG_NAME} ${HELM_RELEASE_NAME} ${CHART_DIR} --values ${CHART_DIR}/${CI_FILE} --debug
+
+.PHONY: template-in-cluster
+template-in-cluster: ## Output the rendered Helm template
+	$(eval CHART_DIR := "helm/cluster-azure")
+	$(eval HELM_RELEASE_NAME := $(shell yq .global.metadata.name ${CHART_DIR}/${CI_FILE}))
+	$(eval ORG_NAME := org-$(shell yq .global.metadata.organization ${CHART_DIR}/${CI_FILE}))
+	@helm template --dry-run=server -n ${ORG_NAME} ${HELM_RELEASE_NAME} ${CHART_DIR} --values ${CHART_DIR}/${CI_FILE} --debug
 
 .PHONY: generate
 generate: normalize-schema validate-schema generate-docs generate-values update-deps
