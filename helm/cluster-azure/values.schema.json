@@ -1580,62 +1580,65 @@
                     }
                 },
                 "teleport": {
-                  "type": "object",
-                  "title": "Teleport Configuration",
-                  "description": "Configuration for Teleport VNet and applications",
-                  "properties": {
-                    "enabled": {
-                      "type": "boolean",
-                      "title": "Enable Teleport",
-                      "description": "Enable or disable Teleport for this cluster",
-                      "default": true
-                    },
-                    "proxyAddr": {
-                      "type": "string",
-                      "title": "Teleport Proxy Address",
-                      "description": "Address of the Teleport proxy server",
-                      "default": "teleport.giantswarm.io:443"
-                    },
-                    "version": {
-                      "type": "string",
-                      "title": "Teleport Version",
-                      "description": "Version of Teleport to use"
-                    },
-                    "loadBalancerIP": {
-                      "type": "string",
-                      "title": "Load Balancer IP",
-                      "description": "IP address of the load balancer for Teleport applications"
-                    },
-                    "apps": {
-                      "type": "array",
-                      "title": "Teleport Applications",
-                      "description": "List of applications to be exposed through Teleport",
-                      "items": {
-                        "type": "object",
-                        "required": ["name", "port"],
-                        "properties": {
-                          "name": {
-                            "type": "string",
-                            "title": "Application Name"
-                          },
-                          "port": {
-                            "type": "integer",
-                            "title": "Application Port"
-                          },
-                          "labels": {
-                            "type": "object",
-                            "title": "Labels",
-                            "additionalProperties": {
-                              "type": "string"
+                    "type": "object",
+                    "title": "Teleport Configuration",
+                    "description": "Configuration for Teleport VNet and applications",
+                    "properties": {
+                        "apps": {
+                            "type": "array",
+                            "title": "Teleport Applications",
+                            "description": "List of applications to be exposed through Teleport",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "port"
+                                ],
+                                "properties": {
+                                    "labels": {
+                                        "type": "object",
+                                        "title": "Labels",
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "title": "Application Name"
+                                    },
+                                    "port": {
+                                        "type": "integer",
+                                        "title": "Application Port"
+                                    }
+                                }
                             }
-                          }
+                        },
+                        "enabled": {
+                            "type": "boolean",
+                            "title": "Enable Teleport",
+                            "description": "Enable or disable Teleport for this cluster",
+                            "default": true
+                        },
+                        "loadBalancerIP": {
+                            "type": "string",
+                            "title": "Load Balancer IP",
+                            "description": "IP address of the load balancer for Teleport applications"
+                        },
+                        "proxyAddr": {
+                            "type": "string",
+                            "title": "Teleport Proxy Address",
+                            "description": "Address of the Teleport proxy server",
+                            "default": "teleport.giantswarm.io:443"
+                        },
+                        "version": {
+                            "type": "string",
+                            "title": "Teleport Version",
+                            "description": "Version of Teleport to use"
                         }
-                      }
                     }
-                  }
                 }
-              }
-          },
+            }
+        },
         "managementCluster": {
             "type": "string",
             "title": "The capi MC managing this cluster"
