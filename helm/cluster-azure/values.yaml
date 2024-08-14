@@ -291,3 +291,21 @@ internal:
     enabled: true
     proxyAddr: teleport.giantswarm.io:443
     version: 14.1.3
+    loadBalancerIP: 10.10.222.231
+    apps:
+      - name: grafana
+        port: 80
+        labels:
+          app: grafana
+      - name: prometheus
+        port: 9090
+        labels:
+          app: prometheus
+      - name: alertmanager
+        port: 9093
+        labels:
+          app: alertmanager
+      - name: api
+        port: 6443
+        labels:
+          app: api

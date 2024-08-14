@@ -31,6 +31,20 @@ ssh_service:
     mc: {{ .Values.global.managementCluster }}
     cluster: {{ include "resource.default.name" $ }}
     baseDomain: {{ .Values.global.connectivity.baseDomain }}
+app_service:
+  enabled: "yes"
+  apps:
+  {{- $lbIP := .Values.teleport.loadBalancerIP }}
+  {{- range $app := .Values.teleport.apps }}
+  - name: {{ $app.name }}
+    uri: "tcp://{{ $lbIP }}:{{ $app.port }}"
+    public_addr: "{{ $app.name }}.{{ $.Values.managementCluster }}.{{ $.Values.global.connectivity.baseDomain }}"
+    labels:
+      cluster: {{ include "resource.default.name" $ }}
+      {{- range $key, $value := $app.labels }}
+      {{ $key }}: {{ $value }}
+      {{- end }}
+  {{- end }}
 proxy_service:
   enabled: "no"
   https_keypairs: []
