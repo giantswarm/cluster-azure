@@ -31,11 +31,10 @@ spec:
     spec:
       chart: azure-cloud-node-manager-app
       {{- $_ := set $ "appName" "azure-cloud-node-manager" }}
-      {{- $appVersion := include "cluster.app.version" $ }}
-      version: {{ $appVersion }}
+      version: {{ include "cluster.app.version" $ }}
       sourceRef:
         kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-default
+        name: {{ include "resource.default.name" $ }}-{{ include "cluster.app.catalog" $ }}
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
