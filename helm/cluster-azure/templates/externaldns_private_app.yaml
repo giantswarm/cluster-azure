@@ -30,11 +30,10 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
     giantswarm.io/managed-by: {{ .Chart.Name }}
 spec:
-  catalog: default
-  name: external-dns-app
   {{- $_ := set $ "appName" "external-dns" }}
-  {{- $appVersion := include "cluster.app.version" $ }}
-  version: {{ $appVersion }}
+  catalog: {{ include "cluster.app.catalog" $ }}
+  name: external-dns-app
+  version: {{ include "cluster.app.version" $ }}
   namespace: kube-system
   config:
     configMap:
