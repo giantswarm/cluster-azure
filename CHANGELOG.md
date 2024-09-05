@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Update `cluster` to [v1.2.2](https://github.com/giantswarm/cluster/releases/tag/v1.2.2)
+  - Set `MachineDeployment` Kubernetes version from release
+
+### Removed
+
+- Remove unused `internal` values from `values.schema.json`.
+
 ## [1.1.0] - 2024-08-29
 
 ### Changed

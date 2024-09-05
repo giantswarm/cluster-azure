@@ -361,11 +361,6 @@ Properties within the `.internal` top-level object
 | `internal.defaults.softEvictionGracePeriod` | **Default settings for soft eviction grace period**|**Type:** `string`<br/>**Default:** `"memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m"`|
 | `internal.defaults.softEvictionThresholds` | **Default settings for soft eviction thresholds**|**Type:** `string`<br/>**Default:** `"memory.available\u003c500Mi,nodefs.available\u003c15%,nodefs.inodesFree\u003c5%,imagefs.available\u003c15%,pid.available\u003c30%"`|
 | `internal.enableVpaResources` | **Enable VPA Resources in helmreleases**|**Type:** `boolean`<br/>**Default:** `true`|
-| `internal.kubectlImage` | **Kubectl Image settings**|**Type:** `object`<br/>|
-| `internal.kubectlImage.name` | **Image name** - Name of the image Registry|**Type:** `string`<br/>**Default:** `"giantswarm/kubectl"`|
-| `internal.kubectlImage.registry` | **Kubectl Image Registry** - Registry for the kubectl image|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
-| `internal.kubectlImage.tag` | **Image tag**|**Type:** `string`<br/>**Default:** `"1.25.15"`|
-| `internal.kubernetesVersion` | **Kubernetes version**|**Type:** `string`<br/>**Default:** `"1.25.16"`|
 | `internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
 | `internal.network.vnet` | **VNet spec** - Existing VNet configuration. This is susceptible to more frequent change or removal.|**Type:** `object`<br/>**Default:** `{}`|
 | `internal.network.vnet.name` | **VNet name** - Name of the existing VNet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|

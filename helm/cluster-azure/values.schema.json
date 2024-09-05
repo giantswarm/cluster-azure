@@ -1482,34 +1482,6 @@
                     "title": "Enable VPA Resources in helmreleases",
                     "default": true
                 },
-                "kubectlImage": {
-                    "type": "object",
-                    "title": "Kubectl Image settings",
-                    "properties": {
-                        "name": {
-                            "type": "string",
-                            "title": "Image name",
-                            "description": "Name of the image Registry",
-                            "default": "giantswarm/kubectl"
-                        },
-                        "registry": {
-                            "type": "string",
-                            "title": "Kubectl Image Registry",
-                            "description": "Registry for the kubectl image",
-                            "default": "gsoci.azurecr.io"
-                        },
-                        "tag": {
-                            "type": "string",
-                            "title": "Image tag",
-                            "default": "1.25.15"
-                        }
-                    }
-                },
-                "kubernetesVersion": {
-                    "type": "string",
-                    "title": "Kubernetes version",
-                    "default": "1.25.16"
-                },
                 "network": {
                     "type": "object",
                     "title": "Network configuration",
