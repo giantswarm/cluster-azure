@@ -274,11 +274,6 @@ internal:
     softEvictionGracePeriod: memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m
     softEvictionThresholds: memory.available<500Mi,nodefs.available<15%,nodefs.inodesFree<5%,imagefs.available<15%,pid.available<30%
   enableVpaResources: true
-  kubectlImage:
-    name: giantswarm/kubectl
-    registry: gsoci.azurecr.io
-    tag: 1.25.15
-  kubernetesVersion: 1.25.16
   network:
     vnet: {}
     vpn:
