@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Update `cluster` to [v1.3.0](https://github.com/giantswarm/cluster/releases/tag/v1.3.0)
+  - Allow to enable auditd service through `global.components.auditd.enabled`.
+
 ## [1.2.0] - 2024-09-05
 
 ### Changed

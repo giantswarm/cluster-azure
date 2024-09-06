@@ -244,6 +244,8 @@ Advanced configuration of components that are running on all nodes.
 
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
+| `global.components.auditd` | **Auditd** - Enable Auditd service.|**Type:** `object`<br/>|
+| `global.components.auditd.enabled` | **Enabled** - Whether or not the Auditd service shall be enabled. When true, the Auditd service is enabled. When false, the Auditd rules service is disabled.|**Type:** `boolean`<br/>**Default:** `false`|
 | `global.components.containerd` | **Containerd** - Configuration of containerd.|**Type:** `object`<br/>|
 | `global.components.containerd.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}],"gsoci.azurecr.io":[{"endpoint":"gsoci.azurecr.io"}]}`|
 | `global.components.containerd.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
