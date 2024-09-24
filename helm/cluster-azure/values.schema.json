@@ -651,7 +651,7 @@
                                 "enabled": {
                                     "type": "boolean",
                                     "title": "Enabled",
-                                    "description": "Whether or not the Auditd service shall be enabled. When true, the Auditd service is enabled. When false, the Auditd rules service is disabled.",
+                                    "description": "Whether or not the Auditd service shall be enabled. When true, the Auditd service is enabled. When false, the Auditd service is disabled.",
                                     "default": false
                                 }
                             }
@@ -979,6 +979,14 @@
                                             ],
                                             "maxItems": 1,
                                             "minItems": 1
+                                        },
+                                        "nodeCidrMaskSize": {
+                                            "type": "integer",
+                                            "title": "Node CIDR mask size",
+                                            "description": "The size of the mask that is used for the node CIDR. The node CIDR is a sub-range of the pod CIDR and so the mask size and pod CIDR must be chosen such that there is enough space for the maximum number of nodes in the cluster.",
+                                            "default": 24,
+                                            "maximum": 27,
+                                            "minimum": 16
                                         }
                                     }
                                 },
