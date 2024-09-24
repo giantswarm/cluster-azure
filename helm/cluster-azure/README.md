@@ -245,7 +245,7 @@ Advanced configuration of components that are running on all nodes.
 | **Property** | **Description** | **More Details** |
 | :----------- | :-------------- | :--------------- |
 | `global.components.auditd` | **Auditd** - Enable Auditd service.|**Type:** `object`<br/>|
-| `global.components.auditd.enabled` | **Enabled** - Whether or not the Auditd service shall be enabled. When true, the Auditd service is enabled. When false, the Auditd rules service is disabled.|**Type:** `boolean`<br/>**Default:** `false`|
+| `global.components.auditd.enabled` | **Enabled** - Whether or not the Auditd service shall be enabled. When true, the Auditd service is enabled. When false, the Auditd service is disabled.|**Type:** `boolean`<br/>**Default:** `false`|
 | `global.components.containerd` | **Containerd** - Configuration of containerd.|**Type:** `object`<br/>|
 | `global.components.containerd.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}],"gsoci.azurecr.io":[{"endpoint":"gsoci.azurecr.io"}]}`|
 | `global.components.containerd.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
@@ -300,6 +300,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.pods` | **Pods**|**Type:** `object`<br/>|
 | `global.connectivity.network.pods.cidrBlocks` | **Pod subnets**|**Type:** `array`<br/>**Default:** `["192.168.0.0/16"]`|
 | `global.connectivity.network.pods.cidrBlocks[*]` | **Pod subnet** - IPv4 address range for pods, in CIDR notation.|**Type:** `string`<br/>**Example:** `"192.168.0.0/16"`<br/>|
+| `global.connectivity.network.pods.nodeCidrMaskSize` | **Node CIDR mask size** - The size of the mask that is used for the node CIDR. The node CIDR is a sub-range of the pod CIDR and so the mask size and pod CIDR must be chosen such that there is enough space for the maximum number of nodes in the cluster.|**Type:** `integer`<br/>**Default:** `24`|
 | `global.connectivity.network.services` | **Services**|**Type:** `object`<br/>|
 | `global.connectivity.network.services.cidrBlocks` | **K8s Service subnets**|**Type:** `array`<br/>**Default:** `["172.31.0.0/16"]`|
 | `global.connectivity.network.services.cidrBlocks[*]` | **Service subnet** - IPv4 address range for kubernetes services, in CIDR notation.|**Type:** `string`<br/>**Example:** `"172.31.0.0/16"`<br/>|
