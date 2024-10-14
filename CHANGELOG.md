@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Make `external-dns-private` app depend on the `prometheus-operator-crd` app, because it uses `ServiceMonitors`.
+
 ## [1.3.0] - 2024-09-24
 
 ### Changed
