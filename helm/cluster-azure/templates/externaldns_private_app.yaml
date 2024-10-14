@@ -29,6 +29,8 @@ metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
     giantswarm.io/managed-by: {{ .Chart.Name }}
+  annotations:
+    app-operator.giantswarm.io/depends-on: {{ include "resource.default.name" . }}-prometheus-operator-crd
 spec:
   {{- $_ := set $ "appName" "external-dns" }}
   catalog: {{ include "cluster.app.catalog" $ }}
