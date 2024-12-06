@@ -12,7 +12,7 @@ annotations:
   application.giantswarm.io/team: phoenix
 dependencies:
   - name: cluster
-    version: "1.6.0"
+    version: "1.7.0"
     repository: https://giantswarm.github.io/cluster-catalog
   - name: cluster-shared
     version: "0.7.1"
