@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2024-12-11
+
+### Changed
+
+- Chart: Update `cluster` to [v1.7.0](https://github.com/giantswarm/cluster/releases/tag/v1.7.0).
+  - Add `teleport-init` systemd unit to handle initial token setup before `teleport` service starts
+  - Improve `teleport` service reliability by adding proper file and service dependencies and pre-start checks
+
 ## [1.4.0] - 2024-11-13
 
 ### Changed
@@ -672,7 +680,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/giantswarm/cluster-azure/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/giantswarm/cluster-azure/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/giantswarm/cluster-azure/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/giantswarm/cluster-azure/compare/v1.1.0...v1.2.0
