@@ -241,7 +241,7 @@ global:
   controlPlane:
     containerdVolumeSizeGB: 100
     encryptionAtHost: false
-    etcdVolumeSizeGB: 100
+    etcdVolumeSizeGB: 50
     instanceType: Standard_D4s_v5
     kubeletVolumeSizeGB: 100
     oidc:
