@@ -230,6 +230,9 @@
                             "configTemplateName": "azureCorednsHelmValues",
                             "enable": true
                         },
+                        "etcdDefrag": {
+                            "enable": true
+                        },
                         "etcdKubernetesResourcesCountExporter": {
                             "enable": true
                         },
@@ -537,6 +540,12 @@
                             "type": "object",
                             "title": "CoreDNS",
                             "description": "Configuration of coredns-app. For all available values see https://github.com/giantswarm/coredns-app."
+                        },
+                        "etcdDefrag": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "etcd-defrag",
+                            "description": "Configuration of etcd-defrag. For all available values see https://github.com/giantswarm/etcd-defrag-app."
                         },
                         "etcdKubernetesResourcesCountExporter": {
                             "$ref": "#/$defs/app",

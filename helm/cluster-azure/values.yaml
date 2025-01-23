@@ -28,6 +28,8 @@ cluster:
       coreDns:
         configTemplateName: azureCorednsHelmValues
         enable: true
+      etcdDefrag:
+        enable: true
       etcdKubernetesResourcesCountExporter:
         enable: true
       externalDns:
@@ -185,6 +187,7 @@ global:
     ciliumServiceMonitors: {}
     clusterAutoscaler: {}
     coreDns: {}
+    etcdDefrag: {}
     etcdKubernetesResourcesCountExporter: {}
     externalDns: {}
     externalDnsPrivate: {}
