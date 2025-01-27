@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2025-01-27
+
 ### Changed
 
 - Chart: Reduce default etcd volume size to 50 GB.
@@ -684,7 +686,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/giantswarm/cluster-azure/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/giantswarm/cluster-azure/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/giantswarm/cluster-azure/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/giantswarm/cluster-azure/compare/v1.2.0...v1.3.0
