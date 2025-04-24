@@ -1,5 +1,4 @@
 {{- if eq .Values.global.connectivity.network.mode "private" }}
-{{- $_ := set $ "appName" "cert-manager-crossplane-resources" }}
 {{- /* Check if app is in Release CR */}}
 {{- if include "cluster.app.in-release" $ | eq "true" }}
 {{- $resourceName := printf "%s-cert-manager-crossplane-resources" (include "resource.default.name" $) }}
