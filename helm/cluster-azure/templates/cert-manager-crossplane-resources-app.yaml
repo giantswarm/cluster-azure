@@ -35,9 +35,9 @@ metadata:
   name: {{ $truncatedResourceName | quote }}
   namespace: {{ $.Release.Namespace | quote }}
 spec:
-  catalog: {{ include "cluster.app.catalog" $ }}
+  catalog: cluster-test #{{ include "cluster.app.catalog" $ }}
   name: cert-manager-crossplane-resources
-  version: {{ include "cluster.app.version" $ }}
+  version: 0.0.7-847d1ed0233a04a61aeefdd74262d12b03c55158 #{{ include "cluster.app.version" $ }}
   install:
     timeout: "10m"
   upgrade:
