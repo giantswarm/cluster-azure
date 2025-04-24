@@ -1,0 +1,32 @@
+{{/* Azure-specific cert-manager Helm values*/}}
+{{/* https://github.com/giantswarm/cert-manager-app/blob/main/helm/cert-manager/values.yaml*/}}
+{{- define "azureCertManagerHelmValues" }}
+{{- $_ := set $ "appName" "cert-manager-crossplane-resources" }}
+{{- if and (eq .Values.global.connectivity.network.mode "private") (include "cluster.app.in-release" $ | eq "true") }}
+dns01RecursiveNameserversOnly: true
+dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
+ingressShim:
+  defaultIssuerName: letsencrypt-giantswarm
+  defaultIssuerKind: ClusterIssuer
+  defaultIssuerGroup: cert-manager.io
+ciliumNetworkPolicy:
+  enabled: true
+serviceAccount:
+  annotations:
+    azure.workload.identity/client-id: ${AZURE_CLIENT_ID}
+giantSwarmClusterIssuer:
+  acme:
+    dns01:
+      azureDNS:
+        enabled: true
+        subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
+        resourceGroupName: {{ include "resource.default.name" $ }}
+        zoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
+        managedIdentity:
+          clientID: {{ .Values.global.providerSpecific.identityClientID | default "${AZURE_CLIENT_ID}" }}
+    http01:
+      enabled: false
+{{- else }}
+# Default empty configuration for non-private network mode
+{{- end }}
+{{- end }}

@@ -1,0 +1,58 @@
+{{- if eq .Values.global.connectivity.network.mode "private" }}
+{{- $_ := set $ "appName" "cert-manager-crossplane-resources" }}
+{{- /* Check if app is in Release CR */}}
+{{- if include "cluster.app.in-release" $ | eq "true" }}
+{{- $resourceName := printf "%s-cert-manager-crossplane-resources" (include "resource.default.name" $) }}
+{{- $truncatedResourceName := trunc 53 $resourceName }}
+apiVersion: v1
+data:
+  values: |
+    clusterName: {{ include "resource.default.name" $ }}
+    serviceType: managed
+    providers:
+      azure:
+        enabled: true
+        subscriptionId: {{ .Values.global.providerSpecific.subscriptionId }}
+        resourceGroup: {{ include "resource.default.name" $ }}
+        location: {{ .Values.global.providerSpecific.location }}
+        workloadIdentity:
+          enabled: true
+          oidcIssuerUrl: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
+kind: ConfigMap
+metadata:
+  labels:
+    app-operator.giantswarm.io/version: 0.0.0
+    {{- include "labels.common" $ | nindent 4 }}
+  name: {{ $truncatedResourceName | quote }}
+  namespace: {{ $.Release.Namespace | quote }}
+---
+apiVersion: application.giantswarm.io/v1alpha1
+kind: App
+metadata:
+  labels:
+    app-operator.giantswarm.io/version: 0.0.0
+    {{- include "labels.common" $ | nindent 4 }}
+  name: {{ $truncatedResourceName | quote }}
+  namespace: {{ $.Release.Namespace | quote }}
+spec:
+  catalog: {{ include "cluster.app.catalog" $ }}
+  name: cert-manager-crossplane-resources
+  version: {{ include "cluster.app.version" $ }}
+  install:
+    timeout: "10m"
+  upgrade:
+    timeout: "10m"
+  kubeConfig:
+    inCluster: true # in management cluster context
+  namespace: {{ $.Release.Namespace | quote }}
+  extraConfigs:
+    # See above
+    - kind: configMap
+      name: {{ $truncatedResourceName | quote }}
+      namespace: {{ $.Release.Namespace | quote }}
+    # Created by azure-crossplane-cluster-config-operator once the cluster gets provisioned
+    - kind: configMap
+      name: {{ printf "%s-crossplane-config" (include "resource.default.name" $) | quote }}
+      namespace: {{ $.Release.Namespace | quote }}
+{{- end }}
+{{- end }}
