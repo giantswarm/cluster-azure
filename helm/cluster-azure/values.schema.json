@@ -508,6 +508,12 @@
                             "title": "cert-manager",
                             "description": "Configuration of cert-manager. For all available values see https://github.com/giantswarm/cert-manager-app."
                         },
+                        "certManagerCrossplaneResources": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "CertManager Crossplane Resources",
+                            "description": "Configuration of cert-manager-crossplane-resources. For all available values see https://github.com/giantswarm/cert-manager-crossplane-resources."
+                        },
                         "chartOperatorExtensions": {
                             "$ref": "#/$defs/app",
                             "type": "object",
