@@ -2,7 +2,7 @@
 #
 #    devctl
 #
-#    https://github.com/giantswarm/devctl/blob/8960b8810d2fdb97543d84baa8b50ffa40da26a9/pkg/gen/input/workflows/internal/file/cluster_app_documentation_validation.yaml.template
+#    https://github.com/giantswarm/devctl/blob/f2b5cf71dfa175afa70f721eca503072d0e7d4c4/pkg/gen/input/workflows/internal/file/cluster_app_documentation_validation.yaml.template
 #
 
 # This workflow validates the documentation generated from the JSON schema of the cluster-app
@@ -25,7 +25,7 @@ on:
 jobs:
   validate:
     name: Validate documentation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       GO_VERSION: 1.21.3
     steps:
