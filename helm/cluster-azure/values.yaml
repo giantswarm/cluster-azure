@@ -262,7 +262,7 @@ global:
     additionalResourceTags: {}
     allowedSubscriptions: []
     azureClusterIdentity:
-      name: cluster-identity
+      name: cluster-workload-identity
       namespace: org-giantswarm
     identity:
       systemAssignedScope: ResourceGroup
