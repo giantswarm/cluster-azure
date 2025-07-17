@@ -225,7 +225,7 @@ Properties within the `.global.providerSpecific` object
 | `global.providerSpecific.allowedSubscriptions` | **List of Azure Subscription IDs that are allowed to work on this cluster**|**Type:** `array`<br/>**Default:** `[]`|
 | `global.providerSpecific.allowedSubscriptions[*]` | **Azure Subscription ID**|**Type:** `string`<br/>**Example:** `"291bba3f-e0a5-47bc-a099-3bdcb2a50a05"`<br/>**Value pattern:** `^[a-fA-F0-9][-a-fA-F0-9]+[a-fA-F0-9]$`<br/>|
 | `global.providerSpecific.azureClusterIdentity` | **Identity** - AzureClusterIdentity resource to use for this cluster.|**Type:** `object`<br/>|
-| `global.providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-identity"`|
+| `global.providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-workload-identity"`|
 | `global.providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
 | `global.providerSpecific.identity` | **Identity**|**Type:** `object`<br/>|
 | `global.providerSpecific.identity.systemAssignedScope` | **Scope of SystemAssignedIdentity**|**Type:** `string`<br/>**Default:** `"ResourceGroup"`|

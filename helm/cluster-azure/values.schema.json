@@ -1365,7 +1365,7 @@
                                 "name": {
                                     "type": "string",
                                     "title": "Name",
-                                    "default": "cluster-identity"
+                                    "default": "cluster-workload-identity"
                                 },
                                 "namespace": {
                                     "type": "string",
