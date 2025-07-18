@@ -1,15 +1,4 @@
 {{/* Azure-specific cilium Helm values*/}}
 {{/* https://github.com/giantswarm/cilium-app/blob/main/helm/cilium/values.yaml*/}}
 {{- define "azureCiliumHelmValues" }}
-ipam:
-  mode: kubernetes
-k8sServiceHost: apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}
-k8sServicePort: '6443'
-kubeProxyReplacement: strict
-hubble:
-  relay:
-    enabled: true
-global:
-  podSecurityStandards:
-    enforced: {{ .Values.global.podSecurityStandards.enforced }}
 {{- end }}
