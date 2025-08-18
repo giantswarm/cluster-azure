@@ -790,6 +790,23 @@
                                             ]
                                         }
                                     }
+                                },
+                                "selinux": {
+                                    "type": "object",
+                                    "title": "SELinux configuration",
+                                    "description": "SELinux configuration for containerd.",
+                                    "required": [
+                                        "enabled"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "enabled": {
+                                            "type": "boolean",
+                                            "title": "Enabled",
+                                            "description": "Enabling this will configure containerd to do SELinux relabeling to containers.",
+                                            "default": false
+                                        }
+                                    }
                                 }
                             }
                         }
