@@ -219,6 +219,8 @@ global:
         enabled: true
         mirroredRegistries:
           - gsoci.azurecr.io
+      selinux:
+        enabled: false
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io
