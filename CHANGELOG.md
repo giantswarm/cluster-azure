@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Update `cluster` to v1.7.1. ([#406](https://github.com/giantswarm/cluster-azure/pull/406))
+
 ## [1.6.0] - 2025-01-27
 
 ### Changed
