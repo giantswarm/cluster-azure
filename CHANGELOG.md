@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Chart: Update `cluster` to v2.2.2.
+- Chart: Enable `coredns-extensions` & `etcd-defrag`.
 
 ## [2.1.1] - 2025-05-21
 
