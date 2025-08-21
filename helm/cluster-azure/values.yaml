@@ -28,6 +28,10 @@ cluster:
       coreDns:
         configTemplateName: azureCorednsHelmValues
         enable: true
+      coreDnsExtensions:
+        enable: true
+      etcdDefrag:
+        enable: true
       etcdKubernetesResourcesCountExporter:
         enable: true
       externalDns:
@@ -137,7 +141,6 @@ cluster:
       cleanupHelmReleaseResourcesEnabled: true
       clusterResourceEnabled: true
       controlPlaneResourceEnabled: true
-      coreDnsHelmReleaseResourceEnabled: false
       helmRepositoryResourcesEnabled: true
       infrastructureCluster:
         group: infrastructure.cluster.x-k8s.io
@@ -185,6 +188,8 @@ global:
     ciliumServiceMonitors: {}
     clusterAutoscaler: {}
     coreDns: {}
+    coreDnsExtensions: {}
+    etcdDefrag: {}
     etcdKubernetesResourcesCountExporter: {}
     externalDns: {}
     externalDnsPrivate: {}
