@@ -398,7 +398,6 @@
                         "cleanupHelmReleaseResourcesEnabled": true,
                         "clusterResourceEnabled": true,
                         "controlPlaneResourceEnabled": true,
-                        "coreDnsHelmReleaseResourceEnabled": false,
                         "helmRepositoryResourcesEnabled": true,
                         "infrastructureCluster": {
                             "group": "infrastructure.cluster.x-k8s.io",
