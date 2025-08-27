@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Chart: Update `cluster` to v2.2.3.
+- Chart: Update Cilium configuration.
 
 ## [2.1.1] - 2025-05-21
 
