@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Chart: Update `cluster` to v2.6.0.
 - Remove custom cilium configuration overrides
 
+## [2.3.1] - 2025-09-02
+
+### Changed
+
+- Chart: Update `cluster` to v2.5.2.
+- Chart: Update Cilium configuration.
+
 ## [2.3.0] - 2025-07-31
 
 ### Changed
@@ -721,7 +728,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v2.3.1...HEAD
+[2.3.1]: https://github.com/giantswarm/cluster-azure/compare/v2.3.0...v2.3.1
 [2.3.0]: https://github.com/giantswarm/cluster-azure/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/giantswarm/cluster-azure/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/giantswarm/cluster-azure/compare/v2.1.0...v2.1.1
