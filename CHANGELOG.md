@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Chart: Update `cluster` to v2.6.0.
+- Chart: Update `cluster` to v2.6.2.
 - Remove custom cilium configuration overrides
 
 ## [2.3.1] - 2025-09-02
