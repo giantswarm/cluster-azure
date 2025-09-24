@@ -9,8 +9,6 @@ cluster:
           dataDir: /var/lib/etcddisk/etcd
   providerIntegration:
     apps:
-      capiNodeLabeler:
-        enable: true
       certExporter:
         enable: true
       certManager:
@@ -180,7 +178,6 @@ global:
     azureCloudNodeManager: {}
     azureDiskCsiDriver: {}
     azureFileCsiDriver: {}
-    capiNodeLabeler: {}
     certExporter: {}
     certManager: {}
     chartOperatorExtensions: {}

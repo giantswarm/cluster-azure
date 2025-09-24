@@ -203,9 +203,6 @@
                 },
                 "providerIntegration": {
                     "apps": {
-                        "capiNodeLabeler": {
-                            "enable": true
-                        },
                         "certExporter": {
                             "enable": true
                         },
@@ -494,12 +491,6 @@
                             "type": "object",
                             "title": "Azure File CSI driver service monitors",
                             "description": "Configuration of azure-file-csi-driver. For all available values see https://github.com/giantswarm/azurefile-csi-driver-app."
-                        },
-                        "capiNodeLabeler": {
-                            "$ref": "#/$defs/app",
-                            "type": "object",
-                            "title": "capi-node-labeler",
-                            "description": "Configuration of capi-node-labeler. For all available values see https://github.com/giantswarm/capi-node-labeler."
                         },
                         "certExporter": {
                             "$ref": "#/$defs/app",
