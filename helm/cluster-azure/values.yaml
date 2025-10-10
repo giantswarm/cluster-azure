@@ -207,6 +207,11 @@ global:
     auditd:
       enabled: false
     containerd:
+      cdi:
+        enabled: false
+        specDirs:
+          - /etc/cdi
+          - /var/run/cdi
       containerRegistries:
         docker.io:
           - endpoint: registry-1.docker.io
