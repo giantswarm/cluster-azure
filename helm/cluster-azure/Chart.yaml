@@ -1,7 +1,7 @@
 apiVersion: v2
 name: cluster-azure
 type: application
-version: 4.0.2
+version: 4.1.0
 description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPZ).
 icon: https://s.giantswarm.io/app-icons/azure/1/light.svg
 home: https://github.com/giantswarm/cluster-azure
