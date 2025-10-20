@@ -9,8 +9,6 @@ domainFilters:
   - "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
 txtOwnerId: giantswarm-io-external-dns
 txtPrefix: {{ include "resource.default.name" $ }}
-sources:
-  - service
 extraVolumes:
   - name: azure-config-file
     hostPath:
