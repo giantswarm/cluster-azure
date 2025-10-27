@@ -1,0 +1,4 @@
+
+{{- $_ := required "global.connectivity.baseDomain is required. The values from the 'cluster-app-installation-values' ConfigMap in the default namespace should be passed when deploying this chart by adding a reference to the ConfigMap in your App custom resource. This is normally done automatically by kyverno" .Values.global.connectivity.baseDomain }}
+{{- $_ := required "global.managementCluster is required. The values from the 'cluster-app-installation-values' ConfigMap in the default namespace should be passed when deploying this chart" .Values.global.managementCluster }}
+{{- $_ := required "You must provide an existing organization name in .global.metadata.organization" .Values.global.metadata.organization }}
