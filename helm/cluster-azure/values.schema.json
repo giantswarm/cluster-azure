@@ -295,6 +295,9 @@
                         "nodeExporter": {
                             "enable": true
                         },
+                        "nodeProblemDetector": {
+                            "enable": false
+                        },
                         "observabilityBundle": {
                             "enable": true
                         },
@@ -635,6 +638,12 @@
                             "type": "object",
                             "title": "node-exporter",
                             "description": "Configuration of node-exporter. For all available values see https://github.com/giantswarm/node-exporter-app."
+                        },
+                        "nodeProblemDetector": {
+                            "$ref": "#/$defs/helmRelease",
+                            "type": "object",
+                            "title": "node-problem-detector",
+                            "description": "Configuration of node-problem-detector-app. For all available values see https://github.com/giantswarm/node-problem-detector-app."
                         },
                         "observabilityBundle": {
                             "$ref": "#/$defs/app",

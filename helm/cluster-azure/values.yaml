@@ -48,6 +48,8 @@ cluster:
         enable: true
       nodeExporter:
         enable: true
+      nodeProblemDetector:
+        enable: false
       observabilityBundle:
         enable: true
       observabilityPolicies:
@@ -196,6 +198,7 @@ global:
     netExporter: {}
     networkPolicies: {}
     nodeExporter: {}
+    nodeProblemDetector: {}
     observabilityBundle: {}
     observabilityPolicies: {}
     prometheusBlackboxExporter: {}
