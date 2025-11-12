@@ -1,4 +1,5 @@
 global:
+  managementCluster: test-mc
   metadata:
     name: test-wc-restricted
     organization: test
