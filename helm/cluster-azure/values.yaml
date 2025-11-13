@@ -54,6 +54,8 @@ cluster:
         enable: true
       observabilityPolicies:
         enable: true
+      priorityClasses:
+        enable: true
       prometheusBlackboxExporter:
         enable: true
       securityBundle:
@@ -201,6 +203,7 @@ global:
     nodeProblemDetector: {}
     observabilityBundle: {}
     observabilityPolicies: {}
+    priorityClasses: {}
     prometheusBlackboxExporter: {}
     securityBundle: {}
     teleportKubeAgent: {}

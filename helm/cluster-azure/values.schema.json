@@ -304,6 +304,9 @@
                         "observabilityPolicies": {
                             "enable": true
                         },
+                        "priorityClasses": {
+                            "enable": true
+                        },
                         "prometheusBlackboxExporter": {
                             "enable": true
                         },
@@ -656,6 +659,12 @@
                             "type": "object",
                             "title": "observability-policies",
                             "description": "Configuration of observability-policies. For all available values see https://github.com/giantswarm/observability-policies-app."
+                        },
+                        "priorityClasses": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "priority-classes",
+                            "description": "Configuration of priority-classes. For all available values see https://github.com/giantswarm/priority-classes."
                         },
                         "prometheusBlackboxExporter": {
                             "$ref": "#/$defs/app",
