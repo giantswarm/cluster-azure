@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "labels.common" $ | nindent 4 }}
     {{- include "preventDeletionLabel" $ | nindent 4 }}
+  annotations:
+    "helm.sh/resource-policy": keep
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
