@@ -264,6 +264,8 @@ global:
       clientId: ""
       groupsClaim: ""
       issuerUrl: ""
+      structuredAuthentication:
+        enabled: false
       usernameClaim: ""
     replicas: 3
     rootVolumeSizeGB: 50
