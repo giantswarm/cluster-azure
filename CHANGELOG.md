@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2025-12-09
+
 ### Added
 
 - Add the `priority-classes` default app, enabled by default. This app provides standardised `PriorityClass` resources like `giantswarm-critical` and `giantswarm-high`, which should replace the previous inconsistent per-app priority classes.
@@ -792,7 +794,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v4.4.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v5.0.0...HEAD
+[5.0.0]: https://github.com/giantswarm/cluster-azure/compare/v4.4.0...v5.0.0
 [4.4.0]: https://github.com/giantswarm/cluster-azure/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/giantswarm/cluster-azure/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/giantswarm/cluster-azure/compare/v4.1.0...v4.2.0
