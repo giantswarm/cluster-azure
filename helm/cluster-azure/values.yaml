@@ -224,6 +224,8 @@ global:
           - endpoint: giantswarm.azurecr.io
         gsoci.azurecr.io:
           - endpoint: gsoci.azurecr.io
+      debug:
+        level: info
       localRegistryCache:
         enabled: false
         mirroredRegistries: []
@@ -264,6 +266,8 @@ global:
       clientId: ""
       groupsClaim: ""
       issuerUrl: ""
+      structuredAuthentication:
+        enabled: false
       usernameClaim: ""
     replicas: 3
     rootVolumeSizeGB: 50
