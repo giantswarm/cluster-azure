@@ -12,7 +12,7 @@
 dns01RecursiveNameserversOnly: true
 ciliumNetworkPolicy:
   enabled: true
-{{- if eq .Values.global.connectivity.network.mode "private" }}
+{{- if (include "useCertManagerDnsChallenges" $ | eq "true") }}
 dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 giantSwarmClusterIssuer:
   acme:

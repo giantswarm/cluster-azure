@@ -239,6 +239,8 @@ global:
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io
+    certManager:
+      useDnsChallenges: false
     network:
       controlPlane:
         cidr: 10.0.0.0/20
