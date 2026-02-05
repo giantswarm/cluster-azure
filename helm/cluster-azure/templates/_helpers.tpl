@@ -524,6 +524,14 @@ glippy nat-ip 20.4.101.216
 {{- end }}
 {{- end -}}
 
+{{- define "useCertManagerDnsChallenges" -}}
+{{ if or (eq .Values.global.connectivity.network.mode "private") (.Values.global.connectivity.certManager.useDnsChallenges) }}
+{{- print "true" }}
+{{- else }}
+{{- print "false" }}
+{{- end }}
+{{- end }}
+
 {{/*
     clusterDNS IP is defined as 10th IP of the service CIDR in kubeadm. See:
     https://github.com/kubernetes/kubernetes/blob/d89d5ab2680bc74fe4487ad71e514f4e0812d9ce/cmd/kubeadm/app/constants/constants.go#L644-L645

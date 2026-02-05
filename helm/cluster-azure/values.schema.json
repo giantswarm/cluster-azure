@@ -966,6 +966,19 @@
                             "title": "Base DNS domain",
                             "default": "azuretest.gigantic.io"
                         },
+                        "certManager": {
+                            "type": "object",
+                            "title": "CertManager",
+                            "description": "Configuration of CertManager.",
+                            "properties": {
+                                "useDnsChallenges": {
+                                    "type": "boolean",
+                                    "title": "Use DNS Challenges",
+                                    "description": "Set to true to enable DNS challenges in the default ClusterIssuer.",
+                                    "default": false
+                                }
+                            }
+                        },
                         "network": {
                             "type": "object",
                             "title": "Network",

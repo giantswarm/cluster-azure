@@ -306,6 +306,8 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.allowedCIDRs` | **List of CIDRs which have to been allowed to connect to the API Server endpoint**|**Type:** `array`<br/>**Default:** `[]`|
 | `global.connectivity.allowedCIDRs[*]` |**None**|**Type:** `string`<br/>|
 | `global.connectivity.baseDomain` | **Base DNS domain**|**Type:** `string`<br/>**Default:** `"azuretest.gigantic.io"`|
+| `global.connectivity.certManager` | **CertManager** - Configuration of CertManager.|**Type:** `object`<br/>|
+| `global.connectivity.certManager.useDnsChallenges` | **Use DNS Challenges** - Set to true to enable DNS challenges in the default ClusterIssuer.|**Type:** `boolean`<br/>**Default:** `false`|
 | `global.connectivity.network` | **Network**|**Type:** `object`<br/>|
 | `global.connectivity.network.controlPlane` | **Control plane**|**Type:** `object`<br/>|
 | `global.connectivity.network.controlPlane.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.0.0/20"`|
