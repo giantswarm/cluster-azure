@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.2.0] - 2026-02-06
+
 ### Changed
 
 - Allow CertManager to use DNS challenges on non-private clusters.
@@ -816,7 +818,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v5.1.2...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v5.2.0...HEAD
+[5.2.0]: https://github.com/giantswarm/cluster-azure/compare/v5.1.2...v5.2.0
 [5.1.2]: https://github.com/giantswarm/cluster-azure/compare/v5.1.1...v5.1.2
 [5.1.1]: https://github.com/giantswarm/cluster-azure/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/giantswarm/cluster-azure/compare/v5.0.0...v5.1.0
