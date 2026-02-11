@@ -152,7 +152,7 @@
                 "instanceType": {
                     "type": "string",
                     "title": "VM size",
-                    "default": "Standard_D4s_v5"
+                    "default": "Standard_D4as_v5"
                 },
                 "replicas": {
                     "type": "integer",
@@ -465,7 +465,7 @@
                                 "customNodeLabels": [
                                     "label=default"
                                 ],
-                                "instanceType": "Standard_D4s_v5",
+                                "instanceType": "Standard_D4as_v5",
                                 "machineHealthCheck": {
                                     "enabled": true,
                                     "maxUnhealthy": "40%",
@@ -1330,7 +1330,7 @@
                         "instanceType": {
                             "type": "string",
                             "title": "Node VM size",
-                            "default": "Standard_D4s_v5"
+                            "default": "Standard_D4as_v5"
                         },
                         "kubeletVolumeSizeGB": {
                             "type": "integer",
