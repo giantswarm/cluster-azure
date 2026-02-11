@@ -161,7 +161,7 @@ cluster:
         def00:
           customNodeLabels:
             - label=default
-          instanceType: Standard_D4s_v5
+          instanceType: Standard_D4as_v5
           machineHealthCheck:
             enabled: true
             maxUnhealthy: 40%
@@ -256,7 +256,7 @@ global:
     containerdVolumeSizeGB: 100
     encryptionAtHost: false
     etcdVolumeSizeGB: 50
-    instanceType: Standard_D4s_v5
+    instanceType: Standard_D4as_v5
     kubeletVolumeSizeGB: 100
     oidc:
       caPem: ""
