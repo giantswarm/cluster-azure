@@ -272,7 +272,7 @@ Advanced configuration of components that are running on all nodes.
 | `global.components.containerd.cdi.enabled` | **Enabled** - Enabling this will configure containerd to support Container Device Interface (CDI) specification.|**Type:** `boolean`<br/>**Default:** `false`|
 | `global.components.containerd.cdi.specDirs` | **CDI spec directories** - List of directories to search for CDI spec files.|**Type:** `array`<br/>**Default:** `["/etc/cdi","/var/run/cdi"]`|
 | `global.components.containerd.cdi.specDirs[*]` | **CDI spec directory** - Directory to search for CDI spec files.|**Type:** `string`<br/>|
-| `global.components.containerd.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{"docker.io":[{"endpoint":"registry-1.docker.io"},{"endpoint":"giantswarm.azurecr.io"}],"gsoci.azurecr.io":[{"endpoint":"gsoci.azurecr.io"}]}`|
+| `global.components.containerd.containerRegistries` | **Container registries** - Endpoints and credentials configuration for container registries.|**Type:** `object`<br/>**Default:** `{}`|
 | `global.components.containerd.containerRegistries.*` | **Registries** - Container registries and mirrors|**Type:** `array`<br/>|
 | `global.components.containerd.containerRegistries.*[*]` | **Registry**|**Type:** `object`<br/>|
 | `global.components.containerd.containerRegistries.*[*].credentials` | **Credentials**|**Type:** `object`<br/>|
