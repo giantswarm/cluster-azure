@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Values: Update default instance size to `D4as_v5`.
+
 ## [5.2.1] - 2026-02-18
 
 ### Changed
