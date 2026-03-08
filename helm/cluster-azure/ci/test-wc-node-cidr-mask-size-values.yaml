@@ -2,7 +2,7 @@ global:
   managementCluster: test-mc
   metadata:
     name: test-wc-minimal
-    organization: test
+    organization: giantswarm
     preventDeletion: false
     servicePriority: lowest
   connectivity:
