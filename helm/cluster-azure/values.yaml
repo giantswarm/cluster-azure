@@ -243,6 +243,8 @@ global:
     baseDomain: azuretest.gigantic.io
     certManager:
       useDnsChallenges: false
+    dns:
+      wildcardCnameTarget: ""
     network:
       controlPlane:
         cidr: 10.0.0.0/20
