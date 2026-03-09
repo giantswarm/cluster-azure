@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add support for `network.giantswarm.io/wildcard-cname-target` annotation on `AzureCluster` via `global.connectivity.dns.wildcardCnameTarget`.
+
 ## [6.0.0] - 2026-03-09
 
 ### Changed
