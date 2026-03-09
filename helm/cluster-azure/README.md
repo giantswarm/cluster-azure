@@ -329,6 +329,8 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.baseDomain` | **Base DNS domain**|**Type:** `string`<br/>**Default:** `"azuretest.gigantic.io"`|
 | `global.connectivity.certManager` | **CertManager** - Configuration of CertManager.|**Type:** `object`<br/>|
 | `global.connectivity.certManager.useDnsChallenges` | **Use DNS Challenges** - Set to true to enable DNS challenges in the default ClusterIssuer.|**Type:** `boolean`<br/>**Default:** `false`|
+| `global.connectivity.dns` | **DNS**|**Type:** `object`<br/>|
+| `global.connectivity.dns.wildcardCnameTarget` | **Wildcard CNAME Target** - Override the wildcard CNAME record value. If no value is passed defaults to "ingress". Only subdomains from the cluster DNS zone are valid.|**Type:** `string`<br/>**Example:** `"gateway"`<br/>|
 | `global.connectivity.network` | **Network**|**Type:** `object`<br/>|
 | `global.connectivity.network.controlPlane` | **Control plane**|**Type:** `object`<br/>|
 | `global.connectivity.network.controlPlane.cidr` | **Subnet**|**Type:** `string`<br/>**Default:** `"10.0.0.0/20"`|
