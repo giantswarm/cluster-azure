@@ -39,6 +39,8 @@ cluster:
         enable: true
       k8sDnsNodeCache:
         enable: true
+      kamajiEtcd:
+        enable: false
       metricsServer:
         enable: true
       netExporter:
@@ -144,7 +146,8 @@ cluster:
       bastionResourceEnabled: false
       cleanupHelmReleaseResourcesEnabled: true
       clusterResourceEnabled: true
-      controlPlaneResourceEnabled: true
+      controlPlaneResource:
+        enabled: true
       helmRepositoryResourcesEnabled: true
       infrastructureCluster:
         group: infrastructure.cluster.x-k8s.io
@@ -198,6 +201,7 @@ global:
     externalDnsPrivate: {}
     k8sAuditMetrics: {}
     k8sDnsNodeCache: {}
+    kamajiEtcd: {}
     metricsServer: {}
     netExporter: {}
     networkPolicies: {}
