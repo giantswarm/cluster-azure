@@ -176,16 +176,6 @@
                             "title": "Rolling update strategy",
                             "description": "Rolling update config params.",
                             "properties": {
-                                "deletePolicy": {
-                                    "type": "string",
-                                    "title": "Delete policy",
-                                    "description": "DeletePolicy defines the policy used by the MachineDeployment to identify nodes to delete when downscaling. When no value is supplied, the default DeletePolicy of MachineSet is used.",
-                                    "enum": [
-                                        "Random",
-                                        "Newest",
-                                        "Oldest"
-                                    ]
-                                },
                                 "maxSurge": {
                                     "type": "string",
                                     "title": "Max surge",
@@ -281,6 +271,9 @@
                         },
                         "k8sDnsNodeCache": {
                             "enable": true
+                        },
+                        "kamajiEtcd": {
+                            "enable": false
                         },
                         "metricsServer": {
                             "enable": true
@@ -445,7 +438,9 @@
                         "bastionResourceEnabled": false,
                         "cleanupHelmReleaseResourcesEnabled": true,
                         "clusterResourceEnabled": true,
-                        "controlPlaneResourceEnabled": true,
+                        "controlPlaneResource": {
+                            "enabled": true
+                        },
                         "helmRepositoryResourcesEnabled": true,
                         "infrastructureCluster": {
                             "group": "infrastructure.cluster.x-k8s.io",
@@ -620,6 +615,12 @@
                             "type": "object",
                             "title": "k8s-dns-node-cache",
                             "description": "Configuration of k8s-dns-node-cache. For all available values see https://github.com/giantswarm/k8s-dns-node-cache-app."
+                        },
+                        "kamajiEtcd": {
+                            "$ref": "#/$defs/app",
+                            "type": "object",
+                            "title": "kamaji-etcd",
+                            "description": "Configuration of kamaji-etcd. For all available values see https://github.com/giantswarm/kamaji-etcd-app."
                         },
                         "metricsServer": {
                             "$ref": "#/$defs/app",
