@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Node pools: Add `minSize` and `maxSize` fields to enable per-node-pool autoscaling configuration.
+- Autoscaling: Deploy cluster-autoscaler to the management cluster org-namespace using in-cluster credentials to scale MachineDeployments.
+
 ## [6.0.0] - 2026-03-09
 
 ### Changed
