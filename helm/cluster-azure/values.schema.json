@@ -154,16 +154,16 @@
                     "title": "VM size",
                     "default": "Standard_D4as_v5"
                 },
-                "minSize": {
-                    "type": "integer",
-                    "title": "Minimum number of nodes",
-                    "description": "Minimum number of nodes for autoscaling. Requires maxSize to be set.",
-                    "minimum": 0
-                },
                 "maxSize": {
                     "type": "integer",
                     "title": "Maximum number of nodes",
                     "description": "Maximum number of nodes for autoscaling. Requires minSize to be set.",
+                    "minimum": 0
+                },
+                "minSize": {
+                    "type": "integer",
+                    "title": "Minimum number of nodes",
+                    "description": "Minimum number of nodes for autoscaling. Requires maxSize to be set.",
                     "minimum": 0
                 },
                 "replicas": {
