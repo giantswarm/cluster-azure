@@ -24,6 +24,7 @@ cluster:
       clusterAutoscaler:
         enable: true
         inCluster: true
+        cloudProvider: clusterapi
         configTemplateName: azureClusterAutoscalerHelmValues
       coreDns:
         configTemplateName: azureCorednsHelmValues
