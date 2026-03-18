@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add proxy values to azuredisk-csi-driver and azurefile-csi-driver HelmRelease default values.
+- Add `_clusterautoscaler_app_config.yaml` to provide Azure `subscriptionID` to cluster-autoscaler.
+- Migrate `external-dns-private` from App CR to HelmRelease, removing cluster-values ConfigMap reference.
+- Add proxy env vars and ciliumNetworkPolicy to external-dns-private default values.
+
 ## [6.1.0] - 2026-03-18
 
 ### Changed
