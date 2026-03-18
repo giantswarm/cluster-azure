@@ -1,0 +1,6 @@
+{{/* Azure-specific cluster-autoscaler Helm values */}}
+{{/* https://github.com/giantswarm/cluster-autoscaler-app/blob/main/helm/cluster-autoscaler-app/values.yaml */}}
+{{- define "azureClusterAutoscalerHelmValues" }}
+azure:
+  subscriptionID: {{ .Values.global.providerSpecific.subscriptionId | quote }}
+{{- end }}

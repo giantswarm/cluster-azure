@@ -5,6 +5,13 @@ provider: capz
 global:
   podSecurityStandards:
     enforced: {{ .Values.global.podSecurityStandards.enforced }}
+{{- if (.Values.global.connectivity.proxy).enabled }}
+cluster:
+  proxy:
+    noProxy: {{ .Values.global.connectivity.proxy.noProxy | quote }}
+    http: {{ .Values.global.connectivity.proxy.httpProxy | quote }}
+    https: {{ .Values.global.connectivity.proxy.httpsProxy | quote }}
+{{- end }}
 {{- end }}
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
