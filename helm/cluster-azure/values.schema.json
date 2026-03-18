@@ -259,7 +259,8 @@
                             "enable": true
                         },
                         "clusterAutoscaler": {
-                            "enable": false
+                            "configTemplateName": "azureClusterAutoscalerHelmValues",
+                            "enable": true
                         },
                         "clusterAutoscalerCrossplaneResources": {
                             "enable": false
