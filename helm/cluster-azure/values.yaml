@@ -23,6 +23,8 @@ cluster:
         enable: true
       clusterAutoscaler:
         enable: false
+      clusterAutoscalerCrossplaneResources:
+        enable: false
       coreDns:
         configTemplateName: azureCorednsHelmValues
         enable: true
@@ -193,6 +195,7 @@ global:
     cilium: {}
     ciliumServiceMonitors: {}
     clusterAutoscaler: {}
+    clusterAutoscalerCrossplaneResources: {}
     coreDns: {}
     coreDnsExtensions: {}
     etcdDefrag: {}
