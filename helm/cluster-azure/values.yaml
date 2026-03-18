@@ -22,10 +22,8 @@ cluster:
       ciliumServiceMonitors:
         enable: true
       clusterAutoscaler:
-        enable: true
-        inCluster: true
-        cloudProvider: clusterapi
         configTemplateName: azureClusterAutoscalerHelmValues
+        enable: true
       coreDns:
         configTemplateName: azureCorednsHelmValues
         enable: true
