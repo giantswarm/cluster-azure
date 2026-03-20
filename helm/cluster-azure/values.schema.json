@@ -154,6 +154,18 @@
                     "title": "VM size",
                     "default": "Standard_D4as_v5"
                 },
+                "maxSize": {
+                    "type": "integer",
+                    "title": "Maximum number of nodes",
+                    "description": "Maximum number of nodes for autoscaling. Requires minSize to be set.",
+                    "minimum": 0
+                },
+                "minSize": {
+                    "type": "integer",
+                    "title": "Minimum number of nodes",
+                    "description": "Minimum number of nodes for autoscaling. Requires maxSize to be set.",
+                    "minimum": 0
+                },
                 "replicas": {
                     "type": "integer",
                     "title": "Number of nodes",
@@ -247,7 +259,8 @@
                             "enable": true
                         },
                         "clusterAutoscaler": {
-                            "enable": false
+                            "configTemplateName": "azureClusterAutoscalerHelmValues",
+                            "enable": true
                         },
                         "clusterAutoscalerCrossplaneResources": {
                             "enable": false
