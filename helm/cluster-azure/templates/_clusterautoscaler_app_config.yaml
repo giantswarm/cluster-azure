@@ -10,4 +10,6 @@ clusterAPI:
 extraArgs:
   balance-similar-node-groups: "true"
   skip-nodes-with-local-storage: "false"
+rbac:
+  clusterScoped: false
 {{- end -}}
