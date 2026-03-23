@@ -1,20 +1,6 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{/*
-Helm values for cluster-autoscaler-app when deployed to the management cluster (inCluster mode).
-The autoscaler watches WC pods/nodes via the {cluster}-kubeconfig secret and scales
-MachineDeployments using in-cluster MC credentials.
-*/}}
-{{- define "azureClusterAutoscalerHelmValues" -}}
-clusterAPI:
-  enabled: true
-  kubeconfigSecret: {{ include "resource.default.name" $ }}-kubeconfig
-extraArgs:
-  balance-similar-node-groups: "true"
-  skip-nodes-with-local-storage: "false"
-{{- end -}}
-
-{{/*
 Expand the name of the chart.
 */}}
 {{- define "name" -}}
