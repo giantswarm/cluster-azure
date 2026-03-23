@@ -6,18 +6,12 @@ The autoscaler watches WC pods/nodes via the {cluster}-kubeconfig secret and sca
 MachineDeployments using in-cluster MC credentials.
 */}}
 {{- define "azureClusterAutoscalerHelmValues" -}}
-cloudProvider: clusterapi
-clusterAPIMode: kubeconfig-incluster
-autoDiscovery:
-  clusterName: {{ include "resource.default.name" $ }}
+clusterAPI:
+  enabled: true
+  kubeconfigSecret: {{ include "resource.default.name" $ }}-kubeconfig
 extraArgs:
-  node-group-auto-discovery: "clusterapi:namespace={{ $.Release.Namespace }},clusterName={{ include "resource.default.name" $ }}"
-  clusterapi-cloud-config-authoritative: "true"
   balance-similar-node-groups: "true"
   skip-nodes-with-local-storage: "false"
-kubeConfigSecret:
-  name: {{ include "resource.default.name" $ }}-kubeconfig
-  namespace: {{ $.Release.Namespace }}
 {{- end -}}
 
 {{/*
