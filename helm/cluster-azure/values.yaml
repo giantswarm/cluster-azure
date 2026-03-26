@@ -22,7 +22,6 @@ cluster:
       ciliumServiceMonitors:
         enable: true
       clusterAutoscaler:
-        configTemplateName: azureClusterAutoscalerHelmValues
         enable: false
       clusterAutoscalerCrossplaneResources:
         enable: false
