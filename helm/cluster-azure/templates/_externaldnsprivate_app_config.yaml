@@ -22,7 +22,7 @@ ciliumNetworkPolicy:
 {{- if (.Values.global.connectivity.proxy).enabled }}
 env:
   - name: NO_PROXY
-    value: {{ .Values.global.connectivity.proxy.noProxy | quote }}
+    value: {{ include "cluster.connectivity.proxy.noProxy" (dict "global" $.Values.global "providerIntegration" $.Values.cluster.providerIntegration) | quote }}
   - name: HTTP_PROXY
     value: {{ .Values.global.connectivity.proxy.httpProxy | quote }}
   - name: HTTPS_PROXY

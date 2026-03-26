@@ -8,7 +8,7 @@ global:
 {{- if (.Values.global.connectivity.proxy).enabled }}
 cluster:
   proxy:
-    noProxy: {{ .Values.global.connectivity.proxy.noProxy | quote }}
+    noProxy: {{ include "cluster.connectivity.proxy.noProxy" (dict "global" $.Values.global "providerIntegration" $.Values.cluster.providerIntegration) | quote }}
     http: {{ .Values.global.connectivity.proxy.httpProxy | quote }}
     https: {{ .Values.global.connectivity.proxy.httpsProxy | quote }}
 {{- end }}
