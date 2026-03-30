@@ -29,6 +29,8 @@ spec:
   kubeConfig:
     secretRef:
       name: {{ include "resource.default.name" $ }}-kubeconfig
+  driftDetection:
+    mode: enabled
   interval: 5m
   install:
     remediation:
