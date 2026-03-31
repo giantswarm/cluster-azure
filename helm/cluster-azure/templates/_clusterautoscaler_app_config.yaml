@@ -4,6 +4,8 @@ The autoscaler watches WC pods/nodes via the {cluster}-kubeconfig secret and sca
 MachineDeployments using in-cluster MC credentials.
 */}}
 {{- define "azureClusterAutoscalerHelmValues" -}}
+azure:
+  subscriptionID: {{ .Values.global.providerSpecific.subscriptionId | quote }}
 clusterAPI:
   enabled: true
   kubeconfigSecret: {{ include "resource.default.name" $ }}-kubeconfig
