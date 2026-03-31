@@ -12,6 +12,11 @@ clusterAPI:
 extraArgs:
   balance-similar-node-groups: "true"
   skip-nodes-with-local-storage: "false"
+
+{{/*
+cluster-autoscaler is deployed on the MC, and there's an instance per WC.
+Each instance needs to be scoped to the WC namespace to watch the WC's MachineDeployments.
+*/}}
 rbac:
   clusterScoped: false
 {{- end -}}
