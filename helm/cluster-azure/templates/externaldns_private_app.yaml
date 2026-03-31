@@ -1,64 +1,58 @@
 {{/* Azure-specific external-dns app for private clusters */}}
 {{- if eq .Values.global.connectivity.network.mode "private" }}
-apiVersion: v1
-kind: ConfigMap
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
 metadata:
-  name: {{ include "resource.default.name" . }}-external-dns-private-user-values
+  name: {{ include "resource.default.name" $ }}-external-dns-private
   namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "labels.common" . | nindent 4 }}
-data:
-    {{- $appHelmValues := (include "azureExternalDnsPrivateHelmValues" $)| fromYaml -}}
-    {{- $userConfig := dict }}
-    {{- $userConfigRaw := get $.Values.global.apps "externalDnsPrivate" }}
-    {{- if $userConfigRaw }}
-    {{- $userConfig = $userConfigRaw | toYaml | toString | fromYaml }}
-    {{- end }}
-    {{- if $userConfig.values }}
-    {{- $appHelmValues = mergeOverwrite $appHelmValues (deepCopy $userConfig.values) -}}
-    {{- end }}
-  values: |
-    {{- $appHelmValues | toYaml | nindent 4 }}
-
----
-apiVersion: application.giantswarm.io/v1alpha1
-kind: App
-metadata:
-  name: {{ include "resource.default.name" . }}-external-dns-private
-  namespace: {{ .Release.Namespace }}
-  labels:
-    {{- include "labels.common" . | nindent 4 }}
-    giantswarm.io/managed-by: {{ .Chart.Name }}
   annotations:
-    app-operator.giantswarm.io/depends-on: {{ include "resource.default.name" . }}-prometheus-operator-crd
+    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
+  labels:
+    cluster-apps-operator.giantswarm.io/watching: ""
+    {{- if .Values.global.metadata.servicePriority }}
+    giantswarm.io/service-priority: {{ .Values.global.metadata.servicePriority }}
+    {{- end }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
-  {{- $_ := set $ "appName" "external-dns" }}
-  catalog: {{ include "cluster.app.catalog" $ }}
-  name: external-dns-app
-  version: {{ include "cluster.app.version" $ }}
-  namespace: kube-system
-  config:
-    configMap:
-      name: {{ include "resource.default.name" . }}-cluster-values
-      namespace: {{ .Release.Namespace }}
-  userConfig:
-    configMap:
-      name: {{ include "resource.default.name" . }}-external-dns-private-user-values
-      namespace: {{ .Release.Namespace }}
-  {{- if .Values.global.apps.externalDnsPrivate.extraConfigs }}
-  extraConfigs:
-  {{- range .Values.global.apps.externalDnsPrivate.extraConfigs }}
-  - kind: {{ .kind }}
-    name: {{ .name }}
-    namespace: {{ .namespace | default $.Release.Namespace }}
-    priority: {{ .priority }}
-  {{- end }}
-  {{- end }}
+  suspend: false
+  releaseName: external-dns-private
+  targetNamespace: kube-system
+  storageNamespace: kube-system
+  chart:
+    spec:
+      chart: external-dns-app
+      {{- $_ := set $ "appName" "external-dns" }}
+      version: {{ include "cluster.app.version" $ }}
+      sourceRef:
+        kind: HelmRepository
+        name: {{ include "resource.default.name" $ }}-{{ include "cluster.app.catalog" $ }}
   kubeConfig:
-    inCluster: false
-    secret:
-      name: {{ include "resource.default.name" . }}-kubeconfig
-      namespace: {{ .Release.Namespace }}
-    context:
-      name: {{ include "resource.default.name" . }}-admin@{{ include "resource.default.name" . }}
+    secretRef:
+      name: {{ include "resource.default.name" $ }}-kubeconfig
+  driftDetection:
+    mode: enabled
+  interval: 5m
+  install:
+    remediation:
+      retries: -1
+  upgrade:
+    remediation:
+      retries: -1
+  {{- $externalDnsPrivateHelmValues := (include "azureExternalDnsPrivateHelmValues" .) | fromYaml -}}
+  {{- $customExternalDnsPrivateHelmValues := $.Values.global.apps.externalDnsPrivate.values -}}
+  {{- if $customExternalDnsPrivateHelmValues }}
+  {{- $externalDnsPrivateHelmValues = merge (deepCopy $customExternalDnsPrivateHelmValues) $externalDnsPrivateHelmValues -}}
+  {{- end }}
+  {{- if $externalDnsPrivateHelmValues }}
+  values: {{- $externalDnsPrivateHelmValues | toYaml | nindent 4 }}
+  {{- end }}
+  {{- if $.Values.global.apps.externalDnsPrivate.extraConfigs }}
+  valuesFrom:
+    {{- range $config := $.Values.global.apps.externalDnsPrivate.extraConfigs }}
+    - kind: {{ $config.kind }}
+      name: {{ $config.name }}
+      valuesKey: values
+      optional: {{ $config.optional | default false  }}
+    {{- end }}
+  {{- end }}
 {{- end }}

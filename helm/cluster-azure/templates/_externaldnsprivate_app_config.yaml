@@ -17,4 +17,15 @@ extraVolumeMounts:
   - name: azure-config-file
     mountPath: /etc/kubernetes
     readOnly: true
+ciliumNetworkPolicy:
+  enabled: true
+{{- if (.Values.global.connectivity.proxy).enabled }}
+env:
+  - name: NO_PROXY
+    value: {{ include "cluster.connectivity.proxy.noProxy" (dict "global" $.Values.global "providerIntegration" $.Values.cluster.providerIntegration) | quote }}
+  - name: HTTP_PROXY
+    value: {{ .Values.global.connectivity.proxy.httpProxy | quote }}
+  - name: HTTPS_PROXY
+    value: {{ .Values.global.connectivity.proxy.httpsProxy | quote }}
+{{- end }}
 {{- end }}
