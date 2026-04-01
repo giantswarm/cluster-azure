@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Node pools: Add `minSize` and `maxSize` fields to enable per-node-pool autoscaling configuration.
 - Autoscaling: Deploy cluster-autoscaler to the management cluster org-namespace using in-cluster credentials to scale MachineDeployments.
+- Add support for `network.giantswarm.io/wildcard-cname-target` annotation on `AzureCluster` via `global.connectivity.dns.wildcardCnameTarget`.
 
 ### Changed
 
