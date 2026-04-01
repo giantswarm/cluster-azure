@@ -1,6 +1,22 @@
-{{/* Azure-specific cluster-autoscaler Helm values */}}
-{{/* https://github.com/giantswarm/cluster-autoscaler-app/blob/main/helm/cluster-autoscaler-app/values.yaml */}}
-{{- define "azureClusterAutoscalerHelmValues" }}
+{{/*
+Azure-specific Helm values for cluster-autoscaler-app when deployed to the management cluster (inCluster mode).
+The autoscaler watches WC pods/nodes via the {cluster}-kubeconfig secret and scales
+MachineDeployments using in-cluster MC credentials.
+*/}}
+{{- define "azureClusterAutoscalerHelmValues" -}}
 azure:
   subscriptionID: {{ .Values.global.providerSpecific.subscriptionId | quote }}
-{{- end }}
+clusterAPI:
+  enabled: true
+  kubeconfigSecret: {{ include "resource.default.name" $ }}-kubeconfig
+extraArgs:
+  balance-similar-node-groups: "true"
+  skip-nodes-with-local-storage: "false"
+
+{{/*
+cluster-autoscaler is deployed on the MC, and there's an instance per WC.
+Each instance needs to be scoped to the WC namespace to watch the WC's MachineDeployments.
+*/}}
+rbac:
+  clusterScoped: false
+{{- end -}}
