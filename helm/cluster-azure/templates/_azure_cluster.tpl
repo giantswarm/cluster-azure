@@ -7,6 +7,12 @@ metadata:
     {{- include "preventDeletionLabel" $ | nindent 4 }}
   annotations:
     "helm.sh/resource-policy": keep
+    {{- if .Values.global.connectivity.dns.wildcardCnameTarget }}
+    {{- if regexMatch "\\." .Values.global.connectivity.dns.wildcardCnameTarget }}
+    {{- fail "global.connectivity.dns.wildcardCnameTarget must be a single word - no FQDNs are allowed" }}
+    {{- end }}
+    network.giantswarm.io/wildcard-cname-target: "{{ .Values.global.connectivity.dns.wildcardCnameTarget }}"
+    {{- end }}
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
