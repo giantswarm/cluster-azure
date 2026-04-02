@@ -13,7 +13,7 @@ annotations:
 dependencies:
   - name: cluster
     repository: https://giantswarm.github.io/cluster-catalog
-    version: "6.2.0"
+    version: "6.3.0"
   - name: cluster-shared
     version: "0.7.1"
     repository: https://giantswarm.github.io/cluster-catalog
