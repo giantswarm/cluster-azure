@@ -76,6 +76,7 @@ cluster:
         enable: true
       verticalPodAutoscalerCrd:
         enable: true
+    clusterAnnotationsTemplateName: azureClusterAnnotations
     controlPlane:
       kubeadmConfig:
         clusterConfiguration:

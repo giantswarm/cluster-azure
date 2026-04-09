@@ -524,6 +524,15 @@ glippy nat-ip 20.4.101.216
 {{- end }}
 {{- end -}}
 
+{{- define "azureClusterAnnotations" -}}
+{{- if .Values.global.connectivity.dns.wildcardCnameTarget }}
+{{- if regexMatch "\\." .Values.global.connectivity.dns.wildcardCnameTarget }}
+{{- fail "global.connectivity.dns.wildcardCnameTarget must be a single word - no FQDNs are allowed" }}
+{{- end }}
+network.giantswarm.io/wildcard-cname-target: "{{ .Values.global.connectivity.dns.wildcardCnameTarget }}"
+{{- end }}
+{{- end -}}
+
 {{- define "useCertManagerDnsChallenges" -}}
 {{ if or (eq .Values.global.connectivity.network.mode "private") (.Values.global.connectivity.certManager.useDnsChallenges) }}
 {{- print "true" }}
