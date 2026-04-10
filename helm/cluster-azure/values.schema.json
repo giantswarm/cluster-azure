@@ -507,10 +507,6 @@
                 }
             }
         },
-        "cluster-shared": {
-            "type": "object",
-            "title": "Library chart"
-        },
         "global": {
             "type": "object",
             "title": "Global",
