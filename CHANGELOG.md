@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Move `network.giantswarm.io/wildcard-cname-target` annotation from `AzureCluster` CR to `Cluster` CR.
+- Chart: Update `cluster` to v6.4.0.
 
 ### Removed
 

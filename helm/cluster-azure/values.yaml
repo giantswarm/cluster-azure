@@ -40,6 +40,8 @@ cluster:
       externalDns:
         configTemplateName: azureExternalDnsHelmValues
         enable: true
+      externalDnsCrossplaneResources:
+        enable: false
       k8sAuditMetrics:
         enable: true
       k8sDnsNodeCache:
@@ -206,6 +208,7 @@ global:
     etcdDefrag: {}
     etcdKubernetesResourcesCountExporter: {}
     externalDns: {}
+    externalDnsCrossplaneResources: {}
     externalDnsPrivate: {}
     k8sAuditMetrics: {}
     k8sDnsNodeCache: {}
