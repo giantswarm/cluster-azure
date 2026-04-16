@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Move `network.giantswarm.io/wildcard-cname-target` annotation from `AzureCluster` CR to `Cluster` CR.
+
 ### Removed
 
 - Chart: Remove unused `cluster-shared` library chart dependency.

@@ -339,6 +339,7 @@
                             "enable": true
                         }
                     },
+                    "clusterAnnotationsTemplateName": "azureClusterAnnotations",
                     "controlPlane": {
                         "kubeadmConfig": {
                             "clusterConfiguration": {
