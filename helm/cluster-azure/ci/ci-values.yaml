@@ -4,7 +4,7 @@ provider: capz
 global:
   metadata:
     name: test-wc
-    organization: test
+    organization: giantswarm
     preventDeletion: false
     servicePriority: lowest
     labels:
