@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Bump `cluster` subchart to dev version `6.6.0-07c04f97c073fe231b1b5912fcdfbefd39526338` from [giantswarm/cluster#780](https://github.com/giantswarm/cluster/pull/780), pulled from `cluster-test-catalog` to pick up the App → HelmRelease migration changes.
+
 ## [6.5.0] - 2026-05-20
 
 ### Changed

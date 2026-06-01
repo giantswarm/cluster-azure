@@ -12,5 +12,5 @@ annotations:
   application.giantswarm.io/team: phoenix
 dependencies:
   - name: cluster
-    repository: https://giantswarm.github.io/cluster-catalog
-    version: "6.5.0"
+    repository: https://giantswarm.github.io/cluster-test-catalog
+    version: "6.6.0-07c04f97c073fe231b1b5912fcdfbefd39526338"
