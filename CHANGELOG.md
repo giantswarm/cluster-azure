@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Enable cert-manager DNS challenges by default.
 
+### Removed
+
+- Templates: Remove dead container registry cache schema.
+
 ## [6.6.0] - 2026-06-02
 
 ### Changed
