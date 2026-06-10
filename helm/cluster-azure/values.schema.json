@@ -1008,7 +1008,7 @@
                                     "type": "boolean",
                                     "title": "Use DNS Challenges",
                                     "description": "Set to true to enable DNS challenges in the default ClusterIssuer.",
-                                    "default": false
+                                    "default": true
                                 }
                             }
                         },
