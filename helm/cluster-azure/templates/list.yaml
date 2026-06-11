@@ -1,7 +1,5 @@
 {{- include "azure-cluster" . }}
 ---
-{{- include "containerd-config-secret" . }}
----
 {{- include "provider-specific-files" . }}
 ---
 {{- include "control-plane" . }}

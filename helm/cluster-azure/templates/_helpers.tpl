@@ -276,15 +276,6 @@ userAssignedIdentities:
 {{- end }}
 {{- end }}
 
-{{- define "containerdConfig" -}}
-- path: /etc/containerd/config.toml
-  permissions: "0644"
-  contentFrom:
-    secret:
-      name: {{ include "resource.default.name" $ }}-containerd-configuration
-      key: registry-config.toml
-{{- end -}}
-
 {{/*
 Calculating API server load balancer IP based on control plane subnet CIDR.
 

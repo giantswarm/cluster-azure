@@ -76,7 +76,6 @@ files:
 {{- end }}
 {{- include "commonSysctlConfigurations" $ | nindent 2 }}
 {{- include "auditRules99Default" $ | nindent 2 }}
-{{- include "containerdConfig" $ | nindent 2 }}
 preKubeadmCommands:
 {{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
 {{- include "kubeletReservationPreCommands" . | nindent 2 }}
