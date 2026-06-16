@@ -9,7 +9,7 @@ else
 CI_FILE ?= "ci/ci-values.yaml"
 endif
 
-APPLICATION="helm/cluster-azure"
+APPLICATION="cluster-azure"
 
 .PHONY: template
 template: ## Output the rendered Helm template
