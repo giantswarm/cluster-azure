@@ -9,11 +9,14 @@
 
 # check extra config for private WC parameters
 # note that user config has higher priority and extra config can be overwritten by userConfig
-dns01RecursiveNameserversOnly: true
+cert-manager:
+  dns01RecursiveNameserversOnly: true
+{{- if (include "useCertManagerDnsChallenges" $ | eq "true") }}
+  dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
+{{- end }}
 ciliumNetworkPolicy:
   enabled: true
 {{- if (include "useCertManagerDnsChallenges" $ | eq "true") }}
-dns01RecursiveNameservers: "8.8.8.8:53,1.1.1.1:53"
 giantSwarmClusterIssuer:
   acme:
     http01:

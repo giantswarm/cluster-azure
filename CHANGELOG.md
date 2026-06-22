@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated `cert-manager` to v4.0.0 and migrated the values to match the new chart's schema.
+
 ## [6.7.0] - 2026-06-18
 
 ### Changed
@@ -310,13 +314,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>How to migrate to cluster-azure</summary>
 
-* In ConfigMap `<cluster name>-userconfig` set `.Values.global.release` to the release version, e.g. `25.0.0`. 
+* In ConfigMap `<cluster name>-userconfig` set `.Values.global.release` to the release version, e.g. `25.0.0`.
 * In App `<cluster name>` set the `version` to an empty string.
 </details>
-  
+
 ## [0.16.1] - 2024-07-16
 
-### Changed 
+### Changed
 
 - Respect `global.apps.externalDnsPrivate` to overwrite configuration of `external-dns-private` app.
 
@@ -368,9 +372,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>How to migrate to cluster-azure v0.14.0</summary>
 
-* Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0). 
-* In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`. 
-* Delete `<cluster name>-default-apps` App. 
+* Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0).
+* In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`.
+* Delete `<cluster name>-default-apps` App.
 * Update `<cluster name>` to the latest version of `cluster-azure` (v0.14.0).
 
 </details>
