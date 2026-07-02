@@ -21,7 +21,7 @@ osDisk:
     storageAccountType: Premium_LRS
   osType: Linux
 securityProfile:
-  encryptionAtHost: {{ .nodePool.config.encryptionAtHost }}
+  encryptionAtHost: {{ .nodePool.config.encryptionAtHost | default false }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ .nodePool.config.instanceType | default "Standard_D4s_v5" }}
 {{- if ( include "network.subnets.nodes.name" $ ) }}
