@@ -13,4 +13,4 @@ annotations:
 dependencies:
   - name: cluster
     repository: https://giantswarm.github.io/cluster-catalog
-    version: "6.7.0"
+    version: "6.8.0"
