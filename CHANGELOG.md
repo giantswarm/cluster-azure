@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Set default for nodepool's `encryptionAtHost` parameter to `false`.
+- Chart: Update `cluster` to v6.8.0.
 
 ## [6.7.0] - 2026-06-18
 
