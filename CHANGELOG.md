@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.8.1] - 2026-07-16
+
 ### Changed
 
 - cert-manager: Fix version assignment.
@@ -922,7 +924,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v6.8.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v6.8.1...HEAD
+[6.8.1]: https://github.com/giantswarm/cluster-azure/compare/v6.8.0...v6.8.1
 [6.8.0]: https://github.com/giantswarm/cluster-azure/compare/v6.7.0...v6.8.0
 [6.7.0]: https://github.com/giantswarm/cluster-azure/compare/v6.6.0...v6.7.0
 [6.6.0]: https://github.com/giantswarm/cluster-azure/compare/v6.5.0...v6.6.0
