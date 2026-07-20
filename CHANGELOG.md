@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- coredns: Drop the provider-specific values override now covered by the shared `cluster` chart defaults.
+
 ## [6.8.1] - 2026-07-16
 
 ### Changed
