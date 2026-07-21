@@ -29,7 +29,6 @@ cluster:
       clusterProbes:
         enable: false
       coreDns:
-        configTemplateName: azureCorednsHelmValues
         enable: true
       coreDnsExtensions:
         enable: true
