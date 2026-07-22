@@ -24,7 +24,7 @@ cluster:
     https: {{ .Values.global.connectivity.proxy.httpsProxy | quote }}
 {{- end }}
 {{- end }}
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: {{ include "resource.default.name" $ }}-azuredisk-csi-driver

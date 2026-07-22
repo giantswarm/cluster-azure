@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Bump `HelmRelease` resources from the removed `helm.toolkit.fluxcd.io/v2beta1` API to `helm.toolkit.fluxcd.io/v2` so cluster apps render on management clusters running current Flux.
+
 ### Removed
 
 - coredns: Drop the provider-specific values override now covered by the shared `cluster` chart defaults.
