@@ -285,7 +285,8 @@
                             "enable": true
                         },
                         "externalDnsCrossplaneResources": {
-                            "enable": false
+                            "configTemplateName": "azureExternalDnsCrossplaneResources",
+                            "enable": true
                         },
                         "k8sAuditMetrics": {
                             "enable": true
@@ -628,7 +629,15 @@
                             "$ref": "#/$defs/app",
                             "type": "object",
                             "title": "external-dns",
-                            "description": "Configuration of external-dns. For all available values see https://github.com/giantswarm/external-dns-app."
+                            "description": "Configuration of external-dns. For all available values see https://github.com/giantswarm/external-dns-app.",
+                            "default": {
+                                "extraConfigs": [
+                                    {
+                                        "kind": "configMap",
+                                        "name": "{{ $.Values.global.metadata.name }}-external-dns-identity"
+                                    }
+                                ]
+                            }
                         },
                         "externalDnsCrossplaneResources": {
                             "$ref": "#/$defs/helmRelease",
