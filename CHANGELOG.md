@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2026-07-22
+
 ### Fixed
 
 - Bump `HelmRelease` resources from the removed `helm.toolkit.fluxcd.io/v2beta1` API to `helm.toolkit.fluxcd.io/v2` so cluster apps render on management clusters running current Flux.
@@ -932,7 +934,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v6.8.1...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v7.0.0...HEAD
+[7.0.0]: https://github.com/giantswarm/cluster-azure/compare/v6.8.1...v7.0.0
 [6.8.1]: https://github.com/giantswarm/cluster-azure/compare/v6.8.0...v6.8.1
 [6.8.0]: https://github.com/giantswarm/cluster-azure/compare/v6.7.0...v6.8.0
 [6.7.0]: https://github.com/giantswarm/cluster-azure/compare/v6.6.0...v6.7.0
