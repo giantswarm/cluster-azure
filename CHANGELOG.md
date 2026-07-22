@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Configure external-dns to use workload identity for Azure authentication.
+
 ### Removed
 
 - coredns: Drop the provider-specific values override now covered by the shared `cluster` chart defaults.

@@ -7,12 +7,39 @@ domainFilters:
   - "{{ .Values.global.connectivity.baseDomain }}"
 txtOwnerId: giantswarm-io-external-dns
 txtPrefix: {{ include "resource.default.name" $ }}
+
+{{/*
+  Setting up Azure Managed Identity
+  We do this ourselves to avoid having external-dns depend on a webhook.
+  It also requires data from a Secret that is deployed by the WorkloadIdentity resource
+  in the external-dns-crossplane-resources HelmRelease.
+*/}}
+env:
+  - name: AZURE_FEDERATED_TOKEN_FILE
+    value: /var/run/secrets/azure/tokens/azure-identity
+  - name: AZURE_AUTHORITY_HOST
+    value: https://login.microsoftonline.com/
+  - name: AZURE_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        key: clientID
+        name: external-dns
+  - name: AZURE_TENANT_ID
+    valueFrom:
+      secretKeyRef:
+        key: tenantID
+        name: external-dns
 extraVolumes:
-  - name: azure-config-file
-    hostPath:
-      path: /etc/kubernetes
+  - name: azure-identity-token
+    projected:
+      defaultMode: 420
+      sources:
+        - serviceAccountToken:
+            audience: api://AzureADTokenExchange
+            expirationSeconds: 3600
+            path: azure-identity
 extraVolumeMounts:
-  - name: azure-config-file
-    mountPath: /etc/kubernetes
+  - mountPath: /var/run/secrets/azure/tokens
+    name: azure-identity-token
     readOnly: true
 {{- end }}

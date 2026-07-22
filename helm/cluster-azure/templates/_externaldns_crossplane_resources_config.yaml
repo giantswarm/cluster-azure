@@ -1,0 +1,7 @@
+{{/* Azure-specific external-dns-crossplane-resources Helm values*/}}
+{{/* https://github.com/giantswarm/external-dns-crossplane-resources/blob/main/helm/external-dns-crossplane-resources/values.yaml*/}}
+{{- define "azureExternalDnsCrossplaneResources" }}
+azure:
+  subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
+  location: {{ .Values.global.providerSpecific.location }}
+{{- end }}
