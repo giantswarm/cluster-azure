@@ -9,7 +9,7 @@ global:
 # kyverno installs PolicyException CRs for core components on CAPI clusters
 deployPolicyExceptions: false
 {{- end }}
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: {{ include "resource.default.name" $ }}-azure-cloud-node-manager

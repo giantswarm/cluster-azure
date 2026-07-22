@@ -1,6 +1,6 @@
 {{/* Azure-specific external-dns app for private clusters */}}
 {{- if eq .Values.global.connectivity.network.mode "private" }}
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: {{ include "resource.default.name" $ }}-external-dns-private
