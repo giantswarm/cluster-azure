@@ -1,6 +1,4 @@
-{{/* Default Helm values for the app */}}
-{{/* See schema for the appropriate app version here https://github.com/giantswarm/azurefile-csi-driver-app/blob/master/helm/azurefile-csi-driver-app/values.schema.json */}}
-{{- define "defaultAzureFileCsiDriverHelmValues" }}
+{{- define "defaultAzureFileCsiDriverHelmValues" -}}
 provider: capz
 global:
   podSecurityStandards:
@@ -8,18 +6,37 @@ global:
 {{- if (.Values.global.connectivity.proxy).enabled }}
 cluster:
   proxy:
-    noProxy: {{ include "cluster.connectivity.proxy.noProxy" (dict "global" $.Values.global "providerIntegration" $.Values.cluster.providerIntegration) | quote }}
     http: {{ .Values.global.connectivity.proxy.httpProxy | quote }}
     https: {{ .Values.global.connectivity.proxy.httpsProxy | quote }}
+    noProxy: {{ include "cluster.connectivity.proxy.noProxy" (dict "global" .Values.global "providerIntegration" .Values.cluster.providerIntegration) | quote }}
 {{- end }}
 {{- end }}
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: {{ include "resource.default.name" . }}-azurefile-csi-driver
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    cluster.giantswarm.io/description: {{ .Values.global.metadata.description | quote }}
+  labels:
+    cluster-apps-operator.giantswarm.io/watching: ""
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  {{- $_ := set $ "appName" "azurefile-csi-driver" }}
+  url: oci://gsoci.azurecr.io/charts/giantswarm/azurefile-csi-driver-app
+  ref:
+    tag: {{ include "cluster.app.version" . }}
+  interval: 24h
+  timeout: 60s
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: {{ include "resource.default.name" $ }}-azurefile-csi-driver
+  name: {{ include "resource.default.name" . }}-azurefile-csi-driver
   namespace: {{ .Release.Namespace }}
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
+    cluster.giantswarm.io/description: {{ .Values.global.metadata.description | quote }}
   labels:
     cluster-apps-operator.giantswarm.io/watching: ""
     {{- if .Values.global.metadata.servicePriority }}
@@ -27,44 +44,41 @@ metadata:
     {{- end }}
     {{- include "labels.common" . | nindent 4 }}
 spec:
-  suspend: false
   releaseName: azurefile-csi-driver
   targetNamespace: kube-system
   storageNamespace: kube-system
-  chart:
-    spec:
-      chart: azurefile-csi-driver-app
-      {{- $_ := set $ "appName" "azurefile-csi-driver" }}
-      version: {{ include "cluster.app.version" $ }}
-      sourceRef:
-        kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-{{ include "cluster.app.catalog" $ }}
+  chartRef:
+    kind: OCIRepository
+    name: {{ include "resource.default.name" . }}-azurefile-csi-driver
   kubeConfig:
     secretRef:
-      name: {{ include "resource.default.name" $ }}-kubeconfig
+      name: {{ include "resource.default.name" . }}-kubeconfig
   dependsOn:
-    - name: {{ include "resource.default.name" $ }}-azure-cloud-controller-manager
-      namespace: {{ $.Release.Namespace }}
-    - name: {{ include "resource.default.name" $ }}-azure-cloud-node-manager
-      namespace: {{ $.Release.Namespace }}
+  - name: {{ include "resource.default.name" . }}-azure-cloud-controller-manager
+    namespace: {{ .Release.Namespace }}
+  - name: {{ include "resource.default.name" . }}-azure-cloud-node-manager
+    namespace: {{ .Release.Namespace }}
+  - name: {{ include "resource.default.name" . }}-cilium
+    namespace: {{ .Release.Namespace }}
   interval: 2m
   install:
     remediation:
       retries: 30
-  {{- $azureFileCsiDriverHelmValues := (include "defaultAzureFileCsiDriverHelmValues" .) | fromYaml -}}
-  {{- $customAzureFileCsiDriverHelmValues := $.Values.global.apps.azureFileCsiDriver.values -}}
+  {{- $azureFileCsiDriverHelmValues := include "defaultAzureFileCsiDriverHelmValues" . | fromYaml }}
+  {{- $customAzureFileCsiDriverHelmValues := .Values.global.apps.azureFileCsiDriver.values }}
   {{- if $customAzureFileCsiDriverHelmValues }}
-  {{- $azureFileCsiDriverHelmValues = merge (deepCopy $customAzureFileCsiDriverHelmValues) $azureFileCsiDriverHelmValues -}}
+  {{- $azureFileCsiDriverHelmValues = merge (deepCopy $customAzureFileCsiDriverHelmValues) $azureFileCsiDriverHelmValues }}
   {{- end }}
   {{- if $azureFileCsiDriverHelmValues }}
-  values: {{- $azureFileCsiDriverHelmValues | toYaml | nindent 4 }}
+  values:
+    {{- $azureFileCsiDriverHelmValues | toYaml | nindent 4 }}
   {{- end }}
-  {{- if $.Values.global.apps.azureFileCsiDriver.extraConfigs }}
+  {{- if .Values.global.apps.azureFileCsiDriver.extraConfigs }}
   valuesFrom:
-    {{- range $config := $.Values.global.apps.azureFileCsiDriver.extraConfigs }}
-    - kind: {{ $config.kind }}
-      name: {{ $config.name }}
-      valuesKey: values
-      optional: {{ $config.optional | default false  }}
-    {{- end }}
+  {{- range $config := .Values.global.apps.azureFileCsiDriver.extraConfigs }}
+  - kind: {{ $config.kind }}
+    name: {{ $config.name }}
+    valuesKey: values
+    optional: {{ $config.optional | default false }}
+  {{- end }}
   {{- end }}
