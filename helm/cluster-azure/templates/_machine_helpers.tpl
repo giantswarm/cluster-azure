@@ -24,9 +24,8 @@ securityProfile:
   encryptionAtHost: {{ .nodePool.config.encryptionAtHost | default false }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ .nodePool.config.instanceType | default "Standard_D4s_v5" }}
-{{- if ( include "network.subnets.nodes.name" $ ) }}
-subnetName: {{ include "network.subnets.nodes.name" $ }}
-{{- end }}
+networkInterfaces:
+  - subnetName: {{ include "network.subnets.nodes.name" $ | quote }}
 {{- end -}}
 
 {{- define "machine-kubeadmconfig-spec" -}}

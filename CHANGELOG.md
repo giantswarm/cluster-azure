@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Migrate to new location of deprecated `subnetName` field in `AzureMachineTemplate` by nesting it under `networkInterfaces`, and drop the always-true conditionals around it. Since the field is part of the hashed `AzureMachineTemplate` spec, the resource is renamed and control plane and worker nodes are rolled.
+
 ### Removed
 
 - coredns: Drop the provider-specific values override now covered by the shared `cluster` chart defaults.
@@ -327,13 +331,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>How to migrate to cluster-azure</summary>
 
-* In ConfigMap `<cluster name>-userconfig` set `.Values.global.release` to the release version, e.g. `25.0.0`. 
+* In ConfigMap `<cluster name>-userconfig` set `.Values.global.release` to the release version, e.g. `25.0.0`.
 * In App `<cluster name>` set the `version` to an empty string.
 </details>
-  
+
 ## [0.16.1] - 2024-07-16
 
-### Changed 
+### Changed
 
 - Respect `global.apps.externalDnsPrivate` to overwrite configuration of `external-dns-private` app.
 
@@ -385,9 +389,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>How to migrate to cluster-azure v0.14.0</summary>
 
-* Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0). 
-* In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`. 
-* Delete `<cluster name>-default-apps` App. 
+* Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0).
+* In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`.
+* Delete `<cluster name>-default-apps` App.
 * Update `<cluster name>` to the latest version of `cluster-azure` (v0.14.0).
 
 </details>

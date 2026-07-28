@@ -29,9 +29,8 @@ securityProfile:
   encryptionAtHost: {{ $.Values.global.controlPlane.encryptionAtHost }}
 sshPublicKey: {{ include "fake-rsa-ssh-key" $ | b64enc }}
 vmSize: {{ $.Values.global.controlPlane.instanceType }}
-{{- if ( include "network.subnets.controlPlane.name" $ ) }}
-subnetName: {{ include "network.subnets.controlPlane.name" $ }}
-{{- end }}
+networkInterfaces:
+  - subnetName: {{ include "network.subnets.controlPlane.name" $ | quote }}
 {{- end }}
 
 {{- define "control-plane" }}
