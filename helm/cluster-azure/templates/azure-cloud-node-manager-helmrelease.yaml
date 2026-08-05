@@ -1,21 +1,37 @@
-{{/* Default Helm values for the app */}}
-{{/* See schema for the appropriate app version here https://github.com/giantswarm/azure-cloud-node-manager-app/blob/main/helm/azure-cloud-node-manager-app/values.yaml */}}
-{{- define "defaultAzureCloudNodeManagerHelmValues" }}
+{{- define "defaultAzureCloudNodeManagerHelmValues" -}}
 verticalPodAutoscaler:
   enabled: {{ .Values.internal.enableVpaResources }}
 global:
   podSecurityStandards:
     enforced: {{ .Values.global.podSecurityStandards.enforced }}
-# kyverno installs PolicyException CRs for core components on CAPI clusters
 deployPolicyExceptions: false
-{{- end }}
+{{- end -}}
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: {{ include "resource.default.name" . }}-azure-cloud-node-manager
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    cluster.giantswarm.io/description: {{ .Values.global.metadata.description | quote }}
+  labels:
+    cluster-apps-operator.giantswarm.io/watching: ""
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  {{- $_ := set $ "appName" "azure-cloud-node-manager" }}
+  url: oci://gsoci.azurecr.io/charts/giantswarm/azure-cloud-node-manager-app
+  ref:
+    tag: {{ include "cluster.app.version" . }}
+  interval: 24h
+  timeout: 60s
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: {{ include "resource.default.name" $ }}-azure-cloud-node-manager
+  name: {{ include "resource.default.name" . }}-azure-cloud-node-manager
   namespace: {{ .Release.Namespace }}
   annotations:
-    cluster.giantswarm.io/description: "{{ .Values.global.metadata.description }}"
+    cluster.giantswarm.io/description: {{ .Values.global.metadata.description | quote }}
   labels:
     cluster-apps-operator.giantswarm.io/watching: ""
     {{- if .Values.global.metadata.servicePriority }}
@@ -23,44 +39,39 @@ metadata:
     {{- end }}
     {{- include "labels.common" . | nindent 4 }}
 spec:
-  suspend: false
   releaseName: azure-cloud-node-manager
   targetNamespace: kube-system
   storageNamespace: kube-system
-  chart:
-    spec:
-      chart: azure-cloud-node-manager-app
-      {{- $_ := set $ "appName" "azure-cloud-node-manager" }}
-      version: {{ include "cluster.app.version" $ }}
-      sourceRef:
-        kind: HelmRepository
-        name: {{ include "resource.default.name" $ }}-{{ include "cluster.app.catalog" $ }}
+  chartRef:
+    kind: OCIRepository
+    name: {{ include "resource.default.name" . }}-azure-cloud-node-manager
   kubeConfig:
     secretRef:
-      name: {{ include "resource.default.name" $ }}-kubeconfig
+      name: {{ include "resource.default.name" . }}-kubeconfig
   dependsOn:
-    - name: {{ include "resource.default.name" $ }}-vertical-pod-autoscaler-crd
-      namespace: {{ $.Release.Namespace }}
+  - name: {{ include "resource.default.name" . }}-kyverno-crds
+    namespace: {{ .Release.Namespace }}
+  - name: {{ include "resource.default.name" . }}-vertical-pod-autoscaler-crd
+    namespace: {{ .Release.Namespace }}
   interval: 2m
   install:
     remediation:
       retries: 30
-  # Default values
-  # https://github.com/giantswarm/azure-cloud-controller-manager-app/blob/main/helm/azure-cloud-controller-manager-app/values.yaml
-  {{- $azureCloudNodeManagerHelmValues := (include "defaultAzureCloudNodeManagerHelmValues" .) | fromYaml -}}
-  {{- $customAzureCloudNodeManagerHelmValues := $.Values.global.apps.azureCloudNodeManager.values -}}
+  {{- $azureCloudNodeManagerHelmValues := include "defaultAzureCloudNodeManagerHelmValues" . | fromYaml }}
+  {{- $customAzureCloudNodeManagerHelmValues := .Values.global.apps.azureCloudNodeManager.values }}
   {{- if $customAzureCloudNodeManagerHelmValues }}
-  {{- $azureCloudNodeManagerHelmValues = merge (deepCopy $customAzureCloudNodeManagerHelmValues) $azureCloudNodeManagerHelmValues -}}
+  {{- $azureCloudNodeManagerHelmValues = merge (deepCopy $customAzureCloudNodeManagerHelmValues) $azureCloudNodeManagerHelmValues }}
   {{- end }}
   {{- if $azureCloudNodeManagerHelmValues }}
-  values: {{- $azureCloudNodeManagerHelmValues | toYaml | nindent 4 }}
+  values:
+    {{- $azureCloudNodeManagerHelmValues | toYaml | nindent 4 }}
   {{- end }}
-  {{- if $.Values.global.apps.azureCloudNodeManager.extraConfigs }}
+  {{- if .Values.global.apps.azureCloudNodeManager.extraConfigs }}
   valuesFrom:
-    {{- range $config := $.Values.global.apps.azureCloudNodeManager.extraConfigs }}
-    - kind: {{ $config.kind }}
-      name: {{ $config.name }}
-      valuesKey: values
-      optional: {{ $config.optional | default false  }}
-    {{- end }}
+  {{- range $config := .Values.global.apps.azureCloudNodeManager.extraConfigs }}
+  - kind: {{ $config.kind }}
+    name: {{ $config.name }}
+    valuesKey: values
+    optional: {{ $config.optional | default false }}
+  {{- end }}
   {{- end }}
