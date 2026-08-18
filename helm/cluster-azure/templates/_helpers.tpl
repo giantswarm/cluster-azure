@@ -288,6 +288,19 @@ It expects one argument which is the control plane subnet network range in forma
 {{- $ipParts._0 -}}.{{- $ipParts._1 -}}.{{- $ipParts._2 -}}.{{- $lastPart -}}
 {{- end -}}
 
+{{/*
+Determine if the cluster is configured with a Bring-Your-Own network.
+
+We assume that if the virtual network name is set, that the entire network is provided,
+and that CAPZ is not expected to manage any network resources.
+*/}}
+{{- define "network.bring-your-own" -}}
+{{- if hasKey $.Values.global.connectivity.network "name" -}}
+{{- print "true" }}
+{{- else }}
+{{- end -}}
+{{- end -}}
+
 {{- define "network.subnets.controlPlane.name" -}}
 {{- if hasKey $.Values.global.connectivity.network.controlPlane "subnetName" -}}
 {{ $.Values.global.connectivity.network.controlPlane.subnetName }}
@@ -301,6 +314,14 @@ control-plane-subnet
 {{ $.Values.global.connectivity.network.controlPlane.routeTableName }}
 {{- else -}}
 {{ include "resource.default.name" $ }}-node-routetable
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.controlPlane.securityGroupName" -}}
+{{- if hasKey $.Values.global.connectivity.network.workers "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.controlPlane.securityGroupName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-controlplane-nsg
 {{- end -}}
 {{- end -}}
 
@@ -325,6 +346,14 @@ node-subnet
 {{ $.Values.global.connectivity.network.workers.routeTableName }}
 {{- else -}}
 {{ include "resource.default.name" $ }}-node-routetable
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.nodes.securityGroupName" -}}
+{{- if hasKey $.Values.global.connectivity.network.workers "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.workers.securityGroupName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-node-nsg
 {{- end -}}
 {{- end -}}
 
@@ -370,16 +399,16 @@ privateEndpoints:
 {{- end -}}
 
 {{- define "network.vnet.resourceGroup" -}}
-{{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
-{{ $.Values.internal.network.vnet.resourceGroup }}
+{{- if and ($.Values.global.connectivity.network.resourceGroupName) ($.Values.global.connectivity.network.name) -}}
+{{ $.Values.global.connectivity.network.resourceGroupName }}
 {{- end -}}
 {{- end -}}
 
 {{- define "network.vnet.name" -}}
-{{- if $.Values.internal.network.vnet.name -}}
-{{ $.Values.internal.network.vnet.name }}
+{{- if $.Values.global.connectivity.network.name -}}
+{{ $.Values.global.connectivity.network.name }}
 {{- else -}}
-{{- if ($.Values.internal.network.vnet.resourceGroup) -}}
+{{- if ($.Values.global.connectivity.network.resourceGroupName) -}}
 {{- fail "When explicitly specifying VNet resource group, you also must explicitly specify the VNet name" }}
 {{- end -}}
 {{ include "resource.default.name" $ }}-vnet

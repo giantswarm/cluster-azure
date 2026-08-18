@@ -27,7 +27,7 @@ spec:
         - {{ .Values.global.connectivity.network.controlPlane.cidr }}
         {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
         securityGroup:
-          name: {{ include "resource.default.name" $ }}-controlplane-nsg
+          name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
           securityRules:
         {{- if (gt (len .Values.global.connectivity.allowedCIDRs) 0) }}
         {{- include "controlPlaneSecurityGroups" .Values.global.connectivity.allowedCIDRs | nindent 12 }}
@@ -52,11 +52,15 @@ spec:
              sourcePorts: "*"
         {{- end }}
       - name: {{ include "network.subnets.nodes.name" $ }}
+        role: node
+        {{- if not (include "network.bring-your-own" .) }}
         natGateway:
           name: {{ include "network.subnets.nodes.natGatewayName" $ }}
-        role: node
+        {{- end }}
         routeTable:
           name: {{ include "network.subnets.nodes.routeTableName" $ }}
+        securityGroup:
+          name: {{ include "network.subnets.nodes.securityGroupName" $ }}
         cidrBlocks:
         - {{ .Values.global.connectivity.network.workers.cidr }}
         {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}

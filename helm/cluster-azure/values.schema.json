@@ -1183,6 +1183,10 @@
                                     ],
                                     "default": "public"
                                 },
+                                "name": {
+                                    "type": "string",
+                                    "title": "Virtual network name (BYON)"
+                                },
                                 "pods": {
                                     "type": "object",
                                     "title": "Pods",
@@ -1213,6 +1217,10 @@
                                             "minimum": 16
                                         }
                                     }
+                                },
+                                "resourceGroupName": {
+                                    "type": "string",
+                                    "title": "Virtual network resource group name (BYON)"
                                 },
                                 "services": {
                                     "type": "object",
@@ -1966,54 +1974,6 @@
                     "type": "boolean",
                     "title": "Enable VPA Resources in helmreleases",
                     "default": true
-                },
-                "network": {
-                    "type": "object",
-                    "title": "Network configuration",
-                    "description": "Internal network configuration that is susceptible to more frequent change",
-                    "properties": {
-                        "vnet": {
-                            "type": "object",
-                            "title": "VNet spec",
-                            "description": "Existing VNet configuration. This is susceptible to more frequent change or removal.",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "title": "VNet name",
-                                    "description": "Name of the existing VNet.",
-                                    "maxLength": 64,
-                                    "minLength": 2,
-                                    "pattern": "^[-\\w\\._]+$"
-                                },
-                                "resourceGroup": {
-                                    "type": "string",
-                                    "title": "Resource group name",
-                                    "description": "Resource group where the existing VNet is deployed.",
-                                    "maxLength": 90,
-                                    "minLength": 1,
-                                    "pattern": "^[-\\w\\._\\(\\)]+$"
-                                }
-                            },
-                            "default": {}
-                        },
-                        "vpn": {
-                            "type": "object",
-                            "title": "VPN configuration",
-                            "description": "Internal VPN configuration that is susceptible to more frequent change",
-                            "properties": {
-                                "gatewayMode": {
-                                    "type": "string",
-                                    "title": "VPN gateway mode",
-                                    "enum": [
-                                        "local",
-                                        "none",
-                                        "remote"
-                                    ],
-                                    "default": "none"
-                                }
-                            }
-                        }
-                    }
                 },
                 "sandboxContainerImage": {
                     "type": "object",
