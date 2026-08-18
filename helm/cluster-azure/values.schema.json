@@ -1975,6 +1975,30 @@
                     "title": "Enable VPA Resources in helmreleases",
                     "default": true
                 },
+                "network": {
+                    "type": "object",
+                    "title": "Network configuration",
+                    "description": "Internal network configuration that is susceptible to more frequent change",
+                    "properties": {
+                        "vpn": {
+                            "type": "object",
+                            "title": "VPN configuration",
+                            "description": "Internal VPN configuration that is susceptible to more frequent change",
+                            "properties": {
+                                "gatewayMode": {
+                                    "type": "string",
+                                    "title": "VPN gateway mode",
+                                    "enum": [
+                                        "local",
+                                        "none",
+                                        "remote"
+                                    ],
+                                    "default": "none"
+                                }
+                            }
+                        }
+                    }
+                },
                 "sandboxContainerImage": {
                     "type": "object",
                     "title": "The image used by sandbox / pause container",

@@ -489,6 +489,9 @@ Properties within the `.internal` top-level object
 | `internal.defaults.softEvictionGracePeriod` | **Default settings for soft eviction grace period**|**Type:** `string`<br/>**Default:** `"memory.available=30s,nodefs.available=2m,nodefs.inodesFree=1m,imagefs.available=2m,pid.available=1m"`|
 | `internal.defaults.softEvictionThresholds` | **Default settings for soft eviction thresholds**|**Type:** `string`<br/>**Default:** `"memory.available\u003c500Mi,nodefs.available\u003c15%,nodefs.inodesFree\u003c5%,imagefs.available\u003c15%,pid.available\u003c30%"`|
 | `internal.enableVpaResources` | **Enable VPA Resources in helmreleases**|**Type:** `boolean`<br/>**Default:** `true`|
+| `internal.network` | **Network configuration** - Internal network configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
+| `internal.network.vpn` | **VPN configuration** - Internal VPN configuration that is susceptible to more frequent change|**Type:** `object`<br/>|
+| `internal.network.vpn.gatewayMode` | **VPN gateway mode**|**Type:** `string`<br/>**Allowed values:** `local`, `none`, `remote`<br/>**Default:** `"none"`|
 | `internal.sandboxContainerImage` | **The image used by sandbox / pause container**|**Type:** `object`<br/>|
 | `internal.sandboxContainerImage.name` | **Repository**|**Type:** `string`<br/>**Default:** `"giantswarm/pause"`|
 | `internal.sandboxContainerImage.registry` | **Registry**|**Type:** `string`<br/>**Default:** `"gsoci.azurecr.io"`|
