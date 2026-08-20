@@ -1837,6 +1837,22 @@
                                 }
                             }
                         },
+                        "failureDomains": {
+                            "type": "array",
+                            "title": "Availability zones",
+                            "description": "Availability zones of the region the control plane nodes are allowed to run in. Control plane nodes are spread evenly across them. If left empty, all availability zones available in the region are used. Note that changing this does not move existing control plane nodes, it only affects newly created ones. If not set, CAPZ will autodetect all zones and default to them.",
+                            "items": {
+                                "type": "string",
+                                "title": "Availability zone",
+                                "enum": [
+                                    "1",
+                                    "2",
+                                    "3"
+                                ]
+                            },
+                            "minItems": 1,
+                            "uniqueItems": true
+                        },
                         "identity": {
                             "type": "object",
                             "title": "Identity",
