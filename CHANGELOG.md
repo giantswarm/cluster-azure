@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `global.providerSpecific.failureDomains` to restrict the availability zones of the region the control plane nodes are allowed to run in.
+
 ## [5.4.2] - 2026-05-20
 
 ### Changed
