@@ -1,16 +1,24 @@
 apiVersion: v2
 name: cluster-azure
-type: application
+description: A helm chart for creating Cluster API clusters with the Azure provider (CAPZ).
 version: 8.0.0
-description: A helm chart for creating Cluster API clusters with the Azure infrastructure provider (CAPZ).
-icon: https://s.giantswarm.io/app-icons/azure/1/light.svg
 home: https://github.com/giantswarm/cluster-azure
+icon: https://s.giantswarm.io/app-icons/azure/1/light.svg
 sources:
-  - https://github.com/giantswarm/cluster-azure
+- https://github.com/giantswarm/cluster-azure
+maintainers:
+- name: Team Phoenix
+  email: team-phoenix@giantswarm.io
+keywords:
+- capz
+- azure
 annotations:
   application.giantswarm.io/app-type: cluster
   application.giantswarm.io/team: phoenix
+restrictions:
+  compatibleProviders:
+  - azure
 dependencies:
-  - name: cluster
-    repository: https://giantswarm.github.io/cluster-catalog
-    version: "7.0.0"
+- repository: https://giantswarm.github.io/cluster-catalog
+  name: cluster
+  version: 8.0.0
