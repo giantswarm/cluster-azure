@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `global.providerSpecific.failureDomains` to restrict the availability zones of the region the control plane nodes are allowed to run in.
 - CI: Run the full set of E2E test suites automatically on release PRs, via `.github/release-pr-body.md`. Towards https://github.com/giantswarm/roadmap/issues/4334
 
+### Changed
+
+- Chart: Migrate Apps to HelmReleases.
+
 ## [8.0.0] - 2026-08-04
 
 ### Changed
