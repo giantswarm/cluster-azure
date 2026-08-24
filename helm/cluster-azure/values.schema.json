@@ -1120,6 +1120,14 @@
                                             "minLength": 2,
                                             "pattern": "^[-\\w\\._]+$"
                                         },
+                                        "securityGroupName": {
+                                            "type": "string",
+                                            "title": "ControlPlane security group name",
+                                            "description": "Name of the control plane security group.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
+                                        },
                                         "subnetName": {
                                             "type": "string",
                                             "title": "ControlPlane subnet name",
@@ -1337,6 +1345,14 @@
                                             "type": "string",
                                             "title": "Nodes route table name",
                                             "description": "Name of the nodes route table.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
+                                        },
+                                        "securityGroupName": {
+                                            "type": "string",
+                                            "title": "Nodes security group name",
+                                            "description": "Name of the nodes security group.",
                                             "maxLength": 80,
                                             "minLength": 2,
                                             "pattern": "^[-\\w\\._]+$"
