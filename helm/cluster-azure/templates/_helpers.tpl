@@ -370,16 +370,17 @@ privateEndpoints:
 {{- end -}}
 
 {{- define "network.vnet.resourceGroup" -}}
-{{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
-{{ $.Values.internal.network.vnet.resourceGroup }}
+{{- if and (or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup)
+            (or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name) -}}
+{{ or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup }}
 {{- end -}}
 {{- end -}}
 
 {{- define "network.vnet.name" -}}
-{{- if $.Values.internal.network.vnet.name -}}
-{{ $.Values.internal.network.vnet.name }}
+{{- if or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name -}}
+{{ or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name }}
 {{- else -}}
-{{- if ($.Values.internal.network.vnet.resourceGroup) -}}
+{{- if or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup  -}}
 {{- fail "When explicitly specifying VNet resource group, you also must explicitly specify the VNet name" }}
 {{- end -}}
 {{ include "resource.default.name" $ }}-vnet
