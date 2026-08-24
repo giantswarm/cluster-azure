@@ -337,8 +337,8 @@ node-subnet
 {{- end -}}
 
 {{- define "network.subnets.nodes.securityGroupName" -}}
-{{- if hasKey $.Values.global.connectivity.network.nodes "securityGroupName" -}}
-{{ $.Values.global.connectivity.network.nodes.securityGroupName }}
+{{- if hasKey $.Values.global.connectivity.network.workers "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.workers.securityGroupName }}
 {{- else -}}
 {{ include "resource.default.name" $ }}-node-nsg
 {{- end -}}
