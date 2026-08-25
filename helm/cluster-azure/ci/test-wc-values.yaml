@@ -33,6 +33,9 @@ global:
       replicas: 4
       rootVolumeSizeGB: 50
   providerSpecific:
+    failureDomains:
+    - "1"
+    - "3"
     location: "westeurope"
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
   release:

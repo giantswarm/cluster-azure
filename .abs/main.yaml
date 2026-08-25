@@ -1,5 +1,6 @@
 chart-dir: helm/cluster-azure
 replace-chart-version-with-git: true
+helm-template-extra-values: helm/cluster-azure/ci/ci-values.yaml
 ct-config: .abs/ct.yaml
 generate-metadata: true
 catalog-base-url: https://giantswarm.github.io/cluster-catalog/
