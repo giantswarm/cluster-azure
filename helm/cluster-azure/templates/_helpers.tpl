@@ -304,6 +304,14 @@ control-plane-subnet
 {{- end -}}
 {{- end -}}
 
+{{- define "network.subnets.controlPlane.securityGroupName" -}}
+{{- if hasKey $.Values.global.connectivity.network.controlPlane "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.controlPlane.securityGroupName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-controlplane-nsg
+{{- end -}}
+{{- end -}}
+
 {{- define "network.subnets.nodes.name" -}}
 {{- if hasKey $.Values.global.connectivity.network.workers "subnetName" -}}
 {{ $.Values.global.connectivity.network.workers.subnetName }}
@@ -325,6 +333,14 @@ node-subnet
 {{ $.Values.global.connectivity.network.workers.routeTableName }}
 {{- else -}}
 {{ include "resource.default.name" $ }}-node-routetable
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.nodes.securityGroupName" -}}
+{{- if hasKey $.Values.global.connectivity.network.workers "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.workers.securityGroupName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-node-nsg
 {{- end -}}
 {{- end -}}
 
@@ -370,16 +386,17 @@ privateEndpoints:
 {{- end -}}
 
 {{- define "network.vnet.resourceGroup" -}}
-{{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
-{{ $.Values.internal.network.vnet.resourceGroup }}
+{{- if and (or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup)
+            (or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name) -}}
+{{ or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup }}
 {{- end -}}
 {{- end -}}
 
 {{- define "network.vnet.name" -}}
-{{- if $.Values.internal.network.vnet.name -}}
-{{ $.Values.internal.network.vnet.name }}
+{{- if or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name -}}
+{{ or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name }}
 {{- else -}}
-{{- if ($.Values.internal.network.vnet.resourceGroup) -}}
+{{- if or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup  -}}
 {{- fail "When explicitly specifying VNet resource group, you also must explicitly specify the VNet name" }}
 {{- end -}}
 {{ include "resource.default.name" $ }}-vnet

@@ -1120,6 +1120,14 @@
                                             "minLength": 2,
                                             "pattern": "^[-\\w\\._]+$"
                                         },
+                                        "securityGroupName": {
+                                            "type": "string",
+                                            "title": "ControlPlane security group name",
+                                            "description": "Name of the control plane security group.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
+                                        },
                                         "subnetName": {
                                             "type": "string",
                                             "title": "ControlPlane subnet name",
@@ -1145,6 +1153,14 @@
                                         "private"
                                     ],
                                     "default": "public"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "title": "Network name",
+                                    "description": "Name of an existing virtual network (enables Bring-Your-Own network).",
+                                    "maxLength": 64,
+                                    "minLength": 2,
+                                    "pattern": "^[-\\w\\._]+$"
                                 },
                                 "pods": {
                                     "type": "object",
@@ -1176,6 +1192,14 @@
                                             "minimum": 16
                                         }
                                     }
+                                },
+                                "resourceGroup": {
+                                    "type": "string",
+                                    "title": "Resource group name",
+                                    "description": "Resource group where the existing VNet is deployed.",
+                                    "maxLength": 90,
+                                    "minLength": 1,
+                                    "pattern": "^[-\\w\\._\\(\\)]+$"
                                 },
                                 "services": {
                                     "type": "object",
@@ -1321,6 +1345,14 @@
                                             "type": "string",
                                             "title": "Nodes route table name",
                                             "description": "Name of the nodes route table.",
+                                            "maxLength": 80,
+                                            "minLength": 2,
+                                            "pattern": "^[-\\w\\._]+$"
+                                        },
+                                        "securityGroupName": {
+                                            "type": "string",
+                                            "title": "Nodes security group name",
+                                            "description": "Name of the nodes security group.",
                                             "maxLength": 80,
                                             "minLength": 2,
                                             "pattern": "^[-\\w\\._]+$"
@@ -1954,12 +1986,12 @@
                         "vnet": {
                             "type": "object",
                             "title": "VNet spec",
-                            "description": "Existing VNet configuration. This is susceptible to more frequent change or removal.",
+                            "description": "DEPRECATED: Use `global.connectivity.network` instead.",
                             "properties": {
                                 "name": {
                                     "type": "string",
                                     "title": "VNet name",
-                                    "description": "Name of the existing VNet.",
+                                    "description": "DEPRECATED: Use `global.connectivity.network.name` instead.",
                                     "maxLength": 64,
                                     "minLength": 2,
                                     "pattern": "^[-\\w\\._]+$"
@@ -1967,7 +1999,7 @@
                                 "resourceGroup": {
                                     "type": "string",
                                     "title": "Resource group name",
-                                    "description": "Resource group where the existing VNet is deployed.",
+                                    "description": "DEPRECATED: Use `global.connectivity.network.resourceGroup` instead.",
                                     "maxLength": 90,
                                     "minLength": 1,
                                     "pattern": "^[-\\w\\._\\(\\)]+$"
