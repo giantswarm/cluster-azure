@@ -11,6 +11,18 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   {{- include "additional-tags" . | indent 2}}
+  {{- if .Values.global.providerSpecific.failureDomains }}
+  {{- /*
+    CAPZ discovers the availability zones of the region and marks all of them as eligible to host
+    control plane nodes. The spec can only opt zones out of that set, never in, so we have to list
+    every zone and flag the ones that were not selected as unusable for the control plane.
+  */}}
+  failureDomains:
+    {{- range $zone := list "1" "2" "3" }}
+    "{{ $zone }}":
+      controlPlane: {{ has $zone $.Values.global.providerSpecific.failureDomains }}
+    {{- end }}
+  {{- end }}
   identityRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: AzureClusterIdentity
