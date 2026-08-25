@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.4.3] - 2026-08-25
+
 ### Added
 
 - Add initial Bring-Your-Own-Network support.
@@ -855,7 +857,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v5.4.2...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v5.4.3...HEAD
+[5.4.3]: https://github.com/giantswarm/cluster-azure/compare/v5.4.2...v5.4.3
 [5.4.2]: https://github.com/giantswarm/cluster-azure/compare/v5.4.1...v5.4.2
 [5.4.1]: https://github.com/giantswarm/cluster-azure/compare/v5.4.0...v5.4.1
 [5.4.0]: https://github.com/giantswarm/cluster-azure/compare/v5.3.0...v5.4.0
