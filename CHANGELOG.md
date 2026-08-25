@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add initial Bring-Your-Own-Network support.
+
 ## [5.4.2] - 2026-05-20
 
 ### Changed
