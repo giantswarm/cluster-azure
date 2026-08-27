@@ -113,7 +113,7 @@ spec:
       {{- end }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
-    {{- end }}
+    {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
 {{ end }}
