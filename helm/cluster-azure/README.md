@@ -255,7 +255,6 @@ Properties within the `.global.providerSpecific` object
 | `global.providerSpecific.azureClusterIdentity` | **Identity** - AzureClusterIdentity resource to use for this cluster.|**Type:** `object`<br/>|
 | `global.providerSpecific.azureClusterIdentity.name` | **Name**|**Type:** `string`<br/>**Default:** `"cluster-identity"`|
 | `global.providerSpecific.azureClusterIdentity.namespace` | **Namespace**|**Type:** `string`<br/>**Default:** `"org-giantswarm"`|
-| `global.providerSpecific.enablePrivateLinkWithPrivateMode` | **Enable Private Link with Private Mode** - Enable Private Link when global.connectivity.network.mode is set to `private`. This will create a private endpoint for the API server.|**Type:** `boolean`<br/>**Default:** `true`|
 | `global.providerSpecific.failureDomains` | **Availability zones** - Availability zones of the region the control plane nodes are allowed to run in. Control plane nodes are spread evenly across them. If left empty, all availability zones available in the region are used. Note that changing this does not move existing control plane nodes, it only affects newly created ones. If not set, CAPZ will autodetect all zones and default to them.|**Type:** `array`<br/>|
 | `global.providerSpecific.failureDomains[*]` | **Availability zone**|**Type:** `string`<br/>**Allowed values:** `1`, `2`, `3`<br/>|
 | `global.providerSpecific.identity` | **Identity**|**Type:** `object`<br/>|
@@ -340,6 +339,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.controlPlane.routeTableName` | **ControlPlane route table name** - Name of the control plane route table.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.controlPlane.securityGroupName` | **ControlPlane security group name** - Name of the control plane security group.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.controlPlane.subnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
+| `global.connectivity.network.enablePrivateLinkWithPrivateMode` | **Enable Private Link with Private Mode** - Enable Private Link when global.connectivity.network.mode is set to `private`. This will create a private endpoint for the API server.|**Type:** `boolean`<br/>**Default:** `true`|
 | `global.connectivity.network.hostCidr` | **Node subnet** - IPv4 address range for nodes, in CIDR notation.|**Type:** `string`<br/>**Default:** `"10.0.0.0/16"`|
 | `global.connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Allowed values:** `public`, `private`<br/>**Default:** `"public"`|
 | `global.connectivity.network.name` | **Network name** - Name of an existing virtual network (enables Bring-Your-Own network).|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|

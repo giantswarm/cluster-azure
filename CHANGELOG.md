@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add option to be able to disable the Private Link on private clusters (`.global.providerSpecific.enablePrivateLinkWithPrivateMode`). Useful for BYON scenarios.
+- Add option to be able to disable the Private Link on private clusters (`.global.connectivity.network.enablePrivateLinkWithPrivateMode`). Useful for BYON scenarios.
 
 ## [5.4.3] - 2026-08-25
 

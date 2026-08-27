@@ -92,7 +92,7 @@ spec:
       frontendIPs:
       - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
-      {{- if .Values.global.providerSpecific.enablePrivateLinkWithPrivateMode }}
+      {{- if .Values.global.connectivity.network.enablePrivateLinkWithPrivateMode }}
       privateLinks:
       - name: {{ include "resource.default.name" $ }}-api-privatelink
         natIpConfigurations:
