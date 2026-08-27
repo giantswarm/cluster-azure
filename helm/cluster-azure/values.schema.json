@@ -1113,6 +1113,12 @@
                                         }
                                     }
                                 },
+                                "enablePrivateLinkWithPrivateMode": {
+                                    "type": "boolean",
+                                    "title": "Enable Private Link with Private Mode",
+                                    "description": "Enable Private Link when global.connectivity.network.mode is set to `private`. This will create a private endpoint for the API server.",
+                                    "default": true
+                                },
                                 "hostCidr": {
                                     "type": "string",
                                     "title": "Node subnet",

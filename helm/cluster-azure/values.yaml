@@ -243,6 +243,7 @@ global:
       controlPlane:
         cidr: 10.0.0.0/20
         privateEndpoints: []
+      enablePrivateLinkWithPrivateMode: true
       hostCidr: 10.0.0.0/16
       mode: public
       pods:
