@@ -92,6 +92,7 @@ spec:
       frontendIPs:
       - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
         privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
+      {{- if .Values.global.providerSpecific.enablePrivateLinkWithPrivateMode }}
       privateLinks:
       - name: {{ include "resource.default.name" $ }}-api-privatelink
         natIpConfigurations:
@@ -109,9 +110,10 @@ spec:
         {{- range .Values.global.providerSpecific.allowedSubscriptions }}
         - {{ . }}
         {{- end }}
+      {{- end }}
     controlPlaneOutboundLB:
       frontendIPsCount: 1
-    {{end}}
+    {{- end }}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
 {{ end }}

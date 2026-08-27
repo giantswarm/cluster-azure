@@ -283,6 +283,7 @@ global:
     azureClusterIdentity:
       name: cluster-identity
       namespace: org-giantswarm
+    enablePrivateLinkWithPrivateMode: true
     identity:
       systemAssignedScope: ResourceGroup
     location: westeurope
