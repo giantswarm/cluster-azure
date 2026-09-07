@@ -1,4 +1,3 @@
-{{- define "azure-cluster" }}
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: AzureCluster
 metadata:
@@ -116,4 +115,3 @@ spec:
     {{end}}
   resourceGroup: {{ include "resource.default.name" $ }}
   subscriptionID: {{ .Values.global.providerSpecific.subscriptionId }}
-{{ end }}
