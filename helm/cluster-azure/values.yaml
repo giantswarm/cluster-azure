@@ -252,6 +252,9 @@ global:
           - gsoci.azurecr.io
       selinux:
         enabled: false
+    selinux:
+      mode: permissive
+      writablePolicyStore: true
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io
