@@ -1156,7 +1156,8 @@
                                     "description": "Specifying if the cluster resources are publicly accessible or not.",
                                     "enum": [
                                         "public",
-                                        "private"
+                                        "private",
+                                        "byon"
                                     ],
                                     "default": "public"
                                 },
