@@ -378,6 +378,9 @@ Advanced configuration of components that are running on all nodes.
 | `global.components.containerd.managementClusterRegistryCache.mirroredRegistries[*]` |**None**|**Type:** `string`<br/>|
 | `global.components.containerd.selinux` | **SELinux configuration** - SELinux configuration for containerd.|**Type:** `object`<br/>|
 | `global.components.containerd.selinux.enabled` | **Enabled** - Enabling this will configure containerd to do SELinux relabeling to containers.|**Type:** `boolean`<br/>**Default:** `false`|
+| `global.components.selinux` | **SELinux** - Configuration of SELinux.|**Type:** `object`<br/>|
+| `global.components.selinux.mode` | **SELinux mode** - Configure SELinux mode: 'enforcing', 'permissive' or 'disabled'.|**Type:** `string`<br/>**Allowed values:** `enforcing`, `permissive`, `disabled`<br/>**Default:** `"permissive"`|
+| `global.components.selinux.writablePolicyStore` | **Writable SELinux policy store** - Make /var/lib/selinux writable for loading additional policies.|**Type:** `boolean`<br/>**Default:** `true`|
 
 ### Connectivity
 Properties within the `.global.connectivity` object

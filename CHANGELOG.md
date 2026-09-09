@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.1.0] - 2026-09-08
+
 ### Added
 
 - Add initial Bring-Your-Own-Network support.
 - Add option to be able to disable the Private Link on private clusters (`.global.connectivity.network.enablePrivateLinkWithPrivateMode`). Useful for BYON scenarios.
+
+### Changed
+
+- Chart: Update `cluster` to v8.1.0.
 
 ## [9.0.0] - 2026-08-22
 
@@ -956,7 +962,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v9.0.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v9.1.0...HEAD
+[9.1.0]: https://github.com/giantswarm/cluster-azure/compare/v9.0.0...v9.1.0
 [9.0.0]: https://github.com/giantswarm/cluster-azure/compare/v8.0.0...v9.0.0
 [8.0.0]: https://github.com/giantswarm/cluster-azure/compare/v7.0.0...v8.0.0
 [7.0.0]: https://github.com/giantswarm/cluster-azure/compare/v6.8.1...v7.0.0
