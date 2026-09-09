@@ -1,0 +1,31 @@
+global:
+  managementCluster: test-mc
+  metadata:
+    name: test-wc-byon
+    organization: giantswarm
+    preventDeletion: false
+    servicePriority: lowest
+  connectivity:
+    network:
+      name: byon-vnet
+      resourceGroup: byon-rg
+      mode: byon
+      controlPlane:
+        subnetName: controlplane-subnet
+        routeName: workers-rt
+        securityGroupName: controlplane-nsg
+      workers:
+        subnetName: workers-subnet
+        routeName: workers-rt
+        securityGroupName: workers-nsg
+  providerSpecific:
+    location: "westeurope"
+    subscriptionId: 7128b61f-826e-4078-bdc6-f3ff51de12fd
+  release:
+    version: 35.0.1
+
+cluster:
+  internal:
+    ephemeralConfiguration:
+      offlineTesting:
+        renderWithoutReleaseResource: true

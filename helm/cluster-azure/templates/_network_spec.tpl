@@ -33,7 +33,7 @@ subnets:
       name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
     cidrBlocks:
     - {{ .Values.global.connectivity.network.controlPlane.cidr }}
-    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
+    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 }}
     securityGroup:
       name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
       securityRules:
@@ -95,7 +95,7 @@ subnets:
       name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
     cidrBlocks:
     - {{ .Values.global.connectivity.network.controlPlane.cidr }}
-    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 -}}
+    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 }}
     securityGroup:
       name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
       securityRules:

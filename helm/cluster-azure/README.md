@@ -418,7 +418,7 @@ Properties within the `.global.connectivity` object
 | `global.connectivity.network.controlPlane.subnetName` | **ControlPlane subnet name** - Name of the control plane subnet.|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.enablePrivateLinkWithPrivateMode` | **Enable Private Link with Private Mode** - Enable Private Link when global.connectivity.network.mode is set to `private`. This will create a private endpoint for the API server.|**Type:** `boolean`<br/>**Default:** `true`|
 | `global.connectivity.network.hostCidr` | **Node subnet** - IPv4 address range for nodes, in CIDR notation.|**Type:** `string`<br/>**Default:** `"10.0.0.0/16"`|
-| `global.connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Allowed values:** `public`, `private`<br/>**Default:** `"public"`|
+| `global.connectivity.network.mode` | **Network mode** - Specifying if the cluster resources are publicly accessible or not.|**Type:** `string`<br/>**Allowed values:** `public`, `private`, `byon`<br/>**Default:** `"public"`|
 | `global.connectivity.network.name` | **Network name** - Name of an existing virtual network (enables Bring-Your-Own network).|**Type:** `string`<br/>**Value pattern:** `^[-\w\._]+$`<br/>|
 | `global.connectivity.network.pods` | **Pods**|**Type:** `object`<br/>|
 | `global.connectivity.network.pods.cidrBlocks` | **Pod subnets**|**Type:** `array`<br/>**Default:** `["192.168.0.0/16"]`|
