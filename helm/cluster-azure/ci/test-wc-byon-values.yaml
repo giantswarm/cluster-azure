@@ -7,15 +7,18 @@ global:
     servicePriority: lowest
   connectivity:
     network:
+      mode: byon
       name: byon-vnet
       resourceGroup: byon-rg
-      mode: byon
+      hostCidr: 10.224.17.0/24
       controlPlane:
         subnetName: controlplane-subnet
+        cidr: 10.224.17.128/26
         routeName: workers-rt
         securityGroupName: controlplane-nsg
       workers:
         subnetName: workers-subnet
+        cidr: 10.224.17.0/25
         routeName: workers-rt
         securityGroupName: workers-nsg
   providerSpecific:
