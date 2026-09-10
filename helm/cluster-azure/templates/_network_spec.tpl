@@ -171,6 +171,8 @@ between MC and WC VNETs, and to the internet. Usually this is used for customers
 vnet:
   name: {{ include "network.vnet.name" $ }}
   resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
+  cidrBlocks:
+  - {{ .Values.global.connectivity.network.hostCidr }}
 subnets:
   - name: {{ include "network.subnets.controlPlane.name" $ }}
     role: control-plane
@@ -184,10 +186,11 @@ subnets:
       name: {{ include "network.subnets.nodes.routeTableName" $ }}
     securityGroup:
       name: {{ include "network.subnets.nodes.securityGroupName" $ }}
-    # TODO: See if NAT gateway is still deployed with this simply commented out,
-    # or if we need to explicitly set the name to an empty string.
-    # natGateway:
-    #   name: {{ include "network.subnets.nodes.natGatewayName" $ }}
+    natGateway:
+      # Setting the name to an empty string disables creation.
+      name: ""
+      ip:
+        name: ""
 privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
 apiServerLB:
   name: {{ include "resource.default.name" $ }}-api-internal-lb
