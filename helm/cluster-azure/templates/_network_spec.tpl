@@ -183,9 +183,8 @@ subnets:
     securityGroup:
       name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
   - name: {{ include "network.subnets.nodes.name" $ }}
-    # Have to set ID disable NAT gateway creation
-    # TODO: Variable if it works
-    id: /subscriptions/6b1f6e4a-6d0e-4aa4-9a5a-fbaca65a23b3/resourceGroups/robin-byon-rg/providers/Microsoft.Network/virtualNetworks/robin-byon-vnet/subnets/node-subnet
+    # Setting the subnet ID disables NAT gateway creation.
+    id: {{ include "network.subnets.nodes.id" $ }}
     role: node
     cidrBlocks:
     - {{ .Values.global.connectivity.network.workers.cidr }}
@@ -194,7 +193,9 @@ subnets:
     securityGroup:
       name: {{ include "network.subnets.nodes.securityGroupName" $ }}
     natGateway:
-      # Setting the name to an empty string disables creation.
+      # Setting the name to an empty string disables creation. Note that this
+      # also requires setting the subnet ID. Otherwise CAPZ defaults the name
+      # of the NAT Gateway to a generated value.
       name: ""
       ip:
         name: ""
@@ -205,4 +206,9 @@ apiServerLB:
   frontendIPs:
   - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
     privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
+{{- end -}}
+
+
+{{- define "network.subnets.nodes.id" -}}
+/subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "network.vnet.resourceGroup" $ }}/providers/Microsoft.Network/virtualNetworks/{{ include "network.vnet.name" $ }}/subnets/{{ include "network.subnets.nodes.name" $ }}
 {{- end -}}
