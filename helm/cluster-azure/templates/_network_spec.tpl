@@ -183,6 +183,9 @@ subnets:
     securityGroup:
       name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
   - name: {{ include "network.subnets.nodes.name" $ }}
+    # Have to set ID disable NAT gateway creation
+    # TODO: Variable if it works
+    id: /subscriptions/6b1f6e4a-6d0e-4aa4-9a5a-fbaca65a23b3/resourceGroups/robin-byon-rg/providers/Microsoft.Network/virtualNetworks/robin-byon-vnet/subnets/node-subnet
     role: node
     cidrBlocks:
     - {{ .Values.global.connectivity.network.workers.cidr }}
