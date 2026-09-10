@@ -176,12 +176,16 @@ vnet:
 subnets:
   - name: {{ include "network.subnets.controlPlane.name" $ }}
     role: control-plane
+    cidrBlocks:
+    - {{ .Values.global.connectivity.network.controlPlane.cidr }}
     routeTable:
       name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
     securityGroup:
       name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
   - name: {{ include "network.subnets.nodes.name" $ }}
     role: node
+    cidrBlocks:
+    - {{ .Values.global.connectivity.network.workers.cidr }}
     routeTable:
       name: {{ include "network.subnets.nodes.routeTableName" $ }}
     securityGroup:
