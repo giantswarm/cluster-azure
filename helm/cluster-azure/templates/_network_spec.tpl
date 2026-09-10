@@ -199,5 +199,7 @@ privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.c
 apiServerLB:
   name: {{ include "resource.default.name" $ }}-api-internal-lb
   type: Internal
-  frontendIPsCount: 1
+  frontendIPs:
+  - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
+    privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
 {{- end -}}
