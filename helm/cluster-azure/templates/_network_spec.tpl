@@ -165,7 +165,7 @@ controlPlaneOutboundLB:
 {{/**
 BYON clusters are deployed with privately accessible API servers in a VNET managed by the customer.
 We assume that both the MC and WC are private, and that the customer manages any required connectivity
-between MC and WC VNETs. Usually this is used for customers that have a Virtual WAN setup.
+between MC and WC VNETs, and to the internet. Usually this is used for customers that have a Virtual WAN setup.
 */}}
 {{- define "network.spec.byon" -}}
 vnet:
@@ -192,7 +192,5 @@ privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.c
 apiServerLB:
   name: {{ include "resource.default.name" $ }}-api-internal-lb
   type: Internal
-  frontendIPs:
-  - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
-    # privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
+  frontendIPsCount: 1
 {{- end -}}
