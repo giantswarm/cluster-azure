@@ -6,6 +6,7 @@ metadata:
     {{- include "preventDeletionLabel" $ | nindent 4 }}
   annotations:
     "helm.sh/resource-policy": keep
+    "giantswarm.io/network-mode": {{ .Values.global.connectivity.network.mode | quote }}
   name: {{ include "resource.default.name" $ }}
   namespace: {{ .Release.Namespace }}
 spec:
