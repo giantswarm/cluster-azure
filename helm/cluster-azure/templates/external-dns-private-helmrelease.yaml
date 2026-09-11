@@ -27,7 +27,7 @@ env:
   value: {{ include "cluster.connectivity.proxy.noProxy" (dict "global" .Values.global "providerIntegration" .Values.cluster.providerIntegration) | quote }}
 {{- end }}
 {{- end }}
-{{- if eq .Values.global.connectivity.network.mode "private" -}}
+{{- if or (eq .Values.global.connectivity.network.mode "private") (eq .Values.global.connectivity.network.mode "byon") -}}
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository

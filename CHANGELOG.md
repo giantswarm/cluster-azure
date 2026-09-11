@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Promote Bring-Your-Own-Network to a dedicated network mode.
+
 ## [9.2.0] - 2026-09-10
 
 ### Changed
