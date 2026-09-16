@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Promote Bring-Your-Own-Network to a dedicated network mode.
+- Promote Bring-Your-Own-Network to a dedicated network mode by setting `global.connectivity.network.mode` to `byo`.
 
 ## [9.2.0] - 2026-09-10
 
