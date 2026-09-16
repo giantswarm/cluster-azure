@@ -9,8 +9,8 @@ to reason about what each mode does and requires.
 {{ include "network.spec.public" $ }}
 {{- else if eq .mode "private" -}}
 {{ include "network.spec.private" $ }}
-{{- else if eq .mode "byon" -}}
-{{ include "network.spec.byon" $ }}
+{{- else if eq .mode "byo" -}}
+{{ include "network.spec.byo" $ }}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -163,11 +163,11 @@ controlPlaneOutboundLB:
 {{- end -}}
 
 {{/**
-BYON clusters are deployed with privately accessible API servers in a VNET managed by the customer.
+Bring-Your-Own-Network clusters are deployed with privately accessible API servers in a VNET managed by the customer.
 We assume that both the MC and WC are private, and that the customer manages any required connectivity
 between MC and WC VNETs, and to the internet. Usually this is used for customers that have a Virtual WAN setup.
 */}}
-{{- define "network.spec.byon" -}}
+{{- define "network.spec.byo" -}}
 vnet:
   name: {{ include "network.vnet.name" $ }}
   resourceGroup: {{ include "network.vnet.resourceGroup" $ }}

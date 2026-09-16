@@ -1,4 +1,4 @@
-{{- if or (eq .Values.global.connectivity.network.mode "private") (eq .Values.global.connectivity.network.mode "byon") -}}
+{{- if or (eq .Values.global.connectivity.network.mode "private") (eq .Values.global.connectivity.network.mode "byo") -}}
 
 # Modify /etc/hosts in order to route API server requests to the local API server replica.
 # See more details here https://github.com/giantswarm/roadmap/issues/2223.
