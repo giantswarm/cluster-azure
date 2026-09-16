@@ -24,52 +24,52 @@ vnet:
   cidrBlocks:
   - {{ .Values.global.connectivity.network.hostCidr }}
   {{- if (include "providerSpecific.vnetPeerings" $) }}
-  peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
+  peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 2 }}
   {{- end }}
 subnets:
-  - name: {{ include "network.subnets.controlPlane.name" $ }}
-    role: control-plane
-    routeTable:
-      name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
-    cidrBlocks:
-    - {{ .Values.global.connectivity.network.controlPlane.cidr }}
-    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 }}
-    securityGroup:
-      name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
-      securityRules:
-    {{- if (gt (len .Values.global.connectivity.allowedCIDRs) 0) }}
-    {{- include "controlPlaneSecurityGroups" .Values.global.connectivity.allowedCIDRs | nindent 12 }}
-    {{- else }}
-        - name: "allow_ssh_from_all"
-          description: "allow SSH"
-          direction: "Inbound"
-          priority: 148
-          protocol: "*"
-          destination: "*"
-          destinationPorts: "22"
-          source: "*"
-          sourcePorts: "*"
-        - name: "allow_apiserver_from_all"
-          description: "Allow K8s API Server"
-          direction: "Inbound"
-          priority: 149
-          protocol: "*"
-          destination: "*"
-          destinationPorts: "6443"
-          source: "*"
-          sourcePorts: "*"
-    {{- end }}
-  - name: {{ include "network.subnets.nodes.name" $ }}
-    natGateway:
-      name: {{ include "network.subnets.nodes.natGatewayName" $ }}
-    role: node
-    routeTable:
-      name: {{ include "network.subnets.nodes.routeTableName" $ }}
-    cidrBlocks:
-    - {{ .Values.global.connectivity.network.workers.cidr }}
-    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
-    securityGroup:
-      name: {{ include "network.subnets.nodes.securityGroupName" $ }}
+- name: {{ include "network.subnets.controlPlane.name" $ }}
+  role: control-plane
+  routeTable:
+    name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
+  cidrBlocks:
+  - {{ .Values.global.connectivity.network.controlPlane.cidr }}
+  {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 2 }}
+  securityGroup:
+    name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
+    securityRules:
+  {{- if (gt (len .Values.global.connectivity.allowedCIDRs) 0) }}
+  {{- include "controlPlaneSecurityGroups" .Values.global.connectivity.allowedCIDRs | nindent 4 }}
+  {{- else }}
+    - name: "allow_ssh_from_all"
+      description: "allow SSH"
+      direction: "Inbound"
+      priority: 148
+      protocol: "*"
+      destination: "*"
+      destinationPorts: "22"
+      source: "*"
+      sourcePorts: "*"
+    - name: "allow_apiserver_from_all"
+      description: "Allow K8s API Server"
+      direction: "Inbound"
+      priority: 149
+      protocol: "*"
+      destination: "*"
+      destinationPorts: "6443"
+      source: "*"
+      sourcePorts: "*"
+  {{- end }}
+- name: {{ include "network.subnets.nodes.name" $ }}
+  natGateway:
+    name: {{ include "network.subnets.nodes.natGatewayName" $ }}
+  role: node
+  routeTable:
+    name: {{ include "network.subnets.nodes.routeTableName" $ }}
+  cidrBlocks:
+  - {{ .Values.global.connectivity.network.workers.cidr }}
+  {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 2 }}
+  securityGroup:
+    name: {{ include "network.subnets.nodes.securityGroupName" $ }}
 {{- end -}}
 
 {{/**
@@ -86,52 +86,52 @@ vnet:
   cidrBlocks:
   - {{ .Values.global.connectivity.network.hostCidr }}
   {{- if (include "providerSpecific.vnetPeerings" $) }}
-  peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 6 }}
+  peerings: {{- include "providerSpecific.vnetPeerings" $ | indent 2 }}
   {{- end }}
 subnets:
-  - name: {{ include "network.subnets.controlPlane.name" $ }}
-    role: control-plane
-    routeTable:
-      name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
-    cidrBlocks:
-    - {{ .Values.global.connectivity.network.controlPlane.cidr }}
-    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 8 }}
-    securityGroup:
-      name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
-      securityRules:
-    {{- if (gt (len .Values.global.connectivity.allowedCIDRs) 0) }}
-    {{- include "controlPlaneSecurityGroups" .Values.global.connectivity.allowedCIDRs | nindent 12 }}
-    {{- else }}
-        - name: "allow_ssh_from_all"
-          description: "allow SSH"
-          direction: "Inbound"
-          priority: 148
-          protocol: "*"
-          destination: "*"
-          destinationPorts: "22"
-          source: "*"
-          sourcePorts: "*"
-        - name: "allow_apiserver_from_all"
-          description: "Allow K8s API Server"
-          direction: "Inbound"
-          priority: 149
-          protocol: "*"
-          destination: "*"
-          destinationPorts: "6443"
-          source: "*"
-          sourcePorts: "*"
-    {{- end }}
-  - name: {{ include "network.subnets.nodes.name" $ }}
-    natGateway:
-      name: {{ include "network.subnets.nodes.natGatewayName" $ }}
-    role: node
-    routeTable:
-      name: {{ include "network.subnets.nodes.routeTableName" $ }}
-    cidrBlocks:
-    - {{ .Values.global.connectivity.network.workers.cidr }}
-    {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 8 }}
-    securityGroup:
-      name: {{ include "network.subnets.nodes.securityGroupName" $ }}
+- name: {{ include "network.subnets.controlPlane.name" $ }}
+  role: control-plane
+  routeTable:
+    name: {{ include "network.subnets.controlPlane.routeTableName" $ }}
+  cidrBlocks:
+  - {{ .Values.global.connectivity.network.controlPlane.cidr }}
+  {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.controlPlane.privateEndpoints) | nindent 2 }}
+  securityGroup:
+    name: {{ include "network.subnets.controlPlane.securityGroupName" $ }}
+    securityRules:
+  {{- if (gt (len .Values.global.connectivity.allowedCIDRs) 0) }}
+  {{- include "controlPlaneSecurityGroups" .Values.global.connectivity.allowedCIDRs | nindent 4 }}
+  {{- else }}
+    - name: "allow_ssh_from_all"
+      description: "allow SSH"
+      direction: "Inbound"
+      priority: 148
+      protocol: "*"
+      destination: "*"
+      destinationPorts: "22"
+      source: "*"
+      sourcePorts: "*"
+    - name: "allow_apiserver_from_all"
+      description: "Allow K8s API Server"
+      direction: "Inbound"
+      priority: 149
+      protocol: "*"
+      destination: "*"
+      destinationPorts: "6443"
+      source: "*"
+      sourcePorts: "*"
+  {{- end }}
+- name: {{ include "network.subnets.nodes.name" $ }}
+  natGateway:
+    name: {{ include "network.subnets.nodes.natGatewayName" $ }}
+  role: node
+  routeTable:
+    name: {{ include "network.subnets.nodes.routeTableName" $ }}
+  cidrBlocks:
+  - {{ .Values.global.connectivity.network.workers.cidr }}
+  {{- include "network.subnet.privateEndpoints" (dict "location" .Values.global.providerSpecific.location "endpoints" .Values.global.connectivity.network.workers.privateEndpoints) | nindent 2 }}
+  securityGroup:
+    name: {{ include "network.subnets.nodes.securityGroupName" $ }}
 privateDNSZoneName: "{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}"
 apiServerLB:
   name: {{ include "resource.default.name" $ }}-api-internal-lb
@@ -207,7 +207,6 @@ apiServerLB:
   - name: {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
     privateIP: "{{- include "controlPlane.apiServerLbIp" .Values.global.connectivity.network.controlPlane.cidr | trim -}}"
 {{- end -}}
-
 
 {{- define "network.subnets.nodes.id" -}}
 /subscriptions/{{ $.Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "network.vnet.resourceGroup" $ }}/providers/Microsoft.Network/virtualNetworks/{{ include "network.vnet.name" $ }}/subnets/{{ include "network.subnets.nodes.name" $ }}
