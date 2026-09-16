@@ -542,7 +542,7 @@ network.giantswarm.io/wildcard-cname-target: "{{ .Values.global.connectivity.dns
 {{- end -}}
 
 {{- define "useCertManagerDnsChallenges" -}}
-{{ if or (eq .Values.global.connectivity.network.mode "private") (.Values.global.connectivity.certManager.useDnsChallenges) }}
+{{ if or (eq .Values.global.connectivity.network.mode "private") (eq .Values.global.connectivity.network.mode "byo") (.Values.global.connectivity.certManager.useDnsChallenges) }}
 {{- print "true" }}
 {{- else }}
 {{- print "false" }}
