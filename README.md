@@ -1,5 +1,7 @@
 # cluster-azure
 
+Triggering E2E tests!
+
 `cluster-azure` is an app that helps create CRs for a Cluster API Azure cluster on the Giant Swarm platform.
 
 ## Configuration
