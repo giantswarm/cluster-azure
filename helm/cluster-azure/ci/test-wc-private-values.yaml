@@ -6,9 +6,16 @@ global:
     preventDeletion: false
     servicePriority: lowest
   connectivity:
+    allowedCIDRs:
+    - 192.168.1.0/24
     network:
       controlPlane:
         cidr: 10.0.16.128/26
+        privateEndpoints:
+        - name: testing-pe
+          privateLinkServiceConnections:
+          - name: testing-pl
+            privateLinkServiceID: /subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1
       hostCidr: 10.0.16.0/24
       mode: private
       pods:
@@ -19,6 +26,11 @@ global:
         - 172.31.0.0/16
       workers:
         cidr: 10.0.16.0/25
+        privateEndpoints:
+        - name: testing-pe
+          privateLinkServiceConnections:
+          - name: testing-pl
+            privateLinkServiceID: /subscriptions/12345678-9abc-def0-1234-567890abcdef/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/privatelink1
   controlPlane:
     oidc:
       clientId: dex-k8s-authenticator
@@ -32,6 +44,10 @@ global:
       rootVolumeSizeGB: 50
   providerSpecific:
     location: "westeurope"
+    network:
+      peerings:
+      - remoteVnetName: peer
+        resourceGroup: peer-rg
     subscriptionId: 12345678-abcd-1234-abcd-1234567abcde
   release:
     version: v25.0.0
