@@ -149,7 +149,7 @@ apiServerLB:
   {{- if .Values.global.connectivity.network.enablePrivateLinkWithPrivateMode }}
   privateLinks:
   - name: {{ include "resource.default.name" $ }}-api-privatelink
-    natIpConfigurations:
+    natIPConfigurations:
     - allocationMethod: Dynamic
       subnet: {{ include "network.subnets.nodes.name" $ }}
     lbFrontendIPConfigNames:

@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Promote Bring-Your-Own-Network to a dedicated network mode by setting `global.connectivity.network.mode` to `byo`.
 
+### Fixed
+
+- Fix templating of user-specific private endpoints.
+- Fix capitalization of `natIPConfigurations` key in `AzureCluster` template.
+
 ## [10.0.0] - 2026-09-29
 
 ### Changed
