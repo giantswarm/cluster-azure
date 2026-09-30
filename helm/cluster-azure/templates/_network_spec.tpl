@@ -4,12 +4,16 @@ It is extracted here and fully deduplicated between each mode to make it easier
 to reason about what each mode does and requires.
 */}}
 {{- define "network.spec" -}}
-{{- with $.Values.global.connectivity.network -}}
-{{- if eq .mode "public" -}}
+{{- with $.Values.global.connectivity -}}
+{{- if eq .network.mode "public" -}}
 {{ include "network.spec.public" $ }}
-{{- else if eq .mode "private" -}}
+{{- else if eq .network.mode "private" -}}
 {{ include "network.spec.private" $ }}
-{{- else if eq .mode "byo" -}}
+{{- else if eq .network.mode "byo" -}}
+{{- if .network.peerings }}{{ fail "Setting VNET peerings is not supported when network mode is set to 'byo'"}}{{ end -}}
+{{- if .allowedCIDRs }}{{ fail "Setting allowed CIDRs is not supported when network mode is set to 'byo'; please configure the network security group directly"}}{{ end -}}
+{{- if .network.workers.natGatewayName }}{{ fail "Setting NAT gateway name is not supported when network mode is set to 'byo'" }}{{ end -}}
+{{- if (or .network.controlPlane.privateEndpoints .network.workers.privateEndpoints) }}{{ fail "Setting private endpoints is not supported when network mode is set to 'byo'" }}{{ end -}}
 {{ include "network.spec.byo" $ }}
 {{- end -}}
 {{- end -}}
@@ -82,10 +86,10 @@ are dynamically added to the MC AzureCluster for every private WC by our own ope
 */}}
 {{- define "network.spec.private" -}}
 vnet:
+  name: {{ include "network.vnet.name" $ }}
   {{- if (include "network.vnet.resourceGroup" $) }}
   resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
   {{- end }}
-  name: {{ include "network.vnet.name" $ }}
   cidrBlocks:
   - {{ .Values.global.connectivity.network.hostCidr }}
   {{- if (include "providerSpecific.vnetPeerings" $) }}
