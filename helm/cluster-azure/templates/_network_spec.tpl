@@ -21,6 +21,9 @@ Public clusters are deployed with publicly accessible API servers in standalone 
 {{- define "network.spec.public" -}}
 vnet:
   name: {{ include "network.vnet.name" $ }}
+  {{- if (include "network.vnet.resourceGroup" $) }}
+  resourceGroup: {{ include "network.vnet.resourceGroup" $ }}
+  {{- end }}
   cidrBlocks:
   - {{ .Values.global.connectivity.network.hostCidr }}
   {{- if (include "providerSpecific.vnetPeerings" $) }}
