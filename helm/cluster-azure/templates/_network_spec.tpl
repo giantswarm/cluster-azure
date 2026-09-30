@@ -152,6 +152,9 @@ apiServerLB:
     natIPConfigurations:
     - allocationMethod: Dynamic
       subnet: {{ include "network.subnets.nodes.name" $ }}
+    # This is the legacy version of the above field. It can be removed once all Azure clusters
+    # use a version of this chart that use the new field.
+    natIpConfigurations: []
     lbFrontendIPConfigNames:
     - {{ include "resource.default.name" $ }}-api-internal-lb-frontend-ip
     allowedSubscriptions:
