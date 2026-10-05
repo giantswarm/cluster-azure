@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.1.0] - 2026-10-05
+
 ### Added
 
 - Promote Bring-Your-Own-Network to a dedicated network mode by setting `global.connectivity.network.mode` to `byo`.
@@ -1014,7 +1016,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.0.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.1.0...HEAD
+[10.1.0]: https://github.com/giantswarm/cluster-azure/compare/v10.0.0...v10.1.0
 [10.0.0]: https://github.com/giantswarm/cluster-azure/compare/v9.4.1...v10.0.0
 [9.4.1]: https://github.com/giantswarm/cluster-azure/compare/v9.4.0...v9.4.1
 [9.4.0]: https://github.com/giantswarm/cluster-azure/compare/v9.3.2...v9.4.0
