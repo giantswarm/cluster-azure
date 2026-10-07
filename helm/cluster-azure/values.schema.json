@@ -472,7 +472,7 @@
                             ]
                         },
                         "resources": {
-                            "infrastructureMachineTemplateSpecTemplateName": "machinedeployment-azuremachinetemplate-spec"
+                            "infrastructureMachineTemplateSpecTemplateName": "workers-azuremachinetemplate-spec"
                         }
                     }
                 }
