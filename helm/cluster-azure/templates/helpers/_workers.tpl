@@ -1,8 +1,4 @@
-{{/*
-Helpers to reuse when defining specs for MachinePools and MachineDeployments
-*/}}
-
-{{- define "machinedeployment-azuremachinetemplate-spec" -}}
+{{- define "workers-azuremachinetemplate-spec" -}}
 {{- include "renderIdentityConfiguration" $ }}
 {{- /* Get image name components. */}}
 {{- $osName := include "cluster.os.name" $ }}
