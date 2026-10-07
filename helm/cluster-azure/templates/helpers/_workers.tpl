@@ -25,61 +25,6 @@ subnetName: {{ include "network.subnets.nodes.name" $ }}
 {{- end }}
 {{- end -}}
 
-{{- define "machine-kubeadmconfig-spec" -}}
-format: ignition
-ignition:
-  containerLinuxConfig:
-    additionalConfig: |
-      systemd:
-        units:
-        - name: kubeadm.service
-          dropins:
-          - name: 10-flatcar.conf
-            contents: |
-              [Unit]
-              After=oem-cloudinit.service
-        {{- if .Values.internal.teleport.enabled }}
-        {{- include "teleportSystemdUnits" $ | nindent 8 }}
-        {{- end }}
-joinConfiguration:
-  nodeRegistration:
-    kubeletExtraArgs:
-      azure-container-registry-config: /etc/kubernetes/azure.json
-      cloud-config: /etc/kubernetes/azure.json
-      cloud-provider: external
-      eviction-soft: {{ .Values.internal.defaults.softEvictionThresholds }}
-      eviction-soft-grace-period: {{ .Values.internal.defaults.softEvictionGracePeriod }}
-      eviction-hard: {{ .Values.internal.defaults.hardEvictionThresholds }}
-      eviction-minimum-reclaim: {{ .Values.internal.defaults.evictionMinimumReclaim }}
-      protect-kernel-defaults: "true"
-      node-labels: role=worker,giantswarm.io/machine-{{ternary "pool" "deployment" (eq .spec.type "machinePool")}}={{ include "resource.default.name" $ }}-{{ .name }}{{- if (and (hasKey .spec "customNodeLabels") (gt (len .spec.customNodeLabels) 0) ) }},{{- join "," .spec.customNodeLabels }}{{- end }}
-    name: '@@HOSTNAME@@'
-    {{- if .spec.customNodeTaints }}
-    taints:
-    {{- include "customNodeTaints" .spec.customNodeTaints | indent 6 }}
-    {{- end }}
-files:
-  - contentFrom:
-      secret:
-        key: worker-node-azure.json
-        name: {{ include "resource.default.name" $ }}-{{ .name }}{{ ternary (printf "-%s" .hash) "" (hasKey . "hash") }}-azure-json
-    owner: root:root
-    path: /etc/kubernetes/azure.json
-    permissions: "0644"
-{{- include "kubeletReservationFiles" $ | nindent 2 }}
-{{- if $.Values.internal.teleport.enabled }}
-{{- include "teleportFiles" . | nindent 2 }}
-{{- end }}
-{{- include "commonSysctlConfigurations" $ | nindent 2 }}
-{{- include "auditRules99Default" $ | nindent 2 }}
-preKubeadmCommands:
-{{- include "prepare-varLibKubelet-Dir" . | nindent 2 }}
-{{- include "kubeletReservationPreCommands" . | nindent 2 }}
-{{- include "override-hostname-in-kubeadm-configuration" . | nindent 2 }}
-{{- include "override-pause-image-with-quay" . | nindent 2 }}
-postKubeadmCommands: []
-{{- end }}
-
 {{/*
 # Azure MAchine spec requires us to pass a key anyway and this key MUST be an RSA one - https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/ed25519-ssh-keys
 # This is not the key we actually use for ssh
