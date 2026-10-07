@@ -1,4 +1,4 @@
-{{- define "workers-azuremachinetemplate-spec" -}}
+{{- define "machinedeployment-azuremachinetemplate-spec" -}}
 {{- include "renderIdentityConfiguration" $ }}
 {{- /* Get image name components. */}}
 {{- $osName := include "cluster.os.name" $ }}
