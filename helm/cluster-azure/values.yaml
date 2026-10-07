@@ -190,7 +190,7 @@ cluster:
           - /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
           - sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
       resources:
-        infrastructureMachineTemplateSpecTemplateName: workers-azuremachinetemplate-spec
+        infrastructureMachineTemplateSpecTemplateName: machinedeployment-azuremachinetemplate-spec
 global:
   apps:
     azureCloudControllerManager: {}

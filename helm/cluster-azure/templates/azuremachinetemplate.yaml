@@ -31,5 +31,5 @@ spec:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
     spec:
-      {{- include "workers-azuremachinetemplate-spec" $ | nindent 6}}
+      {{- include "machinedeployment-azuremachinetemplate-spec" $ | nindent 6}}
 {{- end }}
