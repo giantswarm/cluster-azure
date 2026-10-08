@@ -33,20 +33,3 @@ vmSize: {{ $.Values.global.controlPlane.instanceType }}
 subnetName: {{ include "network.subnets.controlPlane.name" $ }}
 {{- end }}
 {{- end }}
-
-{{- define "control-plane" }}
-apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-kind: AzureMachineTemplate
-metadata:
-  labels:
-    cluster.x-k8s.io/role: control-plane
-    {{- include "labels.common" $ | nindent 4 }}
-  name: {{ include "resource.default.name" $ }}-control-plane-{{ include "hash" (dict "data" (include "controlplane-azuremachinetemplate-spec" $) "global" .) }}
-  namespace: {{ $.Release.Namespace }}
-spec:
-  template:
-    metadata:
-      labels:
-        {{- include "labels.common" $ | nindent 8 }}
-    spec: {{- include "controlplane-azuremachinetemplate-spec" $ | nindent 6 }}
-{{- end -}}
