@@ -97,20 +97,6 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 /subscriptions/{{ .Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
-{{/*Render list of custom Taints from passed values*/}}
-{{- define "customNodeTaints" -}}
-{{- if (gt (len .) 0) }}
-{{- range . }}
-{{- if or (not .key) (not .value) (not .effect) }}
-{{ fail (printf ".customNodeTaints element must have [key, value, effect]")}}
-{{- end }}
-- key: {{ .key | quote }}
-  value: {{ .value | quote }}
-  effect: {{ .effect | quote }}
-{{- end }}
-{{- end }}
-{{- end -}}
-
 {{- define "oidcFiles" -}}
 {{- if ne .Values.global.controlPlane.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
@@ -118,78 +104,6 @@ When comparing the KubernetesVersion we must use the Target version of the clust
   encoding: base64
   content: {{ tpl ($.Files.Get "files/etc/ssl/certs/oidc.pem") . | b64enc }}
 {{- end }}
-{{- end -}}
-
-
-{{- define "kubeletReservationFiles" -}}
-- path: /opt/bin/calculate_kubelet_reservations.sh
-  permissions: "0754"
-  encoding: base64
-  content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
-{{- end -}}
-
-
-{{/*
-The secret `-teleport-join-token` is created by the teleport-operator in cluster namespace
-and is used to join the node to the teleport cluster.
-*/}}
-{{- define "teleportFiles" -}}
-- path: /etc/teleport-join-token
-  permissions: "0644"
-  contentFrom:
-    secret:
-      name: {{ include "resource.default.name" $ }}-teleport-join-token
-      key: joinToken
-- path: /opt/teleport-node-role.sh
-  permissions: "0755"
-  encoding: base64
-  content: {{ $.Files.Get "files/opt/teleport-node-role.sh" | b64enc }}
-- path: /etc/teleport.yaml
-  permissions: "0644"
-  encoding: base64
-  content: {{ tpl ($.Files.Get "files/etc/teleport.yaml") . | b64enc }}
-{{- end -}}
-
-
-{{- define "teleportSystemdUnits" -}}
-- name: teleport.service
-  enabled: true
-  contents: |
-    [Unit]
-    Description=Teleport Service
-    After=network.target
-
-    [Service]
-    Type=simple
-    Restart=on-failure
-    ExecStart=/opt/bin/teleport start --roles=node --config=/etc/teleport.yaml --pid-file=/run/teleport.pid
-    ExecReload=/bin/kill -HUP $MAINPID
-    PIDFile=/run/teleport.pid
-    LimitNOFILE=524288
-
-    [Install]
-    WantedBy=multi-user.target
-{{- end -}}
-
-
-# Custom Sysctl settings
-# https://github.com/giantswarm/roadmap/issues/1659#issuecomment-1452359468
-{{- define "commonSysctlConfigurations" -}}
-- path: /etc/sysctl.d/10_giantswarm_tuning.conf
-  permissions: "0444"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/sysctl.d/tuning.conf" | b64enc }}
-{{- end -}}
-
-{{- define "auditRules99Default" -}}
-- path: /etc/audit/rules.d/99-default.rules
-  permissions: "0444"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/audit/rules.d/99-default.rules" | b64enc }}
-{{- end -}}
-
-{{- define "kubeletReservationPreCommands" -}}
-- /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
 {{/*
@@ -209,21 +123,6 @@ See more details here https://github.com/giantswarm/roadmap/issues/2223.
 - if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
   echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}' >> /etc/hosts;
   fi
-{{- end -}}
-
-{{- define "prepare-varLibKubelet-Dir" -}}
-- /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
-{{- end -}}
-
-# the replacement must match the value from `joinConfiguration.nodeConfiguration.name`
-{{- define "override-hostname-in-kubeadm-configuration" -}}
-- sed -i "s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
-{{- end -}}
-
-# Replace the pause image with our quay.io one
-# Won't be needed anymore once https://github.com/giantswarm/capi-image-builder/pull/81 has been released and new images build out of it
-{{- define "override-pause-image-with-quay" -}}
-- sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
 {{- end -}}
 
 {{/*
