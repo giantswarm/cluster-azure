@@ -29,7 +29,7 @@ env:
 {{- end }}
 {{- if eq .Values.global.connectivity.network.mode "private" -}}
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
   name: {{ include "resource.default.name" . }}-external-dns-private
