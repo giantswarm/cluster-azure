@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.3.0] - 2026-10-19
+
 ### Changed
 
 - The `helm.sh/chart` label is valid for long chart versions: the 63-character cut trims the whole trailing run of `-`, `.` and `_`.
@@ -1033,7 +1035,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.2.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.3.0...HEAD
+[10.3.0]: https://github.com/giantswarm/cluster-azure/compare/v10.2.0...v10.3.0
 [10.2.0]: https://github.com/giantswarm/cluster-azure/compare/v10.1.0...v10.2.0
 [10.1.0]: https://github.com/giantswarm/cluster-azure/compare/v10.0.0...v10.1.0
 [10.0.0]: https://github.com/giantswarm/cluster-azure/compare/v9.4.1...v10.0.0
