@@ -1013,6 +1013,18 @@
                                 }
                             }
                         },
+                        "cni": {
+                            "type": "object",
+                            "title": "CNI",
+                            "properties": {
+                                "managed": {
+                                    "type": "boolean",
+                                    "title": "Managed CNI",
+                                    "description": "The CNI is installed and operated by Giant Swarm. When false, the Cilium app is not rendered and is removed from the dependencies of every other app. Only set it to false when the provider installs its own CNI.",
+                                    "default": true
+                                }
+                            }
+                        },
                         "dns": {
                             "type": "object",
                             "title": "DNS",

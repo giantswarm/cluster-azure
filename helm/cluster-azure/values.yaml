@@ -260,6 +260,8 @@ global:
     baseDomain: azuretest.gigantic.io
     certManager:
       useDnsChallenges: true
+    cni:
+      managed: true
     dns: {}
     network:
       controlPlane:
