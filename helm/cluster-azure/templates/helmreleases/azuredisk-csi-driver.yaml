@@ -78,7 +78,12 @@ spec:
   interval: 2m
   install:
     remediation:
-      retries: 30
+      retries: -1
+      remediateLastFailure: false
+  upgrade:
+    remediation:
+      retries: -1
+      remediateLastFailure: false
   {{- $azureDiskCsiDriverHelmValues := include "defaultAzureDiskCsiDriverHelmValues" . | fromYaml }}
   {{- $customAzureDiskCsiDriverHelmValues := .Values.global.apps.azureDiskCsiDriver.values }}
   {{- if $customAzureDiskCsiDriverHelmValues }}
