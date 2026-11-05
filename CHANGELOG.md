@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.6.0] - 2026-11-04
+
 ### Changed
 
 - Chart: Update `cluster` to v9.5.0.
@@ -1051,7 +1053,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.5.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.6.0...HEAD
+[10.6.0]: https://github.com/giantswarm/cluster-azure/compare/v10.5.0...v10.6.0
 [10.5.0]: https://github.com/giantswarm/cluster-azure/compare/v10.4.0...v10.5.0
 [10.4.0]: https://github.com/giantswarm/cluster-azure/compare/v10.3.0...v10.4.0
 [10.3.0]: https://github.com/giantswarm/cluster-azure/compare/v10.2.0...v10.3.0
