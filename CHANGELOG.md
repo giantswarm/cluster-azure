@@ -11,6 +11,131 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Migrate to new location of deprecated `subnetName` field in `AzureMachineTemplate` by nesting it under `networkInterfaces`, and drop the always-true conditionals around it. Since the field is part of the hashed `AzureMachineTemplate` spec, the resource is renamed and control plane and worker nodes are rolled.
 
+## [10.6.0] - 2026-11-04
+
+### Changed
+
+- Chart: Update `cluster` to v9.5.0.
+
+## [10.5.0] - 2026-10-26
+
+### Changed
+
+- Chart: Update `cluster` to v9.4.0.
+
+## [10.4.0] - 2026-10-25
+
+### Changed
+
+- Chart: Update `cluster` to v9.3.0.
+
+## [10.3.0] - 2026-10-19
+
+### Changed
+
+- The `helm.sh/chart` label is valid for long chart versions: the 63-character cut trims the whole trailing run of `-`, `.` and `_`.
+- Chart: Update `cluster` to v9.2.0.
+
+## [10.2.0] - 2026-10-14
+
+### Changed
+
+- Bump `OCIRepository` resources from the `source.toolkit.fluxcd.io/v1beta2` API to `source.toolkit.fluxcd.io/v1`.
+- Refactored internal chart structure.
+- Chart: Update `cluster` to v9.1.0.
+
+### Removed
+
+- Templates: Remove unused worker node helpers and the files only they referenced.
+
+## [10.1.0] - 2026-10-05
+
+### Added
+
+- Promote Bring-Your-Own-Network to a dedicated network mode by setting `global.connectivity.network.mode` to `byo`.
+
+### Changed
+
+- Fix templating of user-specific private endpoints.
+- Fix capitalization of `natIPConfigurations` key in `AzureCluster` template.
+- Chart: Update `cluster` to v9.0.2.
+
+## [10.0.0] - 2026-09-29
+
+### Changed
+
+- Chart: Update `cluster` to v9.0.0.
+
+## [9.4.1] - 2026-10-05
+
+### Changed
+
+- Chart: Update `cluster` to v8.4.2.
+
+## [9.4.0] - 2026-09-29
+
+### Changed
+
+- Chart: Update `cluster` to v8.4.0.
+
+## [9.3.2] - 2026-09-25
+
+### Changed
+
+- Chart: Update `cluster` to v8.3.2.
+
+## [9.3.1] - 2026-09-23
+
+### Changed
+
+- Chart: Update `cluster` to v8.3.1.
+
+## [9.3.0] - 2026-09-15
+
+### Changed
+
+- Chart: Update `cluster` to v8.3.0.
+
+## [9.2.0] - 2026-09-10
+
+### Changed
+
+- Chart: Update `cluster` to v8.2.0.
+
+## [9.1.0] - 2026-09-08
+
+### Added
+
+- Add initial Bring-Your-Own-Network support.
+- Add option to be able to disable the Private Link on private clusters (`.global.connectivity.network.enablePrivateLinkWithPrivateMode`). Useful for BYON scenarios.
+
+### Changed
+
+- Chart: Update `cluster` to v8.1.0.
+
+## [9.0.0] - 2026-08-22
+
+### Added
+
+- Add `global.providerSpecific.failureDomains` to restrict the availability zones of the region the control plane nodes are allowed to run in.
+- CI: Run the full set of E2E test suites automatically on release PRs, via `.github/release-pr-body.md`. Towards https://github.com/giantswarm/roadmap/issues/4334
+
+### Changed
+
+- Chart: Migrate Apps to HelmReleases.
+
+## [8.0.0] - 2026-08-04
+
+### Changed
+
+- Chart: Update `cluster` to v7.0.0.
+
+## [7.0.0] - 2026-07-22
+
+### Fixed
+
+- Bump `HelmRelease` resources from the removed `helm.toolkit.fluxcd.io/v2beta1` API to `helm.toolkit.fluxcd.io/v2` so cluster apps render on management clusters running current Flux.
+
 ### Removed
 
 - coredns: Drop the provider-specific values override now covered by the shared `cluster` chart defaults.
@@ -932,7 +1057,24 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v6.8.1...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.6.0...HEAD
+[10.6.0]: https://github.com/giantswarm/cluster-azure/compare/v10.5.0...v10.6.0
+[10.5.0]: https://github.com/giantswarm/cluster-azure/compare/v10.4.0...v10.5.0
+[10.4.0]: https://github.com/giantswarm/cluster-azure/compare/v10.3.0...v10.4.0
+[10.3.0]: https://github.com/giantswarm/cluster-azure/compare/v10.2.0...v10.3.0
+[10.2.0]: https://github.com/giantswarm/cluster-azure/compare/v10.1.0...v10.2.0
+[10.1.0]: https://github.com/giantswarm/cluster-azure/compare/v10.0.0...v10.1.0
+[10.0.0]: https://github.com/giantswarm/cluster-azure/compare/v9.4.1...v10.0.0
+[9.4.1]: https://github.com/giantswarm/cluster-azure/compare/v9.4.0...v9.4.1
+[9.4.0]: https://github.com/giantswarm/cluster-azure/compare/v9.3.2...v9.4.0
+[9.3.2]: https://github.com/giantswarm/cluster-azure/compare/v9.3.1...v9.3.2
+[9.3.1]: https://github.com/giantswarm/cluster-azure/compare/v9.3.0...v9.3.1
+[9.3.0]: https://github.com/giantswarm/cluster-azure/compare/v9.2.0...v9.3.0
+[9.2.0]: https://github.com/giantswarm/cluster-azure/compare/v9.1.0...v9.2.0
+[9.1.0]: https://github.com/giantswarm/cluster-azure/compare/v9.0.0...v9.1.0
+[9.0.0]: https://github.com/giantswarm/cluster-azure/compare/v8.0.0...v9.0.0
+[8.0.0]: https://github.com/giantswarm/cluster-azure/compare/v7.0.0...v8.0.0
+[7.0.0]: https://github.com/giantswarm/cluster-azure/compare/v6.8.1...v7.0.0
 [6.8.1]: https://github.com/giantswarm/cluster-azure/compare/v6.8.0...v6.8.1
 [6.8.0]: https://github.com/giantswarm/cluster-azure/compare/v6.7.0...v6.8.0
 [6.7.0]: https://github.com/giantswarm/cluster-azure/compare/v6.6.0...v6.7.0

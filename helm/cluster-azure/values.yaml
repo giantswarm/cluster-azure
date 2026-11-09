@@ -14,6 +14,8 @@ cluster:
       certManager:
         configTemplateName: azureCertManagerHelmValues
         enable: true
+      certManagerCrossplaneResources:
+        enable: false
       chartOperatorExtensions:
         enable: true
       cilium:
@@ -197,6 +199,7 @@ global:
     azureFileCsiDriver: {}
     certExporter: {}
     certManager: {}
+    certManagerCrossplaneResources: {}
     chartOperatorExtensions: {}
     cilium: {}
     ciliumServiceMonitors: {}
@@ -249,16 +252,22 @@ global:
           - gsoci.azurecr.io
       selinux:
         enabled: false
+    selinux:
+      mode: permissive
+      writablePolicyStore: true
   connectivity:
     allowedCIDRs: []
     baseDomain: azuretest.gigantic.io
     certManager:
       useDnsChallenges: true
+    cni:
+      managed: true
     dns: {}
     network:
       controlPlane:
         cidr: 10.0.0.0/20
         privateEndpoints: []
+      enablePrivateLinkWithPrivateMode: true
       hostCidr: 10.0.0.0/16
       mode: public
       pods:

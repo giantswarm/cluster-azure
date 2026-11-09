@@ -11,7 +11,7 @@ Expand the name of the chart.
 Create chart name and version as used by the chart label.
 */}}
 {{- define "chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimAll "-._" -}}
 {{- end -}}
 
 {{/*
@@ -97,20 +97,6 @@ When comparing the KubernetesVersion we must use the Target version of the clust
 /subscriptions/{{ .Values.global.providerSpecific.subscriptionId }}/resourceGroups/{{ include "resource.default.name" . }}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{{ include "resource.default.name" . }}
 {{- end -}}
 
-{{/*Render list of custom Taints from passed values*/}}
-{{- define "customNodeTaints" -}}
-{{- if (gt (len .) 0) }}
-{{- range . }}
-{{- if or (not .key) (not .value) (not .effect) }}
-{{ fail (printf ".customNodeTaints element must have [key, value, effect]")}}
-{{- end }}
-- key: {{ .key | quote }}
-  value: {{ .value | quote }}
-  effect: {{ .effect | quote }}
-{{- end }}
-{{- end }}
-{{- end -}}
-
 {{- define "oidcFiles" -}}
 {{- if ne .Values.global.controlPlane.oidc.caPem "" }}
 - path: /etc/ssl/certs/oidc.pem
@@ -118,78 +104,6 @@ When comparing the KubernetesVersion we must use the Target version of the clust
   encoding: base64
   content: {{ tpl ($.Files.Get "files/etc/ssl/certs/oidc.pem") . | b64enc }}
 {{- end }}
-{{- end -}}
-
-
-{{- define "kubeletReservationFiles" -}}
-- path: /opt/bin/calculate_kubelet_reservations.sh
-  permissions: "0754"
-  encoding: base64
-  content: {{ $.Files.Get "files/opt/bin/calculate_kubelet_reservations.sh" | b64enc }}
-{{- end -}}
-
-
-{{/*
-The secret `-teleport-join-token` is created by the teleport-operator in cluster namespace
-and is used to join the node to the teleport cluster.
-*/}}
-{{- define "teleportFiles" -}}
-- path: /etc/teleport-join-token
-  permissions: "0644"
-  contentFrom:
-    secret:
-      name: {{ include "resource.default.name" $ }}-teleport-join-token
-      key: joinToken
-- path: /opt/teleport-node-role.sh
-  permissions: "0755"
-  encoding: base64
-  content: {{ $.Files.Get "files/opt/teleport-node-role.sh" | b64enc }}
-- path: /etc/teleport.yaml
-  permissions: "0644"
-  encoding: base64
-  content: {{ tpl ($.Files.Get "files/etc/teleport.yaml") . | b64enc }}
-{{- end -}}
-
-
-{{- define "teleportSystemdUnits" -}}
-- name: teleport.service
-  enabled: true
-  contents: |
-    [Unit]
-    Description=Teleport Service
-    After=network.target
-
-    [Service]
-    Type=simple
-    Restart=on-failure
-    ExecStart=/opt/bin/teleport start --roles=node --config=/etc/teleport.yaml --pid-file=/run/teleport.pid
-    ExecReload=/bin/kill -HUP $MAINPID
-    PIDFile=/run/teleport.pid
-    LimitNOFILE=524288
-
-    [Install]
-    WantedBy=multi-user.target
-{{- end -}}
-
-
-# Custom Sysctl settings
-# https://github.com/giantswarm/roadmap/issues/1659#issuecomment-1452359468
-{{- define "commonSysctlConfigurations" -}}
-- path: /etc/sysctl.d/10_giantswarm_tuning.conf
-  permissions: "0444"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/sysctl.d/tuning.conf" | b64enc }}
-{{- end -}}
-
-{{- define "auditRules99Default" -}}
-- path: /etc/audit/rules.d/99-default.rules
-  permissions: "0444"
-  encoding: base64
-  content: {{ $.Files.Get "files/etc/audit/rules.d/99-default.rules" | b64enc }}
-{{- end -}}
-
-{{- define "kubeletReservationPreCommands" -}}
-- /opt/bin/calculate_kubelet_reservations.sh
 {{- end -}}
 
 {{/*
@@ -209,21 +123,6 @@ See more details here https://github.com/giantswarm/roadmap/issues/2223.
 - if [ ! -z "$(grep "^kubeadm join*" "/etc/kubeadm.sh")" ]; then
   echo '127.0.0.1   apiserver.{{ include "resource.default.name" $ }}.{{ .Values.global.connectivity.baseDomain }}' >> /etc/hosts;
   fi
-{{- end -}}
-
-{{- define "prepare-varLibKubelet-Dir" -}}
-- /bin/test ! -d /var/lib/kubelet && (/bin/mkdir -p /var/lib/kubelet && /bin/chmod 0750 /var/lib/kubelet)
-{{- end -}}
-
-# the replacement must match the value from `joinConfiguration.nodeConfiguration.name`
-{{- define "override-hostname-in-kubeadm-configuration" -}}
-- sed -i "s/'@@HOSTNAME@@'/$(curl -s -H Metadata:true --noproxy '*' 'http://169.254.169.254/metadata/instance?api-version=2020-09-01' | jq -r .compute.name)/g" /etc/kubeadm.yml
-{{- end -}}
-
-# Replace the pause image with our quay.io one
-# Won't be needed anymore once https://github.com/giantswarm/capi-image-builder/pull/81 has been released and new images build out of it
-{{- define "override-pause-image-with-quay" -}}
-- sed -i -e 's/registry.k8s.io\/pause/quay.io\/giantswarm\/pause/' /etc/sysconfig/kubelet
 {{- end -}}
 
 {{/*
@@ -304,6 +203,14 @@ control-plane-subnet
 {{- end -}}
 {{- end -}}
 
+{{- define "network.subnets.controlPlane.securityGroupName" -}}
+{{- if hasKey $.Values.global.connectivity.network.controlPlane "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.controlPlane.securityGroupName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-controlplane-nsg
+{{- end -}}
+{{- end -}}
+
 {{- define "network.subnets.nodes.name" -}}
 {{- if hasKey $.Values.global.connectivity.network.workers "subnetName" -}}
 {{ $.Values.global.connectivity.network.workers.subnetName }}
@@ -325,6 +232,14 @@ node-subnet
 {{ $.Values.global.connectivity.network.workers.routeTableName }}
 {{- else -}}
 {{ include "resource.default.name" $ }}-node-routetable
+{{- end -}}
+{{- end -}}
+
+{{- define "network.subnets.nodes.securityGroupName" -}}
+{{- if hasKey $.Values.global.connectivity.network.workers "securityGroupName" -}}
+{{ $.Values.global.connectivity.network.workers.securityGroupName }}
+{{- else -}}
+{{ include "resource.default.name" $ }}-node-nsg
 {{- end -}}
 {{- end -}}
 
@@ -370,16 +285,17 @@ privateEndpoints:
 {{- end -}}
 
 {{- define "network.vnet.resourceGroup" -}}
-{{- if and ($.Values.internal.network.vnet.resourceGroup) ($.Values.internal.network.vnet.name) -}}
-{{ $.Values.internal.network.vnet.resourceGroup }}
+{{- if and (or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup)
+            (or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name) -}}
+{{ or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup }}
 {{- end -}}
 {{- end -}}
 
 {{- define "network.vnet.name" -}}
-{{- if $.Values.internal.network.vnet.name -}}
-{{ $.Values.internal.network.vnet.name }}
+{{- if or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name -}}
+{{ or $.Values.global.connectivity.network.name $.Values.internal.network.vnet.name }}
 {{- else -}}
-{{- if ($.Values.internal.network.vnet.resourceGroup) -}}
+{{- if or $.Values.global.connectivity.network.resourceGroup $.Values.internal.network.vnet.resourceGroup  -}}
 {{- fail "When explicitly specifying VNet resource group, you also must explicitly specify the VNet name" }}
 {{- end -}}
 {{ include "resource.default.name" $ }}-vnet
@@ -525,9 +441,18 @@ network.giantswarm.io/wildcard-cname-target: "{{ .Values.global.connectivity.dns
 {{- end -}}
 
 {{- define "useCertManagerDnsChallenges" -}}
-{{ if or (eq .Values.global.connectivity.network.mode "private") (.Values.global.connectivity.certManager.useDnsChallenges) }}
+{{ if or (eq .Values.global.connectivity.network.mode "private") (eq .Values.global.connectivity.network.mode "byo") (.Values.global.connectivity.certManager.useDnsChallenges) }}
 {{- print "true" }}
 {{- else }}
 {{- print "false" }}
 {{- end }}
 {{- end }}
+
+{{- define "additional-tags" -}}
+{{- $tags := .Values.global.providerSpecific.additionalResourceTags | default dict }}
+additionalTags:
+  giantswarm-cluster: {{ include "resource.default.name" . }}
+  {{- if $tags }}
+  {{- toYaml $tags | nindent 2 }}
+  {{- end -}}
+{{- end -}}

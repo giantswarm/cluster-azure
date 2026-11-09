@@ -1,4 +1,3 @@
-{{- define "provider-specific-files" }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -7,4 +6,3 @@ metadata:
 data:
   update_etc_hosts.sh: {{ tpl ($.Files.Get "files/opt/update_etc_hosts.sh") $ | b64enc | quote }}
 type: Opaque
-{{ end }}
