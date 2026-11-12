@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Migrate to new location of deprecated `subnetName` field in `AzureMachineTemplate` by nesting it under `networkInterfaces`, and drop the always-true conditionals around it. Since the field is part of the hashed `AzureMachineTemplate` spec, the resource is renamed and control plane and worker nodes are rolled.
+
 ### Fixed
 
 - Retry failed upgrades of the Azure `HelmRelease` objects indefinitely, consistent with other `cluster*` charts, so that one failed upgrade no longer leaves them stalled.
