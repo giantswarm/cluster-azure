@@ -61,7 +61,12 @@ spec:
   interval: 2m
   install:
     remediation:
-      retries: 30
+      retries: -1
+      remediateLastFailure: false
+  upgrade:
+    remediation:
+      retries: -1
+      remediateLastFailure: false
   {{- $azureCloudControllerManagerHelmValues := include "defaultAzureCloudControllerManagerHelmValues" . | fromYaml }}
   {{- $customAzureCloudControllerManagerHelmValues := .Values.global.apps.azureCloudControllerManager.values }}
   {{- if $customAzureCloudControllerManagerHelmValues }}

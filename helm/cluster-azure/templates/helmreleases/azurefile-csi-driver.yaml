@@ -63,7 +63,12 @@ spec:
   interval: 2m
   install:
     remediation:
-      retries: 30
+      retries: -1
+      remediateLastFailure: false
+  upgrade:
+    remediation:
+      retries: -1
+      remediateLastFailure: false
   {{- $azureFileCsiDriverHelmValues := include "defaultAzureFileCsiDriverHelmValues" . | fromYaml }}
   {{- $customAzureFileCsiDriverHelmValues := .Values.global.apps.azureFileCsiDriver.values }}
   {{- if $customAzureFileCsiDriverHelmValues }}
