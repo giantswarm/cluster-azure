@@ -460,8 +460,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>How to migrate to cluster-azure</summary>
 
-- In ConfigMap `<cluster name>-userconfig` set `.Values.global.release` to the release version, e.g. `25.0.0`.
-- In App `<cluster name>` set the `version` to an empty string.
+* In ConfigMap `<cluster name>-userconfig` set `.Values.global.release` to the release version, e.g. `25.0.0`.
+* In App `<cluster name>` set the `version` to an empty string.
 </details>
 
 ## [0.16.1] - 2024-07-16
@@ -495,7 +495,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Update `azurefile-csi-driver-app` to `1.30.2-gs1`
+* Update `azurefile-csi-driver-app` to `1.30.2-gs1`
 
 ## [0.14.1] - 2024-06-21
 
@@ -508,6 +508,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Render external-dns for Azure private clusters correctly.
 - Render cert-manager configuration for Azure private clusters correctly.
 
+
 ## [0.14.0] - 2024-06-21
 
 ### **Breaking change**
@@ -517,10 +518,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <details>
 <summary>How to migrate to cluster-azure v0.14.0</summary>
 
-- Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0).
-- In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`.
-- Delete `<cluster name>-default-apps` App.
-- Update `<cluster name>` to the latest version of `cluster-azure` (v0.14.0).
+* Update `<cluster name>` to the latest version of `default-apps-azure` (v0.14.0).
+* In ConfigMap `<cluster name>-default-apps-userconfig` set `.Values.deleteOptions.moveAppsHelmOwnershipToClusterAzure` to `true`.
+* Delete `<cluster name>-default-apps` App.
+* Update `<cluster name>` to the latest version of `cluster-azure` (v0.14.0).
 
 </details>
 
@@ -580,8 +581,8 @@ Please ensure you did install [yq](https://mikefarah.gitbook.io/yq/) first.
 To migrate values from cluster-azure `v0.7.0`, we provide below a bash script which writes an `app.yaml` file which you need to apply.
 This will move the existing user config values into `global` and it also increases the `version` field of `cluster-azure` app to `v0.7.0`.
 
-- Login to the management cluster and run the script (e.g: `./migrate.sh organization my-cluster`)
-- Verify the `app.yaml` file and apply it to the management cluster (e.g: `kubectl apply -f app.yaml`)
+* Login to the management cluster and run the script (e.g: `./migrate.sh organization my-cluster`)
+* Verify the `app.yaml` file and apply it to the management cluster (e.g: `kubectl apply -f app.yaml`)
 
 ```bash
 #!/bin/bash
@@ -660,6 +661,7 @@ rm catalog.yaml
 ```
 
 </details>
+
 
 - Move Helm values property `.Values.metadata` to `.Values.global.metadata`.
 - Move Helm values property `.Values.global.connectivity` to `.Values.global.connectivity`.
@@ -800,6 +802,7 @@ rm catalog.yaml
   - add support for containerd registry mirrors
   - add support for containerd registry credentials
 
+
 ### Added
 
 - Set value for `controller-manager` `terminated-pod-gc-threshold` to `125` ( consistent with vintage )
@@ -854,7 +857,6 @@ rm catalog.yaml
 ## [0.0.21] - 2023-05-15
 
 ### Changed
-
 - :boom: Breaking - Skip `kube-proxy` during kubeadm init/join to replace with cilium-proxy
   - This change requies default-apps >= 0.0.17
 
@@ -867,9 +869,8 @@ rm catalog.yaml
 ## [0.0.19] - 2023-04-18
 
 ### Changed
-
 - Add `connectivity.allowedCIDRs` to define a list of network addresses to connect to the API server.
-- Support defining custom vnet settings ( in the /internal section of the schema )
+- Support defining custom vnet settings ( in the /internal section  of the schema )
   - VNET name and ResourceGroup
   - precreated subnet names
 - Allow defining the scope of the SystemAssigned Identity on WC nodes
@@ -1040,6 +1041,7 @@ rm catalog.yaml
 - Initial support to create a workload cluster via CAPI/CAPZ.
 - Add support for creating cluster with `UserAssigned Identity` for `VM Identity`
 - Add `cluster.x-k8s.io/watch-filter: capi` to common labels.
+
 
 ### Changed
 
