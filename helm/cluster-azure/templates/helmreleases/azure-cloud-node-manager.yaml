@@ -58,7 +58,12 @@ spec:
   interval: 2m
   install:
     remediation:
-      retries: 30
+      retries: -1
+      remediateLastFailure: false
+  upgrade:
+    remediation:
+      retries: -1
+      remediateLastFailure: false
   {{- $azureCloudNodeManagerHelmValues := include "defaultAzureCloudNodeManagerHelmValues" . | fromYaml }}
   {{- $customAzureCloudNodeManagerHelmValues := .Values.global.apps.azureCloudNodeManager.values }}
   {{- if $customAzureCloudNodeManagerHelmValues }}
