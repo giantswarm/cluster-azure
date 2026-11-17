@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Migrate to new location of deprecated `subnetName` field in `AzureMachineTemplate` by nesting it under `networkInterfaces`, and drop the always-true conditionals around it. Since the field is part of the hashed `AzureMachineTemplate` spec, the resource is renamed and control plane and worker nodes are rolled.
+- Chart: Update `cluster` to v9.6.0.
 
 ## [10.6.0] - 2026-11-04
 

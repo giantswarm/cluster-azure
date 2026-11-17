@@ -2,14 +2,8 @@
 {{- /* https://github.com/giantswarm/cert-manager-app/blob/main/helm/cert-manager/values.yaml */}}
 {{- define "azureCertManagerHelmValues" }}
 {{- if (include "useCertManagerDnsChallenges" $ | eq "true") }}
-{{- /* Get cert-manager version. */}}
-{{- $version := "N/A" }}
-{{- if .Values.providerIntegration.useReleases }}
-{{- $_ := set $ "appName" "cert-manager" }}
-{{- $version = include "cluster.app.version" $ | trim }}
-{{- end }}
-{{- /* Check cert-manager version. Since v4.0.0, upstream properties need to be under the `cert-manager` key. */}}
-{{- if or (eq $version "N/A") (semverCompare ">=4.0.0" $version) }}
+{{- /* Since v4.0.0, upstream properties need to be under the `cert-manager` key. */}}
+{{- if eq (include "cluster.app.version.satisfies" (dict "root" $ "appName" "cert-manager" "constraint" ">=4.0.0")) "true" }}
 cert-manager:
   dns01RecursiveNameservers: 8.8.8.8:53,1.1.1.1:53
 {{- else }}
