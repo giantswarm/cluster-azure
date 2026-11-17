@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.7.0] - 2026-11-17
+
 ### Changed
 
 - Migrate to new location of deprecated `subnetName` field in `AzureMachineTemplate` by nesting it under `networkInterfaces`, and drop the always-true conditionals around it. Since the field is part of the hashed `AzureMachineTemplate` spec, the resource is renamed and control plane and worker nodes are rolled.
@@ -1058,7 +1060,8 @@ rm catalog.yaml
 
 ## [0.0.1] - 2022-11-22
 
-[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/cluster-azure/compare/v10.7.0...HEAD
+[10.7.0]: https://github.com/giantswarm/cluster-azure/compare/v10.6.0...v10.7.0
 [10.6.0]: https://github.com/giantswarm/cluster-azure/compare/v10.5.0...v10.6.0
 [10.5.0]: https://github.com/giantswarm/cluster-azure/compare/v10.4.0...v10.5.0
 [10.4.0]: https://github.com/giantswarm/cluster-azure/compare/v10.3.0...v10.4.0
